@@ -58,7 +58,7 @@ class SearchBusinesses extends Component {
               </button>
             </div>
             <div className='col-sm-4'>
-              <h2>Main</h2>
+              <h2>Search Businesses</h2>
             </div>
           </div>
           <br/>
@@ -67,11 +67,8 @@ class SearchBusinesses extends Component {
             <input/>
             <br/>
             <br/>
-            <button className="btn btn-info">
-              <Link to="/search-businesses">
-                Search / Edit / Delete
-              </Link>
-            </button>
+            <div className="business-search-results-container">
+            </div>
             <br/>
             <br/>
           </div>
@@ -83,4 +80,4 @@ class SearchBusinesses extends Component {
 
 }
 
-export default Main;
+export default SearchBusinesses;

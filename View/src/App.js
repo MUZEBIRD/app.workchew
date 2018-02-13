@@ -5,7 +5,11 @@ import { HashRouter } from 'react-router-dom'
 
 import Login from './Components/Login.js'
 
-import Bussiness from './Components/Businesses.js'
+import Business from './Components/Businesses.js'
+
+import SearchBusinesses from './Components/SearchBusinesses.js'
+
+import AddBusiness from './Components/AddBusiness.js'
 
 
 import Main from './Components/Main.js'
@@ -24,11 +28,12 @@ class App extends Component {
       <HashRouter history={ history } basename='/'>
         <div className="App">
           <Route exact path="/" component={ Main } />
-          <Route path="/businesses" component={ Bussiness } />
+          <Route exact path="/Login" component={ Login } />
+          <Route path="/businesses" component={ Business } />
+          <Route path="/search-businesses" component={ SearchBusinesses } />
+          <Route path="/add-business" component={ AddBusiness } />
           <Route path="/users" />
-          <Route path="/add-businesses" />
           <Route path="/add-users" />
-          <Route path="/search-businesses" />
           <Route path="/search-users" />
           <Route path="/edit-businesses" />
           <Route path="/edit-users" />
