@@ -1,0 +1,125 @@
+html,
+body,
+#root {
+
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+
+a {
+
+    color: white;
+}
+
+a:hover {
+
+    color: white;
+    text-decoration: none
+}
+
+.App {
+    text-align: center;
+    position: relative;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.wholeView {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+.showView {
+    position: relative;
+    flex: 1;
+    height: 100%;
+    overflow: hidden;
+}
+
+.picShopView {
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    overflow: scroll;
+    z-index: 5;
+}
+
+.picShopView img {
+    position: relative;
+    height: 100%;
+}
+
+
+.viewShopsImgHolder {
+    position: relative;
+    height: 25%;
+    margin: 5% 0
+}
+
+
+.resize-drag {
+    position: absolute;
+    border:6px solid  #29e;
+
+    border-radius: 8px;
+
+    width: 100px;
+    height:100px;
+    left:50%;
+    flex: none;
+
+    /* This makes things *much* easier */
+    box-sizing: border-box;
+}
+
+.flex-row-center-vert {
+    display: flex;
+    flex-direction: row;
+    align-items: center !important;
+}
+
+.flex-row-center-hori {
+    display: flex;
+    flex-direction: row;
+    justify-content: center !important;
+}
+
+.flex-col {
+    display: flex;
+    flex-direction: column;
+}
+
+.flex-wrap {
+    flex-wrap: wrap;
+}
+
+.flex-col-center-hori {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.flex-col-center-vert {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.flex-col-center-both {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.no-border {
+    border: 0 !important;
+}
