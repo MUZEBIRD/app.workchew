@@ -63,7 +63,7 @@ class AddBusiness extends Component {
           </div>
           <br/>
           <br/>
-          <div class="row">
+          <div className="row">
             <div className='col-sm-4'>
               <span>name</span>
             </div>
@@ -73,7 +73,7 @@ class AddBusiness extends Component {
             <br/>
           </div>
           <br/>
-          <div class="row">
+          <div className="row">
             <div className='col-sm-4'>
               <span>name</span>
             </div>
@@ -83,7 +83,7 @@ class AddBusiness extends Component {
             <br/>
           </div>
           <br/>
-          <div class="row">
+          <div className="row">
             <div className='col-sm-4'>
               <span>name</span>
             </div>
@@ -93,7 +93,7 @@ class AddBusiness extends Component {
             <br/>
           </div>
           <br/>
-          <div class="row">
+          <div className="row">
             <div className='col-sm-4'>
               <span>name</span>
             </div>
@@ -103,7 +103,7 @@ class AddBusiness extends Component {
             <br/>
           </div>
           <br/>
-          <div class="row">
+          <div className="row">
             <div className='col-sm-4'>
               <span>name</span>
             </div>
@@ -113,7 +113,7 @@ class AddBusiness extends Component {
             <br/>
           </div>
           <br/>
-          <div class="row">
+          <div className="row">
             <div className='col-sm-4'>
               <span>name</span>
             </div>
