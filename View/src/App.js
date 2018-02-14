@@ -12,6 +12,13 @@ import SearchBusinesses from './Components/SearchBusinesses.js'
 import AddBusiness from './Components/AddBusiness.js'
 
 
+import Users from './Components/Users.js'
+
+import SearchUsers from './Components/SearchUsers.js'
+
+import AddUser from './Components/AddUser.js'
+
+
 import Main from './Components/Main.js'
 
 import { Route } from 'react-router-dom'
@@ -32,9 +39,9 @@ class App extends Component {
           <Route path="/businesses" component={ Business } />
           <Route path="/search-businesses" component={ SearchBusinesses } />
           <Route path="/add-business" component={ AddBusiness } />
-          <Route path="/users" />
-          <Route path="/add-users" />
-          <Route path="/search-users" />
+          <Route path="/users" component={ Users } />
+          <Route path="/add-user" component={ AddUser } />
+          <Route path="/search-users" component={ SearchUsers } />
           <Route path="/edit-businesses" />
           <Route path="/edit-users" />
         </div>
