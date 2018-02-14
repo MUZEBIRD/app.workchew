@@ -64,7 +64,7 @@ class SearchUser extends Component {
           <br/>
           <br/>
           <div>
-            <input/>
+            <input placeholder="type user name" />
             <br/>
             <br/>
             <div className="business-search-results-container">

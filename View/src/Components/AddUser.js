@@ -57,71 +57,41 @@ class AddUser extends Component {
                 log out
               </button>
             </div>
-            <div className='col-sm-4'>
+            <div className='col-sm-2'>
               <h2>Add User s</h2>
             </div>
           </div>
           <br/>
-          <br/>
           <div className="row">
-            <div className='col-sm-4'>
+            <div className='col-sm-2'>
               <span>name</span>
             </div>
-            <div className='col-sm-4'>
+            <div className='col-sm-2'>
               <input/>
             </div>
             <br/>
           </div>
           <br/>
           <div className="row">
-            <div className='col-sm-4'>
-              <span>name</span>
+            <div className='col-sm-2'>
+              <span>phone</span>
             </div>
-            <div className='col-sm-4'>
+            <div className='col-sm-2'>
               <input/>
             </div>
             <br/>
           </div>
           <br/>
           <div className="row">
-            <div className='col-sm-4'>
-              <span>name</span>
+            <div className='col-sm-2'>
+              <span>email</span>
             </div>
-            <div className='col-sm-4'>
+            <div className='col-sm-2'>
               <input/>
             </div>
             <br/>
           </div>
           <br/>
-          <div className="row">
-            <div className='col-sm-4'>
-              <span>name</span>
-            </div>
-            <div className='col-sm-4'>
-              <input/>
-            </div>
-            <br/>
-          </div>
-          <br/>
-          <div className="row">
-            <div className='col-sm-4'>
-              <span>name</span>
-            </div>
-            <div className='col-sm-4'>
-              <input/>
-            </div>
-            <br/>
-          </div>
-          <br/>
-          <div className="row">
-            <div className='col-sm-4'>
-              <span>name</span>
-            </div>
-            <div className='col-sm-4'>
-              <input/>
-            </div>
-            <br/>
-          </div>
         </div>
       </div>
 

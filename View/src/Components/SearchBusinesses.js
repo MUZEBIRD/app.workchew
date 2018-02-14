@@ -64,7 +64,7 @@ class SearchBusinesses extends Component {
           <br/>
           <br/>
           <div>
-            <input/>
+            <input placeholder="type business name" />
             <br/>
             <br/>
             <div className="business-search-results-container">
