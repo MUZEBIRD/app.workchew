@@ -33,8 +33,22 @@ var restService = {
 
     }).then((res) => res.json()))
 
-  }
+  },
+  put: (url, body) => {
 
+    return Rx.Observable.fromPromise(fetch(url, {
+
+      method: "PUT",
+
+      headers: {
+        "Content-type": "application/json"
+      },
+
+      body: JSON.stringify(body)
+
+    }).then((res) => res.json()))
+
+  }
 }
 
 export default restService

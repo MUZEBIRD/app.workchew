@@ -49,6 +49,34 @@ var post = function(collectionName, dataDocument) {
 
 }
 
+
+var update = function(collectionName, dataDocument, witch) {
+  console.log("")
+  console.log('@ mongo update', {
+    collectionName,
+    dataDocument
+  })
+
+  return rxMongodb
+
+    .connect(connectionString)
+
+    .flatMap(db => rxMongodb
+
+      .update(collectionName, witch, dataDocument)
+
+  )
+    .map(mongoInsertResponse => {
+
+      console.log('@mongo insert response', mongoInsertResponse)
+      console.log("")
+
+      return mongoInsertResponse.ops[0]
+    })
+
+}
+
+
 var get = function(collectionName, query) {
 
   if (query._id) {
