@@ -21,7 +21,7 @@ var restService = {
   },
   post: (url, body) => {
 
-    return Rx.Observable.fromPromise(fetch(urlService.login, {
+    return Rx.Observable.fromPromise(fetch(url, {
 
       method: "POST",
 
@@ -29,7 +29,7 @@ var restService = {
         "Content-type": "application/json"
       },
 
-      body: JSON.stringify(LoginCredentials)
+      body: JSON.stringify(body)
 
     }).then((res) => res.json()))
 

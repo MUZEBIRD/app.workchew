@@ -1,4 +1,4 @@
-var isDev = window.location.href.indexOf(3000) === 17
+var isDev = window.location.href.indexOf(3000) > -1
 
 console.log('isDev', isDev)
 
@@ -11,8 +11,6 @@ export default {
   login: `${base}/Login`,
   signUp: `${base}/SignUp`,
   user: `${base}/User`,
-  pic: `${base}/Pic`,
-  location: `${base}/Location`,
 
   goTo: function(route) {
 
