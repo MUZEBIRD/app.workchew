@@ -34,6 +34,26 @@ class AddBusiness extends Component {
 
   }
 
+  save(){
+
+    var inputs = document.getElementsByTagName('input')
+
+    var fields = [...inputs]
+
+    var infoFields = fields.map( ({name,value})=>{
+
+            return {
+              name,
+              value
+            }
+
+      })
+
+
+    console.log(infoFields )
+
+  }//save
+
   logOut() {
 
     localStorage.clear();
@@ -69,7 +89,7 @@ class AddBusiness extends Component {
               <span>name</span>
             </div>
             <div className='col-sm-2'>
-              <input/>
+              <input name="name"/>
             </div>
             <br/>
           </div>
@@ -79,7 +99,7 @@ class AddBusiness extends Component {
               <span>phone</span>
             </div>
             <div className='col-sm-2'>
-              <input/>
+              <input name="phone"/>
             </div>
             <br/>
           </div>
@@ -89,7 +109,7 @@ class AddBusiness extends Component {
               <span>email</span>
             </div>
             <div className='col-sm-2'>
-              <input/>
+              <input name="email" />
             </div>
             <br/>
           </div>
@@ -99,7 +119,7 @@ class AddBusiness extends Component {
               <span>address</span>
             </div>
             <div className='col-sm-2'>
-              <input/>
+              <input name="address" />
             </div>
             <br/>
           </div>
@@ -109,7 +129,7 @@ class AddBusiness extends Component {
               <span>seats</span>
             </div>
             <div className='col-sm-2'>
-              <input/>
+              <input name="seats"/>
             </div>
             <br/>
           </div>
@@ -119,10 +139,26 @@ class AddBusiness extends Component {
               <span>wifi password</span>
             </div>
             <div className='col-sm-2'>
-              <input/>
+              <input name="wifi" />
             </div>
             <br/>
           </div>
+         <br/>
+          <div className="row">
+            <div className='col-sm-2'>
+                           <button onClick={ (event) => {
+                                
+                                  this.save()
+                                
+                                } } className='btn btn-success'>
+                Save
+              </button>
+            </div>
+         
+            <br/>
+            </div>
+
+
         </div>
       </div>
 
