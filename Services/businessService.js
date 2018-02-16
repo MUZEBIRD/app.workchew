@@ -16,20 +16,12 @@ var put = function(business) {
   return db
 
     .update(businessCollectionName, business, {
-      id: user.id
+      id: business.id
     })
 
 }
 
-var login = function(query) {
 
-  return db.get(businessCollectionName, {
-    id: query.id,
-    email: query.email,
-    password: query.password
-  })
-
-}
 
 var get = function(query) {
 

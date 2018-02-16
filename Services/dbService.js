@@ -49,7 +49,6 @@ var post = function(collectionName, dataDocument) {
 
 }
 
-
 var update = function(collectionName, dataDocument, witch) {
   console.log("")
   console.log('@ mongo update', {

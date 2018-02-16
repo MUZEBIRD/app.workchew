@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import userService from '../Services/userService.js'
+import BusinessService from '../Services/businessService.js';
 
 import { Route, Link } from 'react-router-dom'
 
@@ -48,7 +49,6 @@ class AddBusiness extends Component {
             }
 
       })
-
 
     console.log(infoFields )
 

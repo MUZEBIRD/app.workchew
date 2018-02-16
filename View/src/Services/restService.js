@@ -12,10 +12,6 @@ var restService = {
 
       method: "GET",
 
-      headers: {
-        "Content-type": "application/json"
-      }
-
     }).then((res) => res.json()))
 
   },

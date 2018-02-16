@@ -1,6 +1,7 @@
-const Rx = require('rxjs');
+import Rx from 'rxjs'
 
 import restService from '../Services/restService.js';
+import urlService from '../Services/urlService.js'
 
 var businessStorageKey = 'workchew.business'
 
@@ -38,7 +39,7 @@ var businessService = {
 
             .concat('=')
 
-            .concat(query[key])
+            .concat(params[key])
 
         }, '?')
 
@@ -48,9 +49,8 @@ var businessService = {
 
   },
   post: (businessInfo) => {
-    return Rx.Observable.of({
-      businessInfo
-    })
+    
+    return restService.post(urlService.business,businessInfo)
 
   },
 

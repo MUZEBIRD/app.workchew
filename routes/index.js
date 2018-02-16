@@ -11,6 +11,12 @@ const SignUp = require('./SignUp')
 const Pic = require('./Pic')
 
 
+const Business = require('./Business')
+
+
+
+router.use('/Business', Business)
+
 router.use('/Login', Login)
 
 router.use('/User', User)

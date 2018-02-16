@@ -12,6 +12,7 @@ export default {
   signUp: `${base}/SignUp`,
   user: `${base}/User`,
 
+  business: `${base}/business`,
   goTo: function(route) {
 
     window.location.hash = route
