@@ -7,7 +7,10 @@ var base = isDev ? 'http://localhost:8080' : ''
 export default {
   main: `/`,
   loginPage: `/Login`,
-  viewShopPage: `/ViewShop`,
+  viewUserPage: `/view-user`,
+
+  viewBusinessPage: `/view-business`,
+
   login: `${base}/Login`,
   signUp: `${base}/SignUp`,
   user: `${base}/User`,

@@ -5,13 +5,19 @@ import { Route, Link } from 'react-router-dom'
 
 import urlService from '../Services/urlService.js'
 
+
+import BusinessService from '../Services/businessService.js';
+
+
 class SearchBusinesses extends Component {
 
   constructor(props) {
 
     super(props);
 
-    this.state = {};
+    this.state = {
+      businesses: []
+    };
 
     userService
 
@@ -30,6 +36,35 @@ class SearchBusinesses extends Component {
         urlService.goTo(urlService.loginPage)
 
       })
+
+
+
+    this.getBusinessStream({})
+
+      .subscribe((getBusinessStream) => {
+
+        this.setState({
+          businesses: [...getBusinessStream]
+        })
+
+      })
+
+  }
+
+  selectBusines(business) {
+
+    console.log('on select Business', business)
+
+    urlService.goTo(`${urlService.viewBusinessPage}?id=${business._id}`)
+
+
+  }
+
+  getBusinessStream(params) {
+
+    return BusinessService.get({
+      params
+    })
 
   }
 
@@ -71,6 +106,25 @@ class SearchBusinesses extends Component {
             </div>
             <br/>
             <br/>
+          </div>
+          <div>
+            { this
+                .state
+                .businesses
+                .map(
+                  (business, i) => (
+                    <div key={ i } onClick={ (event) => {
+                                       
+                                         this.selectBusines(business)
+                                       
+                                       } }>
+                      <p className="businesSelection">
+                        { business.name }
+                      </p>
+                    </div>
+                  )
+              
+              ) }
           </div>
         </div>
       </div>

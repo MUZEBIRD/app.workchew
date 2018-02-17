@@ -67,13 +67,13 @@ a:hover {
 
 .resize-drag {
     position: absolute;
-    border:6px solid  #29e;
+    border: 6px solid #29e;
 
     border-radius: 8px;
 
     width: 100px;
-    height:100px;
-    left:50%;
+    height: 100px;
+    left: 50%;
     flex: none;
 
     /* This makes things *much* easier */
@@ -122,4 +122,17 @@ a:hover {
 
 .no-border {
     border: 0 !important;
+}
+
+
+
+
+
+
+.businesSelection {
+
+
+    position: relative;
+
+    cursor: pointer;
 }

@@ -33,6 +33,46 @@ class AddBusiness extends Component {
 
       })
 
+
+    var params = this.getQueryParams();
+
+    if (params.id) {
+
+      this.setBusinsee(params.id)
+
+    }
+
+
+  }
+
+  setBusinsee(id) {
+
+    BusinessService.get({
+      params: {
+        _id: id
+      }
+    })
+
+      .subscribe((getBusinessStream) => {
+
+        console.log('getBusinessStream  in set business', getBusinessStream)
+
+        var business = getBusinessStream[0]
+        this.setObjectToInputsWithName(business)
+
+      })
+
+  }
+
+  setObjectToInputsWithName(item) {
+    var inputs = document.getElementsByTagName('input')
+
+    var fields = [...inputs]
+
+    fields.forEach((inputField) => {
+
+      inputField.value = item[inputField.name]
+    })
   }
 
   save() {
@@ -69,9 +109,7 @@ class AddBusiness extends Component {
 
         if (postBusinessStream.postBusinessResponse) {
 
-
           alert('business saved !')
-
 
           fields.forEach((inputField) => {
 
@@ -85,6 +123,48 @@ class AddBusiness extends Component {
       })
 
   } //save
+
+  getQueryParams() {
+
+    var url = window.location.href;
+    console.log('url', url)
+
+    var queryString = url.substring(url.indexOf('?') + 1)
+
+    if (url.indexOf('?') > -1) {
+
+      var splits = queryString.split('&')
+
+      var queryParams = splits
+
+        .map(split => split.split('='))
+
+        .map(([name, value]) => {
+
+          return {
+
+            [name]: value
+          }
+
+        })
+
+        .reduce((params, splitItem) => {
+
+          return {
+            ...params,
+            ...splitItem
+          }
+
+        }, {})
+
+
+      console.log('queryParams', queryParams)
+
+      return queryParams
+
+    }
+
+  }
 
   logOut() {
 
@@ -111,7 +191,7 @@ class AddBusiness extends Component {
               </button>
             </div>
             <div className='col-sm-2'>
-              <h2>Add Businesses</h2>
+              <h2>Add/Edit Businesses</h2>
             </div>
           </div>
           <br/>

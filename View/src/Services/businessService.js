@@ -43,14 +43,16 @@ var businessService = {
 
         }, '?')
 
-      return Rx.Observable.of({})
+      var getBusinessUrl = `${urlService.business}${qs}`
+
+      return restService.get(getBusinessUrl)
 
     }
 
   },
   post: (businessInfo) => {
-    
-    return restService.post(urlService.business,businessInfo)
+
+    return restService.post(urlService.business, businessInfo)
 
   },
 
