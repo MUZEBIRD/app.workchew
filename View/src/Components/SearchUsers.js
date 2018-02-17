@@ -11,17 +11,78 @@ class SearchUser extends Component {
 
     super(props);
 
-    this.state = {};
+    this.state = {
+      users: []
+    };
 
     userService.checkLoginStatus()
 
+
+    this.getUserStream({})
+
+      .subscribe((getUserStream) => {
+
+        this.setState({
+          users: [...getUserStream]
+        })
+
+      })
+
   }
 
-  logOut() {
+  selectUser(user) {
 
-    localStorage.clear();
+    console.log('on select User', user)
 
-    window.location.reload(true);
+    urlService.goTo(`${urlService.viewUserPage}?id=${user._id}`)
+
+  }
+
+  searchUsers() {
+
+    var input = document.getElementById('userSearch');
+
+    var searchTerm = input.value;
+
+    if (searchTerm && searchTerm.length > 0) {
+
+      userService.get({
+        params: {
+          searchTerm
+        }
+      })
+
+        .subscribe((userSearchStream) => {
+
+          console.log('userSearchStream', userSearchStream)
+
+          this.setState({
+            users: userSearchStream
+          })
+
+        })
+
+    } else {
+
+      this.getUserStream({})
+
+        .subscribe((getUserStream) => {
+
+          this.setState({
+            users: [...getUserStream]
+          })
+
+        })
+
+    }
+
+  }
+
+  getUserStream(params) {
+
+    return userService.get({
+      params
+    })
 
   }
 
@@ -35,7 +96,7 @@ class SearchUser extends Component {
             <div className='col-sm-4'>
               <button onClick={ (event) => {
                                 
-                                  this.logOut()
+                                  userService.logOut()
                                 
                                 } } className='btn btn-success'>
                 log out
@@ -48,10 +109,33 @@ class SearchUser extends Component {
           <br/>
           <br/>
           <div>
-            <input placeholder="type user name" />
+            <input placeholder="type user name" id="userSearch" onKeyUp={ (event) => {
+                                                                          
+                                                                            this.searchUsers()
+                                                                          
+                                                                          } } />
             <br/>
             <br/>
-            <div className="business-search-results-container">
+            <div className="user-search-results-container">
+              <div>
+                { this
+                    .state
+                    .users
+                    .map(
+                      (user, i) => (
+                        <div key={ i } onClick={ (event) => {
+                                           
+                                             this.selectUser(user)
+                                           
+                                           } }>
+                          <p className="businesSelection">
+                            { user.name }
+                          </p>
+                        </div>
+                      )
+                  
+                  ) }
+              </div>
             </div>
             <br/>
             <br/>

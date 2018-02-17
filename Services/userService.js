@@ -16,7 +16,7 @@ var put = function(user) {
   return db
 
     .update(userCollectionName, user, {
-      id: user.id
+      _id: user._id
     })
 
 }
@@ -33,8 +33,18 @@ var login = function(query) {
 
 var get = function(query) {
 
-  return db.get(userCollectionName, query)
+  if (query.searchTerm) {
 
+    query = {
+      'name': {
+        $regex: ".*" + query.searchTerm + ".*",
+        $options: "i"
+      }
+    }
+
+  }
+
+  return db.get(userCollectionName, query)
 }
 
 var userService = {

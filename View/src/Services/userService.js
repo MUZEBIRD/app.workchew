@@ -1,4 +1,5 @@
 import urlService from '../Services/urlService.js'
+import restService from '../Services/restService.js';
 
 const Rx = require('rxjs');
 
@@ -8,7 +9,9 @@ var userService = {
 
   userStorageKey,
 
-  get: ({_id}) => {
+  get: ({params}) => {
+
+    var {_id} = params
 
     if (_id === 1) {
 
@@ -26,10 +29,47 @@ var userService = {
 
     }
 
-    return Rx.Observable.of({})
+
+    var qs = Object.keys(params)
+
+      .reduce((run, key, i) => {
+
+        return run
+
+          .concat(i ? '&' : '')
+
+          .concat(key)
+
+          .concat('=')
+
+          .concat(params[key])
+
+      }, '?')
+
+    var getUserUrl = `${urlService.user}${qs}`
+
+    console.log('getUserUrl', qs)
+
+    return restService.get(getUserUrl)
 
   },
   post: (userInfo) => {
+
+    return restService.post(urlService.user, userInfo)
+
+  },
+
+  put: (userInfo) => {
+    return restService.put(urlService.user, userInfo)
+
+  },
+  logOut: () => {
+
+
+    localStorage.clear();
+
+    window.location.reload(true);
+
 
   },
   store: (user) => {
@@ -45,19 +85,14 @@ var userService = {
     )
 
   },
-
-  pop: () => {
-
-
-    alert('pop')
-
-  },
   checkLoginStatus: () => {
 
     userService
 
       .get({
-        _id: 1
+        params: {
+          _id: 1
+        }
       })
 
       .filter((getCurrentUserResponse) => {

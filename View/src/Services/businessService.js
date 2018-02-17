@@ -59,12 +59,6 @@ var businessService = {
   put: (businessInfo) => {
     return restService.put(urlService.business, businessInfo)
 
-  },
-  checkLoginStatus: () => {
-
-
-
-
   }
 
 }

@@ -53,7 +53,8 @@ var update = function(collectionName, dataDocument, witch) {
   console.log("")
   console.log('@ mongo update', {
     collectionName,
-    dataDocument
+    dataDocument,
+    witch
   })
   if (witch._id) {
 

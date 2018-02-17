@@ -21,14 +21,14 @@ class AddBusiness extends Component {
 
     if (params.id) {
 
-      this.setBusinsee(params.id)
+      this.setBusiness(params.id)
 
     }
 
 
   }
 
-  setBusinsee(id) {
+  setBusiness(id) {
 
     BusinessService.get({
       params: {

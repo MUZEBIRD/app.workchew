@@ -8,9 +8,7 @@ export default {
   main: `/`,
   loginPage: `/Login`,
   viewUserPage: `/view-user`,
-
   viewBusinessPage: `/view-business`,
-
   login: `${base}/Login`,
   signUp: `${base}/SignUp`,
   user: `${base}/User`,

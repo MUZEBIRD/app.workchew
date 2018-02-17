@@ -14,10 +14,10 @@ router.post('/', ({body}, res) => {
 
     .post(userFromBody(body))
 
-    .subscribe((userGetResponse) => {
+    .subscribe((userPostResponse) => {
 
       var responseBody = {
-        userResponse: userGetResponse
+        userResponse: userPostResponse
       }
 
       res.send(responseBody)
@@ -26,11 +26,49 @@ router.post('/', ({body}, res) => {
 
 }); //POST 
 
-var userFromBody = function({email, password}) {
+router.put('/', ({body}, res) => {
+
+  res.set('Content-Type', 'text/html');
+
+  user
+
+    .put(userFromBody(body))
+
+    .subscribe((userPutResponse) => {
+
+      var responseBody = {
+        userResponse: userPutResponse
+      }
+
+      res.send(responseBody)
+
+    })
+
+}); //PUT 
+
+router.get('/', (req, res) => {
+
+  return user
+
+    .get(req.query)
+
+    .subscribe((getUserResponse) => {
+
+      res.send(getUserResponse)
+
+
+    })
+
+})
+
+var userFromBody = function({name, phone, email, address, password, _id}) {
 
   return {
-
+    _id,
+    name,
+    phone,
     email,
+    address,
     password
   }
 

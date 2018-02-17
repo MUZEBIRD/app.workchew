@@ -27,7 +27,9 @@ var restService = {
 
       body: JSON.stringify(body)
 
-    }).then((res) => res.json()))
+    })
+
+      .then((res) => res.json()))
 
   },
   put: (url, body) => {
@@ -42,7 +44,9 @@ var restService = {
 
       body: JSON.stringify(body)
 
-    }).then((res) => res.json()))
+    })
+
+      .then((res) => res.json()))
 
   }
 }
