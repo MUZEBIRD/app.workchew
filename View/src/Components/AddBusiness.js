@@ -140,7 +140,8 @@ class AddBusiness extends Component {
       phone,
       email,
       seats,
-      address
+      address,
+      wifi
     })
 
       .subscribe((postBusinessStream) => {

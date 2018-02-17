@@ -10,7 +10,6 @@ const parseReqForm = require('../rxFormidable/')
 
 router.post('/', (req, res) => {
 
-
   var {name, phone, email, seats, address, wifi} = req.body
 
   console.log('passed in info ', {
@@ -40,8 +39,6 @@ router.post('/', (req, res) => {
       })
 
     })
-
-
 
 }); //POST 
 
@@ -80,7 +77,6 @@ router.put('/', (req, res) => {
     })
 
 }) //PUT
-
 
 router.get('/', (req, res) => {
 
