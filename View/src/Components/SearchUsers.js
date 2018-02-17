@@ -129,7 +129,7 @@ class SearchUser extends Component {
                                            
                                            } }>
                           <p className="businesSelection">
-                            { user.name }
+                            { user.email }
                           </p>
                         </div>
                       )
