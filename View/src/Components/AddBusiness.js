@@ -35,24 +35,56 @@ class AddBusiness extends Component {
 
   }
 
-  save(){
+  save() {
 
     var inputs = document.getElementsByTagName('input')
 
     var fields = [...inputs]
 
-    var infoFields = fields.map( ({name,value})=>{
+    var business = {}
+    var infoFields = fields.map(({name, value}) => {
 
-            return {
-              name,
-              value
-            }
+      business[name] = value
+      return {
+        name,
+        value
+      }
+
+    })
+
+    console.log(infoFields)
+    var {name, phone, email, seats, address} = business
+
+    BusinessService.post({
+      name,
+      phone,
+      email,
+      seats,
+      address
+    })
+
+      .subscribe((postBusinessStream) => {
+
+        console.log('postBusinessStream ', postBusinessStream)
+
+        if (postBusinessStream.postBusinessResponse) {
+
+
+          alert('business saved !')
+
+
+          fields.forEach((inputField) => {
+
+            inputField.value = ""
+
+
+          })
+
+        }
 
       })
 
-    console.log(infoFields )
-
-  }//save
+  } //save
 
   logOut() {
 
@@ -89,7 +121,7 @@ class AddBusiness extends Component {
               <span>name</span>
             </div>
             <div className='col-sm-2'>
-              <input name="name"/>
+              <input name="name" />
             </div>
             <br/>
           </div>
@@ -99,7 +131,7 @@ class AddBusiness extends Component {
               <span>phone</span>
             </div>
             <div className='col-sm-2'>
-              <input name="phone"/>
+              <input name="phone" />
             </div>
             <br/>
           </div>
@@ -129,7 +161,7 @@ class AddBusiness extends Component {
               <span>seats</span>
             </div>
             <div className='col-sm-2'>
-              <input name="seats"/>
+              <input name="seats" />
             </div>
             <br/>
           </div>
@@ -143,10 +175,10 @@ class AddBusiness extends Component {
             </div>
             <br/>
           </div>
-         <br/>
+          <br/>
           <div className="row">
             <div className='col-sm-2'>
-                           <button onClick={ (event) => {
+              <button onClick={ (event) => {
                                 
                                   this.save()
                                 
@@ -154,11 +186,8 @@ class AddBusiness extends Component {
                 Save
               </button>
             </div>
-         
             <br/>
-            </div>
-
-
+          </div>
         </div>
       </div>
 

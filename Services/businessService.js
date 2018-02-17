@@ -21,9 +21,18 @@ var put = function(business) {
 
 }
 
-
-
 var get = function(query) {
+
+  if (query.searchTerm) {
+
+    query = {
+      'name': {
+        $regex: ".*" + query.searchTerm + ".*",
+        $options: "i"
+      }
+    }
+
+  }
 
   return db.get(businessCollectionName, query)
 
