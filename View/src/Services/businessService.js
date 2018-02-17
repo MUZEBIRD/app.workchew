@@ -57,9 +57,7 @@ var businessService = {
   },
 
   put: (businessInfo) => {
-    return Rx.Observable.of({
-      businessInfo
-    })
+    return restService.put(urlService.business, businessInfo)
 
   },
   checkLoginStatus: () => {

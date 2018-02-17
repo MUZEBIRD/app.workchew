@@ -11,27 +11,35 @@ const parseReqForm = require('../rxFormidable/')
 router.post('/', (req, res) => {
 
 
-    var { name, phone, email, seats, address } = req.body
+  var {name, phone, email, seats, address, wifi} = req.body
 
-    console.log('passed in info ', { name, phone, email, seats, address })
+  console.log('passed in info ', {
+    name,
+    phone,
+    email,
+    seats,
+    address,
+    wifi
+  })
 
-    business
+  business
 
-        .post({
-            name,
-            phone,
-            email,
-            seats,
-            address
-        })
+    .post({
+      name,
+      phone,
+      email,
+      seats,
+      address,
+      wifi
+    })
 
-        .subscribe((postBusinessResponse) => {
+    .subscribe((postBusinessResponse) => {
 
-            res.send({
-                postBusinessResponse
-            })
+      res.send({
+        postBusinessResponse
+      })
 
-        })
+    })
 
 
 
@@ -39,56 +47,53 @@ router.post('/', (req, res) => {
 
 router.put('/', (req, res) => {
 
+  var {name, phone, email, seats, address, wifi, _id} = req.body
 
-    parseReqForm(req)
+  console.log('passed in info ', {
+    name,
+    phone,
+    email,
+    seats,
+    address,
+    wifi,
+    _id
+  })
 
-        .subscribe(({ fields, files, fileList }) => {
+  business
 
-            console.log('fields, files, fileList}', {
-                fields,
-                files,
-                fileList
-            })
+    .put({
+      _id,
+      name,
+      phone,
+      email,
+      seats,
+      address,
+      wifi
+    })
 
-            var { name, phone, email, seats, address } = fields
+    .subscribe((putBusinessResponse) => {
 
-            console.log('passed in info ', { name, phone, email, seats, address })
+      res.send({
+        putBusinessResponse
+      })
 
-            business
+    })
 
-                .put({
-                    name,
-                    phone,
-                    email,
-                    seats,
-                    address
-                })
-
-                .subscribe((postBusinessResponse) => {
-
-                    res.send({
-                        postBusinessResponse
-                    })
-
-                })
-
-        })
-
-})
+}) //PUT
 
 
 router.get('/', (req, res) => {
 
-    return business
+  return business
 
-        .get(req.query)
+    .get(req.query)
 
-        .subscribe((getBusinessResponse) => {
+    .subscribe((getBusinessResponse) => {
 
-            res.send(getBusinessResponse)
+      res.send(getBusinessResponse)
 
 
-        })
+    })
 
 })
 

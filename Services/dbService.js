@@ -55,7 +55,13 @@ var update = function(collectionName, dataDocument, witch) {
     collectionName,
     dataDocument
   })
+  if (witch._id) {
 
+    witch._id = new ObjectId(witch._id)
+
+  }
+
+  delete dataDocument._id
   return rxMongodb
 
     .connect(connectionString)
@@ -70,7 +76,7 @@ var update = function(collectionName, dataDocument, witch) {
       console.log('@mongo insert response', mongoInsertResponse)
       console.log("")
 
-      return mongoInsertResponse.ops[0]
+      return dataDocument
     })
 
 }
@@ -207,6 +213,8 @@ var dbService = {
   get,
 
   post,
+
+  update,
 
   postImage,
 

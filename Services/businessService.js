@@ -16,7 +16,7 @@ var put = function(business) {
   return db
 
     .update(businessCollectionName, business, {
-      id: business.id
+      _id: business._id
     })
 
 }

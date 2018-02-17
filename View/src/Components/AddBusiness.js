@@ -58,7 +58,13 @@ class AddBusiness extends Component {
         console.log('getBusinessStream  in set business', getBusinessStream)
 
         var business = getBusinessStream[0]
-        this.setObjectToInputsWithName(business)
+        this.setState({
+          business
+        }, (state) => {
+
+          this.setObjectToInputsWithName(business)
+
+        })
 
       })
 
@@ -92,8 +98,42 @@ class AddBusiness extends Component {
 
     })
 
-    console.log(infoFields)
-    var {name, phone, email, seats, address} = business
+    console.log(this.state)
+
+    if (this.state.business && this.state.business._id) {
+
+      this.updateBusiness({
+
+        ...this.state.business,
+        ...business,
+      })
+
+
+    } else {
+
+      this.createBusiness(business)
+
+    }
+
+  } //save
+
+  clearBusinessFields() {
+    var inputs = document.getElementsByTagName('input')
+
+    var fields = [...inputs]
+
+    fields.forEach((inputField) => {
+
+      inputField.value = ""
+
+
+    })
+
+  }
+
+  createBusiness(business) {
+
+    var {name, phone, email, seats, address, wifi} = business
 
     BusinessService.post({
       name,
@@ -111,18 +151,33 @@ class AddBusiness extends Component {
 
           alert('business saved !')
 
-          fields.forEach((inputField) => {
-
-            inputField.value = ""
-
-
-          })
+          this.clearBusinessFields()
 
         }
 
       })
+  }
 
-  } //save
+  updateBusiness(business) {
+
+    var {name, phone, email, seats, address, wifi, _id} = business
+
+    BusinessService.put({
+      _id,
+      name,
+      phone,
+      email,
+      seats,
+      address,
+      wifi
+    })
+
+      .subscribe((putBusinessStream) => {
+
+        console.log('putBusinessStream ', putBusinessStream)
+
+      })
+  }
 
   getQueryParams() {
 
