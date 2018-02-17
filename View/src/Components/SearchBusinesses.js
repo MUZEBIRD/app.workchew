@@ -57,6 +57,45 @@ class SearchBusinesses extends Component {
 
     urlService.goTo(`${urlService.viewBusinessPage}?id=${business._id}`)
 
+  }
+
+  searchBusinesses() {
+
+    var input = document.getElementById('businessSearch');
+
+    var searchTerm = input.value;
+
+    if (searchTerm && searchTerm.length > 0) {
+
+      BusinessService.get({
+        params: {
+          searchTerm
+        }
+      })
+
+        .subscribe((businessSearchStream) => {
+
+          console.log('businessSearchStream', businessSearchStream)
+
+          this.setState({
+            businesses: businessSearchStream
+          })
+
+        })
+
+    } else {
+
+      this.getBusinessStream({})
+
+        .subscribe((getBusinessStream) => {
+
+          this.setState({
+            businesses: [...getBusinessStream]
+          })
+
+        })
+
+    }
 
   }
 
@@ -99,7 +138,11 @@ class SearchBusinesses extends Component {
           <br/>
           <br/>
           <div>
-            <input placeholder="type business name" />
+            <input id="businessSearch" onKeyUp={ (event) => {
+                                                 
+                                                   this.searchBusinesses()
+                                                 
+                                                 } } placeholder="type business name" />
             <br/>
             <br/>
             <div className="business-search-results-container">
