@@ -34,7 +34,7 @@ class AddBusiness extends Component {
       })
 
 
-    var params = this.getQueryParams();
+    var params = this.getQueryParams() || {};
 
     if (params.id) {
 

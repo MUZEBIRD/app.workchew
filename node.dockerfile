@@ -12,23 +12,23 @@ ENV MONGO_IP=mongodb
 
 RUN npm install forever -g
 
-COPY package.json /datrythur/package.json
+COPY package.json /demo-work-chew/package.json
 
-RUN cd datrythur; npm install
+RUN cd demo-work-chew; npm install
 
-ADD server.js /datrythur/server.js
+ADD server.js /demo-work-chew/server.js
 
-ADD View/build /datrythur/View/build
+ADD View/build /demo-work-chew/View/build
 
-ADD routes /datrythur/routes
+ADD routes /demo-work-chew/routes
 
-ADD middleWare /datrythur/middleWare
+ADD middleWare /demo-work-chew/middleWare
 
-ADD rxFormidable /datrythur/rxFormidable
+ADD rxFormidable /demo-work-chew/rxFormidable
 
-ADD Services /datrythur/Services
+ADD Services /demo-work-chew/Services
 
-WORKDIR   /datrythur
+WORKDIR   /demo-work-chew
 
 EXPOSE $NODE_HTTP_PORT
 
