@@ -1,3 +1,5 @@
+import urlService from '../Services/urlService.js'
+
 const Rx = require('rxjs');
 
 var userStorageKey = 'workchew.user'
@@ -43,10 +45,32 @@ var userService = {
     )
 
   },
+
+  pop: () => {
+
+
+    alert('pop')
+
+  },
   checkLoginStatus: () => {
 
+    userService
 
+      .get({
+        _id: 1
+      })
 
+      .filter((getCurrentUserResponse) => {
+
+        return !getCurrentUserResponse._id
+
+      })
+
+      .subscribe((noUserSubscribe) => {
+
+        urlService.goTo(urlService.loginPage)
+
+      })
 
   }
 

@@ -13,23 +13,7 @@ class SearchUser extends Component {
 
     this.state = {};
 
-    userService
-
-      .get({
-        _id: 1
-      })
-
-      .filter((getCurrentUserResponse) => {
-
-        return !getCurrentUserResponse._id
-
-      })
-
-      .subscribe((noUserSubscribe) => {
-
-        urlService.goTo(urlService.loginPage)
-
-      })
+    userService.checkLoginStatus()
 
   }
 

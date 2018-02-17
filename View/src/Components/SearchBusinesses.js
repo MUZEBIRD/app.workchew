@@ -19,25 +19,7 @@ class SearchBusinesses extends Component {
       businesses: []
     };
 
-    userService
-
-      .get({
-        _id: 1
-      })
-
-      .filter((getCurrentUserResponse) => {
-
-        return !getCurrentUserResponse._id
-
-      })
-
-      .subscribe((noUserSubscribe) => {
-
-        urlService.goTo(urlService.loginPage)
-
-      })
-
-
+    userService.checkLoginStatus()
 
     this.getBusinessStream({})
 
