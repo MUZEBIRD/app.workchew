@@ -12,26 +12,33 @@ import { withGoogleMap, withScriptjs, GoogleMap, Marker } from "react-google-map
 const {SearchBox} = require("react-google-maps/lib/components/places/SearchBox");
 
 
+const searchInpuStyle = {
+  boxSizing: `border-box`,
+  border: `1px solid transparent`,
+  width: `240px`,
+  height: `32px`,
+  marginTop: `8px`,
+  padding: `0 12px`,
+  borderRadius: `3px`,
+  boxShadow: `0 2px 6px rgba(0, 0, 0, 0.3)`,
+  fontSize: `14px`,
+  outline: `none`,
+  textOverflow: `ellipses`,
+}
+
 const MyMapComponent = withScriptjs(withGoogleMap(function(props) {
-
-
 
   return (
 
-
     <GoogleMap defaultZoom={ 12 } defaultCenter={ props.geo }>
       <SearchBox ref={ props.onSearchBoxMounted } bounds={ props.bounds } controlPosition={ 1 } onPlacesChanged={ props.onPlacesChanged }>
-        <input type="text" placeholder="Customized your placeholder" style={ { boxSizing: `border-box`, border: `1px solid transparent`, width: `240px`, height: `32px`, marginTop: `27px`, padding: `0 12px`, borderRadius: `3px`, boxShadow: `0 2px 6px rgba(0, 0, 0, 0.3)`, fontSize: `14px`, outline: `none`, textOverflow: `ellipses`, } } />
+        <input type="text" placeholder="Customized your placeholder" style={ searchInpuStyle } />
       </SearchBox>
       { props.isMarkerShown && <Marker position={ props.geo } /> }
     </GoogleMap>
   )
 
-
 }))
-
-
-
 
 class BusinessMapForm extends Component {
 
@@ -42,8 +49,6 @@ class BusinessMapForm extends Component {
     this.state = {
       props
     };
-
-
 
     this.getGeo()
   }
@@ -67,16 +72,11 @@ class BusinessMapForm extends Component {
 
   }
 
-
-
   onMapEvent(event) {
 
     this.props.subject.next(event)
 
   }
-
-
-
 
   render() {
     var props = this.state.props
