@@ -246,8 +246,8 @@ class BusinessForm extends Component {
           <div className='col-sm-2'>
             <span>name</span>
           </div>
-          <div className='col-sm-2'>
-            <input name="name" />
+          <div className='col-sm-10'>
+            <input className="form-control" name="name" />
           </div>
           <br/>
         </div>
@@ -256,8 +256,8 @@ class BusinessForm extends Component {
           <div className='col-sm-2'>
             <span>phone</span>
           </div>
-          <div className='col-sm-2'>
-            <input name="phone" />
+          <div className='col-sm-10'>
+            <input className="form-control" name="phone" />
           </div>
           <br/>
         </div>
@@ -266,8 +266,8 @@ class BusinessForm extends Component {
           <div className='col-sm-2'>
             <span>email</span>
           </div>
-          <div className='col-sm-2'>
-            <input name="email" />
+          <div className='col-sm-10'>
+            <input className="form-control" name="email" />
           </div>
           <br/>
         </div>
@@ -276,8 +276,8 @@ class BusinessForm extends Component {
           <div className='col-sm-2'>
             <span>address</span>
           </div>
-          <div className='col-sm-2'>
-            <input name="address" />
+          <div className='col-sm-10'>
+            <input className="form-control" name="address" />
           </div>
           <br/>
         </div>
@@ -286,8 +286,8 @@ class BusinessForm extends Component {
           <div className='col-sm-2'>
             <span>seats</span>
           </div>
-          <div className='col-sm-2'>
-            <input name="seats" />
+          <div className='col-sm-10'>
+            <input className="form-control" name="seats" />
           </div>
           <br/>
         </div>
@@ -296,8 +296,8 @@ class BusinessForm extends Component {
           <div className='col-sm-2'>
             <span>wifi password</span>
           </div>
-          <div className='col-sm-2'>
-            <input name="wifi" />
+          <div className='col-sm-10'>
+            <input className="form-control" name="wifi" />
           </div>
           <br/>
         </div>
