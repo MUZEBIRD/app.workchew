@@ -81,6 +81,13 @@ class BusinessMapForm extends Component {
     //   center: nextCenter,
     //   markers: nextMarkers,
     });
+
+
+    var place = places[0]
+    this.props.addBusinessSubject.next({
+      place
+    })
+
   // refs.map.fitBounds(bounds);
   }
   getGeo() {

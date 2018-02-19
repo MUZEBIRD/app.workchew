@@ -13,6 +13,10 @@ import BusinessForm from './Business/BusinessForm.js'
 import { Subject } from 'rxjs'
 
 import BusinessMapForm from './Business/BusinessMapForm.js'
+
+
+const addBusinessSubject = new Subject();
+
 class AddBusiness extends Component {
 
   constructor(props) {
@@ -26,11 +30,11 @@ class AddBusiness extends Component {
   }
 
   render() {
-
+    console.log(addBusinessSubject, 'addBusinessStream')
     var props = {
 
-      title: "Add/Edit Businesses"
-
+      title: "Add/Edit Businesses",
+      addBusinessSubject
     }
 
     return (
@@ -41,8 +45,8 @@ class AddBusiness extends Component {
           <br/>
           <br/>
           <div className="row">
-            <BusinessForm props={ { ...props } } />
-            <BusinessMapForm props={ { ...props } } />
+            <BusinessForm { ...props } />
+            <BusinessMapForm { ...props } />
           </div>
         </div>
       </div>

@@ -22,7 +22,28 @@ class BusinessForm extends Component {
 
     }
 
+  }
 
+  componentDidMount() {
+
+    console.log('this.props', this.props)
+    this.props.addBusinessSubject
+
+      .subscribe((addBusinessStream) => {
+
+        console.log('addBusinessStream', addBusinessStream)
+
+
+        this.setStateBusiness({
+
+          name: addBusinessStream.place.name,
+          address: addBusinessStream.place.formatted_address,
+          phone: addBusinessStream.place.formatted_phone_number,
+
+
+        })
+
+      })
   }
 
   setBusiness(id) {
@@ -38,16 +59,23 @@ class BusinessForm extends Component {
         console.log('getBusinessStream  in set business', getBusinessStream)
 
         var business = getBusinessStream[0]
-        this.setState({
-          business
-        }, (state) => {
-
-          this.setObjectToInputsWithName(business)
-
-        })
+        this.setStateBusiness(business)
 
       })
 
+  }
+
+  setStateBusiness(business) {
+
+    this.setState({
+      business
+    }, () => {
+
+      var {business} = this.state
+
+      this.setObjectToInputsWithName(business)
+
+    })
   }
 
   setObjectToInputsWithName(item) {
@@ -192,7 +220,6 @@ class BusinessForm extends Component {
           }
 
         }, {})
-
 
       console.log('queryParams', queryParams)
 
