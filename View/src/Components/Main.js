@@ -37,7 +37,7 @@ class Main extends Component {
                                 
                                   this.logOut()
                                 
-                                } } className='btn btn-success'>
+                                } } className='btn btn-danger'>
                 log out
               </button>
             </div>

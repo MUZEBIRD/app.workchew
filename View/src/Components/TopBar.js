@@ -19,7 +19,7 @@ var Topbar = ({props}) => (<div className='row flex-row-center-vert' style={ { b
                                                  
                                                    userService.logOut()
                                                  
-                                                 } } className='btn btn-success'>
+                                                 } } className='btn btn-danger'>
                                  log out
                                </button>
                              </div>
