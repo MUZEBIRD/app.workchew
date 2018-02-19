@@ -10,12 +10,12 @@ import restService from '../../Services/restService.js'
 import { withGoogleMap, withScriptjs, GoogleMap, Marker } from "react-google-maps"
 
 const {SearchBox} = require("react-google-maps/lib/components/places/SearchBox");
-
+const MapsUrl = "https://maps.googleapis.com/maps/api/js?key=AIzaSyBJa_W1JGWcoBM_nDKwneNzBnKuRcyDr6M&v=3.exp&libraries=geometry,drawing,places"
 
 const searchInpuStyle = {
   boxSizing: `border-box`,
   border: `1px solid transparent`,
-  width: `240px`,
+  width: `340px`,
   height: `32px`,
   marginTop: `8px`,
   padding: `0 12px`,
@@ -29,16 +29,19 @@ const searchInpuStyle = {
 const MyMapComponent = withScriptjs(withGoogleMap(function(props) {
 
   return (
+    <div>
+      <GoogleMap onBoundsChanged={ props.onBoundsChanged } ref={ props.onMapMounted } defaultZoom={ 12 } defaultCenter={ props.geo }>
+        <SearchBox ref={ props.onSearchBoxMounted } bounds={ props.bounds } controlPosition={ 1 } onPlacesChanged={ props.onPlacesChanged }>
+          <input type="text" placeholder="Customized your placeholder" style={ searchInpuStyle } />
+        </SearchBox>
+        { props.isMarkerShown && <Marker position={ props.geo } /> }
+      </GoogleMap>
+    </div>
 
-    <GoogleMap defaultZoom={ 12 } defaultCenter={ props.geo }>
-      <SearchBox ref={ props.onSearchBoxMounted } bounds={ props.bounds } controlPosition={ 1 } onPlacesChanged={ props.onPlacesChanged }>
-        <input type="text" placeholder="Customized your placeholder" style={ searchInpuStyle } />
-      </SearchBox>
-      { props.isMarkerShown && <Marker position={ props.geo } /> }
-    </GoogleMap>
   )
 
 }))
+const refs = {}
 
 class BusinessMapForm extends Component {
 
@@ -52,7 +55,20 @@ class BusinessMapForm extends Component {
 
     this.getGeo()
   }
+  onBoundsChanged() {
 
+
+    this.setState({
+      bounds: refs.map.getBounds(),
+      center: refs.map.getCenter(),
+    })
+  }
+
+  onMapMounted(map) {
+
+    refs.map = map
+
+  }
   getGeo() {
 
     const mapForm = this;
@@ -84,8 +100,21 @@ class BusinessMapForm extends Component {
 
       <div className='col-sm-6'>
         { this.state.geo ?
-          <MyMapComponent geo={ this.state.geo } isMarkerShown googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyBJa_W1JGWcoBM_nDKwneNzBnKuRcyDr6M&v=3.exp&libraries=geometry,drawing,places"
-            loadingElement={ <div style={ { height: `100%` } } /> } containerElement={ <div style={ { height: `400px` } } /> } mapElement={ <div style={ { height: `100%` } } /> } /> :
+          <MyMapComponent
+                          bounds={ this.state.bounds }
+                          onMapMounted={ (event) => {
+                                           this.onMapMounted(event)
+                                         } }
+                          geo={ this.state.geo }
+                          onBoundsChanged={ (event) => {
+                                              this.onBoundsChanged(event)
+                                            } }
+                          geo={ this.state.geo }
+                          isMarkerShown
+                          googleMapURL={ MapsUrl }
+                          loadingElement={ <div style={ { height: `100%` } } /> }
+                          containerElement={ <div style={ { height: `400px` } } /> }
+                          mapElement={ <div style={ { height: `100%` } } /> } /> :
           <div>
             no coordinatess
           </div> }
