@@ -25,6 +25,9 @@ Promise.resolve()
     console.log(`App listening on HTTP_PORT ${HTTP_PORT}`)
 
   }))
+
+  .then(() => configSSL())
+
   .catch((err) => {
     if (NODE_ENV === 'development') console.error(err.stack);
   });
@@ -33,12 +36,12 @@ Promise.resolve()
 
 var configSSL = function() {
 
-  if (false) {
+  if (true) {
 
     var ssl = {
-      key: fs.readFileSync('./certs/privkey1.pem'),
-      cert: fs.readFileSync('./certs/fullchain1.pem'),
-      ca: fs.readFileSync('./certs/chain1.pem')
+      key: fs.readFileSync('./certs/private.key'),
+      cert: fs.readFileSync('./certs/certificate.crt'),
+      ca: fs.readFileSync('./certs/ca_bundle.crt')
     }
 
     return https.createServer(ssl, app).listen(HTTPS_PORT, () => {

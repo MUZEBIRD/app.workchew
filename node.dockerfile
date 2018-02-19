@@ -6,6 +6,8 @@ ENV NODE_ENV=development
 
 ENV NODE_HTTP_PORT=8080
 
+ENV NODE_HTTPS_PORT=8080
+
 ENV SSL_START=ON
 
 ENV MONGO_IP=mongodb
@@ -15,6 +17,8 @@ RUN npm install forever -g
 COPY package.json /demo-work-chew/package.json
 
 RUN cd demo-work-chew; npm install
+
+ADD certs /demo-work-chew/certs
 
 ADD server.js /demo-work-chew/server.js
 
@@ -31,5 +35,7 @@ ADD Services /demo-work-chew/Services
 WORKDIR   /demo-work-chew
 
 EXPOSE $NODE_HTTP_PORT
+
+EXPOSE $NODE_HTTPS_PORT
 
 ENTRYPOINT ["forever", "server.js"]
