@@ -31,7 +31,7 @@ const MyMapComponent = withScriptjs(withGoogleMap(function(props) {
   return (
     <div>
       <GoogleMap onBoundsChanged={ props.onBoundsChanged } ref={ props.onMapMounted } defaultZoom={ 12 } defaultCenter={ props.geo }>
-        <SearchBox ref={ props.onSearchBoxMounted } bounds={ props.bounds } controlPosition={ 1 } onPlacesChanged={ props.onPlacesChanged }>
+        <SearchBox onPlacesChanged={ props.onPlacesChanged } ref={ props.onSearchBoxMounted } bounds={ props.bounds } controlPosition={ 1 } onPlacesChanged={ props.onPlacesChanged }>
           <input type="text" placeholder="Customized your placeholder" style={ searchInpuStyle } />
         </SearchBox>
         { props.isMarkerShown && <Marker position={ props.geo } /> }
@@ -69,6 +69,36 @@ class BusinessMapForm extends Component {
     refs.map = map
 
   }
+
+  onSearchBoxMounted(ref) {
+    refs.searchBox = ref;
+  }
+
+  onPlacesChanged() {
+    const places = refs.searchBox.getPlaces();
+
+    places.forEach(place => {
+
+      console.log('onPlacesChanged', place)
+
+
+      //   if (place.geometry.viewport) {
+      //     bounds.union(place.geometry.viewport)
+      //   } else {
+      //     bounds.extend(place.geometry.location)
+      //   }
+      // });
+      // const nextMarkers = places.map(place => ({
+      //   position: place.geometry.location,
+      // }));
+      // const nextCenter = _.get(nextMarkers, '0.position', this.state.center);
+
+    // this.setState({
+    //   center: nextCenter,
+    //   markers: nextMarkers,
+    });
+  // refs.map.fitBounds(bounds);
+  }
   getGeo() {
 
     const mapForm = this;
@@ -102,12 +132,18 @@ class BusinessMapForm extends Component {
         { this.state.geo ?
           <MyMapComponent
                           bounds={ this.state.bounds }
+                          onSearchBoxMounted={ (event) => {
+                                                 this.onSearchBoxMounted(event)
+                                               } }
                           onMapMounted={ (event) => {
                                            this.onMapMounted(event)
                                          } }
                           geo={ this.state.geo }
                           onBoundsChanged={ (event) => {
                                               this.onBoundsChanged(event)
+                                            } }
+                          onPlacesChanged={ (event) => {
+                                              this.onPlacesChanged(event)
                                             } }
                           geo={ this.state.geo }
                           isMarkerShown
