@@ -126,7 +126,13 @@ a:hover {
 
 
 
+.edit-business-form{
 
+
+    position: relative;
+    display: flex;
+    padding: 10px;
+}
 
 
 .businesSelection {

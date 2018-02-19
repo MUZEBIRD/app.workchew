@@ -85,6 +85,14 @@ var userService = {
     )
 
   },
+  logOut() {
+
+    localStorage.clear();
+
+    window.location.href = "/"
+
+  },
+
   checkLoginStatus: () => {
 
     userService

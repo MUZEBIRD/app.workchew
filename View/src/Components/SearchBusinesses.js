@@ -128,28 +128,26 @@ class SearchBusinesses extends Component {
             <br/>
             <br/>
             <div className="business-search-results-container">
+              { this
+                  .state
+                  .businesses
+                  .map(
+                    (business, i) => (
+                      <div key={ i } onClick={ (event) => {
+                                         
+                                           this.selectBusines(business)
+                                         
+                                         } }>
+                        <p className="businesSelection">
+                          { business.name }
+                        </p>
+                      </div>
+                    )
+                
+                ) }
             </div>
             <br/>
             <br/>
-          </div>
-          <div>
-            { this
-                .state
-                .businesses
-                .map(
-                  (business, i) => (
-                    <div key={ i } onClick={ (event) => {
-                                       
-                                         this.selectBusines(business)
-                                       
-                                       } }>
-                      <p className="businesSelection">
-                        { business.name }
-                      </p>
-                    </div>
-                  )
-              
-              ) }
           </div>
         </div>
       </div>
