@@ -31,6 +31,27 @@ var login = function(query) {
 
 }
 
+var update = function(user) {
+
+  var query = {
+    _id: user._id
+  }
+
+  return db.get(userCollectionName, query)
+
+    .switchMap((getResponse) => {
+
+      var userUpdate = _.merge(getResponse[0], user)
+
+      return db
+
+        .update(userCollectionName, userUpdate, {
+          _id: user._id
+        })
+
+    })
+
+}
 var get = function(query) {
 
   if (query.searchTerm) {

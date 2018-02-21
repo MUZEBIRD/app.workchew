@@ -32,7 +32,7 @@ router.put('/', ({body}, res) => {
 
   user
 
-    .put(userFromBody(body))
+    .update(userFromBody(body))
 
     .subscribe((userPutResponse) => {
 

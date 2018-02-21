@@ -41,12 +41,14 @@ class AddBusiness extends Component {
 
       <div className="wholeView flex-col">
         <div className="showView">
-          <Topbar props={ { ...props } } />
-          <br/>
-          <br/>
-          <div className="row">
-            <BusinessForm { ...props } />
-            <BusinessMapForm { ...props } />
+          <div className="scrollView">
+            <Topbar props={ { ...props } } />
+            <br/>
+            <br/>
+            <div className="row">
+              <BusinessForm { ...props } />
+              <BusinessMapForm { ...props } />
+            </div>
           </div>
         </div>
       </div>

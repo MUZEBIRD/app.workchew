@@ -6,6 +6,8 @@ import { Route, Link } from 'react-router-dom'
 import urlService from '../../Services/urlService.js'
 import restService from '../../Services/restService.js'
 
+import BusinessSeatWidget from './BusinessSeatWidget.js'
+
 class BusinessForm extends Component {
 
   constructor(props) {
@@ -141,16 +143,7 @@ class BusinessForm extends Component {
 
   createBusiness(business) {
 
-    var {name, phone, email, seats, address, wifi} = business
-
-    BusinessService.post({
-      name,
-      phone,
-      email,
-      seats,
-      address,
-      wifi
-    })
+    BusinessService.post(business)
 
       .subscribe((postBusinessStream) => {
 
@@ -169,17 +162,9 @@ class BusinessForm extends Component {
 
   updateBusiness(business) {
 
-    var {name, phone, email, seats, address, wifi, _id} = business
+    BusinessService
 
-    BusinessService.put({
-      _id,
-      name,
-      phone,
-      email,
-      seats,
-      address,
-      wifi
-    })
+      .put(business)
 
       .subscribe((putBusinessStream) => {
 
@@ -238,6 +223,13 @@ class BusinessForm extends Component {
   }
 
   render() {
+
+    var props = {
+      addBusinessSubject: this.props.addBusinessSubject,
+      seats: [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}],
+      tags: [],
+      discounts: []
+    }
 
     return (
 
@@ -301,6 +293,13 @@ class BusinessForm extends Component {
           </div>
           <br/>
         </div>
+        <br/>
+<div className="row">
+  <div className='col-sm-12'>
+    <BusinessSeatWidget { ...props}/>
+  </div>
+  <br/>
+</div>
         <br/>
         <div className="row">
           <div className='col-sm-2'>

@@ -36,7 +36,7 @@ Promise.resolve()
 
 var configSSL = function() {
 
-  if (true) {
+  if (process.env.SSL_START) {
 
     var ssl = {
       key: fs.readFileSync('./certs/private.key'),

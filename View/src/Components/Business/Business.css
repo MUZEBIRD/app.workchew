@@ -1,0 +1,21 @@
+.busines-seat-widget {
+    position: relative;
+    width: 100%;
+    border:1px solid black;
+}
+
+.business-seats{
+
+	position: relative;
+
+	display: flex;
+	flex-wrap: wrap;
+	overflow: scroll;
+	height: 500px;
+}
+
+.busines-seat-component{
+
+	position: relative;
+	margin: 10px;
+}
