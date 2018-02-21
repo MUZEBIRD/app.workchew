@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "interactjs": "^1.2.9",
+    "lodash": "^4.17.5",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-google-maps": "^9.4.5",

@@ -7,6 +7,7 @@ import urlService from '../../Services/urlService.js'
 import restService from '../../Services/restService.js'
 
 import BusinessSeatWidget from './BusinessSeatWidget.js'
+import _ from 'lodash'
 
 class BusinessForm extends Component {
 
@@ -14,7 +15,12 @@ class BusinessForm extends Component {
 
     super(props);
 
-    this.state = {};
+    this.state = {
+      business: {
+
+        seats: []
+      }
+    };
 
     var params = this.getQueryParams() || {};
 
@@ -34,16 +40,12 @@ class BusinessForm extends Component {
       .subscribe((addBusinessStream) => {
 
         console.log('addBusinessStream', addBusinessStream)
+        console.log('staet business', this.state.business)
 
+        var business = _.merge(this.state.business, addBusinessStream.business)
+        console.log('addBusinessStream business', business)
 
-        this.setStateBusiness({
-
-          name: addBusinessStream.place.name,
-          address: addBusinessStream.place.formatted_address,
-          phone: addBusinessStream.place.formatted_phone_number,
-
-
-        })
+        this.setStateBusiness(business)
 
       })
   }
@@ -85,10 +87,14 @@ class BusinessForm extends Component {
 
     var fields = [...inputs]
 
-    fields.forEach((inputField) => {
+    fields
 
-      inputField.value = item[inputField.name]
-    })
+      .filter((input) => input.id.indexOf('seat') == -1)
+
+      .forEach((inputField) => {
+
+        inputField.value = item[inputField.name]
+      })
   }
 
   save() {
@@ -98,17 +104,19 @@ class BusinessForm extends Component {
     var fields = [...inputs]
 
     var business = {}
-    var infoFields = fields.map(({name, value}) => {
+    var infoFields = fields
 
-      business[name] = value
-      return {
-        name,
-        value
-      }
+      .filter((input) => input.id.indexOf('seat') == -1)
 
-    })
+      .map(({name, value}) => {
 
-    console.log(this.state)
+        business[name] = value
+        return {
+          name,
+          value
+        }
+
+      })
 
     if (this.state.business && this.state.business._id) {
 
@@ -226,7 +234,7 @@ class BusinessForm extends Component {
 
     var props = {
       addBusinessSubject: this.props.addBusinessSubject,
-      seats: [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}],
+      seats: this.state.business.seats,
       tags: [],
       discounts: []
     }
@@ -276,16 +284,6 @@ class BusinessForm extends Component {
         <br/>
         <div className="row">
           <div className='col-sm-2'>
-            <span>seats</span>
-          </div>
-          <div className='col-sm-10'>
-            <input className="form-control" name="seats" />
-          </div>
-          <br/>
-        </div>
-        <br/>
-        <div className="row">
-          <div className='col-sm-2'>
             <span>wifi password</span>
           </div>
           <div className='col-sm-10'>
@@ -294,12 +292,12 @@ class BusinessForm extends Component {
           <br/>
         </div>
         <br/>
-<div className="row">
-  <div className='col-sm-12'>
-    <BusinessSeatWidget { ...props}/>
-  </div>
-  <br/>
-</div>
+        <div className="row">
+          <div className='col-sm-12'>
+            <BusinessSeatWidget { ...props}/>
+          </div>
+          <br/>
+        </div>
         <br/>
         <div className="row">
           <div className='col-sm-2'>

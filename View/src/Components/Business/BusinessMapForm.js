@@ -85,7 +85,18 @@ class BusinessMapForm extends Component {
 
     var place = places[0]
     this.props.addBusinessSubject.next({
-      place
+
+      businessUpdate: true,
+
+      business: {
+
+          name: place.name,
+          address: place.formatted_address,
+          phone: place.formatted_phone_number,
+
+
+        },
+
     })
 
   // refs.map.fitBounds(bounds);

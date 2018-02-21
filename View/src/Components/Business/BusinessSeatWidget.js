@@ -16,35 +16,101 @@ class BusinessSeatWidget extends Component {
       seats: this.props.seats
     };
 
+
   }
 
-  addSeat() {
+  setSeats(seats) {
 
-    this.seats.push({
-      name: "",
-      section: ""
+    seats
+
+      .forEach((seat, i) => {
+
+        var customerId = `${i}seatCustomer`;
+
+        var sectionId = `${i}seatSection`;
+
+        document.getElementById(customerId).value = seat.customer || "";
+
+        document.getElementById(sectionId).value = seat.section || "";
+
+      })
+
+    this.setState({
+      seats
     })
 
   }
 
+  getSeats(item) {
+
+    return this.state.seats
+
+      .map((seat, i) => {
+
+        var customerId = `${i}seatCustomer`;
+
+        var sectionId = `${i}seatSection`;
+
+        var customer = document.getElementById(customerId).value;
+
+        var section = document.getElementById(sectionId).value;
+
+        return {
+          customer,
+          section
+        }
+
+      })
+
+  }
+
+  isSeat(input) {
+
+    return (input.id.indexOf("seatName") > -1)
+  }
+
+  addSeat() {
+
+    var nuSeats = [...this.state.seats, {
+      name: "",
+      section: ""
+    }]
+
+    this.setState({
+      seats: nuSeats
+    })
+
+    console.log('this.state.seats', this.state.seats)
+    this.updateSeats(nuSeats)
+  }
+
   removeSeat(seat, index) {
 
-    this.seats.splice(index, 1)
+    var seats = this.getSeats()
+    seats.splice(index, 1)
+    //var nuSeats = [...]
 
+    this.setSeats(seats)
+
+
+    console.log('this.state.seats', this.state.seats)
+
+    this.updateSeats(seats)
   }
 
   componentDidMount() {
 
     console.log('this.props', this.props)
+    this.setSeats(this.props.seats)
 
   }
 
-  updateSeats() {
+  updateSeats(seats) {
 
     this.props.addBusinessSubject.next({
       businessUpdate: true,
       business: {
-        seats: this.seats
+        seats
       }
     })
 
@@ -55,29 +121,45 @@ class BusinessSeatWidget extends Component {
     return (
 
       <div className="busines-seat-widget">
+        <br/>
         <div className="busines-seat-title">
           <p>
             SEATS
           </p>
+          <button onClick={ (event) => {
+                            
+                              this.addSeat()
+                            
+                            } } className='btn btn-success'>
+            Add
+          </button>
         </div>
+        <br/>
         <div className="scrollView">
           <div className="business-seats">
             { this
                 .state
                 .seats
                 .map(
-                  (business, i) => (
+                  (seat, i) => (
                     <div className="busines-seat-component" key={ i }>
                       <br/>
-                      <p>
-                        Seat #
-                        { i }
-                      </p>
+                      <div className="busines-seat-title">
+                        <span>Seat # { i }</span>
+                        <button onClick={ (event) => {
+                                          
+                                            this.removeSeat(seat, i)
+                                          
+                                          } } className='btn btn-danger'>
+                          remove
+                        </button>
+                      </div>
+                      <br/>
                       <div className="busines-seat-info">
-                        <input placeholder="customer" id={ `seat${i}Name` } />
+                        <input placeholder="customer" id={ `${i}seatCustomer` } />
                         <br/>
                         <br/>
-                        <input placeholder="section" id={ `seat${i}section` } />
+                        <input placeholder="section" id={ `${i}seatSection` } />
                       </div>
                     </div>
                   )

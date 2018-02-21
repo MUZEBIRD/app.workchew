@@ -19,3 +19,10 @@
 	position: relative;
 	margin: 10px;
 }
+
+.busines-seat-title{
+	position: relative;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}
