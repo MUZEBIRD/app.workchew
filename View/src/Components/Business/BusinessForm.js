@@ -42,7 +42,15 @@ class BusinessForm extends Component {
         console.log('addBusinessStream', addBusinessStream)
         console.log('staet business', this.state.business)
 
+        if (this.state.business.seats != addBusinessStream.business.seats) {
+
+
+          delete this.state.business.seats
+        }
+
         var business = _.merge(this.state.business, addBusinessStream.business)
+
+        business.seats = BusinessService.getSeats(business.seats)
         console.log('addBusinessStream business', business)
 
         this.setStateBusiness(business)
@@ -118,18 +126,25 @@ class BusinessForm extends Component {
 
       })
 
+
+
+    console.log(business, 'this.state.business  at save ', this.state.business)
+
     if (this.state.business && this.state.business._id) {
 
+      this.state.business.seats = BusinessService.getSeats(this.state.business.seats)
       this.updateBusiness({
 
         ...this.state.business,
         ...business,
       })
 
-
     } else {
 
-      this.createBusiness(business)
+      this.createBusiness({
+        ...this.state.business,
+        ...business
+      })
 
     }
 
@@ -231,7 +246,7 @@ class BusinessForm extends Component {
   }
 
   render() {
-
+    console.log("render", this.state.business.seats)
     var props = {
       addBusinessSubject: this.props.addBusinessSubject,
       seats: this.state.business.seats,
@@ -242,6 +257,18 @@ class BusinessForm extends Component {
     return (
 
       <div className='col-sm-6'>
+        <div className="row">
+          <div className='col-sm-2'>
+            <button onClick={ (event) => {
+                              
+                                this.save()
+                              
+                              } } className='btn btn-success'>
+              Save
+            </button>
+          </div>
+          <br/>
+        </div>
         <div className="row">
           <div className='col-sm-2'>
             <span>name</span>
@@ -294,7 +321,7 @@ class BusinessForm extends Component {
         <br/>
         <div className="row">
           <div className='col-sm-12'>
-            <BusinessSeatWidget { ...props}/>
+            { props.seats.length > 0 ? <BusinessSeatWidget { ...props}/> : "" } }
           </div>
           <br/>
         </div>

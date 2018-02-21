@@ -59,6 +59,36 @@ var businessService = {
   put: (businessInfo) => {
     return restService.put(urlService.business, businessInfo)
 
+  },
+
+  getSeats: (seats) => {
+
+    return seats
+
+      .map((seat, i) => {
+
+        var customerId = `${i}seatCustomer`;
+
+        var sectionId = `${i}seatSection`;
+        if (!document.getElementById(customerId)) {
+
+          return seat
+
+        }
+        var customer = document.getElementById(customerId).value;
+
+        var section = document.getElementById(sectionId).value;
+
+
+
+
+        return {
+          customer,
+          section
+        }
+
+      })
+
   }
 
 }

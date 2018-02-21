@@ -16,7 +16,6 @@ class BusinessSeatWidget extends Component {
       seats: this.props.seats
     };
 
-
   }
 
   setSeats(seats) {
@@ -41,7 +40,7 @@ class BusinessSeatWidget extends Component {
 
   }
 
-  getSeats(item) {
+  getSeats() {
 
     return this.state.seats
 
@@ -66,13 +65,13 @@ class BusinessSeatWidget extends Component {
 
   isSeat(input) {
 
-    return (input.id.indexOf("seatName") > -1)
+    return (input.id.indexOf("Customer") > -1)
   }
 
   addSeat() {
 
     var nuSeats = [...this.state.seats, {
-      name: "",
+      customer: "",
       section: ""
     }]
 
@@ -92,7 +91,6 @@ class BusinessSeatWidget extends Component {
 
     this.setSeats(seats)
 
-
     console.log('this.state.seats', this.state.seats)
 
     this.updateSeats(seats)
@@ -100,8 +98,8 @@ class BusinessSeatWidget extends Component {
 
   componentDidMount() {
 
-    console.log('this.props', this.props)
-    this.setSeats(this.props.seats)
+    console.log('this.props in seats di load', this.props)
+    this.setSeats(this.state.seats)
 
   }
 
