@@ -6,31 +6,13 @@ const router = express.Router();
 
 const business = require('../Services/businessService.js')
 
-const parseReqForm = require('../rxFormidable/')
-
 router.post('/', (req, res) => {
 
-  var {name, phone, email, seats, address, wifi} = req.body
-
-  console.log('passed in info ', {
-    name,
-    phone,
-    email,
-    seats,
-    address,
-    wifi
-  })
+  console.log('req.body @ busines post route', req.body)
 
   business
 
-    .post({
-      name,
-      phone,
-      email,
-      seats,
-      address,
-      wifi
-    })
+    .post(getBusinessFromBody(req.body))
 
     .subscribe((postBusinessResponse) => {
 
@@ -44,29 +26,11 @@ router.post('/', (req, res) => {
 
 router.put('/', (req, res) => {
 
-  var {name, phone, email, seats, address, wifi, _id} = req.body
-
-  console.log('passed in info ', {
-    name,
-    phone,
-    email,
-    seats,
-    address,
-    wifi,
-    _id
-  })
+  console.log('req.body @ busines put route', req.body)
 
   business
 
-    .put({
-      _id,
-      name,
-      phone,
-      email,
-      seats,
-      address,
-      wifi
-    })
+    .update(getBusinessFromBody(req.body))
 
     .subscribe((putBusinessResponse) => {
 
@@ -88,9 +52,24 @@ router.get('/', (req, res) => {
 
       res.send(getBusinessResponse)
 
-
     })
 
 })
+
+var getBusinessFromBody = function({_id, name, phone, email, seats, tags, discounts, address, wifi}) {
+
+  return {
+    _id,
+    name,
+    phone,
+    email,
+    seats,
+    tags,
+    discounts,
+    address,
+    wifi
+  }
+
+}
 
 module.exports = router;

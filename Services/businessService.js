@@ -1,6 +1,8 @@
 const db = require('./dbService');
 const Rx = require('rxjs');
 
+const _ = require('lodash');
+
 const businessCollectionName = 'businesss'
 
 var post = function(business) {
@@ -17,6 +19,28 @@ var put = function(business) {
 
     .update(businessCollectionName, business, {
       _id: business._id
+    })
+
+}
+
+var update = function(business) {
+
+  var query = {
+    _id: business._id
+  }
+
+  return db.get(businessCollectionName, query)
+
+    .switchMap((getResponse) => {
+
+      var businessUpdate = _.merge(getResponse[0], business)
+
+      return db
+
+        .update(businessCollectionName, businessUpdate, {
+          _id: business._id
+        })
+
     })
 
 }
@@ -43,6 +67,8 @@ var businessService = {
   get,
 
   post,
+
+  update,
 
   put
 }
