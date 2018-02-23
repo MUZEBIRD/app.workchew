@@ -14,6 +14,12 @@ import { Subject } from 'rxjs'
 
 import BusinessMapForm from './Business/BusinessMapForm.js'
 
+import BusinessSeatWidget from './Business/BusinessSeatWidget.js'
+
+import BusinessTagsWidget from './Business/BusinessTagsWidget.js'
+
+import BusinessDiscountWidget from './Business/BusinessDiscountWidget.js'
+
 
 const addBusinessSubject = new Subject();
 
@@ -48,6 +54,22 @@ class AddBusiness extends Component {
             <div className="row">
               <BusinessForm { ...props } />
               <BusinessMapForm { ...props } />
+            </div>
+
+            <br />
+            <div className="row">
+              <div className='col-sm-6'>
+                <BusinessSeatWidget />
+              </div>
+
+              <div className='col-sm-3'>
+                <BusinessTagsWidget />
+              </div>
+
+              <div className='col-sm-3'>
+                <BusinessDiscountWidget />
+              </div>
+              <br/>
             </div>
           </div>
         </div>

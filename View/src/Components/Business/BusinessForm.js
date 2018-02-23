@@ -6,7 +6,6 @@ import { Route, Link } from 'react-router-dom'
 import urlService from '../../Services/urlService.js'
 import restService from '../../Services/restService.js'
 
-import BusinessSeatWidget from './BusinessSeatWidget.js'
 import _ from 'lodash'
 
 import { Subject } from 'rxjs'
@@ -344,12 +343,7 @@ class BusinessForm extends Component {
           <br/>
         </div>
         <br/>
-        <div className="row">
-          <div className='col-sm-12'>
-            <BusinessSeatWidget />
-          </div>
-          <br/>
-        </div>
+
         <br/>
         <div className="row">
           <div className='col-sm-2'>
