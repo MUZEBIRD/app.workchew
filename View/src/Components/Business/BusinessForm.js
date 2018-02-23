@@ -222,6 +222,9 @@ class BusinessForm extends Component {
 
         console.log('putBusinessStream ', putBusinessStream)
 
+        alert('business saved !')
+
+
       })
   }
 
