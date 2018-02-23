@@ -13,7 +13,7 @@ class BusinessSeatWidget extends Component {
     super(props);
 
     this.state = {
-      seats: this.props.seats
+      seats: []
     };
 
   }
@@ -40,9 +40,9 @@ class BusinessSeatWidget extends Component {
 
   }
 
-  getSeats() {
+  getSeats(seats) {
 
-    return this.state.seats
+    return seats
 
       .map((seat, i) => {
 
@@ -70,7 +70,7 @@ class BusinessSeatWidget extends Component {
 
   addSeat() {
 
-    var nuSeats = [...this.state.seats, {
+    var nuSeats = [...this.getSeats(this.state.seats), {
       customer: "",
       section: ""
     }]
@@ -85,13 +85,11 @@ class BusinessSeatWidget extends Component {
 
   removeSeat(seat, index) {
 
-    var seats = this.getSeats()
+    var seats = this.getSeats(this.state.seats)
     seats.splice(index, 1)
     //var nuSeats = [...]
 
     this.setSeats(seats)
-
-    console.log('this.state.seats', this.state.seats)
 
     this.updateSeats(seats)
   }
@@ -99,17 +97,36 @@ class BusinessSeatWidget extends Component {
   componentDidMount() {
 
     console.log('this.props in seats di load', this.props)
-    this.setSeats(this.state.seats)
+
+    BusinessService.subject
+
+      .filter((businessStream) => businessStream.updateSeats)
+
+      .filter((businessStream) => businessStream.seats)
+
+      .filter((businessStream) => Array.isArray(businessStream.seats))
+
+
+      .subscribe((businessStream) => {
+
+        this.setState({
+          seats: businessStream.seats
+        }, () => {
+
+          this.setSeats(this.state.seats)
+
+        })
+
+
+      })
 
   }
 
   updateSeats(seats) {
 
-    this.props.addBusinessSubject.next({
-      businessUpdate: true,
-      business: {
-        seats
-      }
+    BusinessService.subject.next({
+      seatUpdate: true,
+      seats
     })
 
   }

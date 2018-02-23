@@ -9,6 +9,9 @@ import restService from '../../Services/restService.js'
 import BusinessSeatWidget from './BusinessSeatWidget.js'
 import _ from 'lodash'
 
+import { Subject } from 'rxjs'
+
+var updateSubject = new Subject()
 class BusinessForm extends Component {
 
   constructor(props) {
@@ -22,6 +25,10 @@ class BusinessForm extends Component {
       }
     };
 
+  }
+
+  componentDidMount() {
+
     var params = this.getQueryParams() || {};
 
     if (params.id) {
@@ -30,23 +37,14 @@ class BusinessForm extends Component {
 
     }
 
-  }
-
-  componentDidMount() {
-
     console.log('this.props', this.props)
+
     this.props.addBusinessSubject
 
       .subscribe((addBusinessStream) => {
 
         console.log('addBusinessStream', addBusinessStream)
         console.log('staet business', this.state.business)
-
-        if (this.state.business.seats != addBusinessStream.business.seats) {
-
-
-          delete this.state.business.seats
-        }
 
         var business = _.merge(this.state.business, addBusinessStream.business)
 
@@ -56,6 +54,24 @@ class BusinessForm extends Component {
         this.setStateBusiness(business)
 
       })
+
+    BusinessService.subject
+
+      .filter((businessStream) => businessStream.seatUpdate)
+
+      .filter((businessStream) => businessStream.seats)
+
+      .subscribe((businessStream) => {
+
+        this.state.business.seats = businessStream.seats
+
+        this.setState({
+          business: this.state.business
+        })
+
+      })
+
+
   }
 
   setBusiness(id) {
@@ -71,6 +87,11 @@ class BusinessForm extends Component {
         console.log('getBusinessStream  in set business', getBusinessStream)
 
         var business = getBusinessStream[0]
+        if (typeof business.seats === 'string') {
+
+          business.seats = [];
+
+        }
         this.setStateBusiness(business)
 
       })
@@ -87,7 +108,13 @@ class BusinessForm extends Component {
 
       this.setObjectToInputsWithName(business)
 
+      BusinessService.subject.next({
+        updateSeats: true,
+        seats: business.seats || []
+      })
+
     })
+
   }
 
   setObjectToInputsWithName(item) {
@@ -106,19 +133,20 @@ class BusinessForm extends Component {
   }
 
   save() {
-
+    console.log('AT SAVE')
+    console.log('this.state.business   ', this.state.business)
     var inputs = document.getElementsByTagName('input')
 
     var fields = [...inputs]
 
-    var business = {}
+    var businessFromFeilds = {}
     var infoFields = fields
 
       .filter((input) => input.id.indexOf('seat') == -1)
 
       .map(({name, value}) => {
 
-        business[name] = value
+        businessFromFeilds[name] = value
         return {
           name,
           value
@@ -126,25 +154,25 @@ class BusinessForm extends Component {
 
       })
 
+    console.log('businessFromFeilds', businessFromFeilds)
 
+    var spreadResult = {
 
-    console.log(business, 'this.state.business  at save ', this.state.business)
+      ...this.state.business,
+      ...businessFromFeilds
+    }
+
+    spreadResult.seats = BusinessService.getSeats(this.state.business.seats)
+
+    console.log(' spread result  after getseats  ', spreadResult)
 
     if (this.state.business && this.state.business._id) {
 
-      this.state.business.seats = BusinessService.getSeats(this.state.business.seats)
-      this.updateBusiness({
-
-        ...this.state.business,
-        ...business,
-      })
+      this.updateBusiness(spreadResult)
 
     } else {
 
-      this.createBusiness({
-        ...this.state.business,
-        ...business
-      })
+      this.createBusiness(spreadResult)
 
     }
 
@@ -159,14 +187,15 @@ class BusinessForm extends Component {
 
       inputField.value = ""
 
-
     })
 
   }
 
   createBusiness(business) {
 
-    BusinessService.post(business)
+    BusinessService
+
+      .post(business)
 
       .subscribe((postBusinessStream) => {
 
@@ -246,13 +275,6 @@ class BusinessForm extends Component {
   }
 
   render() {
-    console.log("render", this.state.business.seats)
-    var props = {
-      addBusinessSubject: this.props.addBusinessSubject,
-      seats: this.state.business.seats,
-      tags: [],
-      discounts: []
-    }
 
     return (
 
@@ -321,7 +343,7 @@ class BusinessForm extends Component {
         <br/>
         <div className="row">
           <div className='col-sm-12'>
-            { props.seats.length > 0 ? <BusinessSeatWidget { ...props}/> : "" } }
+            <BusinessSeatWidget />
           </div>
           <br/>
         </div>
