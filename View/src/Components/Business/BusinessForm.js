@@ -183,7 +183,7 @@ class BusinessForm extends Component {
 
       .forEach((inputField) => {
 
-        inputField.value = item[inputField.name]
+        inputField.value = item[inputField.name] || ""
       })
   }
 
@@ -449,6 +449,15 @@ class BusinessForm extends Component {
           </div>
           <div className='col-sm-10'>
             <input className="form-control business-text-feild" name="wifi" />
+          </div>
+        </div>
+        <br/>
+        <div className="row">
+          <div className='col-sm-2'>
+            <span>Description</span>
+          </div>
+          <div className='col-sm-10'>
+            <textarea className="form-control business-text-feild" name="description" />
           </div>
           <br/>
         </div>
