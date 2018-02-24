@@ -50,6 +50,9 @@ class BusinessForm extends Component {
         business.discount = BusinessService.getDiscount(business.discount)
 
         business.seats = BusinessService.getSeats(business.seats)
+
+        business.tags = BusinessService.getTags(business.tags)
+
         console.log('addBusinessStream business', business)
 
         this.setStateBusiness(business)
@@ -151,16 +154,11 @@ class BusinessForm extends Component {
         updateSeats: true,
         updateDiscounts: true,
         updateTags: true,
-
         seats: business.seats || [],
         discounts: business.discounts || [],
-
         tags: business.tags || []
-
       })
-
     })
-
   }
 
   setObjectToInputsWithName(item) {
@@ -188,7 +186,7 @@ class BusinessForm extends Component {
     var businessFromFeilds = {}
     var infoFields = fields
 
-      .filter((input) => input.id.indexOf('seat') == -1)
+      // .filter((input) => input.id.indexOf('seat') == )
 
       .map(({name, value}) => {
 
@@ -216,15 +214,15 @@ class BusinessForm extends Component {
 
     console.log(' spread result  after getseats  ', spreadResult)
 
-    if (this.state.business && this.state.business._id) {
+    // if (this.state.business && this.state.business._id) {
 
-      this.updateBusiness(spreadResult)
+    //   this.updateBusiness(spreadResult)
 
-    } else {
+    // } else {
 
-      this.createBusiness(spreadResult)
+    //   this.createBusiness(spreadResult)
 
-    }
+    // }
 
   } //save
 
@@ -238,6 +236,22 @@ class BusinessForm extends Component {
       inputField.value = ""
 
     })
+
+  }
+
+  setFeatured(featured) {
+
+    this.state.business.featured = featured
+
+    this.setState({
+      business: this.state.business
+    },
+      () => {
+
+
+        console.log(this.state.business)
+      }
+    )
 
   }
 
@@ -338,18 +352,39 @@ class BusinessForm extends Component {
                               
                                 this.save()
                               
-                              } } className='btn btn-success'>
+                              } } className='btn btn-primary'>
               Save
             </button>
           </div>
-          <br/>
+          <div className='col-sm-10 featured-flex'>
+            <h2>Featured ?</h2>
+            <div class="dropdown">
+              <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                { this.state.business.featured ? 'True' : 'False' }
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a onClick={ (event) => {
+                             
+                               this.setFeatured(true)
+                             
+                             } } class="dropdown-item">True</a>
+                <a onClick={ (event) => {
+                             
+                               this.setFeatured(false)
+                             
+                             } } class="dropdown-item">False</a>
+              </div>
+            </div>
+          </div>
         </div>
+        <br />
+        <br/>
         <div className="row">
           <div className='col-sm-2'>
             <span>name</span>
           </div>
           <div className='col-sm-10'>
-            <input className="form-control" name="name" />
+            <input className="form-control business-text-feild" name="name" />
           </div>
           <br/>
         </div>
@@ -359,7 +394,7 @@ class BusinessForm extends Component {
             <span>phone</span>
           </div>
           <div className='col-sm-10'>
-            <input className="form-control" name="phone" />
+            <input className="form-control business-text-feild" name="phone" />
           </div>
           <br/>
         </div>
@@ -369,7 +404,7 @@ class BusinessForm extends Component {
             <span>email</span>
           </div>
           <div className='col-sm-10'>
-            <input className="form-control" name="email" />
+            <input className="form-control business-text-feild" name="email" />
           </div>
           <br/>
         </div>
@@ -379,7 +414,7 @@ class BusinessForm extends Component {
             <span>address</span>
           </div>
           <div className='col-sm-10'>
-            <input className="form-control" name="address" />
+            <input className="form-control business-text-feild" name="address" />
           </div>
           <br/>
         </div>
@@ -389,7 +424,7 @@ class BusinessForm extends Component {
             <span>wifi password</span>
           </div>
           <div className='col-sm-10'>
-            <input className="form-control" name="wifi" />
+            <input className="form-control business-text-feild" name="wifi" />
           </div>
           <br/>
         </div>
@@ -401,7 +436,7 @@ class BusinessForm extends Component {
                               
                                 this.save()
                               
-                              } } className='btn btn-success'>
+                              } } className='btn btn-primary'>
               Save
             </button>
           </div>

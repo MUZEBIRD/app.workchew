@@ -7,7 +7,7 @@ var Topbar = ({props}) => (<div className='row flex-row-center-vert' style={ { b
                                <button onClick={ (event) => {
                                                  
                                                    window.history.back();
-                                                 } } className='btn btn-success'>
+                                                 } } className='btn btn-secondary'>
                                  back
                                </button>
                              </div>

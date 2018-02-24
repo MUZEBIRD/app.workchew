@@ -62,7 +62,7 @@ var businessService = {
 
   },
 
-  getSeats: (seats) => {
+  getSeats: (seats = []) => {
 
     return seats
 
@@ -89,7 +89,7 @@ var businessService = {
 
   },
 
-  getDiscounts: (discounts) => {
+  getDiscounts: (discounts = []) => {
 
     return discounts
 
@@ -118,7 +118,7 @@ var businessService = {
 
   },
 
-  getTags: (tags) => {
+  getTags: (tags = []) => {
 
     return tags
 
