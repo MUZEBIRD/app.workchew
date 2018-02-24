@@ -13,107 +13,107 @@ class BusinessDiscountWidget extends Component {
     super(props);
 
     this.state = {
-      seats: []
+      discounts: []
     };
 
   }
 
-  setSeats(seats) {
+  setDiscount(discounts) {
 
-    seats
+    discounts
 
-      .forEach((seat, i) => {
+      .forEach((discount, i) => {
 
-        var customerId = `${i}seatCustomer`;
+        var nameId = `${i}discountName`;
 
-        var sectionId = `${i}seatSection`;
+        var descriptionId = `${i}discountDescription`;
 
-        document.getElementById(customerId).value = seat.customer || "";
+        document.getElementById(nameId).value = discount.name || "";
 
-        document.getElementById(sectionId).value = seat.section || "";
+        document.getElementById(descriptionId).value = discount.description || "";
 
       })
 
     this.setState({
-      seats
+      discounts
     })
 
   }
 
-  getSeats(seats) {
+  getDiscount(discounts) {
 
-    return seats
+    return discounts
 
-      .map((seat, i) => {
+      .map((discount, i) => {
 
-        var customerId = `${i}seatCustomer`;
+        var nameId = `${i}discountName`;
 
-        var sectionId = `${i}seatSection`;
+        var descriptionId = `${i}discountDescription`;
 
-        var customer = document.getElementById(customerId).value;
+        var name = document.getElementById(nameId).value;
 
-        var section = document.getElementById(sectionId).value;
+        var description = document.getElementById(descriptionId).value;
 
         return {
-          customer,
-          section
+          name,
+          description
         }
 
       })
 
   }
 
-  isSeat(input) {
+  isDiscount(input) {
 
-    return (input.id.indexOf("Customer") > -1)
+    return (input.id.indexOf("Name") > -1)
   }
 
-  addSeat() {
+  addDiscount() {
 
-    var nuSeats = [...this.getSeats(this.state.seats), {
-      customer: "",
-      section: ""
+    var nuDiscount = [...this.getDiscount(this.state.discounts), {
+      name: "",
+      description: ""
     }]
 
     this.setState({
-      seats: nuSeats
+      discounts: nuDiscount
     })
 
-    console.log('this.state.seats', this.state.seats)
-    this.updateSeats(nuSeats)
+    console.log('this.state.discounts', this.state.discounts)
+    this.updateDiscount(nuDiscount)
   }
 
-  removeSeat(seat, index) {
+  removeDiscount(discount, index) {
 
-    var seats = this.getSeats(this.state.seats)
-    seats.splice(index, 1)
-    //var nuSeats = [...]
+    var discounts = this.getDiscount(this.state.discounts)
+    discounts.splice(index, 1)
+    //var nuDiscount = [...]
 
-    this.setSeats(seats)
+    this.setDiscount(discounts)
 
-    this.updateSeats(seats)
+    this.updateDiscount(discounts)
   }
 
   componentDidMount() {
 
-    console.log('this.props in seats di load', this.props)
+    console.log('this.props in discounts di load', this.props)
 
     BusinessService.subject
 
       .filter((businessStream) => businessStream.updateDiscounts)
 
-      .filter((businessStream) => businessStream.seats)
+      .filter((businessStream) => businessStream.discounts)
 
-      .filter((businessStream) => Array.isArray(businessStream.seats))
+      .filter((businessStream) => Array.isArray(businessStream.discounts))
 
 
       .subscribe((businessStream) => {
 
         this.setState({
-          seats: businessStream.seats
+          discounts: businessStream.discounts
         }, () => {
 
-          this.setSeats(this.state.seats)
+          this.setDiscount(this.state.discounts)
 
         })
 
@@ -122,11 +122,11 @@ class BusinessDiscountWidget extends Component {
 
   }
 
-  updateSeats(seats) {
+  updateDiscount(discounts) {
 
     BusinessService.subject.next({
-      seatUpdate: true,
-      seats
+      discountUpdate: true,
+      discounts
     })
 
   }
@@ -143,7 +143,7 @@ class BusinessDiscountWidget extends Component {
           </p>
           <button onClick={ (event) => {
                             
-                              this.addSeat()
+                              this.addDiscount()
                             
                             } } className='btn btn-success'>
             Add
@@ -154,16 +154,16 @@ class BusinessDiscountWidget extends Component {
           <div className="business-seats">
             { this
                 .state
-                .seats
+                .discounts
                 .map(
-                  (seat, i) => (
+                  (discount, i) => (
                     <div className="busines-seat-component" key={ i }>
                       <br/>
                       <div className="busines-seat-title">
-                        <span>Seat # { i }</span>
+                        <span>Discount # { i }</span>
                         <button onClick={ (event) => {
                                           
-                                            this.removeSeat(seat, i)
+                                            this.removeDiscount(discount, i)
                                           
                                           } } className='btn btn-danger'>
                           remove
@@ -171,10 +171,10 @@ class BusinessDiscountWidget extends Component {
                       </div>
                       <br/>
                       <div className="busines-seat-info">
-                        <input placeholder="customer" id={ `${i}seatCustomer` } />
+                        <input placeholder="name" id={ `${i}discountName` } />
                         <br/>
                         <br/>
-                        <input placeholder="section" id={ `${i}seatSection` } />
+                        <textarea placeholder="description" id={ `${i}discountDescription` } />
                       </div>
                     </div>
                   )

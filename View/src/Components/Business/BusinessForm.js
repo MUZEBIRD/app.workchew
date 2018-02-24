@@ -47,12 +47,21 @@ class BusinessForm extends Component {
 
         var business = _.merge(this.state.business, addBusinessStream.business)
 
+        business.discount = BusinessService.getDiscount(business.discount)
+
         business.seats = BusinessService.getSeats(business.seats)
         console.log('addBusinessStream business', business)
 
         this.setStateBusiness(business)
 
       })
+
+
+    this.setSubjects()
+
+  }
+
+  setSubjects() {
 
     BusinessService.subject
 
@@ -70,6 +79,37 @@ class BusinessForm extends Component {
 
       })
 
+    BusinessService.subject
+
+      .filter((businessStream) => businessStream.discountUpdate)
+
+      .filter((businessStream) => businessStream.discounts)
+
+      .subscribe((businessStream) => {
+
+        this.state.business.discounts = businessStream.discounts
+
+        this.setState({
+          business: this.state.business
+        })
+
+      })
+
+    BusinessService.subject
+
+      .filter((businessStream) => businessStream.tagUpdate)
+
+      .filter((businessStream) => businessStream.tags)
+
+      .subscribe((businessStream) => {
+
+        this.state.business.tags = businessStream.tags
+
+        this.setState({
+          business: this.state.business
+        })
+
+      })
 
   }
 
@@ -109,7 +149,12 @@ class BusinessForm extends Component {
 
       BusinessService.subject.next({
         updateSeats: true,
-        seats: business.seats || []
+        updateDiscounts: true,
+
+        seats: business.seats || [],
+        discounts: business.discounts || []
+
+
       })
 
     })
@@ -162,6 +207,8 @@ class BusinessForm extends Component {
     }
 
     spreadResult.seats = BusinessService.getSeats(this.state.business.seats)
+
+    spreadResult.discounts = BusinessService.getDiscounts(this.state.business.discounts)
 
     console.log(' spread result  after getseats  ', spreadResult)
 
@@ -343,7 +390,6 @@ class BusinessForm extends Component {
           <br/>
         </div>
         <br/>
-
         <br/>
         <div className="row">
           <div className='col-sm-2'>

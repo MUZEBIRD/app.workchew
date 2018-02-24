@@ -23,7 +23,6 @@ var put = function(business) {
 
 }
 
-
 var update = function(business) {
 
   var query = {
@@ -34,13 +33,23 @@ var update = function(business) {
 
     .switchMap((getResponse) => {
 
+      if (business.seats) {
 
-      if (getResponse[0].seats != business.seats) {
+        getResponse[0].seats = business.seats
 
-
-        delete getResponse[0].seats
       }
 
+      if (business.discounts) {
+
+        getResponse[0].discounts = business.discounts
+
+      }
+
+      if (business.tags) {
+
+        getResponse[0].tags = business.tags
+
+      }
       var businessUpdate = _.merge(getResponse[0], business)
 
       return db

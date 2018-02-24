@@ -87,8 +87,36 @@ var businessService = {
 
       })
 
-  }
+  },
 
+  getDiscounts: (discounts) => {
+
+    return discounts
+
+      .map((discount, i) => {
+
+        var nameId = `${i}discountName`;
+
+        var descriptionId = `${i}discountDescription`;
+
+        if (!document.getElementById(nameId)) {
+
+          return discount
+
+        }
+
+        var name = document.getElementById(nameId).value;
+
+        var description = document.getElementById(descriptionId).value;
+
+        return {
+          name,
+          description
+        }
+
+      })
+
+  }
 }
 
 export default businessService
