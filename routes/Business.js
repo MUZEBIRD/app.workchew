@@ -56,7 +56,7 @@ router.get('/', (req, res) => {
 
 })
 
-var getBusinessFromBody = function({_id, name, phone, email, seats, tags, discounts, address, wifi, featured}) {
+var getBusinessFromBody = function({_id, name, phone, email, seats, tags, discounts, address, wifi, featured, weekday_text, geoPoint}) {
 
   return {
     _id,
@@ -68,7 +68,9 @@ var getBusinessFromBody = function({_id, name, phone, email, seats, tags, discou
     discounts,
     address,
     wifi,
-    featured
+    featured,
+    weekday_text,
+    geoPoint
   }
 
 }
