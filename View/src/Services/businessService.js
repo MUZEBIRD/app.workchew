@@ -116,6 +116,30 @@ var businessService = {
 
       })
 
+  },
+
+  getTags: (tags) => {
+
+    return tags
+
+      .map((tag, i) => {
+
+        var textId = `${i}tagText`;
+
+        if (!document.getElementById(textId)) {
+
+          return tag
+
+        }
+
+        var text = document.getElementById(textId).value;
+
+        return {
+          text
+        }
+
+      })
+
   }
 }
 

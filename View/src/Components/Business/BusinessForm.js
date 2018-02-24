@@ -150,10 +150,12 @@ class BusinessForm extends Component {
       BusinessService.subject.next({
         updateSeats: true,
         updateDiscounts: true,
+        updateTags: true,
 
         seats: business.seats || [],
-        discounts: business.discounts || []
+        discounts: business.discounts || [],
 
+        tags: business.tags || []
 
       })
 
@@ -209,6 +211,8 @@ class BusinessForm extends Component {
     spreadResult.seats = BusinessService.getSeats(this.state.business.seats)
 
     spreadResult.discounts = BusinessService.getDiscounts(this.state.business.discounts)
+
+    spreadResult.tags = BusinessService.getTags(this.state.business.tags)
 
     console.log(' spread result  after getseats  ', spreadResult)
 

@@ -13,120 +13,108 @@ class BusinessTagsWidget extends Component {
     super(props);
 
     this.state = {
-      seats: []
+      tags: []
     };
 
   }
 
-  setSeats(seats) {
+  setTags(tags) {
 
-    seats
+    tags
 
-      .forEach((seat, i) => {
+      .forEach((tag, i) => {
 
-        var customerId = `${i}seatCustomer`;
+        var textId = `${i}tagText`;
 
-        var sectionId = `${i}seatSection`;
-
-        document.getElementById(customerId).value = seat.customer || "";
-
-        document.getElementById(sectionId).value = seat.section || "";
+        document.getElementById(textId).value = tag.text || "";
 
       })
 
     this.setState({
-      seats
+      tags
     })
 
   }
 
-  getSeats(seats) {
+  getTags(tags) {
 
-    return seats
+    return tags
 
-      .map((seat, i) => {
+      .map((tag, i) => {
 
-        var customerId = `${i}seatCustomer`;
+        var textId = `${i}tagText`;
 
-        var sectionId = `${i}seatSection`;
-
-        var customer = document.getElementById(customerId).value;
-
-        var section = document.getElementById(sectionId).value;
+        var text = document.getElementById(textId).value;
 
         return {
-          customer,
-          section
+          text
         }
 
       })
 
   }
 
-  isSeat(input) {
+  isTag(input) {
 
-    return (input.id.indexOf("Customer") > -1)
+    return (input.id.indexOf("Text") > -1)
   }
 
-  addSeat() {
+  addTag() {
 
-    var nuSeats = [...this.getSeats(this.state.seats), {
-      customer: "",
-      section: ""
+    var nuTags = [...this.getTags(this.state.tags), {
+      text: ""
     }]
 
     this.setState({
-      seats: nuSeats
+      tags: nuTags
     })
 
-    console.log('this.state.seats', this.state.seats)
-    this.updateSeats(nuSeats)
+    console.log('this.state.tags', this.state.tags)
+    this.updateTags(nuTags)
   }
 
-  removeSeat(seat, index) {
+  removeTag(tag, index) {
 
-    var seats = this.getSeats(this.state.seats)
-    seats.splice(index, 1)
-    //var nuSeats = [...]
+    var tags = this.getTags(this.state.tags)
+    tags.splice(index, 1)
+    //var nuTags = [...]
 
-    this.setSeats(seats)
+    this.setTags(tags)
 
-    this.updateSeats(seats)
+    this.updateTags(tags)
   }
 
   componentDidMount() {
 
-    console.log('this.props in seats di load', this.props)
+    console.log('this.props in tags di load', this.props)
 
     BusinessService.subject
 
       .filter((businessStream) => businessStream.updateTags)
 
-      .filter((businessStream) => businessStream.seats)
+      .filter((businessStream) => businessStream.tags)
 
-      .filter((businessStream) => Array.isArray(businessStream.seats))
-
+      .filter((businessStream) => Array.isArray(businessStream.tags))
 
       .subscribe((businessStream) => {
 
         this.setState({
-          seats: businessStream.seats
+          tags: businessStream.tags
         }, () => {
 
-          this.setSeats(this.state.seats)
+          this.setTags(this.state.tags)
 
         })
-
 
       })
 
   }
 
-  updateSeats(seats) {
+  updateTags(tags) {
 
     BusinessService.subject.next({
-      seatUpdate: true,
-      seats
+      tagUpdate: true,
+      tags
     })
 
   }
@@ -143,7 +131,7 @@ class BusinessTagsWidget extends Component {
           </p>
           <button onClick={ (event) => {
                             
-                              this.addSeat()
+                              this.addTag()
                             
                             } } className='btn btn-success'>
             Add
@@ -154,16 +142,16 @@ class BusinessTagsWidget extends Component {
           <div className="business-seats">
             { this
                 .state
-                .seats
+                .tags
                 .map(
-                  (seat, i) => (
+                  (tag, i) => (
                     <div className="busines-seat-component" key={ i }>
                       <br/>
                       <div className="busines-seat-title">
-                        <span>Seat # { i }</span>
+                        <span>Tag # { i }</span>
                         <button onClick={ (event) => {
                                           
-                                            this.removeSeat(seat, i)
+                                            this.removeTag(tag, i)
                                           
                                           } } className='btn btn-danger'>
                           remove
@@ -171,10 +159,7 @@ class BusinessTagsWidget extends Component {
                       </div>
                       <br/>
                       <div className="busines-seat-info">
-                        <input placeholder="customer" id={ `${i}seatCustomer` } />
-                        <br/>
-                        <br/>
-                        <input placeholder="section" id={ `${i}seatSection` } />
+                        <input placeholder="text" id={ `${i}tagText` } />
                       </div>
                     </div>
                   )
