@@ -209,7 +209,42 @@ var retrieveImage = function({_id}) {
 
 }
 
+var remove = function(collectionName, witch) {
+  console.log("")
+  console.log('@ mongo remove/ delete', {
+    collectionName,
+    witch
+  })
+
+  if (witch._id) {
+
+    witch._id = new ObjectId(witch._id)
+
+  }
+
+  return rxMongodb
+
+    .connect(connectionString)
+
+    .flatMap(db => rxMongodb
+
+      .remove(collectionName, witch)
+
+  )
+    .map(mongoRemoveResponse => {
+
+      console.log('@mongo  remove/ delete response', mongoRemoveResponse)
+      console.log("")
+
+      return mongoRemoveResponse
+    })
+
+}
+
+
 var dbService = {
+
+  delete: remove,
 
   get,
 

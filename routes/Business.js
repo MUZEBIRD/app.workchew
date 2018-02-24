@@ -56,6 +56,20 @@ router.get('/', (req, res) => {
 
 })
 
+router.delete('/', (req, res) => {
+
+  return business
+
+    .delete(req.query)
+
+    .subscribe((getBusinessResponse) => {
+
+      res.send(getBusinessResponse)
+
+    })
+
+})
+
 var getBusinessFromBody = function({_id, name, phone, email, seats, tags, discounts, address, wifi, featured, weekday_text, geoPoint, description}) {
 
   return {

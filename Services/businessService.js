@@ -28,7 +28,6 @@ const list = [
 
 ]
 
-
 var post = function(business) {
 
   return db
@@ -78,6 +77,15 @@ var update = function(business) {
 
 }
 
+
+var remove = function(query) {
+
+
+  return db.delete(businessCollectionName, query)
+
+
+}
+
 var get = function(query) {
 
   if (query.searchTerm) {
@@ -96,6 +104,8 @@ var get = function(query) {
 }
 
 var businessService = {
+
+  delete: remove,
 
   get,
 

@@ -1,48 +1,80 @@
 .busines-seat-widget {
     position: relative;
     width: 100%;
-    border:1px solid black;
+    border: 1px solid black;
 }
 
-.business-seats{
+.business-seats {
 
-	position: relative;
+    position: relative;
 
+    display: flex;
+    flex-wrap: wrap;
+    overflow: scroll;
+    height: 500px;
+}
+
+.busines-seat-component {
+
+    position: relative;
+    margin: 10px;
+}
+
+.busines-seat-title {
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.featured-flex {
+
+    position: relative;
+    display: flex;
+}
+
+.featured-flex h2 {
+
+    margin-right: 20px;
+}
+
+.mapFormContaner {
+
+
+
+    position: relative;
+    height: 400px;
+}
+
+.business-search-results-container{
 	display: flex;
-	flex-wrap: wrap;
 	overflow: scroll;
-	height: 500px;
 }
+.business-results-table {
 
-.busines-seat-component{
-
-	position: relative;
-	margin: 10px;
-}
-
-.busines-seat-title{
-	position: relative;
-	display: flex;
-	justify-content: space-around;
-	align-items: center;
-}
-
-.featured-flex{
-
-position: relative;
-display: flex;
+    position: relative;
+    margin: 10px;
+    flex:1;
+    width:100%;
 
 }
 
-.featured-flex h2{
+.business-results-table td {
 
-	margin-right: 20px;
+    position: relative;
+    text-align: center;
+
+    padding: 10px;
 }
 
-.mapFormContaner{
+.business-results-table tr {
 
+    position: relative;
+    border-bottom: 1px solid black;
+}
 
+.business-results-table th {
 
-	position: relative;
-	height:400px;
+    position: relative;
+    text-align: center;
 }

@@ -111,11 +111,6 @@ class BusinessForm extends Component {
 
     })
 
-
-
-
-
-
   } //setSubjects
 
   setBusiness(id) {

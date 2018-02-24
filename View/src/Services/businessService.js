@@ -62,6 +62,14 @@ var businessService = {
 
   },
 
+  delete: (businessInfo) => {
+
+    var deleteBusinessUrl = `${urlService.business}?_id=${businessInfo._id}`;
+
+    return restService.delete(deleteBusinessUrl)
+
+  },
+
   firstUpperCase: (word) => {
 
     var first = word[0];

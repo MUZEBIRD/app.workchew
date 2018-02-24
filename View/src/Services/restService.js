@@ -15,6 +15,15 @@ var restService = {
     }).then((res) => res.json()))
 
   },
+  delete: (url) => {
+
+    return Rx.Observable.fromPromise(fetch(url, {
+
+      method: "DELETE",
+
+    }).then((res) => res.json()))
+
+  },
   post: (url, body) => {
 
     return Rx.Observable.fromPromise(fetch(url, {
