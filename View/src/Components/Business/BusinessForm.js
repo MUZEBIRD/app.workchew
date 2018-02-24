@@ -58,7 +58,9 @@ class BusinessForm extends Component {
 
     console.log('this.props', this.props)
 
-    this.props.addBusinessSubject
+    BusinessService.subject
+
+      .filter((businessStream) => businessStream.mapUpdate)
 
       .subscribe((addBusinessStream) => {
 
@@ -109,6 +111,11 @@ class BusinessForm extends Component {
 
     })
 
+
+
+
+
+
   } //setSubjects
 
   setBusiness(id) {
@@ -129,6 +136,13 @@ class BusinessForm extends Component {
           business.seats = [];
 
         }
+
+        if (business.geoPoint && business.geoPoint.coordinates) {
+
+          BusinessService.setGeoCoordinates(business.geoPoint.coordinates[1], business.geoPoint.coordinates[0])
+
+        }
+
         this.setStateBusiness(business)
 
       })
@@ -216,6 +230,8 @@ class BusinessForm extends Component {
     }
 
     var businessWithList = this.mapListDataToBusiness(spreadResult)
+
+    businessWithList.geoPoint = BusinessService.getGeoCoordinates().geoPoint
 
     console.log(' businessWithList  ', businessWithList)
 

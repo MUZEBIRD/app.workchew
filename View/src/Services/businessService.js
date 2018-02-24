@@ -62,62 +62,6 @@ var businessService = {
 
   },
 
-  getSeats: (seats = []) => {
-
-    return seats
-
-      .map((seat, i) => {
-
-        var customerId = `${i}seatCustomer`;
-
-        var sectionId = `${i}seatSection`;
-        if (!document.getElementById(customerId)) {
-
-          return seat
-
-        }
-        var customer = document.getElementById(customerId).value;
-
-        var section = document.getElementById(sectionId).value;
-
-        return {
-          customer,
-          section
-        }
-
-      })
-
-  },
-
-  getDiscounts: (discounts = []) => {
-
-    return discounts
-
-      .map((discount, i) => {
-
-        var nameId = `${i}discountName`;
-
-        var descriptionId = `${i}discountDescription`;
-
-        if (!document.getElementById(nameId)) {
-
-          return discount
-
-        }
-
-        var name = document.getElementById(nameId).value;
-
-        var description = document.getElementById(descriptionId).value;
-
-        return {
-          name,
-          description
-        }
-
-      })
-
-  },
-
   firstUpperCase: (word) => {
 
     var first = word[0];
@@ -126,7 +70,36 @@ var businessService = {
     return word.replace(first, upper)
 
   },
+  setGeoCoordinates: (lat, lng) => {
 
+    document.getElementById("business-geoPoint-latitude").value = lat
+    document.getElementById("business-geoPoint-longitude").value = lng
+
+  },
+  getGeoCoordinates: () => {
+
+    var lat = document.getElementById("business-geoPoint-latitude").value
+
+    var lng = document.getElementById("business-geoPoint-longitude").value
+
+    if (lat.length > 0 && lng.length > 0) {
+
+      return {
+        lat,
+        lng,
+        geoPoint: {
+          "type": "Point",
+          "coordinates": [lng, lat]
+        }
+      }
+
+    } else {
+      return {
+        geoPoint: null
+      }
+    }
+
+  },
   getlistDataByKeyName: (keyName, stateList = [], props = []) => {
 
     console.log({
@@ -154,53 +127,6 @@ var businessService = {
           return listItemData
 
         }, {})
-
-      })
-
-  },
-  getTags: (tags = []) => {
-
-    return tags
-
-      .map((tag, i) => {
-
-        var textId = `${i}tagText`;
-
-        if (!document.getElementById(textId)) {
-
-          return tag
-
-        }
-
-        var text = document.getElementById(textId).value;
-
-        return {
-          text
-        }
-
-      })
-
-  },
-
-  getWeekday_text: (weekday_texts = []) => {
-
-    return weekday_texts
-
-      .map((weekday_text, i) => {
-
-        var textId = `${i}weekday_textText`;
-
-        if (!document.getElementById(textId)) {
-
-          return weekday_text
-
-        }
-
-        var text = document.getElementById(textId).value;
-
-        return {
-          text
-        }
 
       })
 

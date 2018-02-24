@@ -111,9 +111,10 @@ class BusinessMapForm extends Component {
 
       business.geoPoint = {
         "type": "Point",
-        "coordinates": [geometry.location.lng, geometry.location.lat]
+        "coordinates": [geometry.location.lng(), geometry.location.lat()]
       }
 
+      BusinessService.setGeoCoordinates(geometry.location.lat(), geometry.location.lng())
     }
 
     var updateMsg = {
@@ -122,6 +123,11 @@ class BusinessMapForm extends Component {
     }
 
     console.log('place', updateMsg)
+
+    BusinessService.subject.next({
+      mapUpdate: true,
+      ...updateMsg
+    })
 
   }
 
@@ -137,13 +143,12 @@ class BusinessMapForm extends Component {
         address: place.formatted_address,
         phone: place.formatted_phone_number,
 
-
       },
 
     })
 
-
   }
+
   getGeo() {
 
     const mapForm = this;
@@ -173,7 +178,7 @@ class BusinessMapForm extends Component {
     var props = this.state.props
     return (
 
-      <div className='col-sm-6 mapFormContaner'>
+      <div className='mapFormContaner'>
         { this.state.geo ?
           <MyMapComponent
                           bounds={ this.state.bounds }

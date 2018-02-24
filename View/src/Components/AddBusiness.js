@@ -53,19 +53,38 @@ class AddBusiness extends Component {
             <br/>
             <div className="row">
               <BusinessForm { ...props } />
-              <BusinessMapForm { ...props } />
+              <div className='col-sm-6'>
+                <BusinessMapForm { ...props } />
+                <br/>
+                <div id="businessGeoCoordinates">
+                  <div className="row">
+                    <div className='col-sm-2'>
+                      Latitude
+                    </div>
+                    <div className='col-sm-10'>
+                      <input id="business-geoPoint-latitude" className="form-control" />
+                    </div>
+                  </div>
+                  <br/>
+                  <div className="row">
+                    <div className='col-sm-2'>
+                      Longitude
+                    </div>
+                    <div className='col-sm-10'>
+                      <input id="business-geoPoint-longitude" className="form-control" />
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-
             <br />
             <div className="row">
               <div className='col-sm-6'>
                 <BusinessSeatWidget />
               </div>
-
               <div className='col-sm-3'>
                 <BusinessTagsWidget />
               </div>
-
               <div className='col-sm-3'>
                 <BusinessDiscountWidget />
               </div>
