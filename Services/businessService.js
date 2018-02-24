@@ -5,6 +5,30 @@ const _ = require('lodash');
 
 const businessCollectionName = 'businesss'
 
+
+const list = [
+
+  {
+    keyName: 'seats',
+    props: ['customer', 'section']
+  },
+  {
+    keyName: 'discounts',
+    props: ['name', 'description']
+
+  },
+  {
+    keyName: 'tags',
+    props: ['text']
+  },
+  {
+    keyName: 'weekday_text',
+    props: ['text']
+  }
+
+]
+
+
 var post = function(business) {
 
   return db
@@ -33,23 +57,15 @@ var update = function(business) {
 
     .switchMap((getResponse) => {
 
-      if (business.seats) {
+      list.forEach(listItem => {
 
-        getResponse[0].seats = business.seats
+        if (business[listItem.keyName]) {
 
-      }
+          getResponse[0][listItem.keyName] = business[listItem.keyName]
+        }
 
-      if (business.discounts) {
+      })
 
-        getResponse[0].discounts = business.discounts
-
-      }
-
-      if (business.tags) {
-
-        getResponse[0].tags = business.tags
-
-      }
       var businessUpdate = _.merge(getResponse[0], business)
 
       return db

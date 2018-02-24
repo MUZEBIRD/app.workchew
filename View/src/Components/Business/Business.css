@@ -38,3 +38,11 @@ display: flex;
 
 	margin-right: 20px;
 }
+
+.mapFormContaner{
+
+
+
+	position: relative;
+	height:400px;
+}

@@ -14,13 +14,11 @@ const MapsUrl = "https://maps.googleapis.com/maps/api/js?key=AIzaSyBJa_W1JGWcoBM
 const MyMapComponent = withScriptjs(withGoogleMap(function(props) {
 
   return (
-    <div>
-      <GoogleMap onBoundsChanged={ props.onBoundsChanged } ref={ props.onMapMounted } defaultZoom={ 12 } defaultCenter={ props.geo }>
-        <MySearchBox {...props} />
-        { props.isMarkerShown && <Marker position={ props.geo } /> }
-      </GoogleMap>
-    </div>
 
+    <GoogleMap onBoundsChanged={ props.onBoundsChanged } ref={ props.onMapMounted } defaultZoom={ 12 } defaultCenter={ props.geo }>
+      <MySearchBox {...props} />
+      { props.isMarkerShown && <Marker position={ props.geo } /> }
+    </GoogleMap>
   )
 
 }))
@@ -84,22 +82,67 @@ class BusinessMapForm extends Component {
 
 
     var place = places[0]
+    //this.sendGooglePropUpDate(place)
+
+    this.showDataOptions(place)
+
+
+  // refs.map.fitBounds(bounds);
+  }
+
+  showDataOptions(place) {
+
+    var {types, opening_hours, geometry} = place
+    var business = {
+
+      name: place.name,
+      address: place.formatted_address,
+      phone: place.formatted_phone_number,
+
+    }
+
+    if (opening_hours && opening_hours.weekday_text) {
+
+      business.weekday_text = opening_hours.weekday_text
+
+    }
+
+    if (geometry && geometry.location) {
+
+      business.geoPoint = {
+        "type": "Point",
+        "coordinates": [geometry.location.lng, geometry.location.lat]
+      }
+
+    }
+
+    var updateMsg = {
+      business,
+      types
+    }
+
+    console.log('place', updateMsg)
+
+  }
+
+  sendGooglePropUpDate(place) {
+
     this.props.addBusinessSubject.next({
 
       businessUpdate: true,
 
       business: {
 
-          name: place.name,
-          address: place.formatted_address,
-          phone: place.formatted_phone_number,
+        name: place.name,
+        address: place.formatted_address,
+        phone: place.formatted_phone_number,
 
 
-        },
+      },
 
     })
 
-  // refs.map.fitBounds(bounds);
+
   }
   getGeo() {
 
@@ -130,7 +173,7 @@ class BusinessMapForm extends Component {
     var props = this.state.props
     return (
 
-      <div className='col-sm-6'>
+      <div className='col-sm-6 mapFormContaner'>
         { this.state.geo ?
           <MyMapComponent
                           bounds={ this.state.bounds }
@@ -151,7 +194,7 @@ class BusinessMapForm extends Component {
                           isMarkerShown
                           googleMapURL={ MapsUrl }
                           loadingElement={ <div style={ { height: `100%` } } /> }
-                          containerElement={ <div style={ { height: `400px` } } /> }
+                          containerElement={ <div style={ { height: `100%` } } /> }
                           mapElement={ <div style={ { height: `100%` } } /> } /> :
           <div>
             no coordinatess

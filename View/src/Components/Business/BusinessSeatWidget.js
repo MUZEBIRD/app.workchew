@@ -24,9 +24,9 @@ class BusinessSeatWidget extends Component {
 
       .forEach((seat, i) => {
 
-        var customerId = `${i}seatCustomer`;
+        var customerId = `${i}seatsCustomer`;
 
-        var sectionId = `${i}seatSection`;
+        var sectionId = `${i}seatsSection`;
 
         document.getElementById(customerId).value = seat.customer || "";
 
@@ -46,9 +46,9 @@ class BusinessSeatWidget extends Component {
 
       .map((seat, i) => {
 
-        var customerId = `${i}seatCustomer`;
+        var customerId = `${i}seatsCustomer`;
 
-        var sectionId = `${i}seatSection`;
+        var sectionId = `${i}seatsSection`;
 
         var customer = document.getElementById(customerId).value;
 
@@ -79,7 +79,6 @@ class BusinessSeatWidget extends Component {
       seats: nuSeats
     })
 
-    console.log('this.state.seats', this.state.seats)
     this.updateSeats(nuSeats)
   }
 
@@ -95,8 +94,6 @@ class BusinessSeatWidget extends Component {
   }
 
   componentDidMount() {
-
-    console.log('this.props in seats di load', this.props)
 
     BusinessService.subject
 
@@ -125,7 +122,7 @@ class BusinessSeatWidget extends Component {
   updateSeats(seats) {
 
     BusinessService.subject.next({
-      seatUpdate: true,
+      seatsUpdate: true,
       seats
     })
 
@@ -171,10 +168,10 @@ class BusinessSeatWidget extends Component {
                       </div>
                       <br/>
                       <div className="busines-seat-info">
-                        <input placeholder="customer" id={ `${i}seatCustomer` } />
+                        <input placeholder="customer" id={ `${i}seatsCustomer` } />
                         <br/>
                         <br/>
-                        <input placeholder="section" id={ `${i}seatSection` } />
+                        <input placeholder="section" id={ `${i}seatsSection` } />
                       </div>
                     </div>
                   )

@@ -12,7 +12,27 @@ import { Subject } from 'rxjs'
 
 var updateSubject = new Subject()
 class BusinessForm extends Component {
+  list =[
 
+    {
+      keyName: 'seats',
+      props: ['customer', 'section']
+    },
+    {
+      keyName: 'discounts',
+      props: ['name', 'description']
+
+    },
+    {
+      keyName: 'tags',
+      props: ['text']
+    },
+    {
+      keyName: 'weekday_text',
+      props: ['text']
+    }
+
+  ]
   constructor(props) {
 
     super(props);
@@ -47,11 +67,7 @@ class BusinessForm extends Component {
 
         var business = _.merge(this.state.business, addBusinessStream.business)
 
-        business.discount = BusinessService.getDiscount(business.discount)
-
-        business.seats = BusinessService.getSeats(business.seats)
-
-        business.tags = BusinessService.getTags(business.tags)
+        var businessWithList = this.mapListDataToBusiness(business)
 
         console.log('addBusinessStream business', business)
 
@@ -64,57 +80,36 @@ class BusinessForm extends Component {
 
   }
 
+  listenFor(keyName) {
+
+    console.log(keyName, `${keyName}Update`)
+
+    BusinessService.subject
+
+      .filter((businessStream) => businessStream[`${keyName}Update`])
+
+      .filter((businessStream) => businessStream[keyName])
+
+      .subscribe((businessStream) => {
+        console.log(keyName, "on updaet")
+
+        this.state.business[keyName] = businessStream[keyName]
+        this.setState({
+          business: this.state.business
+        })
+
+      })
+  }
+
   setSubjects() {
 
-    BusinessService.subject
+    this.list.forEach((list) => {
 
-      .filter((businessStream) => businessStream.seatUpdate)
+      this.listenFor(list.keyName)
 
-      .filter((businessStream) => businessStream.seats)
+    })
 
-      .subscribe((businessStream) => {
-
-        this.state.business.seats = businessStream.seats
-
-        this.setState({
-          business: this.state.business
-        })
-
-      })
-
-    BusinessService.subject
-
-      .filter((businessStream) => businessStream.discountUpdate)
-
-      .filter((businessStream) => businessStream.discounts)
-
-      .subscribe((businessStream) => {
-
-        this.state.business.discounts = businessStream.discounts
-
-        this.setState({
-          business: this.state.business
-        })
-
-      })
-
-    BusinessService.subject
-
-      .filter((businessStream) => businessStream.tagUpdate)
-
-      .filter((businessStream) => businessStream.tags)
-
-      .subscribe((businessStream) => {
-
-        this.state.business.tags = businessStream.tags
-
-        this.setState({
-          business: this.state.business
-        })
-
-      })
-
-  }
+  } //setSubjects
 
   setBusiness(id) {
 
@@ -140,6 +135,28 @@ class BusinessForm extends Component {
 
   }
 
+  firstUpperCase(word) {
+
+    var first = word[0];
+    var upper = word[0].toUpperCase();
+
+    return word.replace(first, upper)
+
+  }
+
+  buildUpdateMsg(business) {
+
+    return this.list.reduce((msg, list) => {
+
+      msg[`update${this.firstUpperCase(list.keyName)}`] = true;
+
+      msg[list.keyName] = business[list.keyName] || []
+
+      return msg;
+
+    }, {})
+  }
+
   setStateBusiness(business) {
 
     this.setState({
@@ -150,25 +167,19 @@ class BusinessForm extends Component {
 
       this.setObjectToInputsWithName(business)
 
-      BusinessService.subject.next({
-        updateSeats: true,
-        updateDiscounts: true,
-        updateTags: true,
-        seats: business.seats || [],
-        discounts: business.discounts || [],
-        tags: business.tags || []
-      })
+      var msg = this.buildUpdateMsg(business)
+
+      BusinessService.subject.next(msg)
+
     })
   }
 
   setObjectToInputsWithName(item) {
-    var inputs = document.getElementsByTagName('input')
+    var inputs = document.getElementsByClassName('business-text-feild')
 
     var fields = [...inputs]
 
     fields
-
-      .filter((input) => input.id.indexOf('seat') == -1)
 
       .forEach((inputField) => {
 
@@ -179,14 +190,12 @@ class BusinessForm extends Component {
   save() {
     console.log('AT SAVE')
     console.log('this.state.business   ', this.state.business)
-    var inputs = document.getElementsByTagName('input')
+    var inputs = document.getElementsByClassName('business-text-feild')
 
     var fields = [...inputs]
 
     var businessFromFeilds = {}
     var infoFields = fields
-
-      // .filter((input) => input.id.indexOf('seat') == )
 
       .map(({name, value}) => {
 
@@ -206,28 +215,43 @@ class BusinessForm extends Component {
       ...businessFromFeilds
     }
 
-    spreadResult.seats = BusinessService.getSeats(this.state.business.seats)
+    var businessWithList = this.mapListDataToBusiness(spreadResult)
 
-    spreadResult.discounts = BusinessService.getDiscounts(this.state.business.discounts)
+    console.log(' businessWithList  ', businessWithList)
 
-    spreadResult.tags = BusinessService.getTags(this.state.business.tags)
-
-    console.log(' spread result  after getseats  ', spreadResult)
-
-    // if (this.state.business && this.state.business._id) {
-
-    //   this.updateBusiness(spreadResult)
-
-    // } else {
-
-    //   this.createBusiness(spreadResult)
-
-    // }
+    this.saveBusiness(businessWithList)
 
   } //save
 
+  saveBusiness(business) {
+
+    if (this.state.business && this.state.business._id) {
+
+      this.updateBusiness(business)
+
+    } else {
+
+      this.createBusiness(business)
+
+    }
+
+  }
+
+  mapListDataToBusiness(business) {
+
+    this.list.forEach(list => {
+
+      business[list.keyName] = BusinessService.getlistDataByKeyName(list.keyName, business[list.keyName], list.props)
+
+
+    })
+
+    return business
+
+  }
+
   clearBusinessFields() {
-    var inputs = document.getElementsByTagName('input')
+    var inputs = document.getElementsByClassName('business-text-feild')
 
     var fields = [...inputs]
 
@@ -358,21 +382,21 @@ class BusinessForm extends Component {
           </div>
           <div className='col-sm-10 featured-flex'>
             <h2>Featured ?</h2>
-            <div class="dropdown">
-              <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <div className="dropdown">
+              <button className="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 { this.state.business.featured ? 'True' : 'False' }
               </button>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 <a onClick={ (event) => {
                              
                                this.setFeatured(true)
                              
-                             } } class="dropdown-item">True</a>
+                             } } className="dropdown-item">True</a>
                 <a onClick={ (event) => {
                              
                                this.setFeatured(false)
                              
-                             } } class="dropdown-item">False</a>
+                             } } className="dropdown-item">False</a>
               </div>
             </div>
           </div>

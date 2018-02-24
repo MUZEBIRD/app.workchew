@@ -118,6 +118,46 @@ var businessService = {
 
   },
 
+  firstUpperCase: (word) => {
+
+    var first = word[0];
+    var upper = word[0].toUpperCase();
+
+    return word.replace(first, upper)
+
+  },
+
+  getlistDataByKeyName: (keyName, stateList = [], props = []) => {
+
+    console.log({
+      props
+    })
+
+    return stateList
+
+      .map((stateListItem, i) => {
+
+        return props.reduce((listItemData, prop) => {
+
+          var propInputId = `${i}${keyName}${businessService.firstUpperCase(prop)}`
+          console.log({
+            propInputId
+          })
+          var propInput = document.getElementById(propInputId)
+
+          if (propInput) {
+
+            listItemData[prop] = propInput.value
+
+          }
+
+          return listItemData
+
+        }, {})
+
+      })
+
+  },
   getTags: (tags = []) => {
 
     return tags
@@ -129,6 +169,30 @@ var businessService = {
         if (!document.getElementById(textId)) {
 
           return tag
+
+        }
+
+        var text = document.getElementById(textId).value;
+
+        return {
+          text
+        }
+
+      })
+
+  },
+
+  getWeekday_text: (weekday_texts = []) => {
+
+    return weekday_texts
+
+      .map((weekday_text, i) => {
+
+        var textId = `${i}weekday_textText`;
+
+        if (!document.getElementById(textId)) {
+
+          return weekday_text
 
         }
 

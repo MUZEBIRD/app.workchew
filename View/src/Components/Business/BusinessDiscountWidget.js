@@ -24,9 +24,9 @@ class BusinessDiscountWidget extends Component {
 
       .forEach((discount, i) => {
 
-        var nameId = `${i}discountName`;
+        var nameId = `${i}discountsName`;
 
-        var descriptionId = `${i}discountDescription`;
+        var descriptionId = `${i}discountsDescription`;
 
         document.getElementById(nameId).value = discount.name || "";
 
@@ -46,9 +46,9 @@ class BusinessDiscountWidget extends Component {
 
       .map((discount, i) => {
 
-        var nameId = `${i}discountName`;
+        var nameId = `${i}discountsName`;
 
-        var descriptionId = `${i}discountDescription`;
+        var descriptionId = `${i}discountsDescription`;
 
         var name = document.getElementById(nameId).value;
 
@@ -171,10 +171,10 @@ class BusinessDiscountWidget extends Component {
                       </div>
                       <br/>
                       <div className="busines-seat-info">
-                        <input placeholder="name" id={ `${i}discountName` } />
+                        <input placeholder="name" id={ `${i}discountsName` } />
                         <br/>
                         <br/>
-                        <textarea placeholder="description" id={ `${i}discountDescription` } />
+                        <textarea placeholder="description" id={ `${i}discountsDescription` } />
                       </div>
                     </div>
                   )

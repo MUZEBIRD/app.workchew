@@ -24,7 +24,7 @@ class BusinessTagsWidget extends Component {
 
       .forEach((tag, i) => {
 
-        var textId = `${i}tagText`;
+        var textId = `${i}tagsText`;
 
         document.getElementById(textId).value = tag.text || "";
 
@@ -42,7 +42,7 @@ class BusinessTagsWidget extends Component {
 
       .map((tag, i) => {
 
-        var textId = `${i}tagText`;
+        var textId = `${i}tagsText`;
 
         var text = document.getElementById(textId).value;
 
@@ -113,7 +113,7 @@ class BusinessTagsWidget extends Component {
   updateTags(tags) {
 
     BusinessService.subject.next({
-      tagUpdate: true,
+      tagsUpdate: true,
       tags
     })
 
@@ -159,7 +159,7 @@ class BusinessTagsWidget extends Component {
                       </div>
                       <br/>
                       <div className="busines-seat-info">
-                        <input placeholder="text" id={ `${i}tagText` } />
+                        <input placeholder="text" id={ `${i}tagsText` } />
                       </div>
                     </div>
                   )
