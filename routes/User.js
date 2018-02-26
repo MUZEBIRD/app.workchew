@@ -61,6 +61,21 @@ router.get('/', (req, res) => {
 
 })
 
+
+router.delete('/', (req, res) => {
+
+  return user
+
+    .delete(req.query)
+
+    .subscribe((getUserResponse) => {
+
+      res.send(getUserResponse)
+
+    })
+
+})
+
 var userFromBody = function({name, phone, email, address, password, _id}) {
 
   return {

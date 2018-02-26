@@ -80,9 +80,7 @@ var update = function(business) {
 
 var remove = function(query) {
 
-
   return db.delete(businessCollectionName, query)
-
 
 }
 

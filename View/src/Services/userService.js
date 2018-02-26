@@ -29,7 +29,6 @@ var userService = {
 
     }
 
-
     var qs = Object.keys(params)
 
       .reduce((run, key, i) => {
@@ -51,6 +50,13 @@ var userService = {
     console.log('getUserUrl', qs)
 
     return restService.get(getUserUrl)
+
+  },
+  delete: (userInfo) => {
+
+    var deleteBusinessUrl = `${urlService.user}?_id=${userInfo._id}`;
+
+    return restService.delete(deleteBusinessUrl)
 
   },
   post: (userInfo) => {

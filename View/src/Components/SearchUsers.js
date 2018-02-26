@@ -8,6 +8,25 @@ import { Topbar } from './TopBar.js'
 
 class SearchUser extends Component {
 
+  tableRows =[
+    {
+      title: "Name",
+      key: "name"
+    },
+    {
+      title: "Address",
+      key: "address"
+    },
+    {
+      title: "Email",
+      key: "email"
+    },
+    {
+      title: "Phone",
+      key: "phone"
+    },
+  ]
+
   constructor(props) {
 
     super(props);
@@ -17,7 +36,6 @@ class SearchUser extends Component {
     };
 
     userService.checkLoginStatus()
-
 
     this.getUserStream({})
 
@@ -87,6 +105,32 @@ class SearchUser extends Component {
 
   }
 
+  getTableEntry(user, row) {
+
+    return user[row.key]
+  }
+
+  removeUser(user) {
+
+    if (window.confirm(`Yikes! are you sure you want to delete ${user.name}`)) {
+
+      userService.delete(user)
+
+        .subscribe((userDeleteStream) => {
+
+          console.log('userDeleteStream', userDeleteStream)
+
+          this.searchUsers()
+
+        })
+
+    } else {
+
+
+    }
+
+  }
+
   render() {
     var props = {
 
@@ -108,25 +152,54 @@ class SearchUser extends Component {
             <br/>
             <br/>
             <div className="user-search-results-container">
-              <div>
-                { this
-                    .state
-                    .users
-                    .map(
-                      (user, i) => (
-                        <div key={ i } onClick={ (event) => {
-                                           
-                                             this.selectUser(user)
-                                           
-                                           } }>
-                          <p className="businesSelection">
-                            { user.email }
-                          </p>
-                        </div>
-                      )
-                  
-                  ) }
-              </div>
+              <table className="business-results-table">
+                <thead>
+                  <tr>
+                    { this.tableRows.map((row, i) => (
+                      
+                      
+                        <th key={ i }>
+                          { row.title }
+                        </th>
+                      
+                      
+                      )) }
+                    <th>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  { this
+                      .state
+                      .users
+                      .map(
+                        (user, i) => (
+                    
+                          <tr key={ i }>
+                            { this.tableRows.map((row, j) => (
+                              
+                                <td key={ j } onClick={ (event) => {
+                                                      
+                                                        this.selectUser(user)
+                                                      
+                                                      } }>
+                                  { this.getTableEntry(user, row) }
+                                </td> )
+                              
+                              ) }
+                            <td>
+                              <button onClick={ (event) => {
+                                                
+                                                  this.removeUser(user)
+                                                
+                                                } } className='btn btn-warning'>
+                                remove
+                              </button>
+                            </td>
+                          </tr>)
+                    ) }
+                </tbody>
+              </table>
             </div>
             <br/>
             <br/>

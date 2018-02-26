@@ -1,5 +1,6 @@
 const db = require('./dbService');
 const Rx = require('rxjs');
+const _ = require('lodash');
 
 const userCollectionName = 'users'
 
@@ -68,13 +69,23 @@ var get = function(query) {
   return db.get(userCollectionName, query)
 }
 
+
+var remove = function(query) {
+
+  return db.delete(userCollectionName, query)
+
+}
 var userService = {
 
   get,
 
   post,
 
-  put
+  put,
+  update,
+
+  delete: remove,
+
 }
 
 module.exports = userService
