@@ -5,6 +5,9 @@ import { Route, Link } from 'react-router-dom'
 
 import urlService from '../Services/urlService.js'
 
+import MainMapForm from './Main/MainMapForm.js'
+
+
 class Main extends Component {
 
   constructor(props) {
@@ -62,6 +65,9 @@ class Main extends Component {
             </button>
             <br/>
             <br/>
+          </div>
+          <div>
+            <MainMapForm />
           </div>
         </div>
       </div>
