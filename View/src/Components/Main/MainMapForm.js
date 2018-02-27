@@ -6,7 +6,7 @@ import { Route, Link } from 'react-router-dom'
 import urlService from '../../Services/urlService.js'
 import restService from '../../Services/restService.js'
 
-import { withGoogleMap, withScriptjs, GoogleMap, Marker } from "react-google-maps"
+import { withGoogleMap, withScriptjs, GoogleMap, Marker, InfoWindow } from "react-google-maps"
 import _ from 'lodash'
 
 const MapsUrl = "https://maps.googleapis.com/maps/api/js?key=AIzaSyBJa_W1JGWcoBM_nDKwneNzBnKuRcyDr6M&v=3.exp&libraries=geometry,drawing,places"
@@ -15,7 +15,13 @@ const BunchOMarkers = (props) => props.markers
 
   .map(
     (marker, i) => (
-      <Marker key={ i } position={ marker.position } />
+      <Marker key={ i } position={ marker.position }>
+        <InfoWindow>
+          <div>
+            { marker.business.name }
+          </div>
+        </InfoWindow>
+      </Marker>
     )
 )
 
@@ -132,7 +138,8 @@ class MainMapForm extends Component {
       .filter(business => business.geoPoint && business.geoPoint.coordinates)
 
       .map(business => ({
-        position: this.businessPointToGoogleLatLng(business.geoPoint)
+        position: this.businessPointToGoogleLatLng(business.geoPoint),
+        business
       }));
 
     const nextCenter = _.get(nextMarkers, '0.position', this.state.center);
