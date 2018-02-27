@@ -7,6 +7,10 @@ import urlService from '../../Services/urlService.js'
 import restService from '../../Services/restService.js'
 
 import { withGoogleMap, withScriptjs, GoogleMap, Marker, InfoWindow } from "react-google-maps"
+
+import MainMapMarker from './MainMarker.js'
+
+
 import _ from 'lodash'
 
 const MapsUrl = "https://maps.googleapis.com/maps/api/js?key=AIzaSyBJa_W1JGWcoBM_nDKwneNzBnKuRcyDr6M&v=3.exp&libraries=geometry,drawing,places"
@@ -15,20 +19,7 @@ const BunchOMarkers = (props) => props.markers
 
   .map(
     (marker, i) => (
-      <Marker key={ i } onClick={ (info) => {
-                            
-                            
-                            } } position={ marker.position }>
-        { marker.show && <InfoWindow onCloseClick={ (info) => {
-                                     
-                                       props.toggleMarkerInfo(marker, i)
-                                     
-                                     } }>
-                           <div>
-                             { marker.business.name }
-                           </div>
-                         </InfoWindow> }
-      </Marker>
+      <MainMapMarker key={ i } marker={ marker } />
     )
 )
 
