@@ -15,12 +15,19 @@ const BunchOMarkers = (props) => props.markers
 
   .map(
     (marker, i) => (
-      <Marker key={ i } position={ marker.position }>
-        <InfoWindow>
-          <div>
-            { marker.business.name }
-          </div>
-        </InfoWindow>
+      <Marker key={ i } onClick={ (info) => {
+                            
+                            
+                            } } position={ marker.position }>
+        { marker.show && <InfoWindow onCloseClick={ (info) => {
+                                     
+                                       props.toggleMarkerInfo(marker, i)
+                                     
+                                     } }>
+                           <div>
+                             { marker.business.name }
+                           </div>
+                         </InfoWindow> }
       </Marker>
     )
 )
@@ -31,7 +38,7 @@ const MyMapComponent = withScriptjs(withGoogleMap(function(props) {
 
     <GoogleMap onBoundsChanged={ props.onBoundsChanged } ref={ props.onMapMounted } defaultZoom={ 12 } defaultCenter={ props.geo }>
       { props.isMarkerShown && <Marker position={ props.geo } /> }
-      { props.markers.length > 0 && <BunchOMarkers markers={ props.markers } /> }
+      { props.markers.length > 0 && <BunchOMarkers toggleMarkerInfo={ props.toggleMarkerInfo } markers={ props.markers } /> }
     </GoogleMap>
   )
 
@@ -139,7 +146,8 @@ class MainMapForm extends Component {
 
       .map(business => ({
         position: this.businessPointToGoogleLatLng(business.geoPoint),
-        business
+        business,
+        show: true
       }));
 
     const nextCenter = _.get(nextMarkers, '0.position', this.state.center);
@@ -207,8 +215,6 @@ class MainMapForm extends Component {
           lat: geo.coords.latitude,
           lng: geo.coords.longitude
         }
-      }, () => {
-
       })
 
     })
@@ -221,6 +227,21 @@ class MainMapForm extends Component {
 
   }
 
+  showInfoWindow(marker, i) {
+    marker.show = !marker.show
+
+    console.log("marker")
+
+
+
+    this.state.markers[i].show = !this.state.markers[i].show
+
+    this.setState({
+      markers: this.state.markers
+    })
+    return marker
+  }
+
   render() {
     var props = this.state.props
     return (
@@ -228,6 +249,7 @@ class MainMapForm extends Component {
       <div className='mapFormContaner'>
         { this.state.geo ?
           <MyMapComponent
+                          toggleMarkerInfo={ (marker, i) => this.showInfoWindow(marker, i) }
                           markers={ this.state.markers }
                           bounds={ this.state.bounds }
                           onMapMounted={ (event) => {
