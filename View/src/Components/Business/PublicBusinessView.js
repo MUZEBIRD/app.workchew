@@ -58,19 +58,33 @@ class PublicBusinessView extends Component {
   }
 
   render() {
+
+    var {business} = this.state
     return (
 
       <div className="wholeView flex-col">
         <div className="showView">
-          { this.state.business && <div className="scrollView">
-                                     <Topbar title={ this.state.business.name } />
-                                     <br/>
-                                     <div>
-                                       <p>
-                                         { JSON.stringify(this.state.business) }
-                                       </p>
-                                     </div>
-                                   </div> }
+          { business &&
+            <div className="scrollView">
+              <Topbar title={ business.name } />
+              <br/>
+              <div>
+                <p>
+                  { business.address }
+                </p>
+              </div>
+              <div>
+                <p>
+                  { business.phone }
+                </p>
+              </div>
+              <div>
+                <p>
+                  wifi password :
+                  { business.wifi }
+                </p>
+              </div>
+            </div> }
         </div>
       </div>
 
