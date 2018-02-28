@@ -48,7 +48,7 @@ class AddBusiness extends Component {
       <div className="wholeView flex-col">
         <div className="showView">
           <div className="scrollView">
-            <Topbar props={ { ...props } } />
+            <Topbar { ...props }  />
             <br/>
             <br/>
             <div className="row">

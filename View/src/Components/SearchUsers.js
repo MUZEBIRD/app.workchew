@@ -140,7 +140,7 @@ class SearchUser extends Component {
 
       <div className="wholeView flex-col">
         <div className="showView">
-          <Topbar props={ { ...props } } />
+          <Topbar { ...props } />
           <br/>
           <br/>
           <div>

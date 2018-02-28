@@ -11,6 +11,7 @@ import SearchBusinesses from './Components/SearchBusinesses.js'
 
 import AddBusiness from './Components/AddBusiness.js'
 
+import PublicBusinessView from './Components/Business/PublicBusinessView.js'
 
 import Users from './Components/Users.js'
 
@@ -44,7 +45,7 @@ class App extends Component {
           <Route path="/add-user" component={ AddUser } />
           <Route path="/view-user" component={ AddUser } />
           <Route path="/search-users" component={ SearchUsers } />
-          <Route path="/edit-businesses" />
+          <Route path="/business-page" component={ PublicBusinessView } />
           <Route path="/edit-users" />
         </div>
       </HashRouter>

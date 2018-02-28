@@ -26,6 +26,13 @@ class MainMapMarker extends Component {
 
   }
 
+  goToBusiness() {
+    var {marker: {business}} = this.state;
+
+    urlService.goTo(`${urlService.businessPage}?id=${business._id}`)
+
+  }
+
   render() {
 
     return (
@@ -40,7 +47,7 @@ class MainMapMarker extends Component {
                                        this.toggleMarkerInfo()
                                      
                                      } }>
-                               <div>
+                               <div onClick={ (event) => this.goToBusiness() }>
                                  { this.state.marker.business.name }
                                </div>
                              </InfoWindow> }

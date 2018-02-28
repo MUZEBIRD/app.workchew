@@ -118,7 +118,6 @@ class MainMapForm extends Component {
 
     bounds.extend(new google.maps.LatLng(this.state.geo.lat, this.state.geo.lng))
 
-
     businesses.forEach(business => {
 
       console.log(' set business markers  ', business)

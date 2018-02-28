@@ -219,7 +219,7 @@ class AddUser extends Component {
 
       <div className="wholeView flex-col">
         <div className="showView">
-          <Topbar props={ { ...props } } />
+          <Topbar { ...props }  />
           <br/>
           <div className="row">
             <div className='col-sm-2'>

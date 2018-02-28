@@ -9,9 +9,11 @@ export default {
   loginPage: `/Login`,
   viewUserPage: `/view-user`,
   viewBusinessPage: `/view-business`,
+  businessPage: `/business-page`,
   login: `${base}/Login`,
   signUp: `${base}/SignUp`,
   user: `${base}/User`,
+
 
   business: `${base}/business`,
   goTo: function(route) {
