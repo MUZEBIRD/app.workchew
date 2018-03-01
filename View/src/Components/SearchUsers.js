@@ -5,6 +5,7 @@ import { Route, Link } from 'react-router-dom'
 
 import urlService from '../Services/urlService.js'
 import { Topbar } from './TopBar.js'
+import { FlexTable } from './shared/';
 
 class SearchUser extends Component {
 
@@ -135,6 +136,7 @@ class SearchUser extends Component {
     var props = {
 
       title: "Search User",
+      users: this.state.users
     }
     return (
 
@@ -152,54 +154,9 @@ class SearchUser extends Component {
             <br/>
             <br/>
             <div className="user-search-results-container">
-              <table className="business-results-table">
-                <thead>
-                  <tr>
-                    { this.tableRows.map((row, i) => (
-                      
-                      
-                        <th key={ i }>
-                          { row.title }
-                        </th>
-                      
-                      
-                      )) }
-                    <th>
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  { this
-                      .state
-                      .users
-                      .map(
-                        (user, i) => (
-                    
-                          <tr key={ i }>
-                            { this.tableRows.map((row, j) => (
-                              
-                                <td key={ j } onClick={ (event) => {
-                                                      
-                                                        this.selectUser(user)
-                                                      
-                                                      } }>
-                                  { this.getTableEntry(user, row) }
-                                </td> )
-                              
-                              ) }
-                            <td>
-                              <button onClick={ (event) => {
-                                                
-                                                  this.removeUser(user)
-                                                
-                                                } } className='btn btn-warning'>
-                                remove
-                              </button>
-                            </td>
-                          </tr>)
-                    ) }
-                </tbody>
-              </table>
+              { props.users &&
+                <FlexTable items={ props.users } selectItem={ this.selectUser } removeItem={ (event, user) => this.removeUser(user) } getTableEntry={ this.getTableEntry } tableRows={ this.tableRows }
+                /> }
             </div>
             <br/>
             <br/>

@@ -173,7 +173,7 @@ class SearchBusinesses extends Component {
             <br/>
             <div className="business-search-results-container">
               { props.businesses &&
-                <FlexTable items={ props.businesses } selectItem={ this.selectBusiness } removeItem={ (event, business) => this.removeBusiness(event, business) } getTableEntry={ this.getTableEntry } tableRows={ this.tableRows }
+                <FlexTable items={ props.businesses } selectItem={ this.selectBusiness } removeItem={ (event, business) => this.removeBusiness(business) } getTableEntry={ this.getTableEntry } tableRows={ this.tableRows }
                 /> }
             </div>
             <br/>
