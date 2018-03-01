@@ -9,8 +9,7 @@ import { Topbar } from './TopBar.js'
 
 import BusinessService from '../Services/businessService.js';
 
-
-import FlexTable from './shared/FlexTable.js';
+import { FlexTable } from './shared/';
 
 var self = {}
 class SearchBusinesses extends Component {

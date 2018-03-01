@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import BusinessService from '../../Services/businessService.js';
 import { getQueryParams } from '../../Utils/';
-import FlexTable from '../shared/FlexTable.js';
+import { FlexTable } from '../shared/';
 
 import urlService from '../../Services/urlService.js'
 import restService from '../../Services/restService.js'
