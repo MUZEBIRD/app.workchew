@@ -12,66 +12,94 @@ class FlexTable extends Component {
 
     super(props);
 
-        console.log(props,'props props')
+    console.log(props, 'props props')
 
 
     this.state = this.props
 
   }
 
-  getTableEntry(item,row){
+  getTableEntry(item, row) {
 
-    return item[row.key];
+    if (this.props.getTableEntry) {
+
+      return this.props.getTableEntry(item, row)
+
+
+    } else {
+
+      return item[row.key];
+
+    }
 
   }
 
-  selecItem(item) {
-      
-    console.log(item,'item selected')
+  selectItem(item) {
+
+    console.log(item, 'item selected')
+
+    if (this.props.selectItem) {
+
+      return this.props.selectItem(item)
+
+    } else {
+
+
+
+    }
 
   }
 
   render() {
 
     return (
-              <table className="business-results-table">
-                <thead>
-                  <tr>
-                    { this.props.tableRows.map((row, i) => (
-                        
-                        <th key={ i }>
-                          { row.title }
-                        </th>
+      <table className="business-results-table">
+        <thead>
+          <tr>
+            { this.props.tableRows.map((row, i) => (
+              
+                <th key={ i }>
+                  { row.title }
+                </th>
+              
+              
+              )) }
+            <th>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          { this.props.items &&
+            this.props.items
+              .map(
+                (item, i) => (
+            
+                  <tr key={ i }>
+                    { this.props.tableRows.map((row, j) => (
                       
+                        <td key={ j } onClick={ (event) => {
+                                              
+                                                this.selectItem(item)
+                                              
+                                              } }>
+                          { this.getTableEntry(item, row) }
+                        </td> )
                       
-                      )) }
-                    <th>
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  { this.props.items &&
-                    this.props.items
-                      .map(
-                        (item, i) => (
-                    
-                          <tr key={ i }>
-                            { this.props.tableRows.map((row, j) => (
-                              
-                                <td key={ j } onClick={ (event) => {
-                                                      
-                                                        this.selecItem(item)
-                                                      
-                                                      } }>
-                                  { this.getTableEntry(item, row) }
-                                </td> )
-                              
-                              ) }
-                   
-                          </tr>)
-                    ) }
-                </tbody>
-              </table>
+                      ) }
+                    { this.props.removeItem &&
+                      <td>
+                        <button onClick={ (event) => {
+                                          
+                                            this.props.removeItem(event, item)
+                                          
+                                          } } className='btn btn-warning'>
+                          remove
+                        </button>
+                      </td> }
+                  </tr>)
+            ) }
+        </tbody>
+      </table>
       );
   }
 

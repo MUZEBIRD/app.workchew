@@ -44,11 +44,7 @@ class PublicBusinessView extends Component {
   }
 
 
-  checkIn(){
-
-
-
-  }
+  checkIn() {}
 
   setBusiness(id) {
 
@@ -109,25 +105,24 @@ class PublicBusinessView extends Component {
                   { business.wifi }
                 </p>
               </div>
-            <div className="row">
-              <div className='col-sm-2'>
-                <button onClick={ (event) => {
-                                  
-                                    this.checkIn()
-                                  
-                                  } } className='btn btn-primary'>
-                  check In
-                </button>
+              <div className="row">
+                <div className='col-sm-2'>
+                  <button onClick={ (event) => {
+                                    
+                                      this.checkIn()
+                                    
+                                    } } className='btn btn-primary'>
+                    check In
+                  </button>
+                </div>
               </div>
-            </div>
-
-            <div>
-               { 
-                business.discounts &&
-                <FlexTable items={ business.discounts} tableRows ={this.discountTableRows}/> 
-              }
-            </div>
-
+              <p>
+                Discounts
+              </p>
+              <div>
+                { business.discounts &&
+                  <FlexTable items={ business.discounts } tableRows={ this.discountTableRows } /> }
+              </div>
             </div> }
         </div>
       </div>

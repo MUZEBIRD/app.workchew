@@ -10,6 +10,9 @@ import { Topbar } from './TopBar.js'
 import BusinessService from '../Services/businessService.js';
 
 
+import FlexTable from './shared/FlexTable.js';
+
+var self = {}
 class SearchBusinesses extends Component {
 
   tableRows =[
@@ -39,6 +42,8 @@ class SearchBusinesses extends Component {
       businesses: []
     };
 
+    self = this;
+
     userService.checkLoginStatus()
 
     this.getBusinessStream({})
@@ -53,7 +58,7 @@ class SearchBusinesses extends Component {
 
   }
 
-  selectBusines(business) {
+  selectBusiness(business) {
 
     console.log('on select Business', business)
 
@@ -138,7 +143,7 @@ class SearchBusinesses extends Component {
 
           console.log('businessDeleteStream', businessDeleteStream)
 
-          this.searchBusinesses()
+          self.searchBusinesses()
 
         })
 
@@ -153,6 +158,7 @@ class SearchBusinesses extends Component {
     var props = {
 
       title: "Search Businesses",
+      businesses: this.state.businesses
     }
     return (
 
@@ -170,54 +176,9 @@ class SearchBusinesses extends Component {
             <br/>
             <br/>
             <div className="business-search-results-container">
-              <table className="business-results-table">
-                <thead>
-                  <tr>
-                    { this.tableRows.map((row, i) => (
-                      
-                      
-                        <th key={ i }>
-                          { row.title }
-                        </th>
-                      
-                      
-                      )) }
-                    <th>
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  { this
-                      .state
-                      .businesses
-                      .map(
-                        (business, i) => (
-                    
-                          <tr key={ i }>
-                            { this.tableRows.map((row, j) => (
-                              
-                                <td key={ j } onClick={ (event) => {
-                                                      
-                                                        this.selectBusines(business)
-                                                      
-                                                      } }>
-                                  { this.getTableEntry(business, row) }
-                                </td> )
-                              
-                              ) }
-                            <td>
-                              <button onClick={ (event) => {
-                                                
-                                                  this.removeBusiness(business)
-                                                
-                                                } } className='btn btn-warning'>
-                                remove
-                              </button>
-                            </td>
-                          </tr>)
-                    ) }
-                </tbody>
-              </table>
+              { props.businesses &&
+                <FlexTable items={ props.businesses } selectItem={ this.selectBusiness } removeItem={ (event, business) => this.removeBusiness(event, business) } getTableEntry={ this.getTableEntry } tableRows={ this.tableRows }
+                /> }
             </div>
             <br/>
             <br/>
