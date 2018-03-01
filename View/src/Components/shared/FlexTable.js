@@ -34,7 +34,6 @@ class FlexTable extends Component {
   render() {
 
     return (
-
               <table className="business-results-table">
                 <thead>
                   <tr>
@@ -73,7 +72,6 @@ class FlexTable extends Component {
                     ) }
                 </tbody>
               </table>
-
       );
   }
 
