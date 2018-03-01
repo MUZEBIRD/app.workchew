@@ -11,7 +11,6 @@ import BusinessService from '../Services/businessService.js';
 
 import { FlexTable } from './shared/';
 
-var self = {}
 class SearchBusinesses extends Component {
 
   tableRows =[
@@ -40,8 +39,6 @@ class SearchBusinesses extends Component {
     this.state = {
       businesses: []
     };
-
-    self = this;
 
     userService.checkLoginStatus()
 
@@ -142,7 +139,7 @@ class SearchBusinesses extends Component {
 
           console.log('businessDeleteStream', businessDeleteStream)
 
-          self.searchBusinesses()
+          this.searchBusinesses()
 
         })
 
