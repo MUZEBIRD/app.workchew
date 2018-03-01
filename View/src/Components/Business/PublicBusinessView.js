@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import BusinessService from '../../Services/businessService.js';
 import { getQueryParams } from '../../Utils/';
+import FlexTable from '../shared/FlexTable.js';
 
 import urlService from '../../Services/urlService.js'
 import restService from '../../Services/restService.js'
@@ -18,6 +19,18 @@ class PublicBusinessView extends Component {
 
   }
 
+  discountTableRows =[
+    {
+      title: "Name",
+      key: "name"
+    },
+    {
+      title: "Description",
+      key: "description"
+    },
+
+  ]
+
   componentDidMount() {
 
     var params = getQueryParams() || {};
@@ -27,6 +40,13 @@ class PublicBusinessView extends Component {
       this.setBusiness(params.id)
 
     }
+
+  }
+
+
+  checkIn(){
+
+
 
   }
 
@@ -57,6 +77,11 @@ class PublicBusinessView extends Component {
 
   }
 
+  getTableEntry(item, row) {
+
+    return item[row.key]
+  }
+
   render() {
 
     var {business} = this.state
@@ -84,6 +109,25 @@ class PublicBusinessView extends Component {
                   { business.wifi }
                 </p>
               </div>
+            <div className="row">
+              <div className='col-sm-2'>
+                <button onClick={ (event) => {
+                                  
+                                    this.checkIn()
+                                  
+                                  } } className='btn btn-primary'>
+                  check In
+                </button>
+              </div>
+            </div>
+
+            <div>
+               { 
+                business.discounts &&
+                <FlexTable items={ business.discounts} tableRows ={this.discountTableRows}/> 
+              }
+            </div>
+
             </div> }
         </div>
       </div>

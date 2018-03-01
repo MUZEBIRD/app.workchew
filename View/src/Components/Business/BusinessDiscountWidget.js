@@ -125,7 +125,7 @@ class BusinessDiscountWidget extends Component {
   updateDiscount(discounts) {
 
     BusinessService.subject.next({
-      discountUpdate: true,
+      discountsUpdate: true,
       discounts
     })
 

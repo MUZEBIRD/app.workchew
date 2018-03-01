@@ -252,7 +252,7 @@ class BusinessForm extends Component {
 
     this.list.forEach(list => {
 
-      business[list.keyName] = BusinessService.getlistDataByKeyName(list.keyName, business[list.keyName], list.props)
+      business[list.keyName] = BusinessService.getlistDataByKeyName(list.keyName, business[list.keyName] || [], list.props)
 
 
     })
@@ -322,7 +322,6 @@ class BusinessForm extends Component {
         console.log('putBusinessStream ', putBusinessStream)
 
         alert('business saved !')
-
 
       })
   }
