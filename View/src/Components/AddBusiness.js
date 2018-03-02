@@ -86,8 +86,17 @@ class AddBusiness extends Component {
       removeItem: (i) => {
 
         console.log('onRemoveListItem', i)
+        console.log('onRemoveListItem this.state.business.discounts', this.state.business.discounts)
 
-        this.state.business.discounts.splice(i, 1)
+        var fresh = [...this.state.business.discounts]
+        console.log('onRemoveListItem fresh', fresh)
+
+        fresh.splice(i, 1)
+        console.log('onRemoveListItem fresh after splice', fresh)
+
+        this.state.business.discounts = [...fresh]
+
+        console.log('onRemoveListItem this.state.business.discounts  last', this.state.business.discounts)
 
         this.setState({
           business: this.state.business
@@ -159,7 +168,7 @@ class AddBusiness extends Component {
                 <BusinessTagsWidget />
               </div>
               <div className='col-sm-3'>
-                <ListInputWidget {...discountListWidgetProps} />
+                <BusinessDiscountWidget />
               </div>
               <br/>
             </div>
