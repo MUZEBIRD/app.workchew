@@ -51,71 +51,40 @@ class AddBusiness extends Component {
 
   }
 
-  discountItemProperties =[
-    {
-      name: 'name'
-    },
-    {
-      name: 'description',
-      type: 'textarea'
-    }
-  ]
-
-  onRemoveListItem(i, listKey) {
+  onRemoveListItem = (i, listKey) => {
 
     console.log('onRemoveListItem', i, listKey)
 
   }
 
-  onAddListItem(listKey) {
+  onAddListItem = (listKey) => {
 
     console.log('onAddListItem', listKey)
 
   }
 
+  onListUpdate = ({key, items}) => {
+
+    this.state.business[key] = items;
+    var nuTime = {
+      ...this.state.business
+    }
+
+    nuTime[key] = items
+
+    this.setState({
+      business: nuTime
+    }, () => {
+
+
+      console.log('afted list update', this.state.business)
+    })
+
+  }
 
   render() {
 
 
-    var discountListWidgetProps = {
-
-      items: this.state.business.discounts || [],
-      itemTitle: "discount",
-      title: "Discounts",
-      itemPropList: this.discountItemProperties,
-      removeItem: (i) => {
-
-        console.log('onRemoveListItem', i)
-        console.log('onRemoveListItem this.state.business.discounts', this.state.business.discounts)
-
-        var fresh = [...this.state.business.discounts]
-        console.log('onRemoveListItem fresh', fresh)
-
-        fresh.splice(i, 1)
-        console.log('onRemoveListItem fresh after splice', fresh)
-
-        this.state.business.discounts = [...fresh]
-
-        console.log('onRemoveListItem this.state.business.discounts  last', this.state.business.discounts)
-
-        this.setState({
-          business: this.state.business
-        })
-
-      },
-      addItem: () => {
-
-        this.state.business.discounts.push({})
-
-        console.log('onAddListItem')
-
-        this.setState({
-          business: this.state.business
-        })
-
-      }
-
-    }
 
     console.log(addBusinessSubject, 'addBusinessStream')
 
@@ -168,7 +137,7 @@ class AddBusiness extends Component {
                 <BusinessTagsWidget />
               </div>
               <div className='col-sm-3'>
-                <BusinessDiscountWidget />
+                <BusinessDiscountWidget onListUpdate={ this.onListUpdate } discounts={ this.state.business.discounts } />
               </div>
               <br/>
             </div>
