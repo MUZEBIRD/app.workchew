@@ -6,7 +6,7 @@ import './Business.css'
 import urlService from '../../Services/urlService.js'
 import restService from '../../Services/restService.js'
 import { ListInputWidget } from '../shared/';
-// <BusinessDiscountWidget onListUpdate={ this.onListUpdate } discounts={ this.state.business.discounts } />
+// 
 
 class DiscountListWidget extends Component {
 

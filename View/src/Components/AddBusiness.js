@@ -19,6 +19,7 @@ import BusinessSeatWidget from './Business/BusinessSeatWidget.js'
 import BusinessTagsWidget from './Business/BusinessTagsWidget.js'
 
 import BusinessDiscountWidget from './Business/BusinessDiscountWidget.js'
+import DiscountListWidget from './Business/DiscountListWidget.js'
 
 import { ListInputWidget } from './shared/';
 
@@ -135,7 +136,7 @@ class AddBusiness extends Component {
                 <BusinessTagsWidget />
               </div>
               <div className='col-sm-3'>
-                <BusinessDiscountWidget onListUpdate={ this.onListUpdate } discounts={ this.state.business.discounts } />
+                <DiscountListWidget onListUpdate={ this.onListUpdate } discounts={ this.state.business.discounts } />
               </div>
               <br/>
             </div>

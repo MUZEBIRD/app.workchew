@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { v4 } from 'uuid'
 
 const KeyInputRange = (props) => (<div>
                                     { props.itemPropList.map((propertyKeyItem, i) => (
@@ -52,7 +53,7 @@ class ListInputWidget extends Component {
                 .items
                 .map(
                   (item, i) => (
-                    <div className="busines-seat-component" key={ i }>
+                    <div className="busines-seat-component" key={ v4() }>
                       <br/>
                       <div className="busines-seat-title">
                         <span>{ this.props.itemTitle } # { i }</span>
