@@ -63,11 +63,6 @@ class BusinessDiscountWidget extends Component {
 
   }
 
-  isDiscount(input) {
-
-    return (input.id.indexOf("Name") > -1)
-  }
-
   addDiscount() {
 
     var nuDiscount = [...this.getDiscount(this.state.discounts), {
@@ -87,7 +82,6 @@ class BusinessDiscountWidget extends Component {
 
     var discounts = this.getDiscount(this.state.discounts)
     discounts.splice(index, 1)
-    //var nuDiscount = [...]
 
     this.setDiscount(discounts)
 
@@ -105,7 +99,6 @@ class BusinessDiscountWidget extends Component {
       .filter((businessStream) => businessStream.discounts)
 
       .filter((businessStream) => Array.isArray(businessStream.discounts))
-
 
       .subscribe((businessStream) => {
 

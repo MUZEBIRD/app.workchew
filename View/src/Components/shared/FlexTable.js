@@ -24,7 +24,6 @@ class FlexTable extends Component {
 
       return this.props.getTableEntry(item, row)
 
-
     } else {
 
       return item[row.key];
@@ -96,8 +95,7 @@ class FlexTable extends Component {
                   </tr>)
             ) }
         </tbody>
-      </table>
-      );
+      </table>);
   }
 
 }

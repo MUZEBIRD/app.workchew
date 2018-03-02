@@ -84,8 +84,6 @@ class AddBusiness extends Component {
 
   render() {
 
-
-
     console.log(addBusinessSubject, 'addBusinessStream')
 
     var props = {
