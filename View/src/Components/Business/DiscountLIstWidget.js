@@ -38,6 +38,14 @@ class DiscountListWidget extends Component {
       itemTitle: "discount",
       title: "Discounts",
       itemPropList: this.discountItemProperties,
+      onListUpdate: (items) => {
+
+        this.props.onListUpdate({
+          key: 'discounts',
+          items
+        })
+
+      },
       removeItem: (i) => {
 
         console.log('onRemoveListItem', i)

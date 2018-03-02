@@ -5,7 +5,14 @@ const KeyInputRange = (props) => (<div>
                                     { props.itemPropList.map((propertyKeyItem, i) => (
                                       
                                         <div key={ i }>
-                                          <input defaultValue={ props.item[propertyKeyItem.name] } />
+                                          <input onChange={ (event) => {
+                                                              var change = event.target.value
+                                                              var key = propertyKeyItem.name
+                                                              console.log(' on change', props.onChange({
+                                                                change,
+                                                                key
+                                                              }))
+                                                            } } defaultValue={ props.item[propertyKeyItem.name] } />
                                           <br/>
                                           <br/>
                                         </div>
@@ -26,6 +33,19 @@ class ListInputWidget extends Component {
   }
 
   componentDidMount() {}
+
+
+  onItemChange = (item, i) => {
+
+    console.log('item change ', item)
+
+    var nuList = [...this.props.items]
+
+    nuList[i] = item;
+
+    this.props.onListUpdate(nuList)
+
+  }
 
   render() {
 
@@ -67,7 +87,10 @@ class ListInputWidget extends Component {
                       </div>
                       <br/>
                       <div className="busines-seat-info">
-                        <KeyInputRange itemPropList={ this.props.itemPropList } item={ item } />
+                        <KeyInputRange onChange={ ({change, key}) => {
+                                                    item[key] = change
+                                                    this.onItemChange(item)
+                                                  } } itemPropList={ this.props.itemPropList } item={ item } />
                       </div>
                     </div>
                   )
