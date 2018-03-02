@@ -20,6 +20,7 @@ import BusinessTagsWidget from './Business/BusinessTagsWidget.js'
 
 import BusinessDiscountWidget from './Business/BusinessDiscountWidget.js'
 
+import { ListInputWidget } from './shared/';
 
 const addBusinessSubject = new Subject();
 
@@ -29,14 +30,86 @@ class AddBusiness extends Component {
 
     super(props);
 
-    this.state = {};
+    this.state = {
+      business: {
+
+        discounts: [
+          {
+            name: 'fun discount',
+            description: "the best ever"
+          },
+          {
+            name: 'crazy discount',
+            description: "woo woo"
+          }
+        ]
+
+      }
+    };
 
     userService.checkLoginStatus()
 
   }
 
+  discountItemProperties =[
+    {
+      name: 'name'
+    },
+    {
+      name: 'description',
+      type: 'textarea'
+    }
+  ]
+
+  onRemoveListItem(i, listKey) {
+
+    console.log('onRemoveListItem', i, listKey)
+
+  }
+
+  onAddListItem(listKey) {
+
+    console.log('onAddListItem', listKey)
+
+  }
+
+
   render() {
+
+
+    var discountListWidgetProps = {
+
+      items: this.state.business.discounts || [],
+      itemTitle: "discount",
+      title: "Discounts",
+      itemPropList: this.discountItemProperties,
+      removeItem: (i) => {
+
+        console.log('onRemoveListItem', i)
+
+        this.state.business.discounts.splice(i, 1)
+
+        this.setState({
+          business: this.state.business
+        })
+
+      },
+      addItem: () => {
+
+        this.state.business.discounts.push({})
+
+        console.log('onAddListItem')
+
+        this.setState({
+          business: this.state.business
+        })
+
+      }
+
+    }
+
     console.log(addBusinessSubject, 'addBusinessStream')
+
     var props = {
 
       title: "Add/Edit Businesses",
@@ -48,7 +121,7 @@ class AddBusiness extends Component {
       <div className="wholeView flex-col">
         <div className="showView">
           <div className="scrollView">
-            <Topbar { ...props }  />
+            <Topbar { ...props } />
             <br/>
             <br/>
             <div className="row">
@@ -86,7 +159,7 @@ class AddBusiness extends Component {
                 <BusinessTagsWidget />
               </div>
               <div className='col-sm-3'>
-                <BusinessDiscountWidget />
+                <ListInputWidget {...discountListWidgetProps} />
               </div>
               <br/>
             </div>

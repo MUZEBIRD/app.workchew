@@ -14,7 +14,6 @@ class FlexTable extends Component {
 
     console.log(props, 'props props')
 
-
     this.state = this.props
 
   }
@@ -45,7 +44,6 @@ class FlexTable extends Component {
     } else {
 
 
-
     }
 
   }
@@ -61,7 +59,6 @@ class FlexTable extends Component {
                 <th key={ i }>
                   { row.title }
                 </th>
-              
               
               )) }
             <th>
