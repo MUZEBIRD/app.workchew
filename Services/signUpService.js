@@ -1,46 +1,6 @@
 var nodemailer = require('nodemailer');
 var rx = require('rxjs');
 
-var sendEmail = function(emailData) {
-
-  var result = JSON.stringify(docs);
-
-  var transporter = nodemailer.createTransport('smtps://jtvents@gmail.com:sethwins@smtp.gmail.com');
-
-  var mailOptions = emailData.mailOptions
-
-  // send mail with defined transport object
-
-  return rx.Observable.create(function(observer) {
-
-    transporter.sendMail(mailOptions, function(error, info) {
-
-      if (error) {
-
-        console.log(error);
-
-        observer.error(error)
-
-      } else {
-
-        console.log('Message sent: ', info.response);
-
-        observer.next({
-
-          info: info,
-          SignUp: true,
-          msg: 'thank you for signing up , check you inbox for a email from joint Ventures to verify your account'
-
-        });
-
-      }
-
-    });
-
-  })
-
-}
-
 var sendAdminSignUpEmail = function(signUpData) {
 
   console.log('sendAdminSignUpEmail  ', {

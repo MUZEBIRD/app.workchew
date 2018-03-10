@@ -13,6 +13,31 @@ class BusinessUserSignUp extends Component {
 
   }
 
+  signUp() {
+
+    var fields = [...document.getElementsByClassName('sign-up-form-feild')];
+
+    var businessSignUpInfo = fields.reduce((info, inputField) => {
+
+      info[inputField.name] = inputField.value;
+
+      return info;
+
+    }, {})
+
+    userService
+
+      .signUpBusinessUser(businessSignUpInfo)
+      .subscribe((businessSignUpResponse) => {
+        console.log({
+          businessSignUpResponse
+        })
+        alert("thanks for signing up check your email for next steps")
+      }
+
+    )
+  }
+
   render() {
 
     return (
@@ -30,25 +55,25 @@ class BusinessUserSignUp extends Component {
           </div>
           <div className='row'>
             <div className='col-sm-6'>
-              <input placeholder="Name of Business" className="form-control" />
+              <input name="name" placeholder="Name of Business" className="form-control sign-up-form-feild" />
             </div>
           </div>
           <br/>
           <div className='row'>
             <div className='col-sm-6'>
-              <input placeholder="Contact Email" className="form-control" />
+              <input name="email" placeholder="Contact Email" className="form-control sign-up-form-feild" />
             </div>
           </div>
           <br/>
           <div className='row'>
             <div className='col-sm-6'>
-              <textarea placeholder="Message (Optional)" className="form-control" />
+              <textarea name="message" placeholder="Message (Optional)" className="form-control sign-up-form-feild" />
             </div>
           </div>
           <br/>
           <div className='row'>
             <div className='col-sm-1'>
-              <button className="btn btn-success">
+              <button onClick={ this.signUp } className="btn btn-success">
                 Sign up
               </button>
             </div>

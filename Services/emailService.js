@@ -3,8 +3,6 @@ var rx = require('rxjs');
 
 var sendEmail = function(emailData) {
 
-  var result = JSON.stringify(docs);
-
   var transporter = nodemailer.createTransport('smtps://jtvents@gmail.com:sethwins@smtp.gmail.com');
 
   var mailOptions = emailData.mailOptions
@@ -49,7 +47,25 @@ var sendAdminSignUpEmail = function(signUpData) {
 
   var htmlMsg = "";
 
-  htmlMsg = "<p>user has signed up</p>"
+  var signUpEmail = ""
+
+  if (signUpData.businessSignUpInfo) {
+
+    var {email, name, message} = signUpData.businessSignUpInfo
+
+    htmlMsg = `<p> A business named, ${name} , wants to join with  email : ${email}</p>
+
+				<p> message: ${message}</p>`
+
+  }
+
+  if (signUpData.userSignUpInfo) {
+
+    signUpEmail = signUpData.userSignUpInfo.email
+
+    htmlMsg = `<p>user has signed up with email : ${signUpEmail}</p>`
+
+  }
 
   return sendEmail({
     mailOptions: {
@@ -72,10 +88,13 @@ var sendThankForSignUpEmail = function(signUpData) {
 
   htmlMsg = "<p>thank you for signing up</p>"
 
+  var signUpEmail = signUpData.businessSignUpInfo.email
+
+
   return sendEmail({
     mailOptions: {
       from: '" jVents " <jtVents@gmail.com>', // sender address
-      to: signUpData.email, // list of receivers
+      to: signUpEmail, // list of receivers
       subject: 'welcome ✔', // Subject line
       html: htmlMsg
     }
@@ -89,6 +108,8 @@ var sendUserVerificationEmail = function(signUpData) {
     signUpData
   });
 
+  var toEmail = signUpData.userSignUpInfo.email
+
   var htmlMsg = "";
 
   htmlMsg = "<p>click here to verify</p>"
@@ -96,7 +117,7 @@ var sendUserVerificationEmail = function(signUpData) {
   return sendEmail({
     mailOptions: {
       from: '" jVents " <jtVents@gmail.com>', // sender address
-      to: signUpData.email, // list of receivers
+      to: toEmail, // list of receivers
       subject: 'welcome ✔', // Subject line
       html: htmlMsg
     }

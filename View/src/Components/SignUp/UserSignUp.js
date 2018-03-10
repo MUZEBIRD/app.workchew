@@ -13,6 +13,33 @@ class UserSignUp extends Component {
 
   }
 
+  signUp() {
+
+    var fields = [...document.getElementsByClassName('sign-up-form-feild')];
+
+    var userSignUpInfo = fields.reduce((info, inputField) => {
+
+      info[inputField.name] = inputField.value
+
+      return info;
+
+    }, {})
+
+    userService
+
+      .signUpCoChewer(userSignUpInfo)
+
+      .subscribe((signUpCoChewerResponse) => {
+
+        console.log({
+          signUpCoChewerResponse
+        })
+
+        alert("thanks for signing up check your email for next steps")
+
+      })
+  }
+
   render() {
 
     return (
@@ -30,31 +57,31 @@ class UserSignUp extends Component {
           </div>
           <div className='row'>
             <div className='col-sm-6'>
-              <input placeholder="User Name" className="form-control" />
+              <input placeholder="User Name" name="userName" className="form-control sign-up-form-feild" />
             </div>
           </div>
           <br/>
           <div className='row'>
             <div className='col-sm-6'>
-              <input placeholder="Email" className="form-control" />
+              <input placeholder="Email" name="email" className="form-control sign-up-form-feild" />
             </div>
           </div>
           <br/>
           <div className='row'>
             <div className='col-sm-6'>
-              <input placeholder="Password" type="password" className="form-control" />
+              <input placeholder="Password" name="password" type="password" className="form-control sign-up-form-feild" />
             </div>
           </div>
           <br/>
           <div className='row'>
             <div className='col-sm-6'>
-              <textarea placeholder="what are you working on, what drives you?" className="form-control" />
+              <textarea name="info" placeholder="what are you working on, what drives you?" className="form-control sign-up-form-feild" />
             </div>
           </div>
           <br/>
           <div className='row'>
             <div className='col-sm-1'>
-              <button className="btn btn-success">
+              <button onClick={ this.signUp } className="btn btn-success">
                 Sign up
               </button>
             </div>

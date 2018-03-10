@@ -6,15 +6,17 @@ const userCollectionName = 'users'
 
 var post = function(user) {
 
+
+  var {userSignUpInfo, businessSignUpInfo} = user
   var data = {};
 
   console.log("user service.post top ", user)
 
-  if (user.userSignUpInfo) {
+  if (userSignUpInfo) {
 
     return db
 
-      .post(userCollectionName, user)
+      .post(userCollectionName, userSignUpInfo)
 
       .switchMap(userDbPosStream => {
 
@@ -51,11 +53,11 @@ var post = function(user) {
   }
 
 
-  if (user.businessSignUpInfo) {
+  if (businessSignUpInfo) {
 
     return emailService
 
-    
+
       .sendThankForSignUpEmail({
         businessSignUpInfo
       })
