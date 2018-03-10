@@ -18,7 +18,7 @@ class UserSignUp extends Component {
     return (
 
       <div className="wholeView flex-col">
-        <div className="showView">
+        <div className="showView container">
           <div className='row flex-row-center-vert' style={ { backgroundColor: 'white', position: 'relative', zIndex: '5', height: '10%' } }>
             <div className='col-sm-4'>
             </div>

@@ -89,39 +89,45 @@ class PublicBusinessView extends Component {
             <div className="scrollView">
               <Topbar title={ business.name } />
               <br/>
-              <div>
-                <p>
-                  { business.address }
-                </p>
-              </div>
-              <div>
-                <p>
-                  { business.phone }
-                </p>
-              </div>
-              <div>
-                <p>
-                  wifi password :
-                  { business.wifi }
-                </p>
-              </div>
+              <br/>
+              <br/>
               <div className="row">
-                <div className='col-sm-2'>
-                  <button onClick={ (event) => {
-                                    
-                                      this.checkIn()
-                                    
-                                    } } className='btn btn-primary'>
-                    check In
-                  </button>
+                <div className="col-sm-12">
+                  <div>
+                    <p>
+                      { business.address }
+                    </p>
+                  </div>
+                  <div>
+                    <p>
+                      { business.phone }
+                    </p>
+                  </div>
+                  <div>
+                    <p>
+                      wifi password :
+                      { business.wifi }
+                    </p>
+                  </div>
+                  <div className="row">
+                    <div className='col-sm-2'>
+                      <button onClick={ (event) => {
+                                        
+                                          this.checkIn()
+                                        
+                                        } } className='btn btn-primary'>
+                        check In
+                      </button>
+                    </div>
+                  </div>
+                  <p>
+                    Discounts
+                  </p>
+                  <div>
+                    { business.discounts &&
+                      <FlexTable items={ business.discounts } tableRows={ this.discountTableRows } /> }
+                  </div>
                 </div>
-              </div>
-              <p>
-                Discounts
-              </p>
-              <div>
-                { business.discounts &&
-                  <FlexTable items={ business.discounts } tableRows={ this.discountTableRows } /> }
               </div>
             </div> }
         </div>

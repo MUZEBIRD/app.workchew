@@ -76,17 +76,23 @@ router.delete('/', (req, res) => {
 
 })
 
-var userFromBody = function({name, phone, email, address, password, _id}) {
+var userFromBody = function(user) {
 
-  return {
-    _id,
-    name,
-    phone,
-    email,
-    address,
-    password
-  }
+  return user
 
 }
+
+// var userFromBody = function({name, phone, email, address, password, _id}) {
+
+//   return {
+//     _id,
+//     name,
+//     phone,
+//     email,
+//     address,
+//     password
+//   }
+
+// }
 
 module.exports = router;

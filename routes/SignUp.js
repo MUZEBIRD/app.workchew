@@ -12,7 +12,7 @@ router.post('/', ({body}, res) => {
 
   user
 
-    .post(userMaskFromBody(body))
+    .post(body)
 
     .subscribe((postUserResponse) => {
 
@@ -44,14 +44,5 @@ router.post('/', ({body}, res) => {
 
 }); //POST 
 
-var userMaskFromBody = function({email, password}) {
-
-  return {
-
-    email,
-    password
-  }
-
-}
 
 module.exports = router;

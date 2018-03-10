@@ -55,7 +55,7 @@ class Login extends Component {
             if (err) {
 
               this.showAlert({
-                text: "log in error dude",
+                text: "log in error",
                 class: "danger"
               })
             }
@@ -69,7 +69,7 @@ class Login extends Component {
 
           email: 'seth',
 
-          password: 'guy'
+          password: ''
 
         })
 
@@ -95,7 +95,7 @@ class Login extends Component {
 
 
               this.showAlert({
-                text: "log in error dude",
+                text: "log in error",
                 class: "danger"
               })
             }
@@ -142,7 +142,7 @@ class Login extends Component {
             if (err) {
 
               this.showAlert({
-                text: "sign up error dude",
+                text: "sign up error",
                 class: "danger"
               })
 
@@ -157,7 +157,7 @@ class Login extends Component {
 
           email: 'seth',
 
-          password: 'guy'
+          password: ''
 
         })
 
@@ -227,8 +227,8 @@ class Login extends Component {
 
     return (
 
-      <div className="wholeView flex-col-center-vert">
-        <div className="flex-col-center-both">
+      <div className="wholeView">
+        <div>
           <img className="logo" src={ "/static/images/logo.png" } />
         </div>
         <div className="row">

@@ -98,7 +98,23 @@ var userService = {
     window.location.href = "/"
 
   },
+  signUpBusinessUser: (businessSignUpInfo) => {
 
+    return userService
+
+      .post({
+        businessSignUpInfo
+      })
+
+  },
+  signUpCoChewer: (userSignUpInfo) => {
+    return userService
+
+      .post({
+        userSignUpInfo
+      })
+
+  },
   checkLoginStatus: () => {
 
     userService
