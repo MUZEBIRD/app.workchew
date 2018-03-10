@@ -136,7 +136,7 @@ class AddBusiness extends Component {
                 <BusinessTagsWidget />
               </div>
               <div className='col-sm-3'>
-                <DiscountListWidget onListUpdate={ this.onListUpdate } discounts={ this.state.business.discounts } />
+                <BusinessDiscountWidget/>
               </div>
               <br/>
             </div>

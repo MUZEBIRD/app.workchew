@@ -19,6 +19,8 @@ import SearchUsers from './Components/SearchUsers.js'
 
 import AddUser from './Components/AddUser.js'
 
+import { BusinessUserSignUp, UserSignUp } from './Components/SignUp'
+
 
 import Main from './Components/Main.js'
 
@@ -46,6 +48,8 @@ class App extends Component {
           <Route path="/view-user" component={ AddUser } />
           <Route path="/search-users" component={ SearchUsers } />
           <Route path="/business-page" component={ PublicBusinessView } />
+          <Route path="/business-signup" component={ BusinessUserSignUp } />
+          <Route path="/co-chewer-signUp" component={ UserSignUp } />
           <Route path="/edit-users" />
         </div>
       </HashRouter>

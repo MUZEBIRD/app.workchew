@@ -8,6 +8,8 @@ export default {
   main: `/`,
   loginPage: `/Login`,
   viewUserPage: `/view-user`,
+  coChewerSignUp: `/co-chewer-signUp`,
+  businessSignUp: `/business-signup`,
   viewBusinessPage: `/view-business`,
   businessPage: `/business-page`,
   login: `${base}/Login`,

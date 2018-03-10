@@ -194,7 +194,20 @@ class Login extends Component {
           })
 
   }
+  goToCoChewerSignUp() {
 
+
+    urlService.goTo(urlService.coChewerSignUp)
+
+
+  }
+  goToBusinessSignUp() {
+
+
+    urlService.goTo(urlService.businessSignUp)
+
+
+  }
 
   closeAlert() {
     this.setState({
@@ -242,6 +255,7 @@ class Login extends Component {
         <br/>
         <div className="row">
           <div className="col-sm-4"></div>
+          <div className="col-sm-1"></div>
           <div className="col-sm-2">
             <button className="btn btn-info" onClick={ () => {
                                                          this.login()
@@ -249,11 +263,28 @@ class Login extends Component {
               Login
             </button>
           </div>
-          <div className="col-sm-2">
+        </div>
+        <br/>
+        <div className="row">
+          <div className="col-sm-4"></div>
+          <div className="col-sm-4 flex-row-space-around">
+            <span>Sign Up as a Co-Chewer</span>
             <button className="btn btn-success" onClick={ () => {
-                                                            this.signUp()
+                                                            this.goToCoChewerSignUp()
                                                           } }>
-              SignUp
+              click here
+            </button>
+          </div>
+        </div>
+        <br/>
+        <div className="row">
+          <div className="col-sm-4"></div>
+          <div className="col-sm-4 flex-row-space-around">
+            <span>Sign Up as Business Owner</span>
+            <button className="btn btn-success" onClick={ () => {
+                                                            this.goToBusinessSignUp()
+                                                          } }>
+              click here
             </button>
           </div>
         </div>
