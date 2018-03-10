@@ -229,6 +229,9 @@ class Login extends Component {
     return (
 
       <div className="wholeView flex-col-center-vert">
+        <div className="flex-col-center-both">
+          <img className="logo" src={ "/static/images/logo.png" } />
+        </div>
         <div className="row">
           <div className="col-sm-4"></div>
           <div className="col-sm-4">
