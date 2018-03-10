@@ -28,6 +28,37 @@ class UserSignUp extends Component {
             <div className='col-sm-4'>
             </div>
           </div>
+          <div className='row'>
+            <div className='col-sm-6'>
+              <input placeholder="User Name" className="form-control" />
+            </div>
+          </div>
+          <br/>
+          <div className='row'>
+            <div className='col-sm-6'>
+              <input placeholder="Email" className="form-control" />
+            </div>
+          </div>
+          <br/>
+          <div className='row'>
+            <div className='col-sm-6'>
+              <input placeholder="Password" type="password" className="form-control" />
+            </div>
+          </div>
+          <br/>
+          <div className='row'>
+            <div className='col-sm-6'>
+              <textarea placeholder="what are you working on, what drives you?" className="form-control" />
+            </div>
+          </div>
+          <br/>
+          <div className='row'>
+            <div className='col-sm-1'>
+              <button className="btn btn-success">
+                Sign up
+              </button>
+            </div>
+          </div>
         </div>
       </div>
 

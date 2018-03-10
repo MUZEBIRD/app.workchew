@@ -18,7 +18,7 @@ class BusinessUserSignUp extends Component {
     return (
 
       <div className="wholeView flex-col">
-        <div className="showView">
+        <div className="showView container">
           <div className='row flex-row-center-vert' style={ { backgroundColor: 'white', position: 'relative', zIndex: '5', height: '10%' } }>
             <div className='col-sm-4'>
             </div>
@@ -26,6 +26,31 @@ class BusinessUserSignUp extends Component {
               <h2>Business Sign Up</h2>
             </div>
             <div className='col-sm-4'>
+            </div>
+          </div>
+          <div className='row'>
+            <div className='col-sm-6'>
+              <input placeholder="Name of Business" className="form-control" />
+            </div>
+          </div>
+          <br/>
+          <div className='row'>
+            <div className='col-sm-6'>
+              <input placeholder="Contact Email" className="form-control" />
+            </div>
+          </div>
+          <br/>
+          <div className='row'>
+            <div className='col-sm-6'>
+              <textarea placeholder="Message (Optional)" className="form-control" />
+            </div>
+          </div>
+          <br/>
+          <div className='row'>
+            <div className='col-sm-1'>
+              <button className="btn btn-success">
+                Sign up
+              </button>
             </div>
           </div>
         </div>
