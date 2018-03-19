@@ -7,9 +7,26 @@ import urlService from '../Services/urlService.js'
 
 import MainMapForm from './Main/MainMapForm.js'
 
+import { FlexTable } from './shared/';
+
+import BusinessService from '../Services/businessService.js';
+
 
 class Main extends Component {
-
+  tableRows =[
+    {
+      title: "Name",
+      key: "name"
+    },
+    {
+      title: "Address",
+      key: "address"
+    },
+    {
+      title: "WiFi",
+      key: "wifi"
+    },
+  ]
   constructor(props) {
 
     super(props);
@@ -25,6 +42,37 @@ class Main extends Component {
     localStorage.clear();
 
     window.location.reload(true);
+
+  }
+
+  getBusinessStream(params) {
+
+    return BusinessService.get({
+      params
+    })
+
+  }
+
+  selectBusiness(business) {
+
+    console.log('on select Business', business)
+
+    urlService.goTo(`${urlService.businessPage}?id=${business._id}`)
+
+  }
+
+  componentWillMount() {
+
+    this.getBusinessStream({}).subscribe((businessStream) => {
+
+
+      console.log('businessStream', businessStream)
+      this.setState({
+
+        businesses: businessStream
+
+      })
+    })
 
   }
 
@@ -80,7 +128,8 @@ class Main extends Component {
                 <MainMapForm />
               </div>
               <div className="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                ...
+                { this.state.businesses &&
+                  <FlexTable items={ this.state.businesses } selectItem={ this.selectBusiness } getTableEntry={ this.getTableEntry } tableRows={ this.tableRows } /> }
               </div>
             </div>
           </div>
