@@ -228,6 +228,8 @@ class Login extends Component {
     return (
 
       <div className="wholeView">
+        <br/>
+        <br/>
         <div>
           <img className="logo" src={ "/static/images/logo.png" } />
         </div>
@@ -267,6 +269,10 @@ class Login extends Component {
           </div>
         </div>
         <br/>
+
+                  <br/>
+
+                            <br/>
         <div className="row">
           <div className="col-sm-4"></div>
           <div className="col-sm-4 flex-row-space-around">

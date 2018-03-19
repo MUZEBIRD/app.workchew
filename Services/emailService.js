@@ -1,6 +1,12 @@
 var nodemailer = require('nodemailer');
 var rx = require('rxjs');
 
+// hello@workchew.com
+
+// Worckchew2018#
+
+// mb@workchew.com
+
 var sendEmail = function(emailData) {
 
   var transporter = nodemailer.createTransport('smtps://jtvents@gmail.com:sethwins@smtp.gmail.com');
@@ -55,7 +61,7 @@ var sendAdminSignUpEmail = function(signUpData) {
 
     htmlMsg = `<p> A business named, ${name} , wants to join with  email : ${email}</p>
 
-				<p> message: ${message}</p>`
+        <p> message: ${message}</p>`
 
   }
 
@@ -89,7 +95,6 @@ var sendThankForSignUpEmail = function(signUpData) {
   htmlMsg = "<p>thank you for signing up</p>"
 
   var signUpEmail = signUpData.businessSignUpInfo.email
-
 
   return sendEmail({
     mailOptions: {

@@ -1,3 +1,14 @@
+var getPathVariables = () => {
+
+  var [path, id] = window.location.pathname.split('/');
+
+
+  return {
+    path,
+    id
+  }
+
+}
 
 var getQueryParams = function() {
 
@@ -40,4 +51,4 @@ var getQueryParams = function() {
 
 }
 
-export { getQueryParams }
+export { getQueryParams, getPathVariables }

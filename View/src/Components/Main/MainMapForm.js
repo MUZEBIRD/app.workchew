@@ -17,11 +17,7 @@ const MapsUrl = "https://maps.googleapis.com/maps/api/js?key=AIzaSyBJa_W1JGWcoBM
 
 const BunchOMarkers = (props) => props.markers
 
-  .map(
-    (marker, i) => (
-      <MainMapMarker key={ i } marker={ marker } />
-    )
-)
+  .map((marker, i) => (<MainMapMarker key={ i } marker={ marker } />))
 
 const MyMapComponent = withScriptjs(withGoogleMap(function(props) {
 
@@ -221,8 +217,6 @@ class MainMapForm extends Component {
     marker.show = !marker.show
 
     console.log("marker")
-
-
 
     this.state.markers[i].show = !this.state.markers[i].show
 

@@ -6,7 +6,6 @@ const userCollectionName = 'users'
 
 var post = function(user) {
 
-
   var {userSignUpInfo, businessSignUpInfo} = user
   var data = {};
 
@@ -57,7 +56,6 @@ var post = function(user) {
 
     return emailService
 
-
       .sendThankForSignUpEmail({
         businessSignUpInfo
       })
@@ -70,7 +68,6 @@ var post = function(user) {
         return emailService.sendAdminSignUpEmail({
           businessSignUpInfo
         })
-
 
       })
 
@@ -126,6 +123,7 @@ var update = function(user) {
     })
 
 }
+
 var get = function(query) {
 
   if (query.searchTerm) {
@@ -142,12 +140,12 @@ var get = function(query) {
   return db.get(userCollectionName, query)
 }
 
-
 var remove = function(query) {
 
   return db.delete(userCollectionName, query)
 
 }
+
 var userService = {
 
   get,

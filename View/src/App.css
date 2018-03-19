@@ -18,12 +18,12 @@ body,
     width: 300px;
 }
 
-a {
+button a {
 
     color: white;
 }
 
-a:hover {
+button a:hover {
 
     color: white;
     text-decoration: none
