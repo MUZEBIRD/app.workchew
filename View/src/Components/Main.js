@@ -84,13 +84,16 @@ class Main extends Component {
         <div className="showView">
           <div className='row flex-row-center-vert' style={ { backgroundColor: 'white', position: 'relative', zIndex: '5', height: '10%' } }>
             <div className='col-sm-4'>
-              <button onClick={ (event) => {
-                                
-                                  this.logOut()
-                                
-                                } } className='btn btn-danger'>
-                log out
-              </button>
+              <div className="dropdown">
+                <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i className="material-icons md-36">settings</i>
+                </button>
+                <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a className="dropdown-item" href="#">Logout</a>
+                  <a className="dropdown-item" href="#">Login</a>
+                  <a className="dropdown-item" href="#">Settings</a>
+                </div>
+              </div>
             </div>
             <div className='col-sm-4'>
               <h2>Main</h2>
