@@ -5,7 +5,6 @@ const _ = require('lodash');
 
 const businessCollectionName = 'businesss'
 
-
 const list = [
 
   {
@@ -46,6 +45,95 @@ var put = function(business) {
 
 }
 
+var checkin = function(checkInInfo) {
+
+  var {bid, uid} = checkInInfo;
+
+  var query = {
+    _id: bid
+  }
+
+  return db.get(businessCollectionName, query)
+
+    .map((getBusinessStream) => {
+
+      return {
+        business: getBusinessStream[0],
+        uid
+      }
+
+    })
+
+    .map((checkInStream) => {
+
+      if (availiableSeats(checkInStream.business.seats).length) {
+
+        return checkInStream
+      } else {
+
+        return null
+      }
+
+    })
+
+    .switchMap(checkInStream => {
+
+      if (checkInStream && checkInStream.business) {
+
+        query = {
+          _id: checkInStream.business._id
+        }
+
+        var {seats} = checkInStream.business;
+
+        var notFound = true;
+
+        var nuSeats = seats.map((seat) => {
+
+          if (notFound && (!seat.customer || seat.customer.length == 0)) {
+
+            seat.customer = checkInStream.uid
+
+            notFound = false;
+          }
+
+          return seat
+
+        })
+
+        checkInStream.business.seats = [...nuSeats]
+
+        return db
+          .update(businessCollectionName, checkInStream.business, {
+            _id: checkInStream.business._id
+          })
+
+      } else {
+
+        return Rx.Observable.of({
+          msg: "no seats availiable"
+        })
+
+      }
+
+    })
+
+}
+
+var availiableSeats = function(seats) {
+
+  if (seats && seats.filter(seat => !seat.customer).length) {
+
+    return seats.filter(seat => !seat.customer || seat.customer.length == "")
+
+  } else {
+
+    return []
+
+  }
+
+}
+
 var update = function(business) {
 
   var query = {
@@ -77,7 +165,6 @@ var update = function(business) {
 
 }
 
-
 var remove = function(query) {
 
   return db.delete(businessCollectionName, query)
@@ -108,6 +195,8 @@ var businessService = {
   get,
 
   post,
+
+  checkin,
 
   update,
 

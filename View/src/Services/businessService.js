@@ -51,6 +51,15 @@ var businessService = {
     }
 
   },
+  checkIn: (checkInInfo) => {
+
+    var {uid, bid} = checkInInfo;
+
+    var checkInUrl = `${urlService.business}/${bid}/checkin/${uid}`
+
+    return restService.put(checkInUrl, checkInInfo)
+
+  },
   post: (businessInfo) => {
 
     return restService.post(urlService.business, businessInfo)

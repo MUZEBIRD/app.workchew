@@ -42,6 +42,24 @@ router.put('/', (req, res) => {
 
 }) //PUT
 
+router.put('/:bid/checkin/:uid', (req, res) => {
+
+  console.log('req.body @ busines check in route', req.body);
+
+  business
+
+    .checkin(getBusinessFromBody(req.body))
+
+    .subscribe((putBusinessResponse) => {
+
+      res.send({
+        putBusinessResponse
+      })
+
+    })
+
+}) //PUT
+
 router.get('/', (req, res) => {
 
   return business
@@ -70,24 +88,30 @@ router.delete('/', (req, res) => {
 
 })
 
-var getBusinessFromBody = function({_id, name, phone, email, seats, tags, discounts, address, wifi, featured, weekday_text, geoPoint, description}) {
+var getBusinessFromBody = function(business) {
 
-  return {
-    _id,
-    name,
-    phone,
-    email,
-    seats,
-    tags,
-    discounts,
-    address,
-    wifi,
-    featured,
-    weekday_text,
-    geoPoint,
-    description
-  }
+  return business
 
 }
+
+// var getBusinessFromBody = function({_id, name, phone, email, seats, tags, discounts, address, wifi, featured, weekday_text, geoPoint, description}) {
+
+//   return {
+//     _id,
+//     name,
+//     phone,
+//     email,
+//     seats,
+//     tags,
+//     discounts,
+//     address,
+//     wifi,
+//     featured,
+//     weekday_text,
+//     geoPoint,
+//     description
+//   }
+
+// }
 
 module.exports = router;

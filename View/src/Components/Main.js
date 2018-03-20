@@ -65,7 +65,6 @@ class Main extends Component {
 
     this.getBusinessStream({}).subscribe((businessStream) => {
 
-
       console.log('businessStream', businessStream)
       this.setState({
 

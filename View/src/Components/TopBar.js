@@ -15,13 +15,20 @@ var Topbar = (props) => (<div className='row flex-row-center-vert' style={ { bac
                              <h2>{ props.title }</h2>
                            </div>
                            <div className='col-sm-4'>
-                             <button onClick={ (event) => {
-                                               
-                                                 userService.logOut()
-                                               
-                                               } } className='btn btn-danger'>
-                               log out
-                             </button>
+                             <div className="dropdown">
+                               <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                 <i className="material-icons md-36">settings</i>
+                               </button>
+                               <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                 <a className="dropdown-item" onClick={ (event) => {
+                                                                        
+                                                                          userService.logOut()
+                                                                        
+                                                                        } } href="#">Logout</a>
+                                 <a className="dropdown-item" href="#">Login</a>
+                                 <a className="dropdown-item" href="#">Settings</a>
+                               </div>
+                             </div>
                            </div>
                          </div>
 )

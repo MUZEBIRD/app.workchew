@@ -5,6 +5,10 @@ import { FlexTable } from '../shared/';
 
 import urlService from '../../Services/urlService.js'
 import restService from '../../Services/restService.js'
+
+
+import userService from '../../Services/userService.js'
+
 import { Topbar } from '../TopBar.js'
 
 class PublicBusinessView extends Component {
@@ -43,8 +47,31 @@ class PublicBusinessView extends Component {
 
   }
 
+  checkIn() {
 
-  checkIn() {}
+    userService.get({
+      params: {
+        _id: 1
+      }
+    })
+
+      .filter((getCurrentUserStream) => getCurrentUserStream._id)
+
+      .switchMap((logedInUser) => {
+
+        return BusinessService.checkIn({
+          bid: this.state.business._id,
+          uid: logedInUser._id
+        })
+
+      })
+
+      .subscribe((getCurrentUserStream) => {
+
+        console.log('getCurrentUserStream', getCurrentUserStream)
+      })
+
+  }
 
   setBusiness(id) {
 
