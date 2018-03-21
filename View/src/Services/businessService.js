@@ -51,6 +51,16 @@ var businessService = {
     }
 
   },
+  checkOut: (checkOutInfo) => {
+
+    var {uid, bid} = checkOutInfo;
+
+    var checkOutUrl = `${urlService.business}/${bid}/checkout/${uid}`
+
+    return restService.put(checkOutUrl, checkOutInfo)
+
+  },
+
   checkIn: (checkInInfo) => {
 
     var {uid, bid} = checkInInfo;

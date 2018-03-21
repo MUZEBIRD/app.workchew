@@ -60,16 +60,43 @@ class PublicBusinessView extends Component {
 
       .switchMap((logedInUser) => {
 
-        return BusinessService.checkIn({
+        return BusinessService.checkOut({
           bid: this.state.business._id,
           uid: logedInUser._id
         })
 
+          .map((checkOutStream) => {
+
+            return {
+              checkOutStream,
+              uid: logedInUser._id
+            }
+
+          })
+
       })
 
-      .subscribe((getCurrentUserStream) => {
+      .subscribe(({checkOutStream, uid}) => {
 
-        console.log('getCurrentUserStream', getCurrentUserStream)
+        console.log('checkOutStream', checkOutStream)
+
+        var {putBusinessResponse} = checkOutStream;
+
+        if (putBusinessResponse && putBusinessResponse.seats) {
+
+          var seats = putBusinessResponse.seats || [];
+
+          var seatsWithUser = seats.filter((seat) => seat.customer == uid)
+
+          if (seatsWithUser.length == 0) {
+
+            this.setState({
+              isCheckedIn: false
+            })
+
+          }
+
+        }
 
       })
 

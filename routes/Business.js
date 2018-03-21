@@ -42,21 +42,44 @@ router.put('/', (req, res) => {
 
 }) //PUT
 
-router.put('/:bid/checkin/:uid', (req, res) => {
+router.put('/:bid/:action/:uid', (req, res, next) => {
 
-  console.log('req.body @ busines check in route', req.body);
+  console.log('req.body @ busines check in route', req.params);
 
-  business
+  if (req.params.action == 'checkin') {
 
-    .checkin(getBusinessFromBody(req.body))
+    business
 
-    .subscribe((putBusinessResponse) => {
+      .checkin(getBusinessFromBody(req.body))
 
-      res.send({
-        putBusinessResponse
+      .subscribe((putBusinessResponse) => {
+
+        res.send({
+          putBusinessResponse
+        })
+
       })
 
-    })
+  } else if (req.params.action == "checkout") {
+
+    business
+
+      .checkout(getBusinessFromBody(req.body))
+
+      .subscribe((putBusinessResponse) => {
+
+        res.send({
+          putBusinessResponse
+        })
+
+      })
+
+  } else {
+
+    next();
+
+  }
+
 
 }) //PUT
 

@@ -45,6 +45,93 @@ var put = function(business) {
 
 }
 
+
+var checkout = function(checkoutInfo) {
+
+  var {bid, uid} = checkoutInfo;
+
+  var query = {
+    _id: bid
+  }
+
+  return db.get(businessCollectionName, query)
+
+    .map((getBusinessStream) => {
+
+      return {
+        business: getBusinessStream[0],
+        uid
+      }
+
+    })
+
+    .map((checkOutStream) => {
+
+      if (seatsWithUser(checkOutStream.business.seats, {
+          _id: checkOutStream.uid
+        }).length) {
+
+        return checkOutStream
+
+      } else {
+
+        return null
+      }
+
+    })
+
+    .switchMap(checkOutStream => {
+
+      if (checkOutStream && checkOutStream.business) {
+
+        query = {
+          _id: checkOutStream.business._id
+        }
+
+        var {seats} = checkOutStream.business;
+
+        var nuSeats = seats.map((seat) => {
+
+          if (seat.customer == checkOutStream.uid) {
+
+            seat.customer = ""
+
+          }
+
+          return seat
+
+        })
+
+        checkOutStream.business.seats = [...nuSeats]
+
+        return db
+          .update(businessCollectionName, checkOutStream.business, {
+            _id: checkOutStream.business._id
+          })
+
+      } else {
+
+        return Rx.Observable.of({
+          msg: "not checked in"
+        })
+
+      }
+
+    })
+
+}
+
+var seatsWithUser = function(seats, user) {
+
+  console.log({
+    seats,
+    user
+  })
+
+  return seats.filter(seat => seat.customer == user._id)
+
+}
+
 var checkin = function(checkInInfo) {
 
   var {bid, uid} = checkInInfo;
@@ -187,6 +274,8 @@ var businessService = {
   get,
 
   post,
+
+  checkout,
 
   checkin,
 
