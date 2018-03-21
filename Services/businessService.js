@@ -153,7 +153,7 @@ var checkin = function(checkInInfo) {
 
     .map((checkInStream) => {
 
-      if (availiableSeats(checkInStream.business.seats).length) {
+      if (availiableSeats(checkInStream.business.seats, checkInStream.uid).length) {
 
         return checkInStream
       } else {
@@ -207,11 +207,13 @@ var checkin = function(checkInInfo) {
 
 }
 
-var availiableSeats = function(seats) {
+var availiableSeats = function(seats, uid) {
 
-  if (seats && seats.filter(seat => !seat.customer).length) {
+  if ((seats && seats.filter(seat => !seat.customer).length) && seatsWithUser(seats, {
+      _id: uid
+    }).length == 0) {
 
-    return seats.filter(seat => !seat.customer || seat.customer.length == "")
+    return seats.filter(seat => (!seat.customer || seat.customer.length == ""))
 
   } else {
 
