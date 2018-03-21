@@ -61,7 +61,6 @@ router.get('/', (req, res) => {
 
 })
 
-
 router.delete('/', (req, res) => {
 
   return user

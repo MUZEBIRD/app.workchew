@@ -8,12 +8,9 @@ const User = require('./User')
 
 const SignUp = require('./SignUp')
 
-const Pic = require('./Pic')
-
+const Seats = require('./SeatsRoute')
 
 const Business = require('./Business')
-
-
 
 router.use('/Business', Business)
 
@@ -23,7 +20,8 @@ router.use('/User', User)
 
 router.use('/SignUp', SignUp)
 
-router.use('/Pic', Pic)
+router.use('/Seats', Seats)
+
 
 
 // GET home page

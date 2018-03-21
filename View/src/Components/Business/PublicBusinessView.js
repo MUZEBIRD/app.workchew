@@ -18,7 +18,8 @@ class PublicBusinessView extends Component {
     super(props);
 
     this.state = {
-      business: {}
+      business: {},
+      isCheckedIn: false
     }
 
   }
@@ -47,7 +48,7 @@ class PublicBusinessView extends Component {
 
   }
 
-  checkIn() {
+  checkOut() {
 
     userService.get({
       params: {
@@ -69,6 +70,61 @@ class PublicBusinessView extends Component {
       .subscribe((getCurrentUserStream) => {
 
         console.log('getCurrentUserStream', getCurrentUserStream)
+
+      })
+
+  }
+
+  checkIn() {
+
+    userService.get({
+      params: {
+        _id: 1
+      }
+    })
+
+      .filter((getCurrentUserStream) => getCurrentUserStream._id)
+
+      .switchMap((logedInUser) => {
+
+        return BusinessService.checkIn({
+          bid: this.state.business._id,
+          uid: logedInUser._id
+        })
+
+          .map((checkInStream) => {
+
+            return {
+              checkInStream,
+              uid: logedInUser._id
+            }
+
+          })
+
+      })
+
+      .subscribe(({checkInStream, uid}) => {
+
+        console.log('checkInStream', checkInStream)
+
+        var {putBusinessResponse} = checkInStream;
+
+        if (putBusinessResponse && putBusinessResponse.seats) {
+
+          var seats = putBusinessResponse.seats || [];
+
+          var seatsWithUser = seats.filter((seat) => seat.customer == uid)
+
+          if (seatsWithUser.length > 0) {
+
+            this.setState({
+              isCheckedIn: true
+            })
+
+          }
+
+        }
+
       })
 
   }
@@ -81,7 +137,7 @@ class PublicBusinessView extends Component {
       }
     })
 
-      .subscribe((getBusinessStream) => {
+      .map((getBusinessStream) => {
 
         console.log('getBusinessStream  in set business public business view', getBusinessStream)
 
@@ -93,8 +149,46 @@ class PublicBusinessView extends Component {
 
         }
 
+        return business
+
+      })
+
+      .switchMap(business => {
+
+        return userService.get({
+          params: {
+            _id: 1
+          }
+        })
+
+          .map((getCurrentUserStream) => {
+
+            return {
+              business,
+              currentUser: getCurrentUserStream
+            }
+
+          })
+
+      })
+
+      .subscribe(({business, currentUser}) => {
+
+        var seats = business.seats || []
+
+        var seatsWithUser = seats.filter(seat => seat.customer == currentUser._id)
+
+        var isCheckedIn = this.state.isCheckedIn
+
+        if (seatsWithUser.length > 0) {
+          isCheckedIn = true;
+        }
+
+        console.log(currentUser)
+
         this.setState({
-          business
+          business,
+          isCheckedIn
         })
 
       })
@@ -139,13 +233,22 @@ class PublicBusinessView extends Component {
                   </div>
                   <div className="row">
                     <div className='col-sm-2'>
-                      <button onClick={ (event) => {
-                                        
-                                          this.checkIn()
-                                        
-                                        } } className='btn btn-primary'>
-                        check In
-                      </button>
+                      { !this.state.isCheckedIn ?
+                        <button onClick={ (event) => {
+                                          
+                                            this.checkIn()
+                                          
+                                          } } className='btn btn-primary'>
+                          check In
+                        </button>
+                        :
+                        <button onClick={ (event) => {
+                                          
+                                            this.checkOut()
+                                          
+                                          } } className='btn btn-primary'>
+                          check Out
+                        </button> }
                     </div>
                   </div>
                   <p>

@@ -112,38 +112,42 @@ class MainMapForm extends Component {
     var google = window['google']
     const bounds = new google.maps.LatLngBounds();
 
-    bounds.extend(new google.maps.LatLng(this.state.geo.lat, this.state.geo.lng))
+    if (bounds) {
 
-    businesses.forEach(business => {
+      bounds.extend(new google.maps.LatLng(this.state.geo.lat, this.state.geo.lng))
 
-      console.log(' set business markers  ', business)
+      businesses.forEach(business => {
 
-      if (business.geoPoint && business.geoPoint.coordinates) {
+        console.log(' set business markers  ', business)
 
-        bounds.extend(this.businessPointToGoogleLatLng(business.geoPoint))
+        if (business.geoPoint && business.geoPoint.coordinates) {
 
-      }
+          bounds.extend(this.businessPointToGoogleLatLng(business.geoPoint))
 
-    });
+        }
 
-    var nextMarkers = businesses
+      });
 
-      .filter(business => business.geoPoint && business.geoPoint.coordinates)
+      var nextMarkers = businesses
 
-      .map(business => ({
-        position: this.businessPointToGoogleLatLng(business.geoPoint),
-        business,
-        show: true
-      }));
+        .filter(business => business.geoPoint && business.geoPoint.coordinates)
 
-    const nextCenter = _.get(nextMarkers, '0.position', this.state.center);
+        .map(business => ({
+          position: this.businessPointToGoogleLatLng(business.geoPoint),
+          business,
+          show: true
+        }));
 
-    this.setState({
-      center: nextCenter,
-      markers: nextMarkers,
-    });
+      const nextCenter = _.get(nextMarkers, '0.position', this.state.center);
 
-    refs.map.fitBounds(bounds);
+      this.setState({
+        center: nextCenter,
+        markers: nextMarkers,
+      });
+
+      refs.map.fitBounds(bounds);
+
+    }
 
   } //setBusinessToMarkers
 
