@@ -85,7 +85,8 @@ class PublicBusinessView extends Component {
 
         console.log('getBusinessStream  in set business public business view', getBusinessStream)
 
-        var business = getBusinessStream[0]
+        var business = getBusinessStream[0];
+
         if (typeof business.seats === 'string') {
 
           business.seats = [];

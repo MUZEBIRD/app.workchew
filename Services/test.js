@@ -35,14 +35,7 @@ var update = function(business) {
 
     .switchMap((getResponse) => {
 
-
-      if (getResponse[0].seats != business.seats) {
-
-
-        delete getResponse[0].seats
-      }
-
-      var businessUpdate = _.merge(getResponse[0], business)
+      var businessUpdate = _.extend(getResponse[0], business)
 
       return db
 

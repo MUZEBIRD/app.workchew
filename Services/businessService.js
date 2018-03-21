@@ -144,16 +144,8 @@ var update = function(business) {
 
     .switchMap((getResponse) => {
 
-      list.forEach(listItem => {
 
-        if (business[listItem.keyName]) {
-
-          getResponse[0][listItem.keyName] = business[listItem.keyName]
-        }
-
-      })
-
-      var businessUpdate = _.merge(getResponse[0], business)
+      var businessUpdate = _.extend(getResponse[0], business)
 
       return db
 

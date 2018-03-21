@@ -112,7 +112,7 @@ var update = function(user) {
 
     .switchMap((getResponse) => {
 
-      var userUpdate = _.merge(getResponse[0], user)
+      var userUpdate = _.extend(getResponse[0], user)
 
       return db
 
