@@ -7,6 +7,7 @@ import restService from '../../Services/restService.js'
 
 import { MemberShipSelectionWidget, pricingOptions } from './MemberShipSelectionWidget';
 import { getQueryParams, getPathVariables } from '../../Utils'
+import { placeButton } from '../../Utils/wc-pal-pal-client.js'
 
 import './signUp.css';
 class UserSignUp extends Component {
@@ -19,12 +20,30 @@ class UserSignUp extends Component {
 
     this.state = {
       queryParams,
-      showMemberShipSelections: false
+      showMemberShipSelections: true
     }
 
     console.log({
       queryParams
     })
+
+  }
+
+
+  componentDidMount() {
+
+    pricingOptions.forEach((pricing) => {
+
+
+      placeButton({
+
+        price: pricing.price,
+        elementKey: `${pricing.id}-button`,
+        membershipName: pricing.title
+      })
+
+    })
+
 
   }
 

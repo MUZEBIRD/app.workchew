@@ -6,14 +6,17 @@ import urlService from '../../Services/urlService.js'
 import restService from '../../Services/restService.js'
 
 
-import { getQueryParams, getPathVariables } from '../../Utils'
+import { placeButton } from '../../Utils/wc-pal-pal-client.js'
+
+import { getQueryParams, getPathVariables } from '../../Utils/'
 
 
 const pricingOptions = [
 
   {
+    id: "ONE-DAY-PASS",
     title: "ONE-DAY  PASS",
-    price: "$14.99",
+    price: 14.99,
     paymentRecurrence: "ONE TIME CHARGER",
     mainFeature: "Access to one WorkChew location.",
     features: [
@@ -29,8 +32,9 @@ const pricingOptions = [
     ]
   },
   {
+    id: "STARTER",
     title: "STARTER",
-    price: "$39.99",
+    price: 39.99,
     paymentRecurrence: "BILLED MONTHLY",
     mainFeature: "One-day access to all WorkChew locations.",
     features: [
@@ -46,8 +50,9 @@ const pricingOptions = [
     ]
   },
   {
+    id: "PREMIUM",
     title: "PREMIUM",
-    price: "$69.99",
+    price: 69.99,
     paymentRecurrence: "BILLED MONTHLY",
     mainFeature: "One-day access to all WorkChew locations.",
     features: [
@@ -64,8 +69,9 @@ const pricingOptions = [
   },
 
   {
+    id: "PRO",
     title: "PRO",
-    price: "$99.99",
+    price: 99.99,
     paymentRecurrence: "BILLED MONTHLY",
     mainFeature: "One-day access to all WorkChew locations.",
     features: [
@@ -90,12 +96,13 @@ const MemberShipSelectionWidget = (props) => {
 
     <div className='row pricing-box d-flex align-items-start'>
       { props.pricings.map(
-          (pricing) => (
-            <div className='col-sm-3 h-100 d-flex flex-column justify-content-around'>
+          (pricing, i) => (
+            <div key={ i } className='col-sm-3 h-100 d-flex flex-column justify-content-around'>
               <p>
                 { pricing.title }
               </p>
               <p>
+                $
                 { pricing.price }
               </p>
               <p>
@@ -106,21 +113,14 @@ const MemberShipSelectionWidget = (props) => {
               </p>
               <div>
                 { pricing.features.map(
-                    (feature) => (<p>
-                                    { feature.text }
-                                  </p>)
-                  
-                  
-                  
+                    (feature, j) => (<p key={ j }>
+                                       { feature.text }
+                                     </p>)
                   ) }
               </div>
               <br/>
-              <button onClick={ (event) => {
-                                
-                                
-                                } } className="btn btn-info">
-                buy now
-              </button>
+              <div id={ `${pricing.id}-button` }>
+              </div>
             </div>)
         ) }
     </div>
