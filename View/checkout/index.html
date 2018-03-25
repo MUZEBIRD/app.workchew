@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-<!--     <script>
+    <!--     <script>
     if (window.location.protocol != "https:" &&
 
         window.location.href.indexOf('localhost') == -1)
@@ -23,6 +23,7 @@
     <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <script src="//www.paypalobjects.com/api/checkout.js" async></script>
 
 
     <script src="js/utils.js"></script>
@@ -44,93 +45,94 @@
     -->
     <title>checkout.app.workchew</title>
 
-<style>
-  
-  html,body,.main{
+    <style>
+    html,
+    body,
+    .main {
 
-    position: relative;
-    height:100%;
-    width:100%;
-    overflow: hidden;
-    margin: 0;
-    padding: 0;
-
-
-  }
-</style>
+        position: relative;
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+        margin: 0;
+        padding: 0;
+    }
+    </style>
 
 </head>
 
 <body>
 
-  <div class="main">
+    <div class="main">
+        
+        <form id="myContainer" method="post" action="/checkout"></form>
+
+    </div>
     
-
-
-  </div>
 </body>
 
-
+<script>
+window.paypalCheckoutReady = function() {
+    paypal.checkout.setup('<Your-Merchant-ID>', {
+        environment: 'sandbox',
+        container: 'myContainer'
+    });
+};
+</script>
 
 <script>
-  
+var getPathVariables = () => {
 
+    var [path, id] = window.location.pathname.split('/');
 
-  var getPathVariables = () => {
-
-  var [path, id] = window.location.pathname.split('/');
-
-
-  return {
-    path,
-    id
-  }
+    return {
+        path,
+        id
+    }
 
 }
 
 var getQueryParams = function() {
 
-  var url = window.location.href;
-  console.log('url', url)
+    var url = window.location.href;
+    console.log('url', url)
 
-  var queryString = url.substring(url.indexOf('?') + 1)
+    var queryString = url.substring(url.indexOf('?') + 1)
 
-  if (url.indexOf('?') > -1) {
+    if (url.indexOf('?') > -1) {
 
-    var splits = queryString.split('&')
+        var splits = queryString.split('&')
 
-    var queryParams = splits
+        var queryParams = splits
 
-      .map(split => split.split('='))
+            .map(split => split.split('='))
 
-      .map(([name, value]) => {
+            .map(([name, value]) => {
 
-        return {
+                return {
 
-          [name]: value
-        }
+                    [name]: value
+                }
 
-      })
+            })
 
-      .reduce((params, splitItem) => {
+            .reduce((params, splitItem) => {
 
-        return {
-          ...params,
-          ...splitItem
-        }
+                return {
+                    ...params,
+                    ...splitItem
+                }
 
-      }, {})
+            }, {})
 
-    console.log('queryParams', queryParams)
+        console.log('queryParams', queryParams)
 
-    return queryParams
+        return queryParams
 
-  }
+    }
 
 }
 </script>
-
-
 
 
 </html>

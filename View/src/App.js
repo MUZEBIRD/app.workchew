@@ -36,25 +36,29 @@ class App extends Component {
     return (
       <HashRouter history={ history } basename='/'>
         <div className="App">
-          <Route exact path="/" component={ Main } />
-          <Route exact path="/Login" component={ Login } />
-          <Route path="/businesses" component={ Business } />
-          <Route path="/search-businesses" component={ SearchBusinesses } />
-          <Route path="/add-business" component={ AddBusiness } />
-          <Route path="/view-business" component={ AddBusiness } />
-          <Route path="/users" component={ Users } />
-          <Route path="/add-user" component={ AddUser } />
-          <Route path="/view-user" component={ AddUser } />
-          <Route path="/search-users" component={ SearchUsers } />
-          <Route path="/business-page" component={ PublicBusinessView } />
-          <Route path="/business-signup" component={ BusinessUserSignUp } />
-          <Route path="/co-chewer-signUp" component={ UserSignUp } />
-          <Route path="/edit-users" />
+          <Route path="/" component={ UserSignUp } />
         </div>
       </HashRouter>
       );
   }
 
 }
+
+
+/*
+<Route exact path="/" component={ Main } />
+<Route exact path="/Login" component={ Login } />
+<Route path="/businesses" component={ Business } />
+<Route path="/search-businesses" component={ SearchBusinesses } />
+<Route path="/add-business" component={ AddBusiness } />
+<Route path="/view-business" component={ AddBusiness } />
+<Route path="/users" component={ Users } />
+<Route path="/add-user" component={ AddUser } />
+<Route path="/view-user" component={ AddUser } />
+<Route path="/search-users" component={ SearchUsers } />
+<Route path="/business-page" component={ PublicBusinessView } />
+<Route path="/business-signup" component={ BusinessUserSignUp } />
+<Route path="/edit-user" /> 
+*/
 
 export default App;

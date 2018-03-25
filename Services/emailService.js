@@ -9,7 +9,8 @@ var rx = require('rxjs');
 
 var sendEmail = function(emailData) {
 
-  var transporter = nodemailer.createTransport('smtps://jtvents@gmail.com:sethwins@smtp.gmail.com');
+  //  var transporter = nodemailer.createTransport('smtps://jtvents@gmail.com:sethwins@smtp.gmail.com');
+  var transporter = nodemailer.createTransport('smtps://hello@workchew.com:Worckchew2018#@smtpout.secureserver.net');
 
   var mailOptions = emailData.mailOptions
 
@@ -33,7 +34,7 @@ var sendEmail = function(emailData) {
 
           info: info,
           SignUp: true,
-          msg: 'thank you for signing up , check you inbox for a email from joint Ventures to verify your account'
+          msg: 'thank you for signing up , check your email to verify your account'
 
         });
 
