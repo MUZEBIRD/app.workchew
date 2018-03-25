@@ -11,7 +11,7 @@ const SignUp = require('./SignUp')
 const Seats = require('./SeatsRoute')
 
 const Business = require('./Business')
-fs = require('fs'),
+fs = require('fs')
 
 router.use('/Business', Business)
 
