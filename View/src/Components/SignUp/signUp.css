@@ -4,3 +4,8 @@
 	position: relative;
 	height:500px;
 }
+
+.scroll-y{
+
+	overflow-y:scroll;
+}

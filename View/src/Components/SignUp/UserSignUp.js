@@ -69,7 +69,7 @@ class UserSignUp extends Component {
     return (
 
       <div className="wholeView flex-col">
-        <div className="showView container">
+        <div className="showView container scroll-y">
           <div className='row flex-row-center-vert' style={ { backgroundColor: 'white', position: 'relative', zIndex: '5', height: '10%' } }>
             <div className='col-sm-4'>
             </div>
@@ -113,12 +113,16 @@ class UserSignUp extends Component {
               </button>
             </div>
           </div>
-          <div className='row'>
-            <div className='col-sm-12'>
-              <br/>
-              <MemberShipSelectionWidget {...{ pricings: pricingOptions }}/>
-            </div>
-          </div>
+          { this.state.showMemberShipSelections &&
+            
+            
+            
+            <div className='row'>
+              <div className='col-sm-12'>
+                <br/>
+                <MemberShipSelectionWidget {...{ pricings: pricingOptions }}/>
+              </div>
+            </div> }
         </div>
       </div>
 
