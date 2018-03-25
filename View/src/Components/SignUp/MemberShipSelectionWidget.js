@@ -91,7 +91,7 @@ const MemberShipSelectionWidget = (props) => {
     <div className='row pricing-box d-flex align-items-start'>
       { props.pricings.map(
           (pricing) => (
-            <div className='col-sm-3'>
+            <div className='col-sm-3 h-100 d-flex flex-column justify-content-around'>
               <p>
                 { pricing.title }
               </p>
@@ -114,6 +114,13 @@ const MemberShipSelectionWidget = (props) => {
                   
                   ) }
               </div>
+              <br/>
+              <button onClick={ (event) => {
+                                
+                                
+                                } } className="btn btn-info">
+                buy now
+              </button>
             </div>)
         ) }
     </div>

@@ -53,13 +53,13 @@ class UserSignUp extends Component {
         })
 
         userService.storeSignUpInfo(newUser)
+        alert("thanks for signing up check your email for next steps")
 
         this.setState({
           signUpData: newUser,
           showMemberShipSelections: true
         })
 
-        alert("thanks for signing up check your email for next steps")
 
       })
   }
@@ -105,7 +105,10 @@ class UserSignUp extends Component {
           <br/>
           <div className='row'>
             <div className='col-sm-1'>
-              <button onClick={ this.signUp } className="btn btn-success">
+              <button onClick={ (event) => {
+                                
+                                  this.signUp()
+                                } } className="btn btn-success">
                 Sign up
               </button>
             </div>
