@@ -5,10 +5,10 @@ import userService from '../../Services/userService.js'
 import urlService from '../../Services/urlService.js'
 import restService from '../../Services/restService.js'
 
-
+import { MemberShipSelectionWidget, pricingOptions } from './MemberShipSelectionWidget';
 import { getQueryParams, getPathVariables } from '../../Utils'
 
-
+import './signUp.css';
 class UserSignUp extends Component {
 
   constructor(props) {
@@ -108,6 +108,12 @@ class UserSignUp extends Component {
               <button onClick={ this.signUp } className="btn btn-success">
                 Sign up
               </button>
+            </div>
+          </div>
+          <div className='row'>
+            <div className='col-sm-12'>
+              <br/>
+              <MemberShipSelectionWidget {...{ pricings: pricingOptions }}/>
             </div>
           </div>
         </div>

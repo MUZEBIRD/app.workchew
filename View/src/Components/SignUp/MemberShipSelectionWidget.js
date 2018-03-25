@@ -88,15 +88,34 @@ const MemberShipSelectionWidget = (props) => {
 
   return (
 
-    <div className='row flex-row-center-vert'>
-      <div className='col-sm-3'>
-      </div>
-      <div className='col-sm-3'>
-      </div>
-      <div className='col-sm-3'>
-      </div>
-      <div className='col-sm-3'>
-      </div>
+    <div className='row pricing-box d-flex align-items-start'>
+      { props.pricings.map(
+          (pricing) => (
+            <div className='col-sm-3'>
+              <p>
+                { pricing.title }
+              </p>
+              <p>
+                { pricing.price }
+              </p>
+              <p>
+                { pricing.paymentRecurrence }
+              </p>
+              <p>
+                { pricing.mainFeature }
+              </p>
+              <div>
+                { pricing.features.map(
+                    (feature) => (<p>
+                                    { feature.text }
+                                  </p>)
+                  
+                  
+                  
+                  ) }
+              </div>
+            </div>)
+        ) }
     </div>
 
   )
