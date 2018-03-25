@@ -5,13 +5,28 @@ import userService from '../../Services/userService.js'
 import urlService from '../../Services/urlService.js'
 import restService from '../../Services/restService.js'
 
+
+import { getQueryParams, getPathVariables } from '../../Utils'
+
+
 class UserSignUp extends Component {
 
   constructor(props) {
 
     super(props);
 
+
+    var params = getQueryParams()
+
+    console.log({
+      params
+    })
+
+
   }
+
+
+  getMetaDataFromUrl() {}
 
   signUp() {
 
