@@ -74,7 +74,7 @@
 
 <script>
 var startPaypal = function() {
-
+    var price = 0.01
     paypal.Button.render({
 
         // Set your environment
@@ -85,7 +85,7 @@ var startPaypal = function() {
 
         style: {
             label: 'buynow',
-           // fundingicons: true, // optional
+            // fundingicons: true, // optional
             branding: true, // optional
             size: 'medium', // small | medium | large | responsive
             shape: 'rect', // pill | rect
@@ -105,8 +105,16 @@ var startPaypal = function() {
         payment: function(data, actions) {
             return actions.payment.create({
                 transactions: [{
-                    amount: { total: '0.01', currency: 'USD' },
-                    custom: "place access token here"
+                    amount: { total: price, currency: 'USD' },
+                    custom: "place access token here",
+                    item_list: {
+                        items: [{
+                            name: "memership",
+                            price: price,
+                            quantity:1,
+                            currency:"USD"
+                        }]
+                    }
                 }]
             });
         },

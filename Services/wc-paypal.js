@@ -20,28 +20,22 @@ paypal.configure(payPalSandBoxConfig);
 
 var getPayment = function(paymentId) {
 
-  Rx.Observable.create(function(observer) {
+  return Rx.Observable.create(function(observer) {
 
     paypal.payment.get(paymentId, function(error, payment) {
       if (error) {
-        console.log(error);
         observer.error(error)
-
         throw error;
       } else {
-        console.log("Get Payment Response");
-        //console.log(JSON.stringify(payment));
-
         observer.next(payment)
       }
-
     }); //paypal.payment.get(
 
   })
 
 } //getPayment
 
-var paymentId = "PAY-5DD95940RH5459720LK36PMI";
+var paymentId = "PAY-1AB70526TK0449927LK37UJQ";
 
 getPayment(paymentId)
 
@@ -50,4 +44,8 @@ getPayment(paymentId)
     console.log(" paymentStream");
     console.log(JSON.stringify(paymentStream));
 
+  }, (error) => {
+
+    console.log(" paymentStream Error");
+    console.log(JSON.stringify(error));
   })
