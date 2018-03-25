@@ -15,18 +15,18 @@ class UserSignUp extends Component {
 
     super(props);
 
+    var queryParams = getQueryParams()
 
-    var params = getQueryParams()
+    this.state = {
+      queryParams,
+      showMemberShipSelections: false
+    }
 
     console.log({
-      params
+      queryParams
     })
 
-
   }
-
-
-  getMetaDataFromUrl() {}
 
   signUp() {
 
@@ -52,8 +52,12 @@ class UserSignUp extends Component {
           signUpCoChewerResponse
         })
 
-
         userService.storeSignUpInfo(newUser)
+
+        this.setState({
+          signUpData: newUser,
+          showMemberShipSelections: true
+        })
 
         alert("thanks for signing up check your email for next steps")
 
