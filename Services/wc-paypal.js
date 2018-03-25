@@ -35,17 +35,21 @@ var getPayment = function(paymentId) {
 
 } //getPayment
 
-var paymentId = "PAY-1AB70526TK0449927LK37UJQ";
 
-getPayment(paymentId)
+module.exports = {
+  getPayment
+}
+// var paymentId = "PAY-1AB70526TK0449927LK37UJQ";
 
-  .subscribe((paymentStream) => {
+// getPayment(paymentId)
 
-    console.log(" paymentStream");
-    console.log(JSON.stringify(paymentStream));
+//   .subscribe((paymentStream) => {
 
-  }, (error) => {
+//     console.log(" paymentStream");
+//     console.log(JSON.stringify(paymentStream));
 
-    console.log(" paymentStream Error");
-    console.log(JSON.stringify(error));
-  })
+//   }, (error) => {
+
+//     console.log(" paymentStream Error");
+//     console.log(JSON.stringify(error));
+//   })
