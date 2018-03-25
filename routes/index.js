@@ -11,6 +11,7 @@ const SignUp = require('./SignUp')
 const Seats = require('./SeatsRoute')
 
 const Business = require('./Business')
+fs = require('fs'),
 
 router.use('/Business', Business)
 
@@ -30,6 +31,14 @@ router.get('/', (req, res) => {
   res.set('Content-Type', 'text/html');
 
   res.send(fs.readFileSync('./View/build/index.html'));
+});
+
+
+router.get('/checkout', (req, res) => {
+
+  res.set('Content-Type', 'text/html');
+
+  res.send(fs.readFileSync('./View/preSignUp/index.html'));
 });
 
 module.exports = router;
