@@ -4,6 +4,8 @@ import restService from '../Services/restService.js';
 const Rx = require('rxjs');
 
 var userStorageKey = 'workchew.user'
+var userSignUpStorageKey = 'workchew.userSignUp'
+
 
 var userService = {
 
@@ -76,6 +78,15 @@ var userService = {
 
     window.location.reload(true);
 
+
+  },
+  storeSignUpInfo: (user) => {
+
+    localStorage
+
+      .setItem(
+        userSignUpStorageKey, JSON.stringify(user)
+    )
 
   },
   store: (user) => {

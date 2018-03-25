@@ -3,6 +3,7 @@ const Rx = require('rxjs');
 const _ = require('lodash');
 const emailService = require('./emailService')
 const userCollectionName = 'users'
+const uuidv4 = require('uuid/v4');
 
 var post = function(user) {
 
@@ -13,6 +14,15 @@ var post = function(user) {
 
   if (userSignUpInfo) {
 
+    userSignUpInfo.memberShipInfo = {
+      paymentAuth: {
+        token: uuidv4(),
+        created: new Date().getTime()
+      }
+    }
+
+    userSignUpInfo.created = new Date().getTime()
+
     return db
 
       .post(userCollectionName, userSignUpInfo)
@@ -22,36 +32,40 @@ var post = function(user) {
         data.userDbPosStream = userDbPosStream;
         console.log("user service.post  data.userDbPosStream   ", userDbPosStream, data)
 
-        return emailService.sendUserVerificationEmail({
-          userSignUpInfo
-        })
+        // return emailService.sendUserVerificationEmail({
+        //   userSignUpInfo
+        // })
 
+        return Rx.Observable.of({})
+
+          .map((verificationEmailResponse) => {
+            data.verificationEmailResponse = verificationEmailResponse;
+
+            return {
+              newUser: userDbPosStream
+            }
+
+          })
 
       })
 
-      // .switchMap(verificationEmailResponse => {
-
-      //   data.verificationEmailResponse = verificationEmailResponse;
-      //   console.log("user service.post  data.verificationEmailResponse   ", verificationEmailResponse, data)
+      // .switchMap(userSignUp => {
 
       //   return emailService.sendAdminSignUpEmail({
       //     userSignUpInfo
       //   })
 
-
-      // })
-
-      // .map(sendAdminSignUpEmailResponse => {
+      //   .map((sendAdminSignUpEmailResponse)=>{
 
       //   data.sendAdminSignUpEmailResponse = sendAdminSignUpEmailResponse;
       //   console.log("user service.post  data.sendAdminSignUpEmailResponse   ", sendAdminSignUpEmailResponse, data)
 
-      //   return data
+      //     return userSignUp
+      //   })
 
       // })
 
   }
-
 
   if (businessSignUpInfo) {
 
@@ -79,7 +93,8 @@ var post = function(user) {
 
       //   return data
 
-  // })
+      // })
+
   }
 }
 

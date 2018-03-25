@@ -1,7 +1,7 @@
 {
-  "name": "pik",
+  "name": "workchewnode",
   "version": "1.0.0",
-  "description": "datrythur",
+  "description": "workchewnode",
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
@@ -33,7 +33,8 @@
     "paypal-rest-sdk": "^1.8.1",
     "request": "^2.81.0",
     "rx-mongodb": "^1.0.0",
-    "rxjs": "^5.4.0"
+    "rxjs": "^5.4.0",
+    "uuid": "^3.2.1"
   },
   "engines": {
     "node": ">= 6.8.1"

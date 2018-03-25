@@ -31,9 +31,14 @@ class UserSignUp extends Component {
 
       .subscribe((signUpCoChewerResponse) => {
 
+        var {userResponse: {newUser}} = signUpCoChewerResponse;
+
         console.log({
           signUpCoChewerResponse
         })
+
+
+        userService.storeSignUpInfo(newUser)
 
         alert("thanks for signing up check your email for next steps")
 
