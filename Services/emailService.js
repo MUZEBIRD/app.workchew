@@ -9,8 +9,28 @@ var rx = require('rxjs');
 
 var sendEmail = function(emailData) {
 
+  let smtpConfig = {
+    host: 'smtp.office365.com',
+    port: 587,
+    secure: false, // upgrade later with STARTTLS
+    auth: {
+      user: 'hello@workchew.com',
+      pass: 'WorkWorkChew1@'
+    }
+  };
+
+  // let smtpConfig = {
+  //   host: 'smtp.gmail.com',
+  //   secure: true, // upgrade later with STARTTLS
+  //   auth: {
+  //     user: 'jtvents@gmail.com',
+  //     pass: 'sethwins@'
+  //   }
+  // };
+
   //  var transporter = nodemailer.createTransport('smtps://jtvents@gmail.com:sethwins@smtp.gmail.com');
-  var transporter = nodemailer.createTransport('smtps://hello@workchew.com:Worckchew2018#@smtpout.secureserver.net');
+  //var transporter = nodemailer.createTransport('smtps://hello@workchew.com:WorkWorkChew1@@smtpout.secureserver.net');
+  var transporter = nodemailer.createTransport(smtpConfig);
 
   var mailOptions = emailData.mailOptions
 
@@ -76,8 +96,10 @@ var sendAdminSignUpEmail = function(signUpData) {
 
   return sendEmail({
     mailOptions: {
-      from: '" jVents " <jtVents@gmail.com>', // sender address
+      from: 'hello@workchew.com', // sender address
       to: "isethguy@gmail.com", // list of receivers
+
+      //to: "isethguy@gmail.com,mb@workchew.com", // list of receivers
       subject: 'welcome ✔', // Subject line
       html: htmlMsg
     }
@@ -99,7 +121,7 @@ var sendThankForSignUpEmail = function(signUpData) {
 
   return sendEmail({
     mailOptions: {
-      from: '" jVents " <jtVents@gmail.com>', // sender address
+      from: 'hello@workchew.com', // sender address
       to: signUpEmail, // list of receivers
       subject: 'welcome ✔', // Subject line
       html: htmlMsg
@@ -122,7 +144,7 @@ var sendUserVerificationEmail = function(signUpData) {
 
   return sendEmail({
     mailOptions: {
-      from: '" jVents " <jtVents@gmail.com>', // sender address
+      from: 'hello@workchew.com', // sender address
       to: toEmail, // list of receivers
       subject: 'welcome ✔', // Subject line
       html: htmlMsg

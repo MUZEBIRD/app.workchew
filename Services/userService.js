@@ -29,26 +29,27 @@ var post = function(user) {
 
       })
 
-      .switchMap(verificationEmailResponse => {
+      // .switchMap(verificationEmailResponse => {
 
-        data.verificationEmailResponse = verificationEmailResponse;
-        console.log("user service.post  data.verificationEmailResponse   ", verificationEmailResponse, data)
+      //   data.verificationEmailResponse = verificationEmailResponse;
+      //   console.log("user service.post  data.verificationEmailResponse   ", verificationEmailResponse, data)
 
-        return emailService.sendAdminSignUpEmail({
-          userSignUpInfo
-        })
+      //   return emailService.sendAdminSignUpEmail({
+      //     userSignUpInfo
+      //   })
 
 
-      })
+      // })
 
-      .map(sendAdminSignUpEmailResponse => {
+      // .map(sendAdminSignUpEmailResponse => {
 
-        data.sendAdminSignUpEmailResponse = sendAdminSignUpEmailResponse;
-        console.log("user service.post  data.sendAdminSignUpEmailResponse   ", sendAdminSignUpEmailResponse, data)
+      //   data.sendAdminSignUpEmailResponse = sendAdminSignUpEmailResponse;
+      //   console.log("user service.post  data.sendAdminSignUpEmailResponse   ", sendAdminSignUpEmailResponse, data)
 
-        return data
+      //   return data
 
-      })
+      // })
+
   }
 
 
@@ -60,25 +61,25 @@ var post = function(user) {
         businessSignUpInfo
       })
 
-      .switchMap(thanksEmailResponse => {
+      // .switchMap(thanksEmailResponse => {
 
-        data.thanksEmailResponse = thanksEmailResponse;
-        console.log("user service.post  data.thanksEmailResponse   ", thanksEmailResponse, data)
+      //   data.thanksEmailResponse = thanksEmailResponse;
+      //   console.log("user service.post  data.thanksEmailResponse   ", thanksEmailResponse, data)
 
-        return emailService.sendAdminSignUpEmail({
-          businessSignUpInfo
-        })
+      //   return emailService.sendAdminSignUpEmail({
+      //     businessSignUpInfo
+      //   })
 
-      })
+      // })
 
-      .map(sendAdminSignUpEmailResponse => {
+      // .map(sendAdminSignUpEmailResponse => {
 
-        data.sendAdminSignUpEmailResponse = sendAdminSignUpEmailResponse;
-        console.log("user service.post  data.sendAdminSignUpEmailResponse   ", sendAdminSignUpEmailResponse, data)
+      //   data.sendAdminSignUpEmailResponse = sendAdminSignUpEmailResponse;
+      //   console.log("user service.post  data.sendAdminSignUpEmailResponse   ", sendAdminSignUpEmailResponse, data)
 
-        return data
+      //   return data
 
-      })
+  // })
   }
 }
 
