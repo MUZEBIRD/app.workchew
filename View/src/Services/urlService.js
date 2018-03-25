@@ -15,6 +15,7 @@ export default {
   login: `${base}/Login`,
   signUp: `${base}/SignUp`,
   user: `${base}/User`,
+  payPal: `${base}/pay-pal`,
 
 
   business: `${base}/business`,

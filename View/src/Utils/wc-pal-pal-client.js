@@ -1,3 +1,21 @@
+import restService from '../Services/restService.js'
+import urlService from '../Services/urlService.js'
+
+var verifyPayPalTransaction = function(paypalTransactionData) {
+
+  restService
+    .post(urlService.payPal, {
+      paypalTransactionData
+    })
+
+    .subscribe((verifyPayPalTransactionResponse) => {
+
+      console.log('verifyPayPalTransactionResponse', verifyPayPalTransactionResponse)
+
+    })
+
+}
+
 var placeButton = function(config) {
   var paypal = window['paypal']
   var {price, elementKey, membershipName} = config;
@@ -57,6 +75,9 @@ var placeButton = function(config) {
         data,
         actions
       })
+
+      verifyPayPalTransaction(data)
+
       return actions.payment.execute().then(function() {
         window.alert('Payment Complete!');
       });
@@ -66,4 +87,4 @@ var placeButton = function(config) {
 
 }
 
-export { placeButton }
+export { placeButton, verifyPayPalTransaction }

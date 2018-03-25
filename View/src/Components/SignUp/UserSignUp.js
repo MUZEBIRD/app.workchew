@@ -32,18 +32,19 @@ class UserSignUp extends Component {
 
   componentDidMount() {
 
-    pricingOptions.forEach((pricing) => {
+    window.paypalCheckoutReady = function() {
 
+      pricingOptions.forEach((pricing) => {
 
-      placeButton({
+        placeButton({
 
-        price: pricing.price,
-        elementKey: `${pricing.id}-button`,
-        membershipName: pricing.title
+          price: pricing.price,
+          elementKey: `${pricing.id}-button`,
+          membershipName: pricing.title
+        })
+
       })
-
-    })
-
+    };
 
   }
 

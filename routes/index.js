@@ -24,6 +24,11 @@ router.use('/SignUp', SignUp)
 router.use('/Seats', Seats)
 
 
+const payPal = require('./payPalRoute')
+
+router.use('/pay-pal', payPal)
+
+
 
 // GET home page
 router.get('/', (req, res) => {
