@@ -52,7 +52,6 @@ var update = function(seats) {
 
 }
 
-
 var remove = function(query) {
 
   return db.delete(seatsCollectionName, query)

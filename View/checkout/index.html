@@ -64,19 +64,71 @@
 <body>
 
     <div class="main">
-        
-        <form id="myContainer" method="post" action="/checkout"></form>
+
+        <div id="paypal-button-container"></div>
 
     </div>
-    
+
 </body>
+
+
+<script>
+var startPaypal = function() {
+
+    paypal.Button.render({
+
+        // Set your environment
+
+        env: 'sandbox', // sandbox | production
+
+        // Specify the style of the button
+
+        style: {
+            label: 'buynow',
+           // fundingicons: true, // optional
+            branding: true, // optional
+            size: 'medium', // small | medium | large | responsive
+            shape: 'rect', // pill | rect
+            color: 'blue' // gold | blue | silve | black
+        },
+
+        // PayPal Client IDs - replace with your own
+        // Create a PayPal app: https://developer.paypal.com/developer/applications/create
+
+        client: {
+            sandbox: 'ARlX_FQiPMWYBBxHdmAuPnIh4lF0YChw3Ju8R6oPiFfPS7NW74VcNadMQmDuXUmOwlKO215-DIZ4rtVp',
+            //production: '<insert production client id>'
+        },
+
+        // Wait for the PayPal button to be clicked
+
+        payment: function(data, actions) {
+            return actions.payment.create({
+                transactions: [{
+                    amount: { total: '0.01', currency: 'USD' },
+                    custom: "place access token here"
+                }]
+            });
+        },
+
+        // Wait for the payment to be authorized by the customer
+
+        onAuthorize: function(data, actions) {
+
+            console.log("Payment Complete!", { data, actions })
+            return actions.payment.execute().then(function() {
+                window.alert('Payment Complete!');
+            });
+        }
+
+    }, '#paypal-button-container');
+
+}
+</script>
 
 <script>
 window.paypalCheckoutReady = function() {
-    paypal.checkout.setup('<Your-Merchant-ID>', {
-        environment: 'sandbox',
-        container: 'myContainer'
-    });
+    startPaypal();
 };
 </script>
 

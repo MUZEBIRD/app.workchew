@@ -16,7 +16,6 @@ app = express();
 app.use(express.static(path.join(__dirname, 'View/build')));
 app.use(express.static(path.join(__dirname, 'View/checkout')));
 
-
 const {HTTP_PORT = 8080, HTTPS_PORT = 443, NODE_ENV = 'development'} = process.env;
 
 // START SERVER

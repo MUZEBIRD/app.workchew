@@ -1,0 +1,139 @@
+{
+    "data":
+    {
+        "paymentToken": "EC-3CA74396R4427260G",
+        "orderID": "EC-3CA74396R4427260G",
+        "payerID": "24NKB6KDB63H6",
+        "paymentID": "PAY-5DD95940RH5459720LK36PMI",
+        "intent": "sale",
+        "returnUrl": "https://www.sandbox.paypal.com/?paymentId=PAY-5DD95940RH5459720LK36PMI&token=EC-3CA74396R4427260G&PayerID=24NKB6KDB63H6"
+    },
+    "actions":
+    {
+        "payment":
+        {},
+        "order":
+        {}
+    }
+}
+
+
+
+
+
+
+
+
+
+
+{
+    "id": "PAY-5DD95940RH5459720LK36PMI",
+    "intent": "sale",
+    "state": "approved",
+    "cart": "3CA74396R4427260G",
+    "payer":
+    {
+        "payment_method": "paypal",
+        "status": "VERIFIED",
+        "payer_info":
+        {
+            "email": "mb-buyer@workchew.com",
+            "first_name": "test",
+            "last_name": "buyer",
+            "payer_id": "24NKB6KDB63H6",
+            "shipping_address":
+            {
+                "recipient_name": "test buyer",
+                "line1": "1 Main St",
+                "city": "San Jose",
+                "state": "CA",
+                "postal_code": "95131",
+                "country_code": "US"
+            },
+            "phone": "4089188776",
+            "country_code": "US"
+        }
+    },
+    "transactions": [
+    {
+        "amount":
+        {
+            "total": "0.01",
+            "currency": "USD",
+            "details":
+            {
+                "subtotal": "0.01"
+            }
+        },
+        "payee":
+        {
+            "merchant_id": "KGW365FFEPAEJ"
+        },
+        "custom": "place access token here",
+        "item_list":
+        {
+            "items": [],
+            "shipping_address":
+            {
+                "recipient_name": "test buyer",
+                "line1": "1 Main St",
+                "city": "San Jose",
+                "state": "CA",
+                "postal_code": "95131",
+                "country_code": "US"
+            }
+        },
+        "related_resources": [
+        {
+            "sale":
+            {
+                "id": "9GT02111A5173404J",
+                "state": "completed",
+                "amount":
+                {
+                    "total": "0.01",
+                    "currency": "USD",
+                    "details":
+                    {
+                        "subtotal": "0.01"
+                    }
+                },
+                "payment_mode": "INSTANT_TRANSFER",
+                "protection_eligibility": "ELIGIBLE",
+                "protection_eligibility_type": "ITEM_NOT_RECEIVED_ELIGIBLE,UNAUTHORIZED_PAYMENT_ELIGIBLE",
+                "transaction_fee":
+                {
+                    "value": "0.01",
+                    "currency": "USD"
+                },
+                "parent_payment": "PAY-5DD95940RH5459720LK36PMI",
+                "create_time": "2018-03-25T18:18:02Z",
+                "update_time": "2018-03-25T18:18:02Z",
+                "links": [
+                {
+                    "href": "https://api.sandbox.paypal.com/v1/payments/sale/9GT02111A5173404J",
+                    "rel": "self",
+                    "method": "GET"
+                },
+                {
+                    "href": "https://api.sandbox.paypal.com/v1/payments/sale/9GT02111A5173404J/refund",
+                    "rel": "refund",
+                    "method": "POST"
+                },
+                {
+                    "href": "https://api.sandbox.paypal.com/v1/payments/payment/PAY-5DD95940RH5459720LK36PMI",
+                    "rel": "parent_payment",
+                    "method": "GET"
+                }]
+            }
+        }]
+    }],
+    "create_time": "2018-03-25T18:17:21Z",
+    "links": [
+    {
+        "href": "https://api.sandbox.paypal.com/v1/payments/payment/PAY-5DD95940RH5459720LK36PMI",
+        "rel": "self",
+        "method": "GET"
+    }],
+    "httpStatusCode": 200
+}
