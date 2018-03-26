@@ -56,31 +56,41 @@ var update = function(collectionName, dataDocument, witch) {
     dataDocument,
     witch
   })
+
+  var documentUpdate = Object.assign({}, dataDocument);
+
   if (witch._id) {
 
     witch._id = new ObjectId(witch._id)
 
   }
 
-  delete dataDocument._id
+  delete documentUpdate._id
+
+  console.log("")
+  console.log('@ documentUpdate', {
+    documentUpdate
+  })
+
   return rxMongodb
 
     .connect(connectionString)
 
     .flatMap(db => rxMongodb
 
-      .update(collectionName, witch, dataDocument)
+      .update(collectionName, witch, documentUpdate)
 
   )
     .map(mongoInsertResponse => {
 
-      console.log('@mongo insert response', mongoInsertResponse)
+      console.log('@mongo update response', mongoInsertResponse)
       console.log("")
 
       return dataDocument
     })
 
 }
+
 
 
 var get = function(collectionName, query) {

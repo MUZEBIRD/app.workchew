@@ -54,9 +54,6 @@ var placeButton = function(config) {
 
       var signUpData = userService.getSignUpData();
 
-      console.log(signUpData)
-
-
       var memberShipInfo = signUpData.memberShipInfo
 
       var paymentAuth = memberShipInfo.paymentAuth
@@ -81,25 +78,18 @@ var placeButton = function(config) {
         }]
       });
 
-
-
-
-
     },
 
     // Wait for the payment to be authorized by the customer
 
     onAuthorize: function(data, actions) {
 
-      console.log("Payment Complete!", {
-        data,
-        actions
-      })
-
-      verifyPayPalTransaction(data)
 
       return actions.payment.execute().then(function() {
+        verifyPayPalTransaction(data)
+
         window.alert('Payment Complete!');
+
       });
     }
 

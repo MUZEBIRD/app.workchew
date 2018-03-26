@@ -2,6 +2,7 @@ const express = require('express');
 
 const router = express.Router();
 const payPalWCNodeCLient = require('../services/wc-paypal.js')
+const userService = require('../Services/userService.js')
 
 router.post('/', ({body}, res) => {
 
@@ -15,7 +16,7 @@ router.post('/', ({body}, res) => {
 
     .getPayment(paymentID)
 
-    .subscribe((getPaymentStream) => {
+    .switchMap((getPaymentStream) => {
 
       var transactions = getPaymentStream.transactions;
 
@@ -30,9 +31,28 @@ router.post('/', ({body}, res) => {
 
       var custom = transaction.custom;
 
+      return userService.get({
+        'memberShipInfo.paymentAuth.token': custom
+      })
+
+    })
+
+    .switchMap(findUserbyTokenResponse => {
+
+      var user = findUserbyTokenResponse[0]
+      user.memberShipInfo.paymentAuth.lastPaymentId = paymentID
+
+      return userService.update(user)
+
+    })
+
+    .subscribe((getPaymentStream) => {
+
       res.send({
         getPaymentStream
       })
+
+
 
     })
 
