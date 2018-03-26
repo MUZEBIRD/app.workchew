@@ -11,6 +11,9 @@ const SignUp = require('./SignUp')
 const Seats = require('./SeatsRoute')
 
 const Business = require('./Business')
+
+const payPal = require('./payPalRoute')
+
 fs = require('fs')
 
 router.use('/Business', Business)
@@ -23,12 +26,7 @@ router.use('/SignUp', SignUp)
 
 router.use('/Seats', Seats)
 
-
-const payPal = require('./payPalRoute')
-
 router.use('/pay-pal', payPal)
-
-
 
 // GET home page
 router.get('/', (req, res) => {

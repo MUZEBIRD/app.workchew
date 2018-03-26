@@ -73,11 +73,17 @@ var userService = {
   },
   logOut: () => {
 
-
     localStorage.clear();
 
     window.location.reload(true);
 
+  },
+  getSignUpData: () => {
+
+
+    return JSON.parse(localStorage
+
+        .getItem(userSignUpStorageKey) || '{}')
 
   },
   storeSignUpInfo: (user) => {

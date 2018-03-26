@@ -1,5 +1,6 @@
 import restService from '../Services/restService.js'
 import urlService from '../Services/urlService.js'
+import userService from '../Services/userService.js'
 
 var verifyPayPalTransaction = function(paypalTransactionData) {
 
@@ -17,8 +18,10 @@ var verifyPayPalTransaction = function(paypalTransactionData) {
 }
 
 var placeButton = function(config) {
-  var paypal = window['paypal']
+
   var {price, elementKey, membershipName} = config;
+
+  var paypal = window['paypal'];
 
   paypal.Button.render({
 
@@ -48,13 +51,25 @@ var placeButton = function(config) {
     // Wait for the PayPal button to be clicked
 
     payment: function(data, actions) {
+
+      var signUpData = userService.getSignUpData();
+
+      console.log(signUpData)
+
+
+      var memberShipInfo = signUpData.memberShipInfo
+
+      var paymentAuth = memberShipInfo.paymentAuth
+
+      var token = paymentAuth.token;
+
       return actions.payment.create({
         transactions: [{
           amount: {
             total: price,
             currency: 'USD'
           },
-          custom: "place access token here",
+          custom: token,
           item_list: {
             items: [{
               name: membershipName,
@@ -65,6 +80,11 @@ var placeButton = function(config) {
           }
         }]
       });
+
+
+
+
+
     },
 
     // Wait for the payment to be authorized by the customer

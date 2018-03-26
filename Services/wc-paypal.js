@@ -35,7 +35,6 @@ var getPayment = function(paymentId) {
 
 } //getPayment
 
-
 module.exports = {
   getPayment
 }

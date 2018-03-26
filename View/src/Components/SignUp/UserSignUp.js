@@ -20,7 +20,7 @@ class UserSignUp extends Component {
 
     this.state = {
       queryParams,
-      showMemberShipSelections: true
+      showMemberShipSelections: false
     }
 
     console.log({
@@ -32,19 +32,25 @@ class UserSignUp extends Component {
 
   componentDidMount() {
 
-    window.paypalCheckoutReady = function() {
+    window.paypalCheckoutReady = () => {
 
-      pricingOptions.forEach((pricing) => {
 
-        placeButton({
+      if (this.state.showMemberShipSelections) {
+        pricingOptions.forEach((pricing) => {
 
-          price: pricing.price,
-          elementKey: `${pricing.id}-button`,
-          membershipName: pricing.title
+          placeButton({
+
+            price: pricing.price,
+            elementKey: `${pricing.id}-button`,
+            membershipName: pricing.title
+          })
+
         })
+      }
+      ;
 
-      })
-    };
+
+    }
 
   }
 
@@ -78,6 +84,18 @@ class UserSignUp extends Component {
         this.setState({
           signUpData: newUser,
           showMemberShipSelections: true
+        }, () => {
+
+          pricingOptions.forEach((pricing) => {
+
+            placeButton({
+
+              price: pricing.price,
+              elementKey: `${pricing.id}-button`,
+              membershipName: pricing.title
+            })
+
+          })
         })
 
 
