@@ -31,17 +31,11 @@ var post = function(user) {
 
         data.userDbPosStream = userDbPosStream;
 
-
         console.log("user service.post  data.userDbPosStream   ", userDbPosStream, data)
 
-
-        return Rx.Observable.of({})
-
-
-          // return emailService.sendUserVerificationEmail({
-        //   userSignUpInfo
-        // })
-
+        return emailService.sendUserVerificationEmail({
+          userSignUpInfo
+        })
 
           .map((verificationEmailResponse) => {
             data.verificationEmailResponse = verificationEmailResponse;
@@ -53,21 +47,22 @@ var post = function(user) {
           })
 
       })
-      // .switchMap(userSignUp => {
 
-      //   return emailService.sendAdminSignUpEmail({
-      //     userSignUpInfo
-      //   })
+      .switchMap(userSignUp => {
 
-      //     .map((sendAdminSignUpEmailResponse) => {
+        return emailService.sendAdminSignUpEmail({
+          userSignUpInfo
+        })
 
-      //       data.sendAdminSignUpEmailResponse = sendAdminSignUpEmailResponse;
-      //       console.log("user service.post  data.sendAdminSignUpEmailResponse   ", sendAdminSignUpEmailResponse, data)
+          .map((sendAdminSignUpEmailResponse) => {
 
-      //       return userSignUp
-      //     })
+            data.sendAdminSignUpEmailResponse = sendAdminSignUpEmailResponse;
+            console.log("user service.post  data.sendAdminSignUpEmailResponse   ", sendAdminSignUpEmailResponse, data)
 
-      // })
+            return userSignUp
+          })
+
+      })
 
   }
 

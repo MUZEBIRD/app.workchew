@@ -97,9 +97,8 @@ var sendAdminSignUpEmail = function(signUpData) {
   return sendEmail({
     mailOptions: {
       from: 'hello@workchew.com', // sender address
-      to: "isethguy@gmail.com", // list of receivers
-
-      // to: "isethguy@gmail.com,mb@workchew.com", // list of receivers
+      // to: "isethguy@gmail.com", // list of receivers
+      to: "isethguy@gmail.com,mb@workchew.com", // list of receivers
       subject: 'welcome ✔', // Subject line
       html: htmlMsg
     }
