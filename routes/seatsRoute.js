@@ -4,7 +4,7 @@ const express = require('express');
 
 const router = express.Router();
 
-const seats = require('../services/seatsService.js')
+const seats = require('../Services/seatsService.js')
 
 router.post('/', (req, res) => {
 
