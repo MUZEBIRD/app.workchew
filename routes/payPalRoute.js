@@ -1,7 +1,7 @@
 const express = require('express');
 
 const router = express.Router();
-const payPalWCNodeCLient = require('../services/wc-paypal.js')
+const payPalWCNodeCLient = require('../Services/wc-paypal.js')
 const userService = require('../Services/userService.js')
 
 router.post('/', ({body}, res) => {
