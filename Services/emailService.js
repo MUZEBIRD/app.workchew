@@ -11,7 +11,7 @@ var sendEmail = function(emailData) {
 
   let smtpConfig = {
     host: 'smtp.office365.com',
-    port: 587,
+    //  port: 587,
     secure: false, // upgrade later with STARTTLS
     auth: {
       user: 'hello@workchew.com',

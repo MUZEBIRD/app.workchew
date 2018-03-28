@@ -19,6 +19,8 @@ services:
       - nodeapp-network
 
   mongo-express:
+    depends_on:
+      - "mongodb"
     build:
       context: .
       dockerfile: mongo-express.dockerfile  
