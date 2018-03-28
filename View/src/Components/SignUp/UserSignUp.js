@@ -84,6 +84,7 @@ class UserSignUp extends Component {
         this.setState({
           signUpData: newUser,
           showMemberShipSelections: true
+
         }, () => {
 
           pricingOptions.forEach((pricing) => {
