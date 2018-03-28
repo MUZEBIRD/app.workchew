@@ -8,7 +8,7 @@ const User = require('./User')
 
 const SignUp = require('./SignUp')
 
-const Seats = require('./SeatsRoute')
+const Seats = require('./seatsRoute')
 
 const Business = require('./Business')
 
