@@ -71,14 +71,12 @@ var get = function(query) {
 
 var getRole = function(accessToken) {
 
-
   return Rx.Observable.of({})
-
 
 }
 
 var authService = {
-
+  getRole,
   delete: remove,
 
   get,

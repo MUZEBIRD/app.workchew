@@ -36,11 +36,18 @@ var FrontAuth = function(req, res, next) {
   var signedCookies = req.signedCookies;
   var url = req.url;
 
+
+  var accessToken = headers['x-api-access-token']
   var pathname = Url.parse(url).pathname;
 
   console.log(Url.parse(url), body, pathname.toLowerCase())
 
-  if (!headers['x-api-access-token'] && pathname.toLowerCase() != '/user' && pathname.toLowerCase() != '/login') {
+  if (method == 'OPTIONS') {
+
+
+    next();
+
+  } else if (!headers['x-api-access-token'] && pathname.toLowerCase() != '/user' && pathname.toLowerCase() != '/login') {
 
     res.sendStatus(401)
 

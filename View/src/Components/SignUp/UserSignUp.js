@@ -49,7 +49,6 @@ class UserSignUp extends Component {
       }
       ;
 
-
     }
 
   }

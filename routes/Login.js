@@ -23,6 +23,7 @@ router.post('/', ({body}, res) => {
       var foundUser = userLoginResponse[0];
       console.log("found user resp", foundUser)
       foundUser.auth = {
+
         accessToken: uuidv4(),
         date: new Date()
       }

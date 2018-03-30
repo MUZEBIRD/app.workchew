@@ -12,6 +12,24 @@ router.post('/', ({body}, res) => {
 
   res.send("go")
 
+  /*
+ user
+
+   .post(userFromBody(body))
+
+   .subscribe((userPostResponse) => {
+  res.send("go")
+ 
+     var responseBody = {
+       userResponse: userPostResponse
+     }
+
+     res.send(responseBody)
+
+   })
+
+  */
+
 
 }); //POST 
 
