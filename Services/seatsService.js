@@ -5,13 +5,6 @@ const _ = require('lodash');
 
 const seatsCollectionName = 'seats'
 
-const list = [
-  {
-    keyName: 'tags',
-    props: ['text']
-  }
-]
-
 var post = function(seats) {
 
   return db

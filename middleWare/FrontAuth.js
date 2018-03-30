@@ -1,7 +1,8 @@
 var Url = require('url');
 
-var checkAccessToken = function({pathname, body, accessToken, query}) {
+const auth = require('../Services/authService.js')
 
+var checkAccessToken = function({pathname, body, accessToken, userRole, query}) {
 
   return true;
 }
@@ -47,23 +48,37 @@ var FrontAuth = function(req, res, next) {
 
     next();
 
-  } else if (headers['x-api-access-token'] && checkAccessToken({
-      pathname,
-      body,
-      accessToken,
-      query
-    })) {
+  } else if (headers['x-api-access-token']) {
 
+    auth.getRole(accessToken)
 
-    next()
+      .subscribe(userRole => {
 
+        var access = checkAccessToken({
+          pathname,
+          body,
+          accessToken,
+          query,
+          userRole
+        })
+
+        if (access) {
+
+          next()
+
+        } else {
+
+          res.sendStatus(401)
+
+        }
+
+      })
 
   } else if (pathname.toLowerCase() == '/login') {
 
     next();
 
   } else {
-
 
     res.sendStatus(401)
 

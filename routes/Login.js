@@ -6,6 +6,10 @@ const router = express.Router();
 
 const user = require('../Services/userService.js')
 
+const auth = require('../Services/authService.js')
+
+const uuidv4 = require('uuid/v4');
+
 router.post('/', ({body}, res) => {
 
   res.set('Content-Type', 'text/html');
@@ -14,25 +18,42 @@ router.post('/', ({body}, res) => {
 
     .get(loginQueryFromCredentials(body))
 
-    .subscribe((mongoGetResponse) => {
 
-      var responseBody = {
-        msg: {
-          text: 'server login error',
-          class: 'danger'
-        }
+    .switchMap((userLoginResponse) => {
+
+      var foundUser = userLoginResponse[0];
+      console.log("found user resp", foundUser)
+      foundUser.auth = {
+        accessToken: v4(),
+        date: new Date()
       }
 
-      if (mongoGetResponse && mongoGetResponse.length > 0) {
+      return user
 
-        responseBody.user = mongoGetResponse[0]
-        responseBody.msg = {
-          text: "user found logining in",
-          class: 'success'
-        }
-      }
+        .update(foundUser)
 
-      res.send(responseBody)
+    })
+
+
+    .subscribe((userLoginUpdate) => {
+
+      // var responseBody = {
+      //   msg: {
+      //     text: 'server login error',
+      //     class: 'danger'
+      //   }
+      // }
+
+      // if (mongoGetResponse && mongoGetResponse.length > 0) {
+
+      //   responseBody.user = mongoGetResponse[0]
+      //   responseBody.msg = {
+      //     text: "user found logining in",
+      //     class: 'success'
+      //   }
+      // }
+
+      res.send(userLoginUpdate)
 
     })
 
