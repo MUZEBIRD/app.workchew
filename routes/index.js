@@ -36,12 +36,4 @@ router.get('/', (req, res) => {
   res.send(fs.readFileSync('./View/build/index.html'));
 });
 
-
-router.get('/checkout', (req, res) => {
-
-  res.set('Content-Type', 'text/html');
-
-  res.send(fs.readFileSync('./View/checkout/index.html'));
-});
-
 module.exports = router;

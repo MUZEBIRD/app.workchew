@@ -9,6 +9,8 @@ const request = require('request'),
   fs = require('fs'),
 
   //MY WARES, ANYWHERES
+  auth = require('./middleWare/FrontAuth'),
+
   logger = require('./middleWare/logger'),
   headerConfigMiddleWare = require('./middleWare/headerConfigMiddleWare');
 
@@ -66,6 +68,8 @@ app.use(bodyParser.urlencoded({ // to support URL-encoded bodies
 app.use(headerConfigMiddleWare);
 
 app.use(logger);
+
+app.use(auth)
 
 const routes = require('./routes/');
 

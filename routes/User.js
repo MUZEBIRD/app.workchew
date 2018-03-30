@@ -10,19 +10,8 @@ router.post('/', ({body}, res) => {
 
   res.set('Content-Type', 'text/html');
 
-  user
+  res.send("go")
 
-    .post(userFromBody(body))
-
-    .subscribe((userPostResponse) => {
-
-      var responseBody = {
-        userResponse: userPostResponse
-      }
-
-      res.send(responseBody)
-
-    })
 
 }); //POST 
 
