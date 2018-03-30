@@ -18,13 +18,12 @@ router.post('/', ({body}, res) => {
 
     .get(loginQueryFromCredentials(body))
 
-
     .switchMap((userLoginResponse) => {
 
       var foundUser = userLoginResponse[0];
       console.log("found user resp", foundUser)
       foundUser.auth = {
-        accessToken: v4(),
+        accessToken: uuidv4(),
         date: new Date()
       }
 
@@ -33,7 +32,6 @@ router.post('/', ({body}, res) => {
         .update(foundUser)
 
     })
-
 
     .subscribe((userLoginUpdate) => {
 
