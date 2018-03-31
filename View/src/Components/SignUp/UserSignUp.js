@@ -75,33 +75,44 @@ class UserSignUp extends Component {
           signUpCoChewerResponse
         })
 
-        userService.storeSignUpInfo(userResponse)
 
-        var {memberShipInfo} = userResponse;
 
-        var {paymentAuth} = memberShipInfo;
 
-        var {token} = paymentAuth;
+        if (userResponse._id) {
 
-        //alert("thanks for signing up check your email for next steps")
+          userService.storeSignUpInfo(userResponse)
 
-        this.setState({
-          signUpData: userResponse,
-          showMemberShipSelections: true
-        }, () => {
+          var {memberShipInfo} = userResponse;
 
-          pricingOptions.forEach((pricing) => {
+          var {paymentAuth} = memberShipInfo;
 
-            placeButton({
+          var {token} = paymentAuth;
 
-              price: pricing.price,
-              elementKey: `${pricing.id}-button`,
-              membershipName: pricing.title
+          //alert("thanks for signing up check your email for next steps")
+
+          this.setState({
+            signUpData: userResponse,
+            showMemberShipSelections: true
+          }, () => {
+
+            pricingOptions.forEach((pricing) => {
+
+              placeButton({
+
+                price: pricing.price,
+                elementKey: `${pricing.id}-button`,
+                membershipName: pricing.title
+              })
+
             })
-
           })
-        })
 
+        /*userResponse._id*/
+        } else { /*!userResponse._id*/
+
+          alert(userResponse.msg)
+
+        }
 
       })
   }

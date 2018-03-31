@@ -18,73 +18,94 @@ var post = function(user) {
 
     userSignUpInfo.created = new Date().getTime()
 
-    return db
 
-      .post(userCollectionName, userSignUpInfo)
-      /*.switchMap(userDbPosStream => {
+    return get({
+      email: userSignUpInfo.email
+    })
 
-          data.userDbPosStream = userDbPosStream;
+      .switchMap((userSearchStream) => {
 
-          console.log("user service.post  data.userDbPosStream   ", userDbPosStream, data)
+        if (userSearchStream.length) {
 
-          return emailService.sendUserVerificationEmail({
-            userSignUpInfo
+          return Rx.Observable.of({
+            msg: 'user with that email exsist'
           })
 
-            .map((verificationEmailResponse) => {
-              data.verificationEmailResponse = verificationEmailResponse;
+        } else {
 
-              return userDbPosStream
-              
+          return db
+
+            .post(userCollectionName, userSignUpInfo)
+
+
+            /*.switchMap(userDbPosStream => {
+
+                data.userDbPosStream = userDbPosStream;
+
+                console.log("user service.post  data.userDbPosStream   ", userDbPosStream, data)
+
+                return emailService.sendUserVerificationEmail({
+                  userSignUpInfo
+                })
+
+                  .map((verificationEmailResponse) => {
+                    data.verificationEmailResponse = verificationEmailResponse;
+
+                    return userDbPosStream
+                    
+
+                  })
+
+              })
+
+              .switchMap(userSignUp => {
+
+                return emailService.sendAdminSignUpEmail({
+                  userSignUpInfo
+                })
+
+                  .map((sendAdminSignUpEmailResponse) => {
+
+                    data.sendAdminSignUpEmailResponse = sendAdminSignUpEmailResponse;
+                    console.log("user service.post  data.sendAdminSignUpEmailResponse   ", sendAdminSignUpEmailResponse, data)
+
+                    return userSignUp
+                  })
+
+              })*/
+
+            .switchMap(userSignUp => {
+
+              return authService.assignAccessToken(userSignUp)
+
+                .map(authObject => {
+
+                  userSignUp.memberShipInfo = {
+
+                    paymentAuth: {
+                      token: authObject.token,
+                      created: new Date().getTime()
+                    }
+
+                  }
+
+                  return userSignUp
+
+                })
 
             })
 
-        })
+            .switchMap(userSignUp => {
 
-        .switchMap(userSignUp => {
+              return update(userSignUp)
 
-          return emailService.sendAdminSignUpEmail({
-            userSignUpInfo
-          })
-
-            .map((sendAdminSignUpEmailResponse) => {
-
-              data.sendAdminSignUpEmailResponse = sendAdminSignUpEmailResponse;
-              console.log("user service.post  data.sendAdminSignUpEmailResponse   ", sendAdminSignUpEmailResponse, data)
-
-              return userSignUp
             })
 
-        })*/
-
-      .switchMap(userSignUp => {
-
-        return authService.assignAccessToken(userSignUp)
-
-          .map(authObject => {
-
-            userSignUp.memberShipInfo = {
-
-              paymentAuth: {
-                token: authObject.token,
-                created: new Date().getTime()
-              }
-
-            }
-
-            return userSignUp
-
-          })
+        } //userSearchStream.length >0
 
       })
 
-      .switchMap(userSignUp => {
-
-        return update(userSignUp)
-
-      })
-
-  }
+  } //userSignUpInfo
 
   if (businessSignUpInfo) {
 
