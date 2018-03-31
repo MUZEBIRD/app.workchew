@@ -10,25 +10,21 @@ router.post('/', ({body}, res) => {
 
   res.set('Content-Type', 'text/html');
 
-  res.send("go")
 
-  /*
- user
+  user
 
-   .post(userFromBody(body))
+    .post(userFromBody(body))
 
-   .subscribe((userPostResponse) => {
-  res.send("go")
- 
-     var responseBody = {
-       userResponse: userPostResponse
-     }
+    .subscribe((userPostResponse) => {
 
-     res.send(responseBody)
+      var responseBody = {
+        userResponse: userPostResponse
+      }
 
-   })
+      res.send(responseBody)
 
-  */
+    })
+
 
 
 }); //POST 

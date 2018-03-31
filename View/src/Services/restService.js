@@ -24,14 +24,15 @@ var restService = {
     }).then((res) => res.json()))
 
   },
-  post: (url, body) => {
+  post: (url, body, headers?) => {
 
     return Rx.Observable.fromPromise(fetch(url, {
 
       method: "POST",
 
       headers: {
-        "Content-type": "application/json"
+        "Content-type": "application/json",
+        ...headers
       },
 
       body: JSON.stringify(body)

@@ -6,7 +6,10 @@ var verifyPayPalTransaction = function(paypalTransactionData) {
 
   restService
     .post(urlService.payPal, {
-      paypalTransactionData
+      paypalTransactionData,
+
+    }, {
+      "x-api-access-token": paypalTransactionData.custom
     })
 
     .subscribe((verifyPayPalTransactionResponse) => {

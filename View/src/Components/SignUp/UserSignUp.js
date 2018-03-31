@@ -78,12 +78,18 @@ class UserSignUp extends Component {
         })
 
         userService.storeSignUpInfo(newUser)
-        alert("thanks for signing up check your email for next steps")
+
+        var {memberShipInfo} = newUser;
+
+        var {paymentAuth} = memberShipInfo;
+
+        var {token} = paymentAuth;
+
+        //alert("thanks for signing up check your email for next steps")
 
         this.setState({
           signUpData: newUser,
           showMemberShipSelections: true
-
         }, () => {
 
           pricingOptions.forEach((pricing) => {
