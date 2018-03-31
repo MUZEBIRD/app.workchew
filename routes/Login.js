@@ -6,6 +6,9 @@ const router = express.Router();
 
 const user = require('../Services/userService.js')
 
+const authService = require('../Services/authService')
+
+
 const uuidv4 = require('uuid/v4');
 
 router.post('/', ({body}, res) => {
@@ -16,14 +19,35 @@ router.post('/', ({body}, res) => {
 
     .get(loginQueryFromCredentials(body))
 
+
     .switchMap((userLoginResponse) => {
 
       var foundUser = userLoginResponse[0];
       console.log("found user resp", foundUser)
+
+      return authService.assignAccessToken(foundUser)
+
+        .map((authObject) => {
+
+          return {
+
+            foundUser,
+            authObject
+          }
+        })
+
+    })
+
+    .switchMap(({foundUser, authObject}) => {
+
       foundUser.auth = {
 
-        accessToken: uuidv4(),
+        role: authObject.role,
+
+        accessToken: authObject.token,
+
         date: new Date()
+
       }
 
       return user

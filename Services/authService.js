@@ -127,7 +127,6 @@ var assignAccessToken = function(userData) {
 
     })
 
-
 }
 
 var getRole = function(accessToken) {

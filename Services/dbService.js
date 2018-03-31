@@ -81,9 +81,9 @@ var update = function(collectionName, dataDocument, witch) {
       .update(collectionName, witch, documentUpdate)
 
   )
-    .map(mongoInsertResponse => {
+    .map(mongoUpdateResponse => {
 
-      console.log('@mongo update response', mongoInsertResponse)
+      console.log('@mongo update response', mongoUpdateResponse.result)
       console.log("")
 
       return dataDocument
