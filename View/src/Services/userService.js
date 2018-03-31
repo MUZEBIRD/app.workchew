@@ -99,13 +99,7 @@ var userService = {
 
     localStorage
 
-      .setItem(
-        userStorageKey, JSON.stringify({
-          email: user.email,
-          _id: user._id,
-          name: user.name
-        })
-    )
+      .setItem(userStorageKey, JSON.stringify(user))
 
   },
   logOut() {
