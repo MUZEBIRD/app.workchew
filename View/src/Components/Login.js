@@ -182,29 +182,23 @@ class Login extends Component {
 
             if (err) {
 
-
               this.showAlert({
                 text: "sign up error dude",
                 class: "danger"
               })
             }
 
-
           })
 
   }
   goToCoChewerSignUp() {
 
-
     urlService.goTo(urlService.coChewerSignUp)
-
 
   }
   goToBusinessSignUp() {
 
-
     urlService.goTo(urlService.businessSignUp)
-
 
   }
 
@@ -269,10 +263,8 @@ class Login extends Component {
           </div>
         </div>
         <br/>
-
-                  <br/>
-
-                            <br/>
+        <br/>
+        <br/>
         <div className="row">
           <div className="col-sm-4"></div>
           <div className="col-sm-4 flex-row-space-around">

@@ -45,7 +45,9 @@ var FrontAuth = function(req, res, next) {
 
   } else if (!headers['x-api-access-token'] && pathname.toLowerCase() != '/user' && pathname.toLowerCase() != '/login') {
 
-    res.sendStatus(401)
+    res.status(401).send({
+      error: 401
+    })
 
   } else if (pathname.toLowerCase() == '/user' && body.userSignUpInfo) {
 
@@ -71,7 +73,9 @@ var FrontAuth = function(req, res, next) {
 
         } else {
 
-          res.sendStatus(401)
+          res.status(401).send({
+            error: 401
+          })
 
         }
 
@@ -83,7 +87,9 @@ var FrontAuth = function(req, res, next) {
 
   } else {
 
-    res.sendStatus(401)
+    res.status(401).send({
+      error: 401
+    })
 
   }
 

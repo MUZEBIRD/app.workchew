@@ -8,7 +8,6 @@ const user = require('../Services/userService.js')
 
 const authService = require('../Services/authService')
 
-
 const uuidv4 = require('uuid/v4');
 
 router.post('/', ({body}, res) => {
@@ -19,62 +18,81 @@ router.post('/', ({body}, res) => {
 
     .get(loginQueryFromCredentials(body))
 
-
     .switchMap((userLoginResponse) => {
 
-      var foundUser = userLoginResponse[0];
-      console.log("found user resp", foundUser)
+      var foundUser = {}
 
-      return authService.assignAccessToken(foundUser)
+      if (userLoginResponse && userLoginResponse.length) {
 
-        .map((authObject) => {
+        foundUser = userLoginResponse[0];
 
-          return {
+        return authService.assignAccessToken(foundUser)
 
-            foundUser,
-            authObject
-          }
+          .map((authObject) => {
+
+            return {
+
+              foundUser,
+              authObject
+            }
+          })
+
+      } else {
+
+        return Rx.Observable.of({
+
         })
+
+      }
 
     })
 
     .switchMap(({foundUser, authObject}) => {
 
-      foundUser.auth = {
+      if (foundUser && authObject) {
+        foundUser.auth = {
 
-        role: authObject.role,
+          role: authObject.role,
 
-        accessToken: authObject.token,
+          accessToken: authObject.token,
 
-        date: new Date()
+          date: new Date()
+
+        }
+
+        return user
+
+          .update(foundUser)
+
+      } else {
+
+        return Rx.Observable.of({
+
+        })
 
       }
 
-      return user
-
-        .update(foundUser)
-
     })
 
-    .subscribe((userLoginUpdate) => {
+    .subscribe((foundUser) => {
 
-      // var responseBody = {
-      //   msg: {
-      //     text: 'server login error',
-      //     class: 'danger'
-      //   }
-      // }
+      var responseBody = {
+        msg: {
+          text: 'server login error',
+          class: 'danger'
+        }
+      }
 
-      // if (mongoGetResponse && mongoGetResponse.length > 0) {
+      if (foundUser && foundUser._id) {
 
-      //   responseBody.user = mongoGetResponse[0]
-      //   responseBody.msg = {
-      //     text: "user found logining in",
-      //     class: 'success'
-      //   }
-      // }
+        responseBody.user = foundUser
+        responseBody.msg = {
+          text: "user found logining in",
+          class: 'success'
+        }
+      }
 
-      res.send(userLoginUpdate)
+      res.send(responseBody)
 
     })
 
