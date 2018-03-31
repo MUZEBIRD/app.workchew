@@ -39,8 +39,6 @@ var FrontAuth = function(req, res, next) {
   var accessToken = headers['x-api-access-token']
   var pathname = Url.parse(url).pathname;
 
-  console.log(Url.parse(url), body, pathname.toLowerCase())
-
   if (method == 'OPTIONS') {
 
     next();

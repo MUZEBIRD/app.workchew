@@ -5,9 +5,7 @@ const emailService = require('./emailService')
 const userCollectionName = 'users'
 const uuidv4 = require('uuid/v4');
 
-
 const authService = require('./authService')
-
 
 var post = function(user) {
 
@@ -23,44 +21,41 @@ var post = function(user) {
     return db
 
       .post(userCollectionName, userSignUpInfo)
-      /*
-            .switchMap(userDbPosStream => {
+      /*.switchMap(userDbPosStream => {
 
-              data.userDbPosStream = userDbPosStream;
+          data.userDbPosStream = userDbPosStream;
 
-              console.log("user service.post  data.userDbPosStream   ", userDbPosStream, data)
+          console.log("user service.post  data.userDbPosStream   ", userDbPosStream, data)
 
-              return emailService.sendUserVerificationEmail({
-                userSignUpInfo
-              })
+          return emailService.sendUserVerificationEmail({
+            userSignUpInfo
+          })
 
-                .map((verificationEmailResponse) => {
-                  data.verificationEmailResponse = verificationEmailResponse;
+            .map((verificationEmailResponse) => {
+              data.verificationEmailResponse = verificationEmailResponse;
 
-                  return userDbPosStream
-                  
-
-                })
+              return userDbPosStream
+              
 
             })
 
-            .switchMap(userSignUp => {
+        })
 
-              return emailService.sendAdminSignUpEmail({
-                userSignUpInfo
-              })
+        .switchMap(userSignUp => {
 
-                .map((sendAdminSignUpEmailResponse) => {
+          return emailService.sendAdminSignUpEmail({
+            userSignUpInfo
+          })
 
-                  data.sendAdminSignUpEmailResponse = sendAdminSignUpEmailResponse;
-                  console.log("user service.post  data.sendAdminSignUpEmailResponse   ", sendAdminSignUpEmailResponse, data)
+            .map((sendAdminSignUpEmailResponse) => {
 
-                  return userSignUp
-                })
+              data.sendAdminSignUpEmailResponse = sendAdminSignUpEmailResponse;
+              console.log("user service.post  data.sendAdminSignUpEmailResponse   ", sendAdminSignUpEmailResponse, data)
 
+              return userSignUp
             })
 
-            */
+        })*/
 
       .switchMap(userSignUp => {
 
@@ -83,13 +78,11 @@ var post = function(user) {
 
       })
 
-
       .switchMap(userSignUp => {
 
         return update(userSignUp)
 
       })
-
 
   }
 

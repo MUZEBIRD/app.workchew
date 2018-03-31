@@ -29,11 +29,9 @@ class UserSignUp extends Component {
 
   }
 
-
   componentDidMount() {
 
     window.paypalCheckoutReady = () => {
-
 
       if (this.state.showMemberShipSelections) {
         pricingOptions.forEach((pricing) => {

@@ -87,8 +87,6 @@ var assignAccessToken = function(userData) {
 
     .map(getAuth => {
 
-      console.log("AT GETAUTH", getAuth)
-
       if (getAuth.length) {
         // can have multiple open authable accesstokesn
         // can clear out accessTOken by date, and or user
@@ -134,7 +132,33 @@ var assignAccessToken = function(userData) {
 
 var getRole = function(accessToken) {
 
-  return Rx.Observable.of({})
+  return get({
+    token: accessToken
+  })
+
+    .map(getAuth => {
+
+      if (getAuth.length) {
+        // can have multiple open authable accesstokesn
+        // can clear out accessTOken by date, and or user
+
+        if (!getAuth[0].role) {
+
+          getAuth[0].role = 'coChewer'
+
+        }
+
+        return getAuth[0];
+
+      } else {
+
+        return {
+          role: 'coChewer'
+        }
+
+      }
+
+    })
 
 }
 
