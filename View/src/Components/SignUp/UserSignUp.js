@@ -75,9 +75,6 @@ class UserSignUp extends Component {
           signUpCoChewerResponse
         })
 
-
-
-
         if (userResponse._id) {
 
           userService.storeSignUpInfo(userResponse)
