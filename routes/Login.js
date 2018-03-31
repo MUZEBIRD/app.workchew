@@ -6,8 +6,6 @@ const router = express.Router();
 
 const user = require('../Services/userService.js')
 
-const auth = require('../Services/authService.js')
-
 const uuidv4 = require('uuid/v4');
 
 router.post('/', ({body}, res) => {

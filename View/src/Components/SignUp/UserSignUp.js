@@ -71,15 +71,15 @@ class UserSignUp extends Component {
 
       .subscribe((signUpCoChewerResponse) => {
 
-        var {userResponse: {newUser}} = signUpCoChewerResponse;
+        var {userResponse} = signUpCoChewerResponse;
 
         console.log({
           signUpCoChewerResponse
         })
 
-        userService.storeSignUpInfo(newUser)
+        userService.storeSignUpInfo(userResponse)
 
-        var {memberShipInfo} = newUser;
+        var {memberShipInfo} = userResponse;
 
         var {paymentAuth} = memberShipInfo;
 
@@ -88,7 +88,7 @@ class UserSignUp extends Component {
         //alert("thanks for signing up check your email for next steps")
 
         this.setState({
-          signUpData: newUser,
+          signUpData: userResponse,
           showMemberShipSelections: true
         }, () => {
 

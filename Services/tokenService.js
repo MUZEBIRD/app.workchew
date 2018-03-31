@@ -4,8 +4,9 @@ const uuidv4 = require('uuid/v4');
 
 const _ = require('lodash');
 
-const authCollectionName = 'authRegistry'
+const authCollectionName = 'auth'
 
+const user = require('./userService.js')
 
 var post = function(auth) {
 
@@ -87,8 +88,6 @@ var assignAccessToken = function(userData) {
 
     .map(getAuth => {
 
-      console.log("AT GETAUTH", getAuth)
-
       if (getAuth.length) {
         // can have multiple open authable accesstokesn
         // can clear out accessTOken by date, and or user
@@ -139,12 +138,12 @@ var getRole = function(accessToken) {
 }
 
 var authService = {
-  getRole,
 
+  getRole,
+  
   delete: remove,
 
   assignAccessToken,
-
 
   get,
 
@@ -155,4 +154,4 @@ var authService = {
   put
 }
 
-module.exports = authService;
+module.exports = "authService";

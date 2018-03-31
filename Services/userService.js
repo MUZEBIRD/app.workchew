@@ -5,6 +5,10 @@ const emailService = require('./emailService')
 const userCollectionName = 'users'
 const uuidv4 = require('uuid/v4');
 
+
+const authService = require('./authService')
+
+
 var post = function(user) {
 
   var {userSignUpInfo, businessSignUpInfo} = user
@@ -14,55 +18,78 @@ var post = function(user) {
 
   if (userSignUpInfo) {
 
-    userSignUpInfo.memberShipInfo = {
-      paymentAuth: {
-        token: uuidv4(),
-        created: new Date().getTime()
-      }
-    }
-
     userSignUpInfo.created = new Date().getTime()
 
     return db
 
       .post(userCollectionName, userSignUpInfo)
+      /*
+            .switchMap(userDbPosStream => {
 
-      .switchMap(userDbPosStream => {
+              data.userDbPosStream = userDbPosStream;
 
-        data.userDbPosStream = userDbPosStream;
+              console.log("user service.post  data.userDbPosStream   ", userDbPosStream, data)
 
-        console.log("user service.post  data.userDbPosStream   ", userDbPosStream, data)
+              return emailService.sendUserVerificationEmail({
+                userSignUpInfo
+              })
 
-        return emailService.sendUserVerificationEmail({
-          userSignUpInfo
-        })
+                .map((verificationEmailResponse) => {
+                  data.verificationEmailResponse = verificationEmailResponse;
 
-          .map((verificationEmailResponse) => {
-            data.verificationEmailResponse = verificationEmailResponse;
+                  return userDbPosStream
+                  
 
-            return {
-              newUser: userDbPosStream
-            }
+                })
 
-          })
+            })
 
-      })
+            .switchMap(userSignUp => {
+
+              return emailService.sendAdminSignUpEmail({
+                userSignUpInfo
+              })
+
+                .map((sendAdminSignUpEmailResponse) => {
+
+                  data.sendAdminSignUpEmailResponse = sendAdminSignUpEmailResponse;
+                  console.log("user service.post  data.sendAdminSignUpEmailResponse   ", sendAdminSignUpEmailResponse, data)
+
+                  return userSignUp
+                })
+
+            })
+
+            */
 
       .switchMap(userSignUp => {
 
-        return emailService.sendAdminSignUpEmail({
-          userSignUpInfo
-        })
+        return authService.assignAccessToken(userSignUp)
 
-          .map((sendAdminSignUpEmailResponse) => {
+          .map(authObject => {
 
-            data.sendAdminSignUpEmailResponse = sendAdminSignUpEmailResponse;
-            console.log("user service.post  data.sendAdminSignUpEmailResponse   ", sendAdminSignUpEmailResponse, data)
+            userSignUp.memberShipInfo = {
+
+              paymentAuth: {
+                token: authObject.token,
+                created: new Date().getTime()
+              }
+
+            }
 
             return userSignUp
+
           })
 
       })
+
+
+      .switchMap(userSignUp => {
+
+        return update(userSignUp)
+
+      })
+
 
   }
 
