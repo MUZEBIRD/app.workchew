@@ -3,8 +3,8 @@ var Url = require('url');
 const auth = require('../Services/authService.js')
 
 var checkAccessToken = function({pathname, body, accessToken, userRole, query}) {
-
-  return true;
+  console.log("at check access token", userRole)
+  return userRole;
 }
 
 var FrontAuth = function(req, res, next) {

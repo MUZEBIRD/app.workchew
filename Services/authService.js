@@ -152,9 +152,7 @@ var getRole = function(accessToken) {
 
       } else {
 
-        return {
-          role: 'coChewer'
-        }
+        return false;
 
       }
 

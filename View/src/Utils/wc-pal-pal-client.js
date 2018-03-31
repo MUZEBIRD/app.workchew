@@ -9,7 +9,7 @@ var verifyPayPalTransaction = function(paypalTransactionData) {
       paypalTransactionData,
 
     }, {
-      "x-api-access-token": paypalTransactionData.custom
+      "x-api-access-token": paypalTransactionData.token
     })
 
     .subscribe((verifyPayPalTransactionResponse) => {
@@ -87,8 +87,16 @@ var placeButton = function(config) {
 
     onAuthorize: function(data, actions) {
 
+      var signUpData = userService.getSignUpData();
+
+      var memberShipInfo = signUpData.memberShipInfo
+
+      var paymentAuth = memberShipInfo.paymentAuth
+
+      var token = paymentAuth.token;
 
       return actions.payment.execute().then(function() {
+        data.token = token;
         verifyPayPalTransaction(data)
 
         window.alert('Payment Complete!');
