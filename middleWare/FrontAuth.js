@@ -2,10 +2,92 @@ var Url = require('url');
 
 const auth = require('../Services/authService.js')
 
-var checkAccessToken = function({pathname, body, accessToken, userRole, query}) {
+var checkAccessToken = function({pathname, body, accessToken, method, userRole, query}) {
+
   console.log("at check access token", userRole)
-  return userRole;
+
+  var pathKey = pathname.substring(1).toLowerCase();
+
+  console.log('pathkey at auth', pathKey)
+
+  var pathAuth = userRole[pathKey] || {}
+  var requestedObject = {}
+
+  if ( (method == "POST" || method == "PUT") ) {
+
+    requestedObject = body;
+
+  }
+
+  if (pathKey == "pay-pal") {
+
+    return true
+  }
+
+  //IN BUSSINESS RELM
+  if (pathKey == "business") {
+
+    return businessRealmCheck({
+      pathAuth,
+
+      requestedObject
+    })
+
+  } //IN BUSSINESS RELM
+
+  //IN USER RELM
+  if (pathKey == "user") {
+
+    return userRealmCheck(query, userRole)
+
+  } //IN USER RELM
+
+  return false;
+} //checkAccessToken
+
+
+var userRealmCheck = function(query, userRole) {
+  if (query._id && query._id == userRole.userId) {
+
+    return true;
+  }
+
+  return false;
 }
+
+
+
+var businessRealmCheck = function({pathAuth, requestedObject}) {
+
+  var {allowedObjects} = pathAuth;
+
+  if (allowedObjects) {
+
+    var matchgingObjects = allowedObjects.filter((object) => requestedObject._id == object._id)
+
+    if (matchgingObjects.length) {
+
+      return true;
+
+    }
+
+    if (query._id) {
+
+      var matchgingObjects = allowedObjects.filter((object) => object._id == query._id)
+
+      if (matchgingObjects.length) {
+
+        return true;
+
+      }
+
+    }
+
+  } //allowedObjects
+
+  return false;
+}
+
 
 var FrontAuth = function(req, res, next) {
 
@@ -39,17 +121,33 @@ var FrontAuth = function(req, res, next) {
   var accessToken = headers['x-api-access-token']
   var pathname = Url.parse(url).pathname;
 
+  /*
+   else if (!headers['x-api-access-token'] && pathname.toLowerCase() != '/user' && pathname.toLowerCase() != '/login') {
+
+      res.status(401).send({
+        error: 401
+      })
+
+    }
+  */
+
   if (method == 'OPTIONS') {
 
     next();
 
-  } else if (!headers['x-api-access-token'] && pathname.toLowerCase() != '/user' && pathname.toLowerCase() != '/login') {
-
-    res.status(401).send({
-      error: 401
-    })
-
   } else if (pathname.toLowerCase() == '/user' && body.userSignUpInfo) {
+
+    next();
+
+  } else if (pathname.toLowerCase() == '/public-business') {
+
+    next();
+
+  } else if (pathname.toLowerCase() == '/public-users') {
+
+    next();
+
+  } else if (pathname.toLowerCase() == '/login') {
 
     next();
 
@@ -64,10 +162,13 @@ var FrontAuth = function(req, res, next) {
           body,
           accessToken,
           query,
+          method,
           userRole
         })
 
-        if (access) {
+        console.log(access)
+
+        if (access || userRole.role == "admin") {
 
           next()
 
@@ -80,10 +181,6 @@ var FrontAuth = function(req, res, next) {
         }
 
       })
-
-  } else if (pathname.toLowerCase() == '/login') {
-
-    next();
 
   } else {
 
