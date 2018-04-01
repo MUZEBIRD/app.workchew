@@ -97,7 +97,7 @@ const MemberShipSelectionWidget = (props) => {
     <div className='row pricing-box d-flex align-items-start'>
       { props.pricings.map(
           (pricing, i) => (
-            <div key={ i } className='col-sm-3 h-100 d-flex flex-column justify-content-around'>
+            <div key={ i } className='col-lg-3 h-100 d-flex flex-column justify-content-around'>
               <p>
                 { pricing.title }
               </p>
