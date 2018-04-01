@@ -20,12 +20,8 @@ class UserSignUp extends Component {
 
     this.state = {
       queryParams,
-      showMemberShipSelections: false
+      showMemberShipSelections: true
     }
-
-    console.log({
-      queryParams
-    })
 
   }
 
@@ -71,10 +67,6 @@ class UserSignUp extends Component {
 
         var {userResponse} = signUpCoChewerResponse;
 
-        console.log({
-          signUpCoChewerResponse
-        })
-
         if (userResponse._id) {
 
           userService.storeSignUpInfo(userResponse)
@@ -118,51 +110,58 @@ class UserSignUp extends Component {
 
     return (
 
-      <div className="wholeView flex-col">
-        <div className="showView container scroll-y">
-          <div className='row flex-row-center-vert' style={ { backgroundColor: 'white', position: 'relative', zIndex: '5', height: '10%' } }>
+      <div className="wholeView d-flex flex-column align-items-center">
+        <div className="showView  scroll-y">
+          <div className='row flex-row-center-vert' style={ { backgroundColor: 'white', position: 'relative', zIndex: '5' } }>
             <div className='col-sm-4'>
             </div>
             <div className='col-sm-4'>
+              <img className="logo" src={ "/static/images/logo.png" } />
+              <br/>
+              <br/>
               <h2>User Sign Up</h2>
             </div>
             <div className='col-sm-4'>
             </div>
           </div>
+          <br/>
+          <br/>
           <div className='row'>
+            <div className='col-sm-3'></div>
             <div className='col-sm-6'>
               <input placeholder="User Name" name="userName" className="form-control sign-up-form-feild" />
             </div>
           </div>
           <br/>
           <div className='row'>
+            <div className='col-sm-3'></div>
             <div className='col-sm-6'>
               <input placeholder="Email" name="email" className="form-control sign-up-form-feild" />
             </div>
           </div>
           <br/>
           <div className='row'>
+            <div className='col-sm-3'></div>
             <div className='col-sm-6'>
               <input placeholder="Password" name="password" type="password" className="form-control sign-up-form-feild" />
             </div>
           </div>
           <br/>
           <div className='row'>
+            <div className='col-sm-3'></div>
             <div className='col-sm-6'>
               <textarea name="info" placeholder="what are you working on, what drives you?" className="form-control sign-up-form-feild" />
             </div>
           </div>
           <br/>
-          <div className='row'>
-            <div className='col-sm-1'>
-              <button onClick={ (event) => {
-                                
-                                  this.signUp()
-                                
-                                } } className="btn btn-success">
-                Sign up
-              </button>
-            </div>
+          <div className='d-flex justify-content-center'>
+            <button onClick={ (event) => {
+                              
+                                this.signUp()
+                              
+                              } } className="btn btn-success">
+              Sign up
+            </button>
           </div>
           { this.state.showMemberShipSelections &&
             <div className='row'>
