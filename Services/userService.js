@@ -10,6 +10,7 @@ const authService = require('./authService')
 var post = function(user) {
 
   var {userSignUpInfo, businessSignUpInfo} = user
+
   var data = {};
 
   console.log("user service.post top ", user)
@@ -33,9 +34,17 @@ var post = function(user) {
 
         } else {
 
+
+          var {email, password, userName, info} = userSignUpInfo
+
           return db
 
-            .post(userCollectionName, userSignUpInfo)
+            .post(userCollectionName, {
+              email,
+              password,
+              userName,
+              info
+            })
 
             .switchMap(userDbPosStream => {
 
