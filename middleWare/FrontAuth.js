@@ -166,8 +166,6 @@ var FrontAuth = function(req, res, next) {
           userRole
         })
 
-        console.log(access)
-
         if (access || userRole.role == "admin") {
 
           next()
