@@ -10,6 +10,8 @@ const authService = require('../Services/authService')
 
 const uuidv4 = require('uuid/v4');
 
+const bcryptStream = require('../Services/bcryptStreams')
+
 router.post('/', ({body}, res) => {
 
   res.set('Content-Type', 'text/html');
@@ -18,13 +20,39 @@ router.post('/', ({body}, res) => {
 
     .get(loginQueryFromCredentials(body))
 
-    .switchMap((userLoginResponse) => {
+    .switchMap((findUserStream) => {
 
-      var foundUser = {}
+      if (findUserStream && findUserStream.length) {
 
-      if (userLoginResponse && userLoginResponse.length) {
+        var foundUser = findUserStream[0];
 
-        foundUser = userLoginResponse[0];
+        return bcryptStream.compare(body.password, foundUser.password)
+
+          .map((testResponse) => {
+
+            if (testResponse) {
+
+              return foundUser
+
+            } else {
+
+              return false
+
+            }
+
+          })
+
+      } else {
+
+        return Rx.Observable.of(false)
+
+      }
+
+    })
+
+    .switchMap((foundUser) => {
+
+      if (foundUser) {
 
         return authService.assignAccessToken(foundUser)
 
@@ -39,9 +67,7 @@ router.post('/', ({body}, res) => {
 
       } else {
 
-        return Rx.Observable.of({
-
-        })
+        return Rx.Observable.of({})
 
       }
 
@@ -102,8 +128,7 @@ var loginQueryFromCredentials = function({email, password}) {
 
   return {
 
-    email,
-    password
+    email
   }
 
 }

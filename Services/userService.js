@@ -7,6 +7,8 @@ const uuidv4 = require('uuid/v4');
 
 const authService = require('./authService')
 
+const bcryptStream = require('./bcryptStreams')
+
 var post = function(user) {
 
   var {userSignUpInfo, businessSignUpInfo} = user
@@ -16,9 +18,6 @@ var post = function(user) {
   console.log("user service.post top ", user)
 
   if (userSignUpInfo) {
-
-    userSignUpInfo.created = new Date().getTime()
-
 
     return get({
       email: userSignUpInfo.email
@@ -34,16 +33,22 @@ var post = function(user) {
 
         } else {
 
-
           var {email, password, userName, info} = userSignUpInfo
 
-          return db
+          return bcryptStream.hashUserPassword(password)
 
-            .post(userCollectionName, {
-              email,
-              password,
-              userName,
-              info
+            .switchMap((hashedPassword) => {
+
+              return db
+
+                .post(userCollectionName, {
+                  email,
+                  password: hashedPassword,
+                  userName,
+                  info,
+                  created: new Date().getTime()
+                })
+
             })
 
             .switchMap(userDbPosStream => {
@@ -60,7 +65,6 @@ var post = function(user) {
                   data.verificationEmailResponse = verificationEmailResponse;
 
                   return userDbPosStream
-
 
                 })
 
@@ -123,25 +127,25 @@ var post = function(user) {
         businessSignUpInfo
       })
 
-      // .switchMap(thanksEmailResponse => {
+      .switchMap(thanksEmailResponse => {
 
-      //   data.thanksEmailResponse = thanksEmailResponse;
-      //   console.log("user service.post  data.thanksEmailResponse   ", thanksEmailResponse, data)
+        data.thanksEmailResponse = thanksEmailResponse;
+        console.log("user service.post  data.thanksEmailResponse   ", thanksEmailResponse, data)
 
-      //   return emailService.sendAdminSignUpEmail({
-      //     businessSignUpInfo
-      //   })
+        return emailService.sendAdminSignUpEmail({
+          businessSignUpInfo
+        })
 
-      // })
+      })
 
-      // .map(sendAdminSignUpEmailResponse => {
+      .map(sendAdminSignUpEmailResponse => {
 
-      //   data.sendAdminSignUpEmailResponse = sendAdminSignUpEmailResponse;
-      //   console.log("user service.post  data.sendAdminSignUpEmailResponse   ", sendAdminSignUpEmailResponse, data)
+        data.sendAdminSignUpEmailResponse = sendAdminSignUpEmailResponse;
+        console.log("user service.post  data.sendAdminSignUpEmailResponse   ", sendAdminSignUpEmailResponse, data)
 
-      //   return data
+        return data
 
-      // })
+      })
 
   }
 }
