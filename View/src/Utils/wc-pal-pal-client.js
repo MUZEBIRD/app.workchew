@@ -14,7 +14,33 @@ var verifyPayPalTransaction = function(paypalTransactionData) {
 
     .subscribe((verifyPayPalTransactionResponse) => {
 
-      console.log('verifyPayPalTransactionResponse', verifyPayPalTransactionResponse)
+      var signUpMessage = "Sign up error try again"
+
+      var {getPaymentStream} = verifyPayPalTransactionResponse
+
+      if (getPaymentStream && getPaymentStream._id) {
+
+        var {memberShipInfo} = getPaymentStream;
+
+        if (memberShipInfo) {
+
+          var {paymentAuth} = memberShipInfo
+
+          if (paymentAuth && paymentAuth.lastPaymentId) {
+
+            signUpMessage = " Sign up success ! , check your email for next steps"
+
+          }
+
+        }
+
+      }
+
+      alert(signUpMessage)
+
+      localStorage.clear();
+
+      window.location.reload(true);
 
     })
 

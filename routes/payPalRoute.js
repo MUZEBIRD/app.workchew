@@ -1,5 +1,7 @@
 const express = require('express');
 
+const Rx = require('rxjs');
+
 const router = express.Router();
 const payPalWCNodeCLient = require('../Services/wc-paypal.js')
 const userService = require('../Services/userService.js')
@@ -9,8 +11,6 @@ router.post('/', ({body}, res) => {
   var paypalTransactionData = body.paypalTransactionData
 
   var paymentID = paypalTransactionData.paymentID
-
-  console.log(paymentID, paypalTransactionData)
 
   payPalWCNodeCLient
 
@@ -39,10 +39,17 @@ router.post('/', ({body}, res) => {
 
     .switchMap(findUserbyTokenResponse => {
 
-      var user = findUserbyTokenResponse[0]
-      user.memberShipInfo.paymentAuth.lastPaymentId = paymentID
+      if (findUserbyTokenResponse && findUserbyTokenResponse.length) {
+        var user = findUserbyTokenResponse[0]
+        user.memberShipInfo.paymentAuth.lastPaymentId = paymentID
 
-      return userService.update(user)
+        return userService.update(user)
+      } else {
+
+        return Rx.Observable.of({
+          error: "payment error"
+        })
+      }
 
     })
 
@@ -51,8 +58,6 @@ router.post('/', ({body}, res) => {
       res.send({
         getPaymentStream
       })
-
-
 
     })
 

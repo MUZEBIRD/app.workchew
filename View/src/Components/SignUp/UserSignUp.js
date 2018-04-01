@@ -158,15 +158,13 @@ class UserSignUp extends Component {
               <button onClick={ (event) => {
                                 
                                   this.signUp()
+                                
                                 } } className="btn btn-success">
                 Sign up
               </button>
             </div>
           </div>
           { this.state.showMemberShipSelections &&
-            
-            
-            
             <div className='row'>
               <div className='col-sm-12'>
                 <br/>

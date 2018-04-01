@@ -37,42 +37,41 @@ var post = function(user) {
 
             .post(userCollectionName, userSignUpInfo)
 
+            .switchMap(userDbPosStream => {
 
-            /*.switchMap(userDbPosStream => {
+              data.userDbPosStream = userDbPosStream;
 
-                data.userDbPosStream = userDbPosStream;
+              console.log("user service.post  data.userDbPosStream   ", userDbPosStream, data)
 
-                console.log("user service.post  data.userDbPosStream   ", userDbPosStream, data)
-
-                return emailService.sendUserVerificationEmail({
-                  userSignUpInfo
-                })
-
-                  .map((verificationEmailResponse) => {
-                    data.verificationEmailResponse = verificationEmailResponse;
-
-                    return userDbPosStream
-                    
-
-                  })
-
+              return emailService.sendUserVerificationEmail({
+                userSignUpInfo
               })
 
-              .switchMap(userSignUp => {
+                .map((verificationEmailResponse) => {
+                  data.verificationEmailResponse = verificationEmailResponse;
 
-                return emailService.sendAdminSignUpEmail({
-                  userSignUpInfo
+                  return userDbPosStream
+
+
                 })
 
-                  .map((sendAdminSignUpEmailResponse) => {
+            })
 
-                    data.sendAdminSignUpEmailResponse = sendAdminSignUpEmailResponse;
-                    console.log("user service.post  data.sendAdminSignUpEmailResponse   ", sendAdminSignUpEmailResponse, data)
+            .switchMap(userSignUp => {
 
-                    return userSignUp
-                  })
+              return emailService.sendAdminSignUpEmail({
+                userSignUpInfo
+              })
 
-              })*/
+                .map((sendAdminSignUpEmailResponse) => {
+
+                  data.sendAdminSignUpEmailResponse = sendAdminSignUpEmailResponse;
+                  console.log("user service.post  data.sendAdminSignUpEmailResponse   ", sendAdminSignUpEmailResponse, data)
+
+                  return userSignUp
+                })
+
+            })
 
             .switchMap(userSignUp => {
 
