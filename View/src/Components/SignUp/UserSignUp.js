@@ -20,7 +20,7 @@ class UserSignUp extends Component {
 
     this.state = {
       queryParams,
-      showMemberShipSelections: true
+      showMemberShipSelections: false
     }
 
   }
@@ -110,8 +110,9 @@ class UserSignUp extends Component {
 
     return (
 
-      <div className="wholeView d-flex flex-column align-items-center">
-        <div className="showView  scroll-y">
+      <div className="wholeView w-100 d-flex flex-column align-items-center">
+        <div className="showView w-100 scroll-y">
+          <br/>
           <div className='row flex-row-center-vert' style={ { backgroundColor: 'white', position: 'relative', zIndex: '5' } }>
             <div className='col-sm-4'>
             </div>

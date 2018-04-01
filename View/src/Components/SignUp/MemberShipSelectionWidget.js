@@ -28,6 +28,9 @@ const pricingOptions = [
       },
       {
         text: "Access to events at chosen WorkChew locations"
+      },
+      {
+        text: "Fast Wifi"
       }
     ]
   },
@@ -36,7 +39,7 @@ const pricingOptions = [
     title: "STARTER",
     price: 39.99,
     paymentRecurrence: "BILLED MONTHLY",
-    mainFeature: "One-day access to all WorkChew locations.",
+    mainFeature: "Access to one WorkChew location",
     features: [
       {
         text: "Food/drink discounts"
@@ -46,6 +49,9 @@ const pricingOptions = [
       },
       {
         text: "Access to events at chosen WorkChew locations"
+      },
+      {
+        text: "Fast Wifi"
       }
     ]
   },
@@ -54,16 +60,19 @@ const pricingOptions = [
     title: "PREMIUM",
     price: 69.99,
     paymentRecurrence: "BILLED MONTHLY",
-    mainFeature: "One-day access to all WorkChew locations.",
+    mainFeature: " Unlimited access to all WorkChew locations ",
     features: [
       {
-        text: "$10 food credit Food/drink discounts."
+        text: "$10 food credit."
       },
       {
-        text: "Complimentary perks at chosen WorkChew location"
+        text: "Food/drink discounts."
       },
       {
-        text: "Access to events at chosen WorkChew locations"
+        text: "Exclusive perks, community benefits and access to events at all WorkChew locations."
+      },
+      {
+        text: "Fast Wifi"
       }
     ]
   },
@@ -73,16 +82,19 @@ const pricingOptions = [
     title: "PRO",
     price: 99.99,
     paymentRecurrence: "BILLED MONTHLY",
-    mainFeature: "One-day access to all WorkChew locations.",
+    mainFeature: "Unlimited access to all WorkChew locations ",
     features: [
       {
         text: "$50 food credit Food/drink discounts."
       },
       {
-        text: "Complimentary perks at chosen WorkChew location"
+        text: "Food/drink discounts."
       },
       {
-        text: "Access to events at chosen WorkChew locations"
+        text: "Exclusive perks, community benefits and access to events at all WorkChew locations."
+      },
+      {
+        text: "Fast Wifi"
       }
     ]
   },
@@ -94,7 +106,7 @@ const MemberShipSelectionWidget = (props) => {
 
   return (
 
-    <div className='row pricing-box d-flex flex-wrap jusifiy-content-center'>
+    <div className='row pricing-box w-100 d-flex flex-wrap justify-content-center'>
       { props.pricings.map(
           (pricing, i) => (
             <div key={ i } style={ { width: 300 } } className='h-100 d-flex flex-column justify-content-around'>
