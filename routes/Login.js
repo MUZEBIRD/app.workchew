@@ -111,6 +111,8 @@ router.post('/', ({body}, res) => {
 
       if (foundUser && foundUser._id) {
 
+        delete foundUser.password
+
         responseBody.user = foundUser
         responseBody.msg = {
           text: "user found logining in",

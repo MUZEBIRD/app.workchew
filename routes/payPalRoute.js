@@ -55,6 +55,10 @@ router.post('/', ({body}, res) => {
 
     .subscribe((getPaymentStream) => {
 
+      console.log(" out at get payment stream ", getPaymentStream)
+
+      delete getPaymentStream.password
+
       res.send({
         getPaymentStream
       })

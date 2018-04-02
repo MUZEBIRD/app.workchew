@@ -10,7 +10,6 @@ router.post('/', ({body}, res) => {
 
   res.set('Content-Type', 'text/html');
 
-
   user
 
     .post(userFromBody(body))
@@ -24,8 +23,6 @@ router.post('/', ({body}, res) => {
       res.send(responseBody)
 
     })
-
-
 
 }); //POST 
 
@@ -58,7 +55,6 @@ router.get('/', (req, res) => {
     .subscribe((getUserResponse) => {
 
       res.send(getUserResponse)
-
 
     })
 

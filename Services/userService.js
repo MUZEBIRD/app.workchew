@@ -109,7 +109,12 @@ var post = function(user) {
 
             .switchMap(userSignUp => {
 
-              return update(userSignUp)
+              return update(userSignUp).map((user) => {
+
+                console.log("user response after sign up ", user)
+                delete user.password
+                return user
+              })
 
             })
 
