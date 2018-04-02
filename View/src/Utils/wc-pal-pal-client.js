@@ -4,6 +4,9 @@ import userService from '../Services/userService.js'
 
 import { loaderStream } from '../Components/shared/workLoader'
 
+import { signUpDialogSubject } from '../Components/SignUp/UserSignUp'
+
+
 var verifyPayPalTransaction = function(paypalTransactionData) {
   loaderStream.next(true)
 
@@ -20,6 +23,7 @@ var verifyPayPalTransaction = function(paypalTransactionData) {
       loaderStream.next(false)
 
       var signUpMessage = "Sign up error try again"
+
 
       var {getPaymentStream} = verifyPayPalTransactionResponse
 
@@ -41,11 +45,11 @@ var verifyPayPalTransaction = function(paypalTransactionData) {
 
       }
 
-      alert(signUpMessage)
-
-      localStorage.clear();
-
-      window.location.reload(true);
+      signUpDialogSubject.next({
+        dialogMsg: signUpMessage,
+        showDialog: true,
+        signUpComplete: true
+      })
 
     })
 
@@ -130,8 +134,6 @@ var placeButton = function(config) {
         data.token = token;
 
         verifyPayPalTransaction(data)
-
-        window.alert('Payment Complete!');
 
       });
     }
