@@ -2,6 +2,14 @@ var logger = function(req, res, next) {
 
   console.log("")
   console.log("")
+  var remoteIp = ""
+
+  if (req.connection && req.connection.remoteAddress) {
+
+    remoteIp = req.connection.remoteAddress
+
+  }
+
 
   console.log({
     body: req.body,
@@ -15,6 +23,7 @@ var logger = function(req, res, next) {
     cookies: req.cookies,
     signedCookies: req.signedCookies,
     url: req.url,
+    remoteIp: remoteIp
   // socketKeys: Object.keys(req.socket)
   })
 
