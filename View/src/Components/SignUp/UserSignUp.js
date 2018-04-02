@@ -9,6 +9,9 @@ import { MemberShipSelectionWidget, pricingOptions } from './MemberShipSelection
 import { getQueryParams, getPathVariables } from '../../Utils'
 import { placeButton } from '../../Utils/wc-pal-pal-client.js'
 
+
+
+import WorkLoader, { loaderStream } from '../shared/workLoader'
 import './signUp.css';
 class UserSignUp extends Component {
 
@@ -26,6 +29,14 @@ class UserSignUp extends Component {
   }
 
   componentDidMount() {
+
+    loaderStream.subscribe((showLoader) => {
+
+      this.setState({
+        showLoader
+      })
+
+    })
 
     window.paypalCheckoutReady = () => {
 
@@ -59,6 +70,10 @@ class UserSignUp extends Component {
 
     }, {})
 
+    this.setState({
+      showLoader: true
+    })
+
     userService
 
       .signUpCoChewer(userSignUpInfo)
@@ -81,7 +96,8 @@ class UserSignUp extends Component {
 
           this.setState({
             signUpData: userResponse,
-            showMemberShipSelections: true
+            showMemberShipSelections: true,
+            showLoader: false
           }, () => {
 
             pricingOptions.forEach((pricing) => {
@@ -111,6 +127,7 @@ class UserSignUp extends Component {
     return (
 
       <div className="wholeView w-100 d-flex flex-column align-items-center">
+        { this.state.showLoader && <WorkLoader/> }
         <div className="showView w-100 scroll-y">
           <br/>
           <div className='row flex-row-center-vert' style={ { backgroundColor: 'white', position: 'relative', zIndex: '5' } }>

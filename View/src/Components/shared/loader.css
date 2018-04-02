@@ -1,0 +1,71 @@
+.work-words {
+  font-size: 8vw;
+  font-family:helvetica;
+  -webkit-animation-name: work; /* Safari 4.0 - 8.0 */
+  -webkit-animation-duration: 4s; /* Safari 4.0 - 8.0 */
+  animation-name: work;
+  animation-duration: 4s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+}
+
+@-webkit-keyframes work {
+  0% {
+    font-size: 8vw;
+  }
+  50% {
+    font-size: 16vw;
+  }
+  100% {
+    font-size: 8vw;
+  }
+}
+
+/* Standard syntax */
+@keyframes work {
+  0% {
+    font-size: 8vw;
+  }
+  50% {
+    font-size: 16vw;
+  }
+  100% {
+    font-size: 8vw;
+  }
+}
+
+.chew-words {
+  font-size: 6vw;
+  -webkit-animation-name: chew; /* Safari 4.0 - 8.0 */
+  -webkit-animation-duration: 4s; /* Safari 4.0 - 8.0 */
+  animation-name: chew;
+  animation-duration: 4s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+  color: orange;
+}
+
+@-webkit-keyframes chew {
+  0% {
+    font-size: 16vw;
+  }
+  50% {
+    font-size: 8vw;
+  }
+  100% {
+    font-size: 16vw;
+  }
+}
+
+/* Standard syntax */
+@keyframes chew {
+  0% {
+    font-size: 16vw;
+  }
+  50% {
+    font-size: 8vw;
+  }
+  100% {
+    font-size: 16vw;
+  }
+}

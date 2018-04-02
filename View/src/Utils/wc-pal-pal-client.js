@@ -2,7 +2,10 @@ import restService from '../Services/restService.js'
 import urlService from '../Services/urlService.js'
 import userService from '../Services/userService.js'
 
+import { loaderStream } from '../Components/shared/workLoader'
+
 var verifyPayPalTransaction = function(paypalTransactionData) {
+  loaderStream.next(true)
 
   restService
     .post(urlService.payPal, {
@@ -13,6 +16,8 @@ var verifyPayPalTransaction = function(paypalTransactionData) {
     })
 
     .subscribe((verifyPayPalTransactionResponse) => {
+
+      loaderStream.next(false)
 
       var signUpMessage = "Sign up error try again"
 
@@ -123,6 +128,7 @@ var placeButton = function(config) {
 
       return actions.payment.execute().then(function() {
         data.token = token;
+
         verifyPayPalTransaction(data)
 
         window.alert('Payment Complete!');
