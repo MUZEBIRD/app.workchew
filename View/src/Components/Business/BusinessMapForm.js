@@ -9,7 +9,7 @@ import restService from '../../Services/restService.js'
 import { withGoogleMap, withScriptjs, GoogleMap, Marker } from "react-google-maps"
 import { MySearchBox } from '../MySearchBox.js'
 
-const MapsUrl = "https://maps.googleapis.com/maps/api/js?key=AIzaSyBJa_W1JGWcoBM_nDKwneNzBnKuRcyDr6M&v=3.exp&libraries=geometry,drawing,places"
+const MapsUrl = "https://maps.googleapis.com/maps/api/js?key=AIzaSyA_8r6OomKLA42Vzblb5jOjxeIlqpix5G0&v=3.exp&libraries=geometry,drawing,places"
 
 const MyMapComponent = withScriptjs(withGoogleMap(function(props) {
 
