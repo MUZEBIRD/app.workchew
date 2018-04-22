@@ -5,28 +5,6 @@ const _ = require('lodash');
 
 const businessCollectionName = 'businesss'
 
-const list = [
-
-  {
-    keyName: 'seats',
-    props: ['customer', 'section']
-  },
-  {
-    keyName: 'discounts',
-    props: ['name', 'description']
-
-  },
-  {
-    keyName: 'tags',
-    props: ['text']
-  },
-  {
-    keyName: 'weekday_text',
-    props: ['text']
-  }
-
-]
-
 var post = function(business) {
 
   return db

@@ -27,10 +27,10 @@ class BusinessForm extends Component {
       keyName: 'tags',
       props: ['text']
     },
-    {
-      keyName: 'weekday_text',
-      props: ['text']
-    }
+// {
+//   keyName: 'weekday_text',
+//   props: ['text']
+// }
 
   ]
 
@@ -68,7 +68,7 @@ class BusinessForm extends Component {
         console.log('addBusinessStream', addBusinessStream)
         console.log('staet business', this.state.business)
 
-        var business = _.merge(this.state.business, addBusinessStream.business)
+        var business = _.extend(this.state.business, addBusinessStream.business)
 
         var businessWithList = this.mapListDataToBusiness(business)
 
@@ -127,12 +127,6 @@ class BusinessForm extends Component {
         console.log('getBusinessStream  in set business', getBusinessStream)
 
         var business = getBusinessStream[0]
-        if (typeof business.seats === 'string') {
-
-          business.seats = [];
-
-        }
-
         if (business.geoPoint && business.geoPoint.coordinates) {
 
           BusinessService.setGeoCoordinates(business.geoPoint.coordinates[1], business.geoPoint.coordinates[0])

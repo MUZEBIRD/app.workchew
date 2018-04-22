@@ -51,40 +51,40 @@ var post = function(user) {
 
             })
 
-            .switchMap(userDbPosStream => {
+// .switchMap(userDbPosStream => {
 
-              data.userDbPosStream = userDbPosStream;
+//   data.userDbPosStream = userDbPosStream;
 
-              console.log("user service.post  data.userDbPosStream   ", userDbPosStream, data)
+//   console.log("user service.post  data.userDbPosStream   ", userDbPosStream, data)
 
-              return emailService.sendUserVerificationEmail({
-                userSignUpInfo
-              })
+//   return emailService.sendUserVerificationEmail({
+//     userSignUpInfo
+//   })
 
-                .map((verificationEmailResponse) => {
-                  data.verificationEmailResponse = verificationEmailResponse;
+//     .map((verificationEmailResponse) => {
+//       data.verificationEmailResponse = verificationEmailResponse;
 
-                  return userDbPosStream
+//       return userDbPosStream
 
-                })
+//     })
 
-            })
+// })
 
-            .switchMap(userSignUp => {
+// .switchMap(userSignUp => {
 
-              return emailService.sendAdminSignUpEmail({
-                userSignUpInfo
-              })
+//   return emailService.sendAdminSignUpEmail({
+//     userSignUpInfo
+//   })
 
-                .map((sendAdminSignUpEmailResponse) => {
+//     .map((sendAdminSignUpEmailResponse) => {
 
-                  data.sendAdminSignUpEmailResponse = sendAdminSignUpEmailResponse;
-                  console.log("user service.post  data.sendAdminSignUpEmailResponse   ", sendAdminSignUpEmailResponse, data)
+//       data.sendAdminSignUpEmailResponse = sendAdminSignUpEmailResponse;
+//       console.log("user service.post  data.sendAdminSignUpEmailResponse   ", sendAdminSignUpEmailResponse, data)
 
-                  return userSignUp
-                })
+//       return userSignUp
+//     })
 
-            })
+// })
 
             .switchMap(userSignUp => {
 
