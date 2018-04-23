@@ -92,6 +92,10 @@ button a:hover {
 }
 
 
+.border {
+    border: 1px solid black;
+}
+
 .no-border {
     border: 0 !important;
 }

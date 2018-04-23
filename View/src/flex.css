@@ -1,5 +1,11 @@
 
 
+.flex-1{
+
+
+    flex:1;
+}
+
 .flex-row-center-vert {
     display: flex;
     flex-direction: row;

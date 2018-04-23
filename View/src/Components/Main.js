@@ -11,22 +11,23 @@ import { FlexTable } from './shared/';
 
 import BusinessService from '../Services/businessService.js';
 
+import { v4 } from 'uuid'
 
 const BusinessList = (props) => props.businesses.map(business => {
 
   return (
 
-    <div>
+    <div key={ v4() }>
       <br/>
       <div className="w-100 row d-flex justify-content-around">
-        <div className="col-md-6">
+        <div onClick={ (event) => props.selectItem(business) } className="col-md-6">
           <span>{ business.name }</span>
           <br/>
           <span>{ business.address }</span>
         </div>
         <div className="col-md-6">
           <button className="btn btn-primary" type="button" aria-expanded="false">
-            menu
+            Partner Page
           </button>
         </div>
       </div>
@@ -151,7 +152,7 @@ class Main extends Component {
             </ul>
             <div className="tab-content" id="myTabContent">
               <div className="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                { this.state.businesses && <BusinessList {...this.state} /> }
+                { this.state.businesses && <BusinessList {...this.state} selectItem={ this.selectBusiness } /> }
               </div>
               <div className="tab-pane fade" id="map" role="tabpanel" aria-labelledby="map-tab">
                 <MainMapForm />

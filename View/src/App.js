@@ -15,6 +15,10 @@ import PublicBusinessView from './Components/Business/PublicBusinessView.js'
 
 import Users from './Components/Users.js'
 
+
+import PartnerPage from './Components/partner-page.js'
+
+
 import SearchUsers from './Components/SearchUsers.js'
 
 import AddUser from './Components/AddUser.js'
@@ -38,6 +42,7 @@ class App extends Component {
         <div className="App">
           <Route exact path="/" component={ Main } />
           <Route exact path="/Login" component={ Login } />
+          <Route exact path="/partner-page" component={ PartnerPage } />
           <Route path="/businesses" component={ Business } />
           <Route path="/search-businesses" component={ SearchBusinesses } />
           <Route path="/add-business" component={ AddBusiness } />
