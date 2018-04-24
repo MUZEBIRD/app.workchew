@@ -35,7 +35,7 @@ class PartnerPage extends Component {
             <div className='border d-flex flex-column justify-content-center col-md-4'>
               <h2>Menu</h2>
             </div>
-            <div className='border d-flex flex-column justify-content-center col-md-4'>
+            <div onClick={ (event) => window.location.hash = "partner-marketing-page" } className='border d-flex flex-column justify-content-center col-md-4'>
               <h2>Marketing</h2>
             </div>
             <div className='border d-flex flex-column justify-content-center col-md-4'>
