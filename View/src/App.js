@@ -19,6 +19,7 @@ import PartnerPage from './Components/partner-page.js'
 
 import PartnerMarketingPage from './Components/Partner/Marketing.js'
 
+import PartnerSettingsPage from './Components/Partner/Settings.js'
 
 import SearchUsers from './Components/SearchUsers.js'
 
@@ -44,6 +45,7 @@ class App extends Component {
           <Route exact path="/" component={ Main } />
           <Route exact path="/Login" component={ Login } />
           <Route exact path="/partner-marketing-page" component={ PartnerMarketingPage } />
+          <Route exact path="/partner-settings-page" component={ PartnerSettingsPage } />
           <Route exact path="/partner-page" component={ PartnerPage } />
           <Route path="/businesses" component={ Business } />
           <Route path="/search-businesses" component={ SearchBusinesses } />

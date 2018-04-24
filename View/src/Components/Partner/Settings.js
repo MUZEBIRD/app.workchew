@@ -7,7 +7,7 @@ import urlService from '../../Services/urlService.js'
 
 import BusinessService from '../../Services/businessService.js';
 
-class PartnerMarketingPage extends Component {
+class PartnerSettingsPage extends Component {
 
   constructor(props) {
 
@@ -28,22 +28,13 @@ class PartnerMarketingPage extends Component {
           <br />
           <div className='row h-25'>
             <div className='col-md-12'>
-              <h2>Partner Marketing Page</h2>
+              <h2>Partner Settings Page</h2>
             </div>
           </div>
           <div className='flex-1 scroll-y'>
             <div className='row'>
-              <div className='col-md-6'>
-                Days
-              </div>
-              <div className='col-md-6'>
-                <textarea className="form-control input-lg" />
-              </div>
-            </div>
-            <br/>
-            <div className='row'>
-              <div className='col-md-6'>
-                WorkChew Hours:
+              <div className='col-md-3'>
+                Contact Name
               </div>
               <div className='col-md-6'>
                 <input className="form-control input-lg" />
@@ -51,8 +42,8 @@ class PartnerMarketingPage extends Component {
             </div>
             <br/>
             <div className='row'>
-              <div className='col-md-6'>
-                # of Allotted Seats:
+              <div className='col-md-3'>
+                Partner Business Name
               </div>
               <div className='col-md-6'>
                 <input className="form-control input-lg" />
@@ -60,8 +51,8 @@ class PartnerMarketingPage extends Component {
             </div>
             <br/>
             <div className='row'>
-              <div className='col-md-6'>
-                # of Allotted Seats: WorkChew Hours:
+              <div className='col-md-3'>
+                Contact Email
               </div>
               <div className='col-md-6'>
                 <input className="form-control input-lg" />
@@ -69,20 +60,11 @@ class PartnerMarketingPage extends Component {
             </div>
             <br/>
             <div className='row'>
-              <div className='col-md-6'>
-                Additional Specials:
+              <div className='col-md-3'>
+                Password
               </div>
               <div className='col-md-6'>
-                <textarea className="form-control input-lg" />
-              </div>
-            </div>
-            <br/>
-            <div className='row'>
-              <div className='col-md-6'>
-                WorkChew Hours:
-              </div>
-              <div className='col-md-6'>
-                <textarea className="form-control input-lg" />
+                <input className="form-control input-lg" />
               </div>
             </div>
             <br />
@@ -100,4 +82,4 @@ class PartnerMarketingPage extends Component {
 
 }
 //<FlexTable items={ this.state.businesses } selectItem={ this.selectBusiness } getTableEntry={ this.getTableEntry } tableRows={ this.tableRows } />
-export default PartnerMarketingPage;
+export default PartnerSettingsPage;
