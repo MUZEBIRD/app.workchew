@@ -72,6 +72,7 @@ var placeButton = function(config) {
     style: {
       label: 'buynow',
       // fundingicons: true, // optional
+      fundingicons: true,
       branding: true, // optional
       size: 'medium', // small | medium | large | responsive
       shape: 'rect', // pill | rect

@@ -35,7 +35,7 @@ class UserSignUp extends Component {
     this.state = {
 
       queryParams,
-      showMemberShipSelections: false
+      showMemberShipSelections: true
     }
 
   }
