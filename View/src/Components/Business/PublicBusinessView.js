@@ -237,54 +237,35 @@ class PublicBusinessView extends Component {
           { business &&
             <div className="scrollView">
               <Topbar title={ business.name } />
-              <br/>
-              <br/>
+              <div className="row">
+                <div className="col-md-6">
+                  <h2>{ business.name }</h2>
+                  <br/>
+                  <span>4.93 15 ratings</span>
+                  <br/>
+                  <span>{ business.address }</span>
+                  <br/>
+                  <span>Total: 25 | Availiable: 10</span>
+                </div>
+                <div className="col-md-6">
+                  <button className="btn btn-primary" type="button">
+                    Menu
+                  </button>
+                </div>
+              </div>
               <br/>
               <div className="row">
-                <div className="col-sm-12">
-                  <div>
-                    <p>
-                      { business.address }
-                    </p>
-                  </div>
-                  <div>
-                    <p>
-                      { business.phone }
-                    </p>
-                  </div>
-                  <div>
-                    <p>
-                      wifi password :
-                      { business.wifi }
-                    </p>
-                  </div>
-                  <div className="row">
-                    <div className='col-sm-2'>
-                      { !this.state.isCheckedIn ?
-                        <button onClick={ (event) => {
-                                          
-                                            this.checkIn()
-                                          
-                                          } } className='btn btn-primary'>
-                          check In
-                        </button>
-                        :
-                        <button onClick={ (event) => {
-                                          
-                                            this.checkOut()
-                                          
-                                          } } className='btn btn-primary'>
-                          check Out
-                        </button> }
-                    </div>
-                  </div>
-                  <p>
-                    Discounts
-                  </p>
-                  <div>
-                    { business.discounts &&
-                      <FlexTable items={ business.discounts } tableRows={ this.discountTableRows } /> }
-                  </div>
+                <div className="col-md-6">
+                  <h3>Hours</h3>
+                </div>
+                <div className="col-md-6">
+                  <h3>Discounts</h3>
+                </div>
+              </div>
+              <br/>
+              <div className="row">
+                <div className="col-md-12">
+                  <h3>Events:</h3>
                 </div>
               </div>
             </div> }
