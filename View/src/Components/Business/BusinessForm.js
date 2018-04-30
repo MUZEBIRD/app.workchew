@@ -27,10 +27,10 @@ class BusinessForm extends Component {
       keyName: 'tags',
       props: ['text']
     },
-// {
-//   keyName: 'weekday_text',
-//   props: ['text']
-// }
+    // {
+    //   keyName: 'weekday_text',
+    //   props: ['text']
+    // }
 
   ]
 
@@ -463,6 +463,15 @@ class BusinessForm extends Component {
           </div>
           <div className='col-sm-10'>
             <textarea className="form-control business-text-feild" name="description" />
+          </div>
+        </div>
+        <br/>
+        <div className="row">
+          <div className='col-sm-2'>
+            <span>Hours</span>
+          </div>
+          <div className='col-sm-10'>
+            <textarea className="form-control business-text-feild" rows="8" name="hours" />
           </div>
           <br/>
         </div>

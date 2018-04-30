@@ -110,6 +110,14 @@ class BusinessMapForm extends Component {
 
       business.weekday_text = opening_hours.weekday_text
 
+      business.hours = business.weekday_text.reduce((hours, text) => {
+
+        return `${hours}
+        ${text}`
+
+      }, "")
+      console.log(business.hours)
+
     }
 
     if (geometry && geometry.location) {
