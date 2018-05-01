@@ -4,7 +4,7 @@ import { createLogger } from 'redux-logger'
 
 import { rootReducer } from '../reducers/'
 
-//import { api, paypal, business } from '../middleware';
+import { partnerMiddleware } from '../middleware';
 
 var appWorkchewReduxStateKey = "appWorkchewReduxState"
 
@@ -13,7 +13,7 @@ var appWorkchewReduxStateKey = "appWorkchewReduxState"
 // )
 
 const enhancer = compose(
-  applyMiddleware(thunk, createLogger()),
+  applyMiddleware(thunk, partnerMiddleware, createLogger()),
 )
 
 const configureStore = preloadedState => {

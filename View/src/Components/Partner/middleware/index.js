@@ -1,9 +1,4 @@
-
-// A Redux middleware that interprets actions with CALL_API info specified.
-// Performs the call and promises when such actions are dispatched.
-
 const API_ROOT = window.location.port == 3000 ? "http://localhost:8080" : ""
-
 
 const callApi = (endpoint, config = {}) => {
 
@@ -36,11 +31,9 @@ var addQueryParams = (url, config) => {
 
     return `${paramString}${showAmp}${paramKey}=${config[paramKey]}`
 
-
   }, '')
 
   return `${url}?${paramString}`
-
 
 }
 
@@ -61,6 +54,5 @@ export default store => next => action => {
     default:
       return next(action)
   }
-
 
 }

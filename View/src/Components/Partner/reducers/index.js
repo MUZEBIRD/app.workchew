@@ -5,6 +5,7 @@ export const partners = (state = {
   }, action) => {
   console.log("@ partner reducer", state, action)
   //GET_BUSINESS_MENUS_SUCCESS
+
   switch (action.type) {
 
     case "GET_PARTNER_SUCCESS": {
