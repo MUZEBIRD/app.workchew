@@ -33,6 +33,11 @@ import { Route } from 'react-router-dom'
 
 import createHistory from 'history/createBrowserHistory'
 
+import { store } from './Store'
+
+import { Provider, connect } from 'react-redux'
+
+
 const history = createHistory()
 
 class App extends Component {
@@ -40,27 +45,30 @@ class App extends Component {
   render() {
 
     return (
-      <HashRouter history={ history } basename='/'>
-        <div className="App">
-          <Route exact path="/" component={ Main } />
-          <Route exact path="/Login" component={ Login } />
-          <Route exact path="/partner-marketing-page" component={ PartnerMarketingPage } />
-          <Route exact path="/partner-settings-page" component={ PartnerSettingsPage } />
-          <Route exact path="/partner-page" component={ PartnerPage } />
-          <Route path="/businesses" component={ Business } />
-          <Route path="/search-businesses" component={ SearchBusinesses } />
-          <Route path="/add-business" component={ AddBusiness } />
-          <Route path="/view-business" component={ AddBusiness } />
-          <Route path="/users" component={ Users } />
-          <Route path="/add-user" component={ AddUser } />
-          <Route path="/view-user" component={ AddUser } />
-          <Route path="/search-users" component={ SearchUsers } />
-          <Route path="/business-page" component={ PublicBusinessView } />
-          <Route path="/business-signup" component={ BusinessUserSignUp } />
-          <Route path="/co-chewer-signUp" component={ UserSignUp } />
-          <Route path="/edit-user" />
-        </div>
-      </HashRouter>
+      <Provider store={ store }>
+        <HashRouter history={ history } basename='/'>
+          <div className="App">
+            <Route exact path="/" component={ Main } />
+            <Route exact path="/Login" component={ Login } />
+            <Route exact path="/partner-marketing-page" component={ PartnerMarketingPage } />
+            <Route exact path="/partner-settings-page" component={ PartnerSettingsPage } />
+            <Route exact path="/partner-page" component={ PartnerPage } />
+            <Route path="/businesses" component={ Business } />
+            <Route path="/search-businesses" component={ SearchBusinesses } />
+            <Route path="/add-business" component={ AddBusiness } />
+            <Route path="/view-business" component={ AddBusiness } />
+            <Route path="/users" component={ Users } />
+            <Route path="/add-user" component={ AddUser } />
+            <Route path="/view-user" component={ AddUser } />
+            <Route path="/search-users" component={ SearchUsers } />
+            <Route path="/business-page" component={ PublicBusinessView } />
+            <Route path="/business-signup" component={ BusinessUserSignUp } />
+            <Route path="/co-chewer-signUp" component={ UserSignUp } />
+            <Route path="/edit-user" />
+          </div>
+        </HashRouter>
+      </Provider>
+
       );
   }
 
