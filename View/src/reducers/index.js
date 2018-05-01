@@ -2,12 +2,15 @@ import { combineReducers } from 'redux'
 //import { routerReducer } from 'react-router-redux'
 
 //import { business } from '../Components/Business/reducers'
-//mport { user } from './user'
+import { partners } from '../Components/Partner/reducers'
+
+
+
 
 const appReducer = combineReducers({
-  //user,
-  //business,
-  // routing: routerReducer
+  partners,
+//business,
+// routing: routerReducer
 })
 
 export const rootReducer = (state, action) => {

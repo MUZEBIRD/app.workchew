@@ -59,7 +59,12 @@ class MainMapForm extends Component {
 
     }, 1000)
 
+
+
   }
+
+
+
   onBoundsChanged() {
 
     console.log("map bounds", refs.map)
