@@ -117,7 +117,7 @@ class MainMapForm extends Component {
     var google = window['google']
     const bounds = new google.maps.LatLngBounds();
 
-    if (bounds) {
+    if (bounds && this.state.geo) {
 
       bounds.extend(new google.maps.LatLng(this.state.geo.lat, this.state.geo.lng))
 

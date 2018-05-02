@@ -11,6 +11,7 @@ export default {
   coChewerSignUp: `/co-chewer-signUp`,
   businessSignUp: `/business-signup`,
   viewBusinessPage: `/view-business`,
+  partnerPage: `/partner-page`,
   businessPage: `/business-page`,
   login: `${base}/Login`,
   signUp: `${base}/SignUp`,

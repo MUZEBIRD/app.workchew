@@ -20,13 +20,13 @@ const BusinessList = (props) => props.businesses.map(business => {
     <div key={ v4() }>
       <br/>
       <div className="w-100 row d-flex justify-content-around">
-        <div onClick={ (event) => props.selectItem(business) } className="col-md-6">
+        <div className="col-md-6">
           <span>{ business.name }</span>
           <br/>
           <span>{ business.address }</span>
         </div>
         <div className="col-md-6">
-          <button className="btn btn-primary" type="button" aria-expanded="false">
+          <button onClick={ (event) => props.selectItem(business) } className="btn btn-primary" type="button" aria-expanded="false">
             Partner Page
           </button>
         </div>
@@ -82,7 +82,7 @@ class Main extends Component {
 
     console.log('on select Business', business)
 
-    urlService.goTo(`${urlService.businessPage}?id=${business._id}`)
+    urlService.goTo(`${urlService.partnerPage}?id=${business._id}`)
 
   }
 
