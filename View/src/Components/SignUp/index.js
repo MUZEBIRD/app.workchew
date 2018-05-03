@@ -4,4 +4,8 @@ import BusinessUserSignUp from './BusinessSignUp';
 
 import UserSignUp from './UserSignUp';
 
-export { BusinessUserSignUp, UserSignUp }
+
+import Memberships from './Memberships';
+
+
+export { BusinessUserSignUp, Memberships, UserSignUp }
