@@ -27,6 +27,10 @@ import AddUser from './Components/AddUser.js'
 
 import { BusinessUserSignUp, UserSignUp, Memberships, UserSignUpSocial, BuildYourProfile } from './Components/SignUp'
 
+
+import UserProfile from './Components/Public/UserPofile'
+
+
 import Main from './Components/Main.js'
 
 import { Route } from 'react-router-dom'
@@ -64,9 +68,11 @@ class App extends Component {
             <Route path="/business-page" component={ PublicBusinessView } />
             <Route path="/business-signup" component={ BusinessUserSignUp } />
             <Route path="/co-chewer-signUp-social" component={ UserSignUpSocial } />
+            <Route path="/co-chewer-profile" component={ UserSignUpSocial } />
             <Route path="/co-chewer-signUp-build" component={ BuildYourProfile } />
             <Route path="/co-chewer-signUp" component={ UserSignUp } />
             <Route path="/memberships" component={ Memberships } />
+            <Route path="/user-profile" component={ UserProfile } />
             <Route path="/edit-user" />
           </div>
         </HashRouter>
