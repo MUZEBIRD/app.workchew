@@ -38,19 +38,19 @@ class UserType extends Component {
     return (
 
       <MuiThemeProvider>
-        <div className="wholeView w-100 d-flex flex-column">
-          <div className="showView w-100 scroll-y container">
+        <div className="wholeView w-100 d-flex flex-column align-items-center">
+          <div className="showView w-100 scroll-y container d-flex flex-column align-items-center justify-content-center">
             <br/>
-            <h1 className='text-left'>How do you identify yourself?</h1>
+            <h1 className='text-left'>How do you identify yourself ?</h1>
             <h1 className='text-left'>Choose the one that fits the best.</h1>
-            <div className='row'>
-              <button className="btn btn-info">
+            <div className='w-100'>
+              <button className="btn btn-info m-2">
                 Remote Worker
               </button>
-              <button className="btn btn-info">
+              <button className="btn btn-info m-2">
                 Entrepreneur
               </button>
-              <button className="btn btn-info">
+              <button className="btn btn-info m-2">
                 Traveling Professional
               </button>
             </div>
