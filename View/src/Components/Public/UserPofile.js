@@ -38,12 +38,18 @@ class UserProfile extends Component {
     return (
 
       <MuiThemeProvider>
-        <div className="wholeView w-100 d-flex flex-column">
-          <div className="showView w-100 scroll-y container">
+        <div className="wholeView w-100 d-flex flex-column align-items-center justify-content-center oback">
+          <div className="w-50" style={ { backgroundColor: 'white' } }>
             <br/>
             <div className='d-flex align-items-center justify-content-center' style={ { backgroundColor: 'white', position: 'relative', zIndex: '5' } }>
-              <div className="h-100 m-3 d-flex align-items-center">
+              <div className="h-100 w-100 m-3 d-flex align-items-center justify-content-around">
+                <button className="btn btn-secondary">
+                  pro
+                </button>
                 <img style={ { width: 150 } } src={ "/static/images/blank-user.png" } />
+                <button className="btn btn-secondary">
+                  add
+                </button>
               </div>
             </div>
             <div className='row'>
@@ -58,6 +64,11 @@ class UserProfile extends Component {
                 </p>
               </div>
             </div>
+            <button className="btn btn-secondary">
+              Message
+            </button>
+            <br/>
+            <br/>
           </div>
         </div>
       </MuiThemeProvider>

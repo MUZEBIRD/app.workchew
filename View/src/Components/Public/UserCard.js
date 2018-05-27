@@ -38,8 +38,8 @@ class UserCard extends Component {
     return (
 
       <MuiThemeProvider>
-        <div className="wholeView w-100 d-flex flex-column">
-          <div className="showView w-100 scroll-y container d-flex flex-column align-items-center justify-content-center">
+        <div className="wholeView w-100 d-flex flex-column oback align-items-center justify-content-center">
+          <div style={ { backgroundColor: 'white' } } className="w-50 d-flex flex-column align-items-center justify-content-center">
             <br/>
             <img className="logo" src={ "/static/images/logo.png" } />
             <br/>

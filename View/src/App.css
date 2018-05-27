@@ -16,6 +16,11 @@ body,
     position: relative;
 
     width: 300px;
+    max-width: 100%;
+}
+
+.oback{
+    background-color: orange;
 }
 
 button a {
