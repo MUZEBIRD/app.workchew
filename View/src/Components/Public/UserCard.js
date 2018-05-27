@@ -39,7 +39,11 @@ class UserCard extends Component {
 
       <MuiThemeProvider>
         <div className="wholeView w-100 d-flex flex-column">
-          <div className="showView w-100 scroll-y container">
+          <div className="showView w-100 scroll-y container d-flex flex-column align-items-center justify-content-center">
+            <br/>
+            <img className="logo" src={ "/static/images/logo.png" } />
+            <br/>
+            <h2>MEMBERSHIP CARD</h2>
             <br/>
             <div className='d-flex align-items-center justify-content-center' style={ { backgroundColor: 'white', position: 'relative', zIndex: '5' } }>
               <div className="h-100 m-3 d-flex align-items-center">
@@ -49,12 +53,11 @@ class UserCard extends Component {
             <div className='row'>
               <div className='col-sm-12'>
                 <p>
-                  G.T.
-                  <br/> Turgut Washington, DC
+                  G.T.Turgut
+                  <br/> Washington, DC
                 </p>
                 <p>
-                  Assistant Professor in the Decision, Operations, and Information Technologies Department at the Robert H. Smith School of Business, University of Maryland, College
-                  Park.
+                  Entrepreneur
                 </p>
               </div>
             </div>

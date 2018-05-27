@@ -74,7 +74,7 @@ class App extends Component {
             <Route path="/co-chewer-signUp" component={ UserSignUp } />
             <Route path="/memberships" component={ Memberships } />
             <Route path="/user-profile" component={ UserProfile } />
-            <Route path="/user-card" component={ UserProfile } />
+            <Route path="/user-card" component={ UserCard } />
             <Route path="/user-type" component={ UserType } />
             <Route path="/user-interest" component={ UserInterest } />
             <Route path="/edit-user" />

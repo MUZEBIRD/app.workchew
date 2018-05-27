@@ -49,8 +49,8 @@ class UserProfile extends Component {
             <div className='row'>
               <div className='col-sm-12'>
                 <p>
-                  G.T.
-                  <br/> Turgut Washington, DC
+                  G.T. Turgut
+                  <br/> Washington, DC
                 </p>
                 <p>
                   Assistant Professor in the Decision, Operations, and Information Technologies Department at the Robert H. Smith School of Business, University of Maryland, College
