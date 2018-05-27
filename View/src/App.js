@@ -25,10 +25,11 @@ import SearchUsers from './Components/SearchUsers.js'
 
 import AddUser from './Components/AddUser.js'
 
-import { BusinessUserSignUp, UserSignUp, Memberships, UserSignUpSocial, BuildYourProfile } from './Components/SignUp'
+import { BusinessUserSignUp, UserSignUp, Memberships, UserSignUpSocial, BuildYourProfile, UserInterest, UserType } from './Components/SignUp'
 
 
 import UserProfile from './Components/Public/UserPofile'
+import UserCard from './Components/Public/UserCard'
 
 
 import Main from './Components/Main.js'
@@ -73,6 +74,9 @@ class App extends Component {
             <Route path="/co-chewer-signUp" component={ UserSignUp } />
             <Route path="/memberships" component={ Memberships } />
             <Route path="/user-profile" component={ UserProfile } />
+            <Route path="/user-card" component={ UserProfile } />
+            <Route path="/user-type" component={ UserType } />
+            <Route path="/user-interest" component={ UserInterest } />
             <Route path="/edit-user" />
           </div>
         </HashRouter>

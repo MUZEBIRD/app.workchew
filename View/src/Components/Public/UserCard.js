@@ -16,7 +16,7 @@ import { Subject } from 'rxjs'
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-class UserProfile extends Component {
+class UserCard extends Component {
 
   constructor(props) {
 
@@ -66,4 +66,4 @@ class UserProfile extends Component {
 
 }
 
-export default UserProfile;
+export default UserCard;

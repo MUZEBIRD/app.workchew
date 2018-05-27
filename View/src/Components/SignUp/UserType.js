@@ -16,7 +16,7 @@ import { Subject } from 'rxjs'
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-class UserProfile extends Component {
+class UserType extends Component {
 
   constructor(props) {
 
@@ -41,22 +41,18 @@ class UserProfile extends Component {
         <div className="wholeView w-100 d-flex flex-column">
           <div className="showView w-100 scroll-y container">
             <br/>
-            <div className='d-flex align-items-center justify-content-center' style={ { backgroundColor: 'white', position: 'relative', zIndex: '5' } }>
-              <div className="h-100 m-3 d-flex align-items-center">
-                <img style={ { width: 150 } } src={ "/static/images/blank-user.png" } />
-              </div>
-            </div>
+            <h1 className='text-left'>How do you identify yourself?</h1>
+            <h1 className='text-left'>Choose the one that fits the best.</h1>
             <div className='row'>
-              <div className='col-sm-12'>
-                <p>
-                  G.T.
-                  <br/> Turgut Washington, DC
-                </p>
-                <p>
-                  Assistant Professor in the Decision, Operations, and Information Technologies Department at the Robert H. Smith School of Business, University of Maryland, College
-                  Park.
-                </p>
-              </div>
+              <button className="btn btn-info">
+                Remote Worker
+              </button>
+              <button className="btn btn-info">
+                Entrepreneur
+              </button>
+              <button className="btn btn-info">
+                Traveling Professional
+              </button>
             </div>
           </div>
         </div>
@@ -66,4 +62,4 @@ class UserProfile extends Component {
 
 }
 
-export default UserProfile;
+export default UserType;
