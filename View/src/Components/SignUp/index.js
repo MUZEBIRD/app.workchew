@@ -11,5 +11,6 @@ import UserInterest from './UserInterest';
 
 import Memberships from './Memberships';
 
+import M3mberships from './M3mberships';
 
-export { BusinessUserSignUp, Memberships, UserSignUp, UserSignUpSocial, BuildYourProfile, UserInterest, UserType }
+export { BusinessUserSignUp, Memberships, M3mberships, UserSignUp, UserSignUpSocial, BuildYourProfile, UserInterest, UserType }

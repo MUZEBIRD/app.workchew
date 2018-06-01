@@ -25,7 +25,7 @@ import SearchUsers from './Components/SearchUsers.js'
 
 import AddUser from './Components/AddUser.js'
 
-import { BusinessUserSignUp, UserSignUp, Memberships, UserSignUpSocial, BuildYourProfile, UserInterest, UserType } from './Components/SignUp'
+import { BusinessUserSignUp, UserSignUp, Memberships, M3mberships, UserSignUpSocial, BuildYourProfile, UserInterest, UserType } from './Components/SignUp'
 
 
 import UserProfile from './Components/Public/UserPofile'
@@ -48,6 +48,7 @@ const history = createHistory()
 class App extends Component {
 
   render() {
+
 
     return (
       <Provider store={ store }>
@@ -72,6 +73,7 @@ class App extends Component {
             <Route path="/co-chewer-profile" component={ UserSignUpSocial } />
             <Route path="/co-chewer-signUp-build" component={ BuildYourProfile } />
             <Route path="/co-chewer-signUp" component={ UserSignUp } />
+            <Route path="/m3mberships" component={ M3mberships } />
             <Route path="/memberships" component={ Memberships } />
             <Route path="/user-profile" component={ UserProfile } />
             <Route path="/user-card" component={ UserCard } />

@@ -101,6 +101,70 @@ const pricingOptions = [
 
 ]
 
+
+const pricingOptions3 = [
+
+  {
+    id: "ONE-DAY-PASS",
+    title: "DAY PASS",
+    price: 14.99,
+    paymentRecurrence: "ONE TIME CHARGER",
+    features: [
+      {
+        text: "Access to one WorkChew location"
+      },
+      {
+        text: " Access to networking and social events occurring on that day"
+      }
+    ]
+  },
+  {
+    id: "STARTER",
+    title: "STARTER",
+    price: 39.99,
+    paymentRecurrence: "BILLED MONTHLY",
+    mainFeature: "Access to one WorkChew location",
+    features: [
+      {
+        text: "Access to all WorkChew location"
+      },
+      {
+        text: "$10 food credit"
+      },
+      {
+        text: "Access to all networking & social events"
+      }
+    ]
+  },
+  {
+    id: "Pro",
+    title: "PRO",
+    price: 69.99,
+    paymentRecurrence: "BILLED MONTHLY",
+    features: [
+
+      {
+        text: "Access to all WorkChew location"
+      },
+
+      {
+        text: "$40 food credit."
+      },
+      {
+        text: "Priority access to all networking & social events"
+      },
+      {
+        text: "Priority access to private dining & meeting spaces"
+      },
+      {
+        text: "Ability to create custom events"
+      }
+    ]
+  }
+
+]
+
+
 const MemberShipSelectionWidget = (props) => {
 
 
@@ -140,4 +204,4 @@ const MemberShipSelectionWidget = (props) => {
   )
 }
 
-export { MemberShipSelectionWidget, pricingOptions }
+export { MemberShipSelectionWidget, pricingOptions, pricingOptions3 }
