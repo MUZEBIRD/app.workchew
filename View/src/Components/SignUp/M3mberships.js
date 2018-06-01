@@ -40,7 +40,29 @@ class M3mberships extends Component {
 
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+
+
+
+    window.paypalCheckoutReady = () => {
+
+      if (this.state.showMemberShipSelections) {
+        pricingOptions3.forEach((pricing) => {
+
+          placeButton({
+
+            price: pricing.price,
+            elementKey: `${pricing.id}-button`,
+            membershipName: pricing.title
+          })
+
+        })
+      }
+      ;
+
+    }
+
+  }
 
 
 
@@ -157,6 +179,15 @@ class M3mberships extends Component {
                                                  { feature.text }
                                                </p>)
                             ) }
+                        </div>)
+                    ) }
+                </div>
+                <div className='row w-100 d-flex flex-wrap justify-content-center'>
+                  { pricingOptions3.map(
+                      (pricing, i) => (
+                        <div key={ i } style={ { width: 300 } } className='d-flex flex-column'>
+                          <div id={ `${pricing.id}-button` }>
+                          </div>
                         </div>)
                     ) }
                 </div>
