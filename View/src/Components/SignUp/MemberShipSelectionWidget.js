@@ -80,7 +80,7 @@ const pricingOptions = [
   {
     id: "PRO",
     title: "PRO",
-    price: 99.99,
+    price: 49.99,
     paymentRecurrence: "BILLED MONTHLY",
     mainFeature: "Unlimited access to all WorkChew locations ",
     features: [
@@ -107,7 +107,7 @@ const pricingOptions3 = [
   {
     id: "ONE-DAY-PASS",
     title: "DAY PASS",
-    price: 14.99,
+    price: 69.99,
     paymentRecurrence: "ONE TIME CHARGER",
     features: [
       {
@@ -164,9 +164,7 @@ const pricingOptions3 = [
 
 ]
 
-
 const MemberShipSelectionWidget = (props) => {
-
 
   return (
 

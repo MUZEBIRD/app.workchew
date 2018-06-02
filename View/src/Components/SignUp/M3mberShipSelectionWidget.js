@@ -1,0 +1,160 @@
+import React, { Component } from 'react';
+import { Route, Link } from 'react-router-dom'
+
+import userService from '../../Services/userService.js'
+import urlService from '../../Services/urlService.js'
+import restService from '../../Services/restService.js'
+
+import { placeButton } from '../../Utils/wc-pal-pal-client.js'
+
+import { getQueryParams, getPathVariables } from '../../Utils/'
+
+const pricingOptions3 = [
+
+  {
+    id: "ONE-DAY-PASS",
+    title: "DAY PASS",
+    price: 14.99,
+    paymentRecurrence: "ONE TIME CHARGER",
+    features: [
+      {
+        text: "Access to one WorkChew location"
+      },
+      {
+        text: " Access to networking and social events occurring on that day"
+      }
+    ]
+  },
+  {
+    id: "STARTER",
+    title: "STARTER",
+    price: 49.99,
+    paymentRecurrence: "BILLED MONTHLY",
+    mainFeature: "Access to one WorkChew location",
+    features: [
+      {
+        text: "Access to all WorkChew location"
+      },
+      {
+        text: "$10 food credit"
+      },
+      {
+        text: "Access to all networking & social events"
+      }
+    ]
+  },
+  {
+    id: "Pro",
+    title: "PRO",
+    price: 99.99,
+    paymentRecurrence: "BILLED MONTHLY",
+    features: [
+
+      {
+        text: "Access to all WorkChew location"
+      },
+
+      {
+        text: "$40 food credit."
+      },
+      {
+        text: "Priority access to all networking & social events"
+      },
+      {
+        text: "Priority access to private dining & meeting spaces"
+      },
+      {
+        text: "Ability to create custom events"
+      }
+    ]
+  }
+
+]
+
+const M3mberShipSelectionWidget = (props) => {
+
+  return (
+
+    <div className='row'>
+      <div className='col-sm-12'>
+        <div className='row w-100 d-flex flex-wrap justify-content-around'>
+          { pricingOptions3.map(
+              (pricing, i) => (
+                <div key={ i } style={ { width: 300 } } className='d-flex flex-column'>
+                  <p>
+                    { pricing.title }
+                  </p>
+                  <h2>${ pricing.price }</h2>
+                  <p>
+                    { pricing.paymentRecurrence }
+                  </p>
+                </div>)
+            ) }
+        </div>
+        <div class="d-flex flex-column align-items-center w-100" style={ { border: '1px solid black' } }>
+          <br/>
+          <h3>A M E N I T I E S</h3>
+          <br/>
+          <div id="priceLet-container" class="d-flex w-100 ae-3 done">
+            <div class="flex-1 flex-column align-items-center">
+              <img width="80" height="50" src={ "/static/images/Wifi.png" } />
+              <br/>
+              <strong>Fast <br/> WiFi</strong>
+              <br/>
+              <br/>
+            </div>
+            <div class="flex-1 d-flex justify-content-between">
+              <div class="flex-1 flex-column align-items-center">
+                <img width="80" height="50" src={ "/static/images/Weekly_Social_Events.png" } />
+                <br/>
+                <strong>Weekly Networking + <br/> Social Events</strong>
+                <br/>
+                <br/>
+              </div>
+              <div class="flex-1 flex-column align-items-center">
+                <img width="80" height="50" src={ "/static/images/Portbale_Charger.png" } />
+                <br/>
+                <strong>Portable <br/> Chargers</strong>
+                <br/>
+                <br/>
+              </div>
+            </div>
+            <div class="flex-1 flex-column align-items-center">
+              <img width="80" height="50" src={ "/static/images/Food_Drink_Discounts.png" } />
+              <br/>
+              <strong>Food & Drink <br/> Discounts</strong>
+              <br/>
+              <br/>
+            </div>
+          </div>
+        </div>
+        <br/>
+        <div className='row w-100 d-flex flex-wrap justify-content-around'>
+          { pricingOptions3.map(
+              (pricing, i) => (
+                <div key={ i } style={ { width: 300 } } className='d-flex flex-column'>
+                  { pricing.features.map(
+                      (feature, j) => (<p key={ j }>
+                                         <img class="chewCheck" style={ { height: 20 } } src={ "static/images/chewCheck.png" } />
+                                         { feature.text }
+                                       </p>)
+                    ) }
+                </div>)
+            ) }
+        </div>
+        <div className='row w-100 d-flex flex-wrap justify-content-around'>
+          { pricingOptions3.map(
+              (pricing, i) => (
+                <div key={ i } style={ { width: 300 } } className='d-flex flex-column'>
+                  <div id={ `${pricing.id}-button` }>
+                  </div>
+                </div>)
+            ) }
+        </div>
+      </div>
+    </div>
+
+  )
+}
+
+export { M3mberShipSelectionWidget, pricingOptions3 }
