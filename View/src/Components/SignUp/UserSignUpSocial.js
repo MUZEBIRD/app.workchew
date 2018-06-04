@@ -24,6 +24,8 @@ import FacebookLogin from 'react-facebook-login';
 
 import GoogleLogin from 'react-google-login';
 
+import LinkedinSDK from 'react-linkedin-sdk'
+
 
 
 export const signUpDialogSubject = new Subject();
@@ -169,6 +171,11 @@ class UserSignUpSocial extends Component {
     console.log(response);
   }
 
+
+  responseLinkedin = response => {
+    console.log(response)
+  }
+
   render() {
 
     const actions = [
@@ -207,7 +214,11 @@ class UserSignUpSocial extends Component {
                 <br/>
                 <br/>
                 <GoogleLogin clientId="198825134082-u2qdvkt35ub7smeevce2vj7q2hte1o9u.apps.googleusercontent.com" buttonText="Login with Google" onSuccess={ this.responseGoogle } onFailure={ this.responseGoogle }
-                />,
+                />
+                <br/>
+                <br/>
+                <LinkedinSDK clientId="77vwlh2pgcg359" callBack={ this.responseLinkedin } fields=":(id,num-connections,picture-url)" textButton={ 'Login with Linkedin' } buttonType={ 'button' }
+                />
               </div>
               <p>
                 or
