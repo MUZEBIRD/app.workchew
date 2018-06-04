@@ -22,6 +22,9 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import './signUp.css';
 import FacebookLogin from 'react-facebook-login';
 
+import GoogleLogin from 'react-google-login';
+
+
 
 export const signUpDialogSubject = new Subject();
 
@@ -157,6 +160,11 @@ class UserSignUpSocial extends Component {
 
   }
 
+
+  responseGoogle = (response) => {
+    console.log(response);
+  }
+
   responseFacebook = (response) => {
     console.log(response);
   }
@@ -193,7 +201,13 @@ class UserSignUpSocial extends Component {
             </div>
             <div className='d-flex' style={ { backgroundColor: 'white', position: 'relative', zIndex: '5' } }>
               <div className='flex-1'>
+                <br/>
+                <br/>
                 <FacebookLogin appId="1755466141213974" autoLoad={ true } fields="name,email,picture" callback={ this.responseFacebook } />
+                <br/>
+                <br/>
+                <GoogleLogin clientId="198825134082-u2qdvkt35ub7smeevce2vj7q2hte1o9u.apps.googleusercontent.com" buttonText="Login with Google" onSuccess={ this.responseGoogle } onFailure={ this.responseGoogle }
+                />,
               </div>
               <p>
                 or
