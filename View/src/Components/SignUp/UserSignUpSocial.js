@@ -20,6 +20,7 @@ import { Subject } from 'rxjs'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import './signUp.css';
+import FacebookLogin from 'react-facebook-login';
 
 
 export const signUpDialogSubject = new Subject();
@@ -156,6 +157,10 @@ class UserSignUpSocial extends Component {
 
   }
 
+  responseFacebook = (response) => {
+    console.log(response);
+  }
+
   render() {
 
     const actions = [
@@ -188,6 +193,7 @@ class UserSignUpSocial extends Component {
             </div>
             <div className='d-flex' style={ { backgroundColor: 'white', position: 'relative', zIndex: '5' } }>
               <div className='flex-1'>
+                <FacebookLogin appId="1755466141213974" autoLoad={ true } fields="name,email,picture" callback={ this.responseFacebook } />
               </div>
               <p>
                 or
