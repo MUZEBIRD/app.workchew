@@ -24,7 +24,7 @@ import FacebookLogin from 'react-facebook-login';
 
 import GoogleLogin from 'react-google-login';
 
-import LinkedinSDK from 'react-linkedin-sdk'
+import LinkedIn from 'finnx-react-linkedin-login'
 
 
 
@@ -173,7 +173,7 @@ class UserSignUpSocial extends Component {
 
 
   responseLinkedin = response => {
-    console.log(response)
+    console.log('responseLinkedin', response)
   }
 
   render() {
@@ -210,15 +210,14 @@ class UserSignUpSocial extends Component {
               <div className='flex-1'>
                 <br/>
                 <br/>
-                <FacebookLogin appId="1755466141213974" autoLoad={ true } fields="name,email,picture" callback={ this.responseFacebook } />
+                <FacebookLogin appId="1755466141213974" fields="name,email,picture" callback={ this.responseFacebook } />
                 <br/>
                 <br/>
                 <GoogleLogin clientId="198825134082-u2qdvkt35ub7smeevce2vj7q2hte1o9u.apps.googleusercontent.com" buttonText="Login with Google" onSuccess={ this.responseGoogle } onFailure={ this.responseGoogle }
                 />
                 <br/>
                 <br/>
-                <LinkedinSDK clientId="77vwlh2pgcg359" callBack={ this.responseLinkedin } fields=":(id,num-connections,picture-url)" textButton={ 'Login with Linkedin' } buttonType={ 'button' }
-                />
+                <LinkedIn clientId='77vwlh2pgcg359' callback={ this.responseLinkedin } text='Login With linkedin' />
               </div>
               <p>
                 or

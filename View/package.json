@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "finnx-react-linkedin-login": "^1.0.3",
     "interactjs": "^1.2.9",
     "lodash": "^4.17.5",
     "material-ui": "^0.20.0",
