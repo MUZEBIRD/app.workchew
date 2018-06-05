@@ -140,15 +140,46 @@ class UserSignUpSocial extends Component {
 
   }
 
-
   responseGoogle = (response) => {
+
     console.log(response);
+
+    var {profileObj, accessToken} = response
+
+    var {email, givenName, FamilyName, googleId, imageUrl, name} = profileObj
+
+    var userSignUpInfo = {
+      ...{
+        name,
+        accessToken,
+        email,
+        googleId
+      },
+      googleImgUrl: imageUrl
+    }
+
+    this.signUp(userSignUpInfo)
   }
 
   responseFacebook = (response) => {
-    console.log(response);
-  }
 
+    console.log(response);
+
+    var {name, accessToken, email, userID, picture: {data: {url}}} = response
+
+    var userSignUpInfo = {
+      ...{
+        name,
+        accessToken,
+        email
+      },
+      facebookUserId: userID,
+      facebookImgUrl: url
+    }
+
+    this.signUp(userSignUpInfo)
+
+  }
 
   responseLinkedin = response => {
     console.log('responseLinkedin', response)

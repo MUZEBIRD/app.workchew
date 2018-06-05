@@ -119,6 +119,7 @@ var userService = {
 
   },
   signUpCoChewer: (userSignUpInfo) => {
+
     return userService
 
       .post({
