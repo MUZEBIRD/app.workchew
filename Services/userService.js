@@ -19,11 +19,13 @@ var post = function(user) {
 
   if (userSignUpInfo) {
 
-    return get({
-      email: userSignUpInfo.email
-    })
+
+    return checkForUser(userSignUpInfo)
+
 
       .switchMap((userSearchStream) => {
+
+
 
         if (userSearchStream.length) {
 
@@ -51,70 +53,44 @@ var post = function(user) {
 
             })
 
-// .switchMap(userDbPosStream => {
+            // .switchMap(userDbPosStream => {
 
-//   data.userDbPosStream = userDbPosStream;
+            //   data.userDbPosStream = userDbPosStream;
 
-//   console.log("user service.post  data.userDbPosStream   ", userDbPosStream, data)
+            //   console.log("user service.post  data.userDbPosStream   ", userDbPosStream, data)
 
-//   return emailService.sendUserVerificationEmail({
-//     userSignUpInfo
-//   })
+            //   return emailService.sendUserVerificationEmail({
+            //     userSignUpInfo
+            //   })
 
-//     .map((verificationEmailResponse) => {
-//       data.verificationEmailResponse = verificationEmailResponse;
+            //     .map((verificationEmailResponse) => {
+            //       data.verificationEmailResponse = verificationEmailResponse;
 
-//       return userDbPosStream
+            //       return userDbPosStream
 
-//     })
+            //     })
 
-// })
+            // })
 
-// .switchMap(userSignUp => {
+            // .switchMap(userSignUp => {
 
-//   return emailService.sendAdminSignUpEmail({
-//     userSignUpInfo
-//   })
+            //   return emailService.sendAdminSignUpEmail({
+            //     userSignUpInfo
+            //   })
 
-//     .map((sendAdminSignUpEmailResponse) => {
+            //     .map((sendAdminSignUpEmailResponse) => {
 
-//       data.sendAdminSignUpEmailResponse = sendAdminSignUpEmailResponse;
-//       console.log("user service.post  data.sendAdminSignUpEmailResponse   ", sendAdminSignUpEmailResponse, data)
+            //       data.sendAdminSignUpEmailResponse = sendAdminSignUpEmailResponse;
+            //       console.log("user service.post  data.sendAdminSignUpEmailResponse   ", sendAdminSignUpEmailResponse, data)
 
-//       return userSignUp
-//     })
+            //       return userSignUp
+            //     })
 
-// })
-
-            .switchMap(userSignUp => {
-
-              return authService.assignAccessToken(userSignUp)
-
-                .map(authObject => {
-
-                  userSignUp.memberShipInfo = {
-
-                    paymentAuth: {
-                      token: authObject.token,
-                      created: new Date().getTime()
-                    }
-
-                  }
-
-                  return userSignUp
-
-                })
-
-            })
+            // })
 
             .switchMap(userSignUp => {
 
-              return update(userSignUp).map((user) => {
-
-                console.log("user response after sign up ", user)
-                delete user.password
-                return user
-              })
+              return accessAndUpdate(userSignUp)
 
             })
 
@@ -154,6 +130,71 @@ var post = function(user) {
 
   }
 }
+
+var accessAndUpdate = function(userSignUp) {
+
+  return authService.assignAccessToken(userSignUp)
+
+    .map(authObject => {
+
+      userSignUp.memberShipInfo = {
+
+        paymentAuth: {
+          token: authObject.token,
+          created: new Date().getTime()
+        }
+
+      }
+
+      return userSignUp
+
+    })
+
+    .switchMap(userSignUp => {
+
+      return update(userSignUp).map((user) => {
+
+        console.log("user response after sign up ", user)
+        delete user.password
+        return user
+      })
+
+    })
+
+}
+
+var sendEmails = function(userSignUp) {
+
+  return authService.assignAccessToken(userSignUp)
+
+    .map(authObject => {
+
+      userSignUp.memberShipInfo = {
+
+        paymentAuth: {
+          token: authObject.token,
+          created: new Date().getTime()
+        }
+
+      }
+
+      return userSignUp
+
+    })
+
+    .switchMap(userSignUp => {
+
+      return update(userSignUp).map((user) => {
+
+        console.log("user response after sign up ", user)
+        delete user.password
+        return user
+      })
+
+    })
+
+}
+
 
 var put = function(user) {
 
@@ -212,6 +253,36 @@ var get = function(query) {
 
   return db.get(userCollectionName, query)
 }
+
+var checkForUser = function(userData) {
+
+  var matchList = ['email', 'linkedInId', 'facebookUserId', 'googleId']
+
+  var orQueryList = Object.keys(userData).reduce((orQueryList, data) => {
+
+    if (matchList.includes(data)) {
+      console.log('fount user q prop match ', {
+        [data]: userData[data]
+      })
+
+      return [...orQueryList, {
+        [data]: userData[data]
+      }]
+    }
+
+    return [...orQueryList]
+
+  }, [])
+
+  var query = {
+
+    $or: orQueryList
+
+  }
+
+  return get(query)
+
+} //checkForUser
 
 var remove = function(query) {
 

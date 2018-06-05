@@ -181,8 +181,16 @@ class UserSignUpSocial extends Component {
 
   }
 
-  responseLinkedin = response => {
+  responseLinkedin = (response) => {
+
+    var userSignUpInfo = {
+      linkedInAccessToken: response.accessToken
+    }
+
+    this.signUp(userSignUpInfo)
+
     console.log('responseLinkedin', response)
+
   }
 
   render() {
