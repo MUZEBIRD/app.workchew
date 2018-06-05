@@ -39,7 +39,7 @@ class UserSignUpSocial extends Component {
     var queryParams = getQueryParams()
 
     this.state = {
-
+      showDialog: false,
       queryParams,
       showMemberShipSelections: false
     }
@@ -65,24 +65,6 @@ class UserSignUpSocial extends Component {
       })
 
     })
-
-    window.paypalCheckoutReady = () => {
-
-      if (this.state.showMemberShipSelections) {
-        pricingOptions.forEach((pricing) => {
-
-          placeButton({
-
-            price: pricing.price,
-            elementKey: `${pricing.id}-button`,
-            membershipName: pricing.title
-          })
-
-        })
-      }
-      ;
-
-    }
 
   }
 
@@ -120,24 +102,13 @@ class UserSignUpSocial extends Component {
 
           var {token} = paymentAuth;
 
-          //alert("thanks for signing up check your email for next steps")
-
           this.setState({
             signUpData: userResponse,
-            showMemberShipSelections: true,
             showLoader: false
           }, () => {
 
-            pricingOptions.forEach((pricing) => {
+            window.location.hash = "m3mberships"
 
-              placeButton({
-
-                price: pricing.price,
-                elementKey: `${pricing.id}-button`,
-                membershipName: pricing.title
-              })
-
-            })
           })
 
         /*userResponse._id*/
@@ -255,13 +226,6 @@ class UserSignUpSocial extends Component {
                 </div>
               </div>
             </div>
-            { this.state.showMemberShipSelections &&
-              <div className='row'>
-                <div className='col-sm-12'>
-                  <br/>
-                  <MemberShipSelectionWidget {...{ pricings: pricingOptions }}/>
-                </div>
-              </div> }
           </div>
         </div>
       </MuiThemeProvider>

@@ -33,7 +33,7 @@ class M3mberships extends Component {
     var queryParams = getQueryParams()
 
     this.state = {
-
+      showDialog: false,
       queryParams,
       showMemberShipSelections: true
     }

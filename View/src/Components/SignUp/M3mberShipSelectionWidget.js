@@ -91,27 +91,27 @@ const M3mberShipSelectionWidget = (props) => {
                 </div>)
             ) }
         </div>
-        <div class="d-flex flex-column align-items-center w-100" style={ { border: '1px solid black' } }>
+        <div className="d-flex flex-column align-items-center w-100" style={ { border: '1px solid black' } }>
           <br/>
           <h3>A M E N I T I E S</h3>
           <br/>
-          <div id="priceLet-container" class="d-flex w-100 ae-3 done">
-            <div class="flex-1 flex-column align-items-center">
+          <div id="priceLet-container" className="d-flex w-100 ae-3 done">
+            <div className="flex-1 flex-column align-items-center">
               <img width="80" height="50" src={ "/static/images/Wifi.png" } />
               <br/>
               <strong>Fast <br/> WiFi</strong>
               <br/>
               <br/>
             </div>
-            <div class="flex-1 d-flex justify-content-between">
-              <div class="flex-1 flex-column align-items-center">
+            <div className="flex-1 d-flex justify-content-between">
+              <div className="flex-1 flex-column align-items-center">
                 <img width="80" height="50" src={ "/static/images/Weekly_Social_Events.png" } />
                 <br/>
                 <strong>Weekly Networking + <br/> Social Events</strong>
                 <br/>
                 <br/>
               </div>
-              <div class="flex-1 flex-column align-items-center">
+              <div className="flex-1 flex-column align-items-center">
                 <img width="80" height="50" src={ "/static/images/Portbale_Charger.png" } />
                 <br/>
                 <strong>Portable <br/> Chargers</strong>
@@ -119,7 +119,7 @@ const M3mberShipSelectionWidget = (props) => {
                 <br/>
               </div>
             </div>
-            <div class="flex-1 flex-column align-items-center">
+            <div className="flex-1 flex-column align-items-center">
               <img width="80" height="50" src={ "/static/images/Food_Drink_Discounts.png" } />
               <br/>
               <strong>Food & Drink <br/> Discounts</strong>
@@ -135,7 +135,7 @@ const M3mberShipSelectionWidget = (props) => {
                 <div key={ i } style={ { width: 300 } } className='d-flex flex-column'>
                   { pricing.features.map(
                       (feature, j) => (<p key={ j }>
-                                         <img class="chewCheck" style={ { height: 20 } } src={ "static/images/chewCheck.png" } />
+                                         <img className="chewCheck" style={ { height: 20 } } src={ "static/images/chewCheck.png" } />
                                          { feature.text }
                                        </p>)
                     ) }
