@@ -19,82 +19,36 @@ var post = function(user) {
 
   if (userSignUpInfo) {
 
+    return onUserSignUpInfo(userSignUpInfo)
 
-    return checkForUser(userSignUpInfo)
+      .switchMap(userSignUpData => {
 
+        return checkForUser(userSignUpData)
 
-      .switchMap((userSearchStream) => {
+          .switchMap((userSearchStream) => {
 
+            if (userSearchStream.length) {
 
+              return Rx.Observable.of({
+                msg: 'user with that email exsist',
+                user: userSearchStream[0]
+              })
 
-        if (userSearchStream.length) {
-
-          return Rx.Observable.of({
-            msg: 'user with that email exsist'
-          })
-
-        } else {
-
-          var {email, password, userName, info} = userSignUpInfo
-
-          return bcryptStream.hashUserPassword(password)
-
-            .switchMap((hashedPassword) => {
+            } else {
 
               return db
 
-                .post(userCollectionName, {
-                  email,
-                  password: hashedPassword,
-                  userName,
-                  info,
-                  created: new Date().getTime()
+                .post(userCollectionName, userSignUpData)
+
+                .switchMap(userSignUp => {
+
+                  return accessAndUpdate(userSignUp)
+
                 })
 
-            })
+            } //userSearchStream.length >0
 
-            // .switchMap(userDbPosStream => {
-
-            //   data.userDbPosStream = userDbPosStream;
-
-            //   console.log("user service.post  data.userDbPosStream   ", userDbPosStream, data)
-
-            //   return emailService.sendUserVerificationEmail({
-            //     userSignUpInfo
-            //   })
-
-            //     .map((verificationEmailResponse) => {
-            //       data.verificationEmailResponse = verificationEmailResponse;
-
-            //       return userDbPosStream
-
-            //     })
-
-            // })
-
-            // .switchMap(userSignUp => {
-
-            //   return emailService.sendAdminSignUpEmail({
-            //     userSignUpInfo
-            //   })
-
-            //     .map((sendAdminSignUpEmailResponse) => {
-
-            //       data.sendAdminSignUpEmailResponse = sendAdminSignUpEmailResponse;
-            //       console.log("user service.post  data.sendAdminSignUpEmailResponse   ", sendAdminSignUpEmailResponse, data)
-
-            //       return userSignUp
-            //     })
-
-            // })
-
-            .switchMap(userSignUp => {
-
-              return accessAndUpdate(userSignUp)
-
-            })
-
-        } //userSearchStream.length >0
+          })
 
       })
 
@@ -163,35 +117,92 @@ var accessAndUpdate = function(userSignUp) {
 
 }
 
-var sendEmails = function(userSignUp) {
+var onUserSignUpInfo = function(userSignUpInfo) {
 
-  return authService.assignAccessToken(userSignUp)
+  if (userSignUpInfo.linkedInAccessToken) {
 
-    .map(authObject => {
+    return Rx.Observable.of(userSignUpInfo)
 
-      userSignUp.memberShipInfo = {
+  }
 
-        paymentAuth: {
-          token: authObject.token,
+  if (userSignUpInfo.facebookUserId) {
+
+    return Rx.Observable.of(userSignUpInfo)
+
+  }
+
+  if (userSignUpInfo.googleId) {
+
+    return getLinkedInData(userSignUpInfo)
+
+  }
+
+  if (userSignUpInfo.password && userSignUpInfo.password.length) {
+
+    var {email, password, userName, info} = userSignUpInfo
+
+
+    return bcryptStream.hashUserPassword(password)
+
+      .map((hashedPassword) => {
+
+        return {
+          email,
+          password: hashedPassword,
+          userName,
+          info,
           created: new Date().getTime()
         }
 
-      }
-
-      return userSignUp
-
-    })
-
-    .switchMap(userSignUp => {
-
-      return update(userSignUp).map((user) => {
-
-        console.log("user response after sign up ", user)
-        delete user.password
-        return user
       })
 
-    })
+  }
+
+}
+
+var getLinkedInData = function(userSignUpInfo) {
+
+  return Rx.Observable.of(userSignUpInfo)
+
+}
+
+var sendEmail = function() {
+
+
+  // .switchMap(userDbPosStream => {
+
+  //   data.userDbPosStream = userDbPosStream;
+
+  //   console.log("user service.post  data.userDbPosStream   ", userDbPosStream, data)
+
+  //   return emailService.sendUserVerificationEmail({
+  //     userSignUpInfo
+  //   })
+
+  //     .map((verificationEmailResponse) => {
+  //       data.verificationEmailResponse = verificationEmailResponse;
+
+  //       return userDbPosStream
+
+  //     })
+
+  // })
+
+  // .switchMap(userSignUp => {
+
+  //   return emailService.sendAdminSignUpEmail({
+  //     userSignUpInfo
+  //   })
+
+  //     .map((sendAdminSignUpEmailResponse) => {
+
+  //       data.sendAdminSignUpEmailResponse = sendAdminSignUpEmailResponse;
+  //       console.log("user service.post  data.sendAdminSignUpEmailResponse   ", sendAdminSignUpEmailResponse, data)
+
+  //       return userSignUp
+  //     })
+
+  // })
 
 }
 
