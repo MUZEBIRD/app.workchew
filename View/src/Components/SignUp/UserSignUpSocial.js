@@ -26,8 +26,6 @@ import GoogleLogin from 'react-google-login';
 
 import LinkedIn from 'finnx-react-linkedin-login'
 
-
-
 export const signUpDialogSubject = new Subject();
 
 class UserSignUpSocial extends Component {
@@ -68,7 +66,7 @@ class UserSignUpSocial extends Component {
 
   }
 
-  signUp() {
+  defaultUserRespone = () => {
 
     var fields = [...document.getElementsByClassName('sign-up-form-feild')];
 
@@ -79,6 +77,14 @@ class UserSignUpSocial extends Component {
       return info;
 
     }, {})
+
+    console.log(userSignUpInfo);
+
+    this.signUp(userSignUpInfo)
+
+  }
+
+  signUp(userSignUpInfo) {
 
     this.setState({
       showLoader: true
@@ -107,7 +113,8 @@ class UserSignUpSocial extends Component {
             showLoader: false
           }, () => {
 
-            window.location.hash = "m3mberships"
+            // window.location.hash = "m3mberships"
+            window.location.hash = "co-chewer-signUp-build"
 
           })
 
@@ -218,7 +225,7 @@ class UserSignUpSocial extends Component {
                 <div className='d-flex justify-content-center'>
                   <button onClick={ (event) => {
                                     
-                                      this.signUp()
+                                      this.defaultUserRespone()
                                     
                                     } } className="btn btn-success">
                     Sign up

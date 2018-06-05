@@ -129,6 +129,7 @@ class UserSignUp extends Component {
                 price: pricing.price,
                 elementKey: `${pricing.id}-button`,
                 membershipName: pricing.title
+
               })
 
             })
