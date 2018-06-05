@@ -217,12 +217,11 @@ class UserSignUpSocial extends Component {
                 />
                 <br/>
                 <br/>
-                <button onClick={ (event) => {
-                                  
-                                    window.location.href = "https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=77vwlh2pgcg359&redirect_uri=http://localhost:3000/&state=987654321&scope=r_basicprofile"
-                                  
-                                  } }>
-                  Login With linkedin
+                <button className={ "linkedin-button" } onClick={ (event) => {
+                                                                  
+                                                                    window.location.href = "https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=77vwlh2pgcg359&redirect_uri=http://localhost:3000/&state=987654321&scope=r_basicprofile"
+                                                                  
+                                                                  } }>
                 </button>
               </div>
               <p>

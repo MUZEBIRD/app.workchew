@@ -1,11 +1,23 @@
-.pricing-box{
+.pricing-box {
 
 
-	position: relative;
-	height:500px;
+    position: relative;
+    height: 500px;
 }
 
-.scroll-y{
+.scroll-y {
 
-	overflow-y:scroll;
+    overflow-y: scroll;
+}
+
+
+
+.linkedin-button {
+    height: 40px;
+    width: 200px;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-image: url("/static/images/signin-button-Linkin.png");
+
+    cursor: pointer;
 }
