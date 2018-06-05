@@ -213,12 +213,11 @@ class UserSignUpSocial extends Component {
                 <FacebookLogin appId="1755466141213974" fields="name,email,picture" callback={ this.responseFacebook } />
                 <br/>
                 <br/>
-                <GoogleLogin clientId="198825134082-u2qdvkt35ub7smeevce2vj7q2hte1o9u.apps.googleusercontent.com" buttonText="Login with Google" onSuccess={ this.responseGoogle } onFailure={ this.responseGoogle }
+                <GoogleLogin clientId="198825134082-5l64c1opmt10ts62nm7ka7dssev9iok9.apps.googleusercontent.com" buttonText="Login with Google" onSuccess={ this.responseGoogle } onFailure={ this.responseGoogle }
                 />
                 <br/>
                 <br/>
                 <button onClick={ (event) => {
-                                  
                                   
                                     window.location.href = "https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=77vwlh2pgcg359&redirect_uri=http://localhost:3000/&state=987654321&scope=r_basicprofile"
                                   
