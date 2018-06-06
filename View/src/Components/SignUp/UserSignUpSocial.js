@@ -183,13 +183,39 @@ class UserSignUpSocial extends Component {
 
   responseLinkedin = (response) => {
 
-    var userSignUpInfo = {
-      linkedInAccessToken: response.accessToken
-    }
 
-    this.signUp(userSignUpInfo)
+    // Use the API call wrapper to request the member's basic profile data
+    window.IN.API.Profile("me").fields("id,firstName,lastName,summary,specialties,headline,email-address,picture-urls::(original),public-profile-url,location:(name)")
+      .result((me) => {
+        var profile = me.values[0];
+        var id = profile.id;
+        var firstName = profile.firstName;
+        var lastName = profile.lastName;
+        var emailAddress = profile.emailAddress;
+        var pictureUrl = profile.pictureUrls.values[0];
+        var profileUrl = profile.publicProfileUrl;
+        var country = profile.location.name;
 
-    console.log('responseLinkedin', response)
+
+        console.log("mememememe", me)
+        var userSignUpInfo = {
+          linkedInId: id,
+
+          headline: profile.headline,
+          summary: profile.summary,
+          firstName: profile.firstName,
+          lastName: profile.lastName,
+          email: profile.emailAddress,
+          linkedInPictureUrl: profile.pictureUrls.values[0],
+          profileUrl: profile.publicProfileUrl,
+          location: profile.location,
+
+        }
+
+        this.signUp(userSignUpInfo)
+
+
+      });
 
   }
 
@@ -234,11 +260,15 @@ class UserSignUpSocial extends Component {
                 />
                 <br/>
                 <br/>
-                <button className={ "linkedin-button" } onClick={ (event) => {
-                                                                  
-                                                                    window.location.href = "https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=77vwlh2pgcg359&redirect_uri=http://localhost:3000/&state=987654321&scope=r_basicprofile"
-                                                                  
-                                                                  } }>
+                <button onClick={ (event) => {
+                                  
+                                    window['IN'].User.authorize((responseLinkedin) => {
+                                  
+                                  
+                                      this.responseLinkedin(responseLinkedin)
+                                    });
+                                  
+                                  } } className={ "linkedin-button" }>
                 </button>
               </div>
               <p>

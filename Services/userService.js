@@ -119,7 +119,7 @@ var accessAndUpdate = function(userSignUp) {
 
 var onUserSignUpInfo = function(userSignUpInfo) {
 
-  if (userSignUpInfo.linkedInAccessToken) {
+  if (userSignUpInfo.linkedInId) {
 
     return Rx.Observable.of(userSignUpInfo)
 
@@ -133,7 +133,7 @@ var onUserSignUpInfo = function(userSignUpInfo) {
 
   if (userSignUpInfo.googleId) {
 
-    return getLinkedInData(userSignUpInfo)
+    return Rx.Observable.of(userSignUpInfo)
 
   }
 
@@ -163,6 +163,35 @@ var onUserSignUpInfo = function(userSignUpInfo) {
 var getLinkedInData = function(userSignUpInfo) {
 
   return Rx.Observable.of(userSignUpInfo)
+
+  Rx.Observable.create((observer) => {
+    request
+
+      .post('https://www.linkedin.com/oauth/v2/accessToken', {
+
+        form: {
+
+          grant_type: 'authorization_code',
+
+          code: userSignUpInfo.linkedInAccessToken,
+
+          redirect_uri: 'http://localhost:3000/',
+
+          client_id: '77vwlh2pgcg359',
+
+          client_secret: 'm9KfecH44NCgowBw'
+
+        }
+
+      })
+      .on('response', function(response) {
+
+        console.log('response', response) // 200
+
+        observer.next(response)
+
+      })
+  })
 
 }
 
