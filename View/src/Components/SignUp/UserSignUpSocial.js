@@ -112,7 +112,7 @@ class UserSignUpSocial extends Component {
           }, () => {
 
             // window.location.hash = "m3mberships"
-            window.location.hash = "co-chewer-signUp-build"
+            window.location.hash = `co-chewer-signUp-build?id=${userResponse._id}`
 
           })
 
@@ -262,8 +262,8 @@ class UserSignUpSocial extends Component {
                                   
                                     window['IN'].User.authorize((responseLinkedin) => {
                                   
-                                  
                                       this.responseLinkedin(responseLinkedin)
+                                  
                                     });
                                   
                                   } } className={ "linkedin-button" }>
