@@ -32,10 +32,15 @@ class BuildYourProfile extends Component {
 
     var queryParams = getQueryParams()
 
+    var {id} = queryParams;
+
+    var signUpData = userService.getSignUpData()
+
+    console.log('signUpData', signUpData)
+
     this.state = {
 
       queryParams,
-      showMemberShipSelections: false
     }
 
   }
@@ -50,103 +55,9 @@ class BuildYourProfile extends Component {
 
     })
 
-    signUpDialogSubject.subscribe(({dialogMsg, showDialog, signUpComplete}) => {
+  } //componentDidMount
 
-      this.setState({
-        dialogMsg,
-        showDialog,
-        signUpComplete
-      })
 
-    })
-
-    window.paypalCheckoutReady = () => {
-
-      if (this.state.showMemberShipSelections) {
-        pricingOptions.forEach((pricing) => {
-
-          placeButton({
-
-            price: pricing.price,
-            elementKey: `${pricing.id}-button`,
-            membershipName: pricing.title
-          })
-
-        })
-      }
-      ;
-
-    }
-
-  }
-
-  signUp() {
-
-    var fields = [...document.getElementsByClassName('sign-up-form-feild')];
-
-    var userSignUpInfo = fields.reduce((info, inputField) => {
-
-      info[inputField.name] = inputField.value
-
-      return info;
-
-    }, {})
-
-    this.setState({
-      showLoader: true
-    })
-
-    userService
-
-      .signUpCoChewer(userSignUpInfo)
-
-      .subscribe((signUpCoChewerResponse) => {
-
-        var {userResponse} = signUpCoChewerResponse;
-
-        if (userResponse._id) {
-
-          userService.storeSignUpInfo(userResponse)
-
-          var {memberShipInfo} = userResponse;
-
-          var {paymentAuth} = memberShipInfo;
-
-          var {token} = paymentAuth;
-
-          //alert("thanks for signing up check your email for next steps")
-
-          this.setState({
-            signUpData: userResponse,
-            showMemberShipSelections: true,
-            showLoader: false
-          }, () => {
-
-            pricingOptions.forEach((pricing) => {
-
-              placeButton({
-
-                price: pricing.price,
-                elementKey: `${pricing.id}-button`,
-                membershipName: pricing.title
-              })
-
-            })
-          })
-
-        /*userResponse._id*/
-        } else { /*!userResponse._id*/
-
-          this.setState({
-            showLoader: false,
-            showDialog: true,
-            dialogMsg: userResponse.msg
-          })
-
-        }
-
-      })
-  }
 
   handleClose = () => {
 
@@ -223,6 +134,19 @@ class BuildYourProfile extends Component {
             <div className='row'>
               <div className='col-sm-12'>
                 <textarea placeholder="Introduce yourself so we know a little about you…" name="info" className="form-control sign-up-form-feild" />
+              </div>
+            </div>
+            <br/>
+            <div className='row'>
+              <div className='col-sm-12'>
+                <button onClick={ (event) => {
+                                    var signUpData = userService.getSignUpData()
+                                  
+                                    window.location.hash = `M3mberships?id=${signUpData._id}`
+                                  
+                                  } } className="btn btn-info">
+                  NEXT
+                </button>
               </div>
             </div>
           </div>
