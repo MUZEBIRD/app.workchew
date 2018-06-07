@@ -57,8 +57,6 @@ class BuildYourProfile extends Component {
 
   } //componentDidMount
 
-
-
   handleClose = () => {
 
     this.setState({
@@ -104,13 +102,13 @@ class BuildYourProfile extends Component {
               <div className='flex-1'>
                 <div className='row'>
                   <div className='col-sm-12'>
-                    <input placeholder="First Name" name="firstName" className="form-control sign-up-form-feild" />
+                    <input placeholder="First Name" name="firstName" className="form-control sign-up-build-form-feild" />
                   </div>
                 </div>
                 <br/>
                 <div className='row'>
                   <div className='col-sm-12'>
-                    <input placeholder="Last Name" name="lastName" className="form-control sign-up-form-feild" />
+                    <input placeholder="Last Name" name="lastName" className="form-control sign-up-build-form-feild" />
                   </div>
                 </div>
               </div>
@@ -120,20 +118,20 @@ class BuildYourProfile extends Component {
               <div className='flex-1'>
                 <div className='row'>
                   <div className='col-sm-12'>
-                    <input placeholder="Location" name="location" className="form-control sign-up-form-feild" />
+                    <input placeholder="Location" name="location" className="form-control sign-up-build-form-feild" />
                   </div>
                 </div>
                 <br/>
                 <div className='row'>
                   <div className='col-sm-12'>
-                    <input placeholder="Email" name="email" className="form-control sign-up-form-feild" />
+                    <input placeholder="Email" name="email" className="form-control sign-up-build-form-feild" />
                   </div>
                 </div>
               </div>
             </div>
             <div className='row'>
               <div className='col-sm-12'>
-                <textarea placeholder="Introduce yourself so we know a little about you…" name="info" className="form-control sign-up-form-feild" />
+                <textarea placeholder="Introduce yourself so we know a little about you…" name="info" className="form-control sign-up-build-form-feild" />
               </div>
             </div>
             <br/>
