@@ -36,6 +36,9 @@ class BuildYourProfile extends Component {
 
     var signUpData = userService.getSignUpData()
 
+
+
+
     console.log('signUpData', signUpData)
 
     this.state = {
