@@ -139,7 +139,7 @@ var onUserSignUpInfo = function(userSignUpInfo) {
 
   if (userSignUpInfo.password && userSignUpInfo.password.length) {
 
-    var {email, password, userName, info} = userSignUpInfo
+    var {email, password, info} = userSignUpInfo
 
 
     return bcryptStream.hashUserPassword(password)
@@ -149,7 +149,6 @@ var onUserSignUpInfo = function(userSignUpInfo) {
         return {
           email,
           password: hashedPassword,
-          userName,
           info,
           created: new Date().getTime()
         }

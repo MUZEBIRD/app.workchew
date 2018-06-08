@@ -144,11 +144,12 @@ class UserSignUpSocial extends Component {
 
     var {profileObj, accessToken} = response
 
-    var {email, givenName, FamilyName, googleId, imageUrl, name} = profileObj
+    var {email, givenName, familyName, googleId, imageUrl, name} = profileObj
 
     var userSignUpInfo = {
       ...{
-        name,
+        firstName: givenName,
+        lastName: familyName,
         accessToken,
         email,
         googleId
@@ -157,6 +158,7 @@ class UserSignUpSocial extends Component {
     }
 
     this.signUp(userSignUpInfo)
+
   }
 
   responseFacebook = (response) => {
@@ -167,8 +169,8 @@ class UserSignUpSocial extends Component {
 
     var userSignUpInfo = {
       ...{
-        first_name,
-        last_name,
+        firstName: first_name,
+        lastName: last_name,
         accessToken,
         email
       },
