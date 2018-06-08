@@ -34,21 +34,36 @@ class BuildYourProfile extends Component {
 
     var {id} = queryParams;
 
-    var signUpData = userService.getSignUpData()
-
-
-
-
-    console.log('signUpData', signUpData)
-
     this.state = {
 
-      queryParams,
+      queryParams
     }
 
   }
 
   componentDidMount() {
+
+    var signUpData = userService.getSignUpData()
+
+    console.log('signUpData', signUpData)
+
+    var {email, firstName, lastName, location} = signUpData;
+
+    var fields = [...document.getElementsByClassName('sign-up-build-form-feild')];
+
+    fields.forEach((inputField) => {
+
+      if (signUpData[inputField.name]) {
+
+        inputField.value = signUpData[inputField.name]
+        if (inputField.name == "location") {
+
+          inputField.value = location.name
+
+        }
+      }
+
+    }, {})
 
     loaderStream.subscribe((showLoader) => {
 
@@ -134,7 +149,7 @@ class BuildYourProfile extends Component {
             </div>
             <div className='row'>
               <div className='col-sm-12'>
-                <textarea placeholder="Introduce yourself so we know a little about you…" name="info" className="form-control sign-up-build-form-feild" />
+                <textarea placeholder="Introduce yourself so we know a little about you…" name="summary" className="form-control sign-up-build-form-feild" />
               </div>
             </div>
             <br/>
