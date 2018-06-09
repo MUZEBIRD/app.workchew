@@ -255,22 +255,22 @@ var login = function(query) {
 
 }
 
-var update = function(user) {
+var update = function(userUpdateData) {
 
   var query = {
-    _id: user._id
+    _id: userUpdateData._id
   }
 
   return db.get(userCollectionName, query)
 
     .switchMap((getResponse) => {
 
-      var userUpdate = _.extend(getResponse[0], user)
+      var userUpdate = _.extend(getResponse[0], userUpdateData)
 
       return db
 
         .update(userCollectionName, userUpdate, {
-          _id: user._id
+          _id: userUpdateData._id
         })
 
     })

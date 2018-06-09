@@ -91,8 +91,6 @@ var update = function(collectionName, dataDocument, witch) {
 
 }
 
-
-
 var get = function(collectionName, query) {
 
   if (query._id) {

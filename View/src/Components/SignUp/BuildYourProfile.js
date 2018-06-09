@@ -51,13 +51,29 @@ class BuildYourProfile extends Component {
 
       return info;
 
-    }, {})
+    }, {
+      _id: this.state.queryParams.id
+    })
 
     console.log(userProfileUpdate);
 
+    userService
 
+      .put(userProfileUpdate)
 
-  }
+      .subscribe((updateUserResponse) => {
+
+        console.log('updateUserResponse', updateUserResponse);
+
+        var {userResponse} = updateUserResponse;
+
+        userService.storeSignUpInfo(userResponse)
+
+        window.location.hash = `M3mberships?id=${userResponse._id}`
+
+      })
+
+  } //updateUser
 
   componentDidMount() {
 
@@ -73,12 +89,14 @@ class BuildYourProfile extends Component {
 
       if (signUpData[inputField.name]) {
 
-        inputField.value = signUpData[inputField.name]
+        inputField.value = signUpData[inputField.name];
+
         if (inputField.name == "location") {
 
           inputField.value = location.name
 
         }
+
       }
 
     }, {})
@@ -176,7 +194,7 @@ class BuildYourProfile extends Component {
                 <button onClick={ (event) => {
                                     var signUpData = userService.getSignUpData()
                                   
-                                    window.location.hash = `M3mberships?id=${signUpData._id}`
+                                    this.updateUser();
                                   
                                   } } className="btn btn-info">
                   NEXT

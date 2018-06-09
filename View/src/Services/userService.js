@@ -54,6 +54,10 @@ var userService = {
     return restService.get(getUserUrl)
 
   },
+  updateProfile: () => {
+
+
+  },
   delete: (userInfo) => {
 
     var deleteBusinessUrl = `${urlService.user}?_id=${userInfo._id}`;
@@ -62,15 +66,15 @@ var userService = {
 
   },
   post: (userInfo) => {
-
     return restService.post(urlService.user, userInfo)
-
   },
 
   put: (userInfo) => {
-    return restService.put(urlService.user, userInfo)
 
+    return restService.put(urlService.user, userInfo)
+    
   },
+
   logOut: () => {
 
     localStorage.clear();
