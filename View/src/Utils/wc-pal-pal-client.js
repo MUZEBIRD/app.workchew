@@ -93,22 +93,17 @@ var placeButton = function(config) {
 
       var signUpData = userService.getSignUpData();
 
-      var memberShipInfo = signUpData.memberShipInfo
-
-      var paymentAuth = memberShipInfo.paymentAuth
-
-      var token = paymentAuth.token;
-
       return actions.payment.create({
         transactions: [{
+          description: `${membershipName} for: ${signUpData.email}`,
           amount: {
             total: price,
             currency: 'USD'
           },
-          custom: token,
           item_list: {
             items: [{
-              name: membershipName,
+              name: `${membershipName}`,
+              description: `${membershipName} for: ${signUpData.email}`,
               price: price,
               quantity: 1,
               currency: "USD"
@@ -127,12 +122,9 @@ var placeButton = function(config) {
 
       var memberShipInfo = signUpData.memberShipInfo
 
-      var paymentAuth = memberShipInfo.paymentAuth
-
-      var token = paymentAuth.token;
-
       return actions.payment.execute().then(function() {
-        data.token = token;
+
+        console.log("actions", actions, data)
 
         verifyPayPalTransaction(data)
 

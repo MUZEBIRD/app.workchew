@@ -35,7 +35,6 @@ class M3mberships extends Component {
     this.state = {
       showDialog: false,
       queryParams,
-      showMemberShipSelections: true
     }
 
   }
@@ -44,19 +43,16 @@ class M3mberships extends Component {
 
     window.paypalCheckoutReady = () => {
 
-      if (this.state.showMemberShipSelections) {
-        pricingOptions3.forEach((pricing) => {
+      pricingOptions3.forEach((pricing) => {
 
-          placeButton({
+        placeButton({
 
-            price: pricing.price,
-            elementKey: `${pricing.id}-button`,
-            membershipName: pricing.title
-          })
-
+          price: pricing.price,
+          elementKey: `${pricing.id}-button`,
+          membershipName: pricing.title
         })
-      }
-      ;
+
+      })
 
     }
 
