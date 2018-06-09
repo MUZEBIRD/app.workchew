@@ -41,6 +41,24 @@ class BuildYourProfile extends Component {
 
   }
 
+  updateUser() {
+
+    var fields = [...document.getElementsByClassName('sign-up-build-form-feild')];
+
+    var userProfileUpdate = fields.reduce((info, inputField) => {
+
+      info[inputField.name] = inputField.value
+
+      return info;
+
+    }, {})
+
+    console.log(userProfileUpdate);
+
+
+
+  }
+
   componentDidMount() {
 
     var signUpData = userService.getSignUpData()
