@@ -21,7 +21,6 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import './signUp.css';
 
-
 export const signUpDialogSubject = new Subject();
 
 class M3mberships extends Component {
@@ -41,6 +40,14 @@ class M3mberships extends Component {
 
   componentDidMount() {
 
+    loaderStream.subscribe((showLoader) => {
+
+      this.setState({
+        showLoader
+      })
+
+    })
+
     window.paypalCheckoutReady = () => {
 
       pricingOptions3.forEach((pricing) => {
@@ -50,13 +57,25 @@ class M3mberships extends Component {
           price: pricing.price,
           elementKey: `${pricing.id}-button`,
           membershipName: pricing.title
+
         })
 
       })
 
     }
 
-  }
+    signUpDialogSubject.subscribe(({dialogMsg, showDialog, signUpComplete}) => {
+
+      this.setState({
+        dialogMsg,
+        showDialog,
+        signUpComplete
+      })
+
+    })
+
+
+  } //componentDidMount
 
   handleClose = () => {
 

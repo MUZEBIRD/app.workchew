@@ -4,14 +4,17 @@ import userService from '../Services/userService.js'
 
 import { loaderStream } from '../Components/shared/workLoader'
 
-import { signUpDialogSubject } from '../Components/SignUp/UserSignUp'
+import { signUpDialogSubject } from '../Components/SignUp/M3mberships'
 
 
-var verifyPayPalTransaction = function(paypalTransactionData) {
+var verifyPayPalTransaction = function(paypalTransactionData, signUpData) {
   loaderStream.next(true)
 
   restService
     .post(urlService.payPal, {
+
+      signUpData,
+
       paypalTransactionData,
 
     }, {
@@ -23,7 +26,6 @@ var verifyPayPalTransaction = function(paypalTransactionData) {
       loaderStream.next(false)
 
       var signUpMessage = "Sign up error try again"
-
 
       var {getPaymentStream} = verifyPayPalTransactionResponse
 
@@ -126,7 +128,7 @@ var placeButton = function(config) {
 
         console.log("actions", actions, data)
 
-        verifyPayPalTransaction(data)
+        verifyPayPalTransaction(data, signUpData)
 
       });
     }
