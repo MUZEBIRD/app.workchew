@@ -208,7 +208,7 @@ class UserSignUpSocial extends Component {
           email: profile.emailAddress,
           linkedInPictureUrl: profile.pictureUrls.values[0],
           profileUrl: profile.publicProfileUrl,
-          location: profile.location,
+          location: profile.location.name,
 
         }
 

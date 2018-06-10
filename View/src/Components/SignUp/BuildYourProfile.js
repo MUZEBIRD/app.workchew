@@ -91,12 +91,6 @@ class BuildYourProfile extends Component {
 
         inputField.value = signUpData[inputField.name];
 
-        if (inputField.name == "location") {
-
-          inputField.value = location.name
-
-        }
-
       }
 
     }, {})
