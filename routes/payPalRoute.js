@@ -12,6 +12,8 @@ router.post('/', ({body}, res) => {
 
   var paymentID = paypalTransactionData.paymentID
 
+  var {signUpData, paypalTransactionData} = body;
+
   payPalWCNodeCLient
 
     .getPayment(paymentID)
@@ -32,7 +34,7 @@ router.post('/', ({body}, res) => {
       var custom = transaction.custom;
 
       return userService.get({
-        'memberShipInfo.paymentAuth.token': custom
+        '_id': signUpData._id
       })
 
     })

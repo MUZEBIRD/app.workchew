@@ -94,7 +94,7 @@ class M3mberships extends Component {
                                                                                this.handleClose()
                                                                              
                                                                                if (this.state.signUpComplete) {
-                                                                                 window.location.reload(true);
+                                                                                 window.location.hash = "login"
                                                                                }
                                                                              
                                                                              } } />
