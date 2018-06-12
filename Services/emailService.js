@@ -5,8 +5,6 @@ var rx = require('rxjs');
 
 // Worckchew2018#
 
-// mb@workchew.com
-
 var sendEmail = function(emailData) {
 
   let smtpConfig = {
@@ -28,7 +26,7 @@ var sendEmail = function(emailData) {
   //   }
   // };
 
-  //  var transporter = nodemailer.createTransport('smtps://jtvents@gmail.com:sethwins@smtp.gmail.com');
+  //var transporter = nodemailer.createTransport('smtps://jtvents@gmail.com:sethwins@smtp.gmail.com');
   //var transporter = nodemailer.createTransport('smtps://hello@workchew.com:WorkWorkChew1@@smtpout.secureserver.net');
   var transporter = nodemailer.createTransport(smtpConfig);
 

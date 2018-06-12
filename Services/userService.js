@@ -29,6 +29,23 @@ var post = function(user) {
 
             if (userSearchStream.length) {
 
+              var keys = Object.keys(userSignUpInfo);
+
+              console.log("keyskeyskeyskeyskeyskeyskeyskeyskeyskeyskeyskeyskeyskeyskeys", keys)
+
+              var SocialLogin = keys.includes('linkedInId') || keys.includes('facebookUserId') || keys.includes('googleId')
+
+              console.log("SocialLoginSocialLoginSocialLoginSocialLogin", SocialLogin)
+
+              if (SocialLogin) {
+
+                return Rx.Observable.of({
+
+                  user: userSearchStream[0]
+                })
+
+              }
+
               return Rx.Observable.of({
                 msg: 'user with that email exsist',
                 user: userSearchStream[0]

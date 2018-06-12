@@ -8,6 +8,10 @@ import userService from '../Services/userService.js'
 
 import urlService from '../Services/urlService.js'
 
+import FacebookLogin from 'react-facebook-login';
+
+import GoogleLogin from 'react-google-login';
+
 class Login extends Component {
 
   constructor(props) {
@@ -93,104 +97,16 @@ class Login extends Component {
 
             if (err) {
 
-
               this.showAlert({
                 text: "log in error",
                 class: "danger"
               })
             }
 
-
           })
 
   }
 
-  signUp() {
-
-    var email = document.getElementById('userEmail').value
-
-    var password = document.getElementById('userPassword').value
-
-    if (email && password) signUpService
-
-        .post({
-
-          email,
-          password
-        })
-
-        .subscribe((SignUpResponse) => {
-
-          if (SignUpResponse.msg) {
-
-            this.showAlert(SignUpResponse.msg)
-
-
-          }
-
-          if (SignUpResponse.user && SignUpResponse.user._id) {
-
-            userService.store(SignUpResponse.user)
-
-            urlService.goTo(urlService.main)
-
-          }
-
-        },
-          (err) => {
-
-            if (err) {
-
-              this.showAlert({
-                text: "sign up error",
-                class: "danger"
-              })
-
-            }
-
-
-          })
-
-    else signUpService
-
-        .post({
-
-          email: 'seth',
-
-          password: ''
-
-        })
-
-        .subscribe((SignUpResponse) => {
-
-          if (SignUpResponse.msg) {
-
-            this.showAlert(SignUpResponse.msg)
-
-          }
-
-          if (SignUpResponse.user && SignUpResponse.user._id) {
-
-            userService.store(SignUpResponse.user)
-
-            urlService.goTo(urlService.main)
-
-          }
-
-        },
-          (err) => {
-
-            if (err) {
-
-              this.showAlert({
-                text: "sign up error dude",
-                class: "danger"
-              })
-            }
-
-          })
-
-  }
   goToCoChewerSignUp() {
 
     urlService.goTo(urlService.coChewerSignUp)
@@ -242,26 +158,58 @@ class Login extends Component {
             </div>
           </div>
         </div>
-        <div className="row">
-          <div className="col-sm-4"></div>
-          <div className="col-sm-4">
-            <input placeholder='Email' id='userEmail' className="form-control input-lg text-center" />
+        <div className='d-flex' style={ { backgroundColor: 'white', position: 'relative', zIndex: '5' } }>
+          <div className='flex-1'>
             <br/>
-            <input type='password' placeholder='Password' id='userPassword' className="form-control input-lg text-center" />
+            <br/>
+            <FacebookLogin autoLoad={ false } appId="1755466141213974" fields="email,picture,first_name,last_name" callback={ this.responseFacebook } />
+            <br/>
+            <br/>
+            <GoogleLogin clientId="198825134082-5l64c1opmt10ts62nm7ka7dssev9iok9.apps.googleusercontent.com" buttonText="Login with Google" onSuccess={ this.responseGoogle } onFailure={ this.responseGoogle }
+            />
+            <br/>
+            <br/>
+            <button onClick={ (event) => {
+                              
+                                window['IN'].User.authorize((responseLinkedin) => {
+                              
+                                  this.responseLinkedin(responseLinkedin)
+                              
+                                });
+                              
+                              } } className={ "linkedin-button" }>
+            </button>
+          </div>
+          <p>
+            or
+          </p>
+          <div className='flex-1'>
+            <br/>
+            <br/>
+            <div className='row'>
+              <div className='col-sm-3'></div>
+              <div className='col-sm-6'>
+                <input placeholder='Email' id='userEmail' className="form-control input-lg text-center" />
+              </div>
+            </div>
+            <br/>
+            <div className='row'>
+              <div className='col-sm-3'></div>
+              <div className='col-sm-6'>
+                <input type='password' placeholder='Password' id='userPassword' className="form-control input-lg text-center" />
+              </div>
+            </div>
+            <br/>
+            <div className='d-flex justify-content-center'>
+              <button className="btn btn-info" onClick={ () => {
+                                                           this.login()
+                                                         } }>
+                Login
+              </button>
+            </div>
           </div>
         </div>
         <br/>
-        <div className="row">
-          <div className="col-sm-4"></div>
-          <div className="col-sm-1"></div>
-          <div className="col-sm-2">
-            <button className="btn btn-info" onClick={ () => {
-                                                         this.login()
-                                                       } }>
-              Login
-            </button>
-          </div>
-        </div>
         <br/>
         <br/>
         <br/>

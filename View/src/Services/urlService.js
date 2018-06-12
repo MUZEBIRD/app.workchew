@@ -8,7 +8,7 @@ export default {
   main: `/`,
   loginPage: `/Login`,
   viewUserPage: `/view-user`,
-  coChewerSignUp: `/co-chewer-signUp`,
+  coChewerSignUp: `/co-chewer-signUp-social`,
   businessSignUp: `/business-signup`,
   viewBusinessPage: `/view-business`,
   partnerPage: `/partner-page`,
