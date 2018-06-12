@@ -107,6 +107,155 @@ class Login extends Component {
 
   }
 
+
+
+  socialSignUp(userSignUpInfo) {
+
+    this.setState({
+      showLoader: true
+    })
+
+    userService
+
+      .signUpCoChewer(userSignUpInfo)
+
+      .subscribe((signUpCoChewerResponse) => {
+
+        var {userResponse} = signUpCoChewerResponse;
+
+        if (userResponse._id) {
+
+          var {memberShipInfo} = userResponse;
+
+          var {paymentAuth} = memberShipInfo;
+
+          var {token} = paymentAuth;
+
+          this.setState({
+            signUpData: userResponse,
+            showLoader: false
+          }, () => {
+
+            // window.location.hash = "m3mberships"
+            window.location.hash = `/`
+
+          })
+
+        /*userResponse._id*/
+        } else if (userResponse.user && userResponse.user._id) { /*userResponse.user*/
+
+          window.location.hash = `/`
+
+
+        } else {
+
+
+          this.setState({
+            showLoader: false,
+            showDialog: true,
+            dialogMsg: userResponse.msg
+          })
+
+
+        }
+
+      })
+  }
+
+
+
+
+
+
+
+
+
+  responseGoogle = (response) => {
+
+    console.log(response);
+
+    var {profileObj, accessToken} = response
+
+    var {email, givenName, familyName, googleId, imageUrl, name} = profileObj
+
+    var userSignUpInfo = {
+      ...{
+        firstName: givenName,
+        lastName: familyName,
+        accessToken,
+        email,
+        googleId
+      },
+      googleImgUrl: imageUrl
+    }
+
+    this.socialSignUp(userSignUpInfo)
+
+  }
+
+  responseFacebook = (response) => {
+
+    console.log(response);
+
+    var {accessToken, email, first_name, last_name, userID, picture: {data: {url}}} = response
+
+    var userSignUpInfo = {
+      ...{
+        firstName: first_name,
+        lastName: last_name,
+        accessToken,
+        email
+      },
+      facebookUserId: userID,
+      facebookImgUrl: url
+    }
+
+    this.socialSignUp(userSignUpInfo)
+
+  }
+
+  responseLinkedin = (response) => {
+
+
+    // Use the API call wrapper to request the member's basic profile data
+    window.IN.API.Profile("me").fields("id,firstName,lastName,summary,specialties,headline,email-address,picture-urls::(original),public-profile-url,location:(name)")
+      .result((me) => {
+        var profile = me.values[0];
+        var id = profile.id;
+        var firstName = profile.firstName;
+        var lastName = profile.lastName;
+        var emailAddress = profile.emailAddress;
+        var pictureUrl = profile.pictureUrls.values[0];
+        var profileUrl = profile.publicProfileUrl;
+        var country = profile.location.name;
+
+        console.log("mememememe", me)
+
+        var userSignUpInfo = {
+          linkedInId: id,
+          headline: profile.headline,
+          summary: profile.summary,
+          firstName: profile.firstName,
+          lastName: profile.lastName,
+          email: profile.emailAddress,
+          linkedInPictureUrl: profile.pictureUrls.values[0],
+          profileUrl: profile.publicProfileUrl,
+          location: profile.location.name,
+
+        }
+
+        this.socialSignUp(userSignUpInfo)
+
+
+      });
+
+  }
+
+
+
+
+
+
   goToCoChewerSignUp() {
 
     urlService.goTo(urlService.coChewerSignUp)

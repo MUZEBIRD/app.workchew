@@ -20,6 +20,7 @@ import { Subject } from 'rxjs'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import './signUp.css';
+
 import FacebookLogin from 'react-facebook-login';
 
 import GoogleLogin from 'react-google-login';
