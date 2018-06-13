@@ -1,8 +1,9 @@
 const API_ROOT = window.location.port == 3000 ? "http://localhost:8080" : ""
+export const CALL_API = 'Call API'
 
 const callApi = (endpoint, config = {}) => {
 
-  const fullUrl = `${API_ROOT}${endpoint}`
+  const fullUrl = addQueryParams(`${API_ROOT}${endpoint}`, config.query)
 
   var responseType = "json"
 
@@ -20,7 +21,11 @@ const callApi = (endpoint, config = {}) => {
         return Promise.reject(json)
       }
 
-      return Object.assign({}, json)
+      return Object.assign({
+        type: "GET_PARTNER_SUCCESS"
+      }, {
+        data: json
+      })
     }))
 }
 
@@ -37,19 +42,22 @@ var addQueryParams = (url, config) => {
 
 }
 
-const partnersApiUrl = `${API_ROOT}/partners`
+const partnersApiPath = `/partners`
 
 export default store => next => action => {
 
   switch (action.type) {
 
+
     case "GET_PARTNER": {
 
-      return callApi(partnersApiUrl)
+      return callApi(partnersApiPath, action.config).then(next)
+
     }
     case "GET_PARTNERS": {
 
-      return callApi(partnersApiUrl)
+      return callApi(partnersApiPath, action.config).then(next)
+
     }
     default:
       return next(action)

@@ -16,6 +16,8 @@ const payPal = require('./payPalRoute')
 
 fs = require('fs')
 
+router.use('/Partners', Business)
+
 router.use('/Business', Business)
 
 router.use('/Login', Login)

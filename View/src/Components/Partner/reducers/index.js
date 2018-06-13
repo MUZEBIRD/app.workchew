@@ -10,9 +10,15 @@ export const partners = (state = {
 
     case "GET_PARTNER_SUCCESS": {
 
+      console.log("GET_PARTNER_SUCCESS", state, action)
+
+      var [current] = action.data
+
       return {
         ...state,
+        current
       }
+
     }
     case "GET_PARTNERS_SUCCESS": {
 

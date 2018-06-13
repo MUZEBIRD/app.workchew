@@ -2,7 +2,6 @@ var getPathVariables = () => {
 
   var [path, id] = window.location.pathname.split('/');
 
-
   return {
     path,
     id

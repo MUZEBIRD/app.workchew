@@ -20,7 +20,7 @@ const configureStore = preloadedState => {
   const store = createStore(
     rootReducer,
     // preloadedState,
-    //  enhancer
+    enhancer
 
   )
 

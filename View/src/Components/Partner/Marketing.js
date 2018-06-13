@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+
+import { connect } from 'react-redux'
+
 import userService from '../../Services/userService.js'
 
 import { Route, Link } from 'react-router-dom'
@@ -7,17 +10,35 @@ import urlService from '../../Services/urlService.js'
 
 import BusinessService from '../../Services/businessService.js';
 
+import * as partnerActions from './actions'
+import { getQueryParams, getPathVariables } from '../../Utils'
+
+var {getPartner} = partnerActions
+
 class PartnerMarketingPage extends Component {
 
   constructor(props) {
+    var queryParams = getQueryParams()
 
     super(props);
 
-    this.state = {};
+    this.state = {
+      queryParams
+    };
 
   }
 
-  componentWillMount() {}
+  componentDidMount() {
+
+    if (this.state.queryParams && this.state.queryParams.id) {
+
+      this.props.getPartner({
+        query: {
+          _id: this.state.queryParams.id
+        }
+      })
+    }
+  }
 
   render() {
 
@@ -37,7 +58,7 @@ class PartnerMarketingPage extends Component {
                 WorkChew Hours:
               </div>
               <div className='col-md-6'>
-                <input className="form-control input-lg" />
+                <textarea rows="5" className="form-control input-lg" />
               </div>
             </div>
             <br/>
@@ -72,5 +93,14 @@ class PartnerMarketingPage extends Component {
   }
 
 }
+
+const mapStateToProps = (state, ownProps) => ({
+  business: state.business
+})
+
+const PartnerMarketingPageComponent = connect(mapStateToProps, {
+  getPartner
+})(PartnerMarketingPage)
+
 //<FlexTable items={ this.state.businesses } selectItem={ this.selectBusiness } getTableEntry={ this.getTableEntry } tableRows={ this.tableRows } />
-export default PartnerMarketingPage;
+export default PartnerMarketingPageComponent;

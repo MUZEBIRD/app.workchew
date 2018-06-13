@@ -29,7 +29,8 @@ class M3mberships extends Component {
 
     super(props);
 
-    var queryParams = getQueryParams()
+
+var queryParams = getQueryParams()
 
     this.state = {
       showDialog: false,
