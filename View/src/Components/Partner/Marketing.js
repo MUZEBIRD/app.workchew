@@ -34,15 +34,6 @@ class PartnerMarketingPage extends Component {
           <div className='flex-1 scroll-y'>
             <div className='row'>
               <div className='col-md-6'>
-                Days
-              </div>
-              <div className='col-md-6'>
-                <textarea className="form-control input-lg" />
-              </div>
-            </div>
-            <br/>
-            <div className='row'>
-              <div className='col-md-6'>
                 WorkChew Hours:
               </div>
               <div className='col-md-6'>
@@ -61,25 +52,7 @@ class PartnerMarketingPage extends Component {
             <br/>
             <div className='row'>
               <div className='col-md-6'>
-                # of Allotted Seats: WorkChew Hours:
-              </div>
-              <div className='col-md-6'>
-                <input className="form-control input-lg" />
-              </div>
-            </div>
-            <br/>
-            <div className='row'>
-              <div className='col-md-6'>
                 Additional Specials:
-              </div>
-              <div className='col-md-6'>
-                <textarea className="form-control input-lg" />
-              </div>
-            </div>
-            <br/>
-            <div className='row'>
-              <div className='col-md-6'>
-                WorkChew Hours:
               </div>
               <div className='col-md-6'>
                 <textarea className="form-control input-lg" />

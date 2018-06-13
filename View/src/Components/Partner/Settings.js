@@ -58,15 +58,6 @@ class PartnerSettingsPage extends Component {
                 <input className="form-control input-lg" />
               </div>
             </div>
-            <br/>
-            <div className='row'>
-              <div className='col-md-3'>
-                Password
-              </div>
-              <div className='col-md-6'>
-                <input className="form-control input-lg" />
-              </div>
-            </div>
             <br />
             <div className='d-flex justify-content-center'>
               <button className="btn btn-primary" type="button" aria-expanded="false">
@@ -81,5 +72,4 @@ class PartnerSettingsPage extends Component {
   }
 
 }
-//<FlexTable items={ this.state.businesses } selectItem={ this.selectBusiness } getTableEntry={ this.getTableEntry } tableRows={ this.tableRows } />
 export default PartnerSettingsPage;

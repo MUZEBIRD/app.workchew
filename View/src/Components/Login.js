@@ -107,8 +107,6 @@ class Login extends Component {
 
   }
 
-
-
   socialSignUp(userSignUpInfo) {
 
     this.setState({
@@ -146,9 +144,7 @@ class Login extends Component {
 
           window.location.hash = `/`
 
-
         } else {
-
 
           this.setState({
             showLoader: false,
@@ -156,19 +152,10 @@ class Login extends Component {
             dialogMsg: userResponse.msg
           })
 
-
         }
 
       })
   }
-
-
-
-
-
-
-
-
 
   responseGoogle = (response) => {
 
@@ -216,7 +203,6 @@ class Login extends Component {
 
   responseLinkedin = (response) => {
 
-
     // Use the API call wrapper to request the member's basic profile data
     window.IN.API.Profile("me").fields("id,firstName,lastName,summary,specialties,headline,email-address,picture-urls::(original),public-profile-url,location:(name)")
       .result((me) => {
@@ -250,11 +236,6 @@ class Login extends Component {
       });
 
   }
-
-
-
-
-
 
   goToCoChewerSignUp() {
 
