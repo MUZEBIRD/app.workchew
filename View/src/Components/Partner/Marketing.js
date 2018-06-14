@@ -23,7 +23,8 @@ class PartnerMarketingPage extends Component {
     super(props);
 
     this.state = {
-      queryParams
+      queryParams,
+
     };
 
   }
@@ -40,7 +41,32 @@ class PartnerMarketingPage extends Component {
     }
   }
 
+
+  updateCurrentPartnerState(update, key) {
+
+
+    console.log('updateCurrentPartnerState', update, key)
+
+    var partner = this.state.partner || this.props.partner
+
+
+    partner.hours = update;
+    this.setState({
+      partner
+    })
+
+  }
+
+  updatePartner() {
+
+
+    console.log('updatePartner', this.state.partner)
+
+  }
+
   render() {
+
+    var partner = this.state.partner || this.props.partner
 
     return (
 
@@ -58,7 +84,12 @@ class PartnerMarketingPage extends Component {
                 WorkChew Hours:
               </div>
               <div className='col-md-6'>
-                <textarea rows="5" className="form-control input-lg" />
+                <textarea value={ partner.hours } onChange={ (event) => {
+                                                             
+                                                             
+                                                               this.updateCurrentPartnerState(event.target.value, 'hours')
+                                                             
+                                                             } } rows="7" className="form-control input-lg" />
               </div>
             </div>
             <br/>
@@ -81,7 +112,7 @@ class PartnerMarketingPage extends Component {
             </div>
             <br />
             <div className='d-flex justify-content-center'>
-              <button className="btn btn-primary" type="button" aria-expanded="false">
+              <button onClick={ (event) => this.updatePartner() } className="btn btn-primary" type="button" aria-expanded="false">
                 update
               </button>
             </div>
@@ -95,7 +126,7 @@ class PartnerMarketingPage extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => ({
-  business: state.business
+  partner: state.partners.current
 })
 
 const PartnerMarketingPageComponent = connect(mapStateToProps, {
