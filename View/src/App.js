@@ -65,7 +65,7 @@ class App extends Component {
             <Route path="/search-businesses" component={ SearchBusinesses } />
             <Route path="/add-business" component={ AddBusiness } />
             <Route path="/view-business" component={ AddBusiness } />
-            <Route path="/admin-partner-page" component={ AddBusiness } />
+            <Route path="/admin-partner-page" component={ AdminPartnerPage } />
             <Route path="/users" component={ Users } />
             <Route path="/add-user" component={ AddUser } />
             <Route path="/view-user" component={ AddUser } />

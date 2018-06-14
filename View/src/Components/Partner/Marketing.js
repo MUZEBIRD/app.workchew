@@ -16,7 +16,7 @@ import ParnterInfoArea from './PartnerInfoArea'
 import { getQueryParams, getPathVariables } from '../../Utils'
 import * as partnerActions from './actions'
 
-var {getPartner} = partnerActions
+var {getPartner, putPartner} = partnerActions
 
 
 class PartnerMarketingPage extends Component {
@@ -143,7 +143,8 @@ const mapStateToProps = (state, ownProps) => ({
 })
 
 const PartnerMarketingPageComponent = connect(mapStateToProps, {
-  getPartner
+  getPartner,
+  putPartner
 })(PartnerMarketingPage)
 
 //<FlexTable items={ this.state.businesses } selectItem={ this.selectBusiness } getTableEntry={ this.getTableEntry } tableRows={ this.tableRows } />

@@ -143,42 +143,6 @@ class AdminPartnerPage extends Component {
               </div>
             </div>
             <br/>
-            <div className='row'>
-              <div className='col-md-6'>
-                # of Allotted Seats:
-              </div>
-              <div className='col-md-6'>
-                <input className="form-control input-lg" />
-              </div>
-            </div>
-            <br/>
-            <div className='row'>
-              <div className='col-md-6'>
-                Additional Specials:
-              </div>
-              <div className='col-md-6'>
-                <ParnterInfoArea onChange={ (event) => this.updateCurrentPartnerState(event.target.value, 'specials') } value={ partner.specials } />
-              </div>
-            </div>
-            <br />
-            <div className='row'>
-              <div className='col-md-6'>
-                Events
-              </div>
-              <div className='col-md-6'>
-                <ParnterInfoArea onChange={ (event) => this.updateCurrentPartnerState(event.target.value, 'events') } value={ partner.events } />
-              </div>
-            </div>
-            <br/>
-            <div className='row'>
-              <div className='col-md-6'>
-                Discounts
-              </div>
-              <div className='col-md-6'>
-                <ParnterInfoArea onChange={ (event) => this.updateCurrentPartnerState(event.target.value, 'discounts') } value={ partner.discounts } />
-              </div>
-            </div>
-            <br/>
           </div>
         </div>
       </div>

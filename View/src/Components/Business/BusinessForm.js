@@ -12,27 +12,7 @@ import { Subject } from 'rxjs'
 
 var updateSubject = new Subject()
 class BusinessForm extends Component {
-  list =[
 
-    {
-      keyName: 'seats',
-      props: ['customer', 'section']
-    },
-    {
-      keyName: 'discounts',
-      props: ['name', 'description']
-
-    },
-    {
-      keyName: 'tags',
-      props: ['text']
-    },
-    // {
-    //   keyName: 'weekday_text',
-    //   props: ['text']
-    // }
-
-  ]
 
   constructor(props) {
 
@@ -79,7 +59,6 @@ class BusinessForm extends Component {
       })
 
 
-    this.setSubjects()
 
   }
 
@@ -103,16 +82,6 @@ class BusinessForm extends Component {
 
       })
   }
-
-  setSubjects() {
-
-    this.list.forEach((list) => {
-
-      this.listenFor(list.keyName)
-
-    })
-
-  } //setSubjects
 
   setBusiness(id) {
 
@@ -148,19 +117,6 @@ class BusinessForm extends Component {
 
   }
 
-  buildUpdateMsg(business) {
-
-    return this.list.reduce((msg, list) => {
-
-      msg[`update${this.firstUpperCase(list.keyName)}`] = true;
-
-      msg[list.keyName] = business[list.keyName] || []
-
-      return msg;
-
-    }, {})
-  }
-
   setStateBusiness(business) {
 
     this.setState({
@@ -171,9 +127,9 @@ class BusinessForm extends Component {
 
       this.setObjectToInputsWithName(business)
 
-      var msg = this.buildUpdateMsg(business)
+      //var msg = this.buildUpdateMsg(business)
 
-      BusinessService.subject.next(msg)
+     // BusinessService.subject.next(msg)
 
     })
   }
@@ -472,6 +428,36 @@ class BusinessForm extends Component {
           </div>
           <div className='col-sm-10'>
             <textarea className="form-control business-text-feild" rows="8" name="hours" />
+          </div>
+          <br/>
+        </div>
+        <br/>
+        <div className="row">
+          <div className='col-sm-2'>
+            <span>Specials</span>
+          </div>
+          <div className='col-sm-10'>
+            <textarea className="form-control business-text-feild" rows="8" name="specials" />
+          </div>
+          <br/>
+        </div>
+        <br/>
+        <div className="row">
+          <div className='col-sm-2'>
+            <span>Discounts</span>
+          </div>
+          <div className='col-sm-10'>
+            <textarea className="form-control business-text-feild" rows="8" name="discounts" />
+          </div>
+          <br/>
+        </div>
+        <br/>
+        <div className="row">
+          <div className='col-sm-2'>
+            <span>Events</span>
+          </div>
+          <div className='col-sm-10'>
+            <textarea className="form-control business-text-feild" rows="8" name="events" />
           </div>
           <br/>
         </div>
