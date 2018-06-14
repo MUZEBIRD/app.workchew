@@ -10,13 +10,14 @@ import urlService from '../../Services/urlService.js'
 
 import BusinessService from '../../Services/businessService.js';
 
-import * as partnerActions from './actions'
+
+import ParnterInfoArea from './PartnerInfoArea'
+
 import { getQueryParams, getPathVariables } from '../../Utils'
+import * as partnerActions from './actions'
 
 var {getPartner} = partnerActions
 
-
-const ParnterInfoArea = (props) => (<textarea value={ props.value } onChange={ props.onChange } rows="7" className="form-control input-lg" />)
 
 class PartnerMarketingPage extends Component {
 
