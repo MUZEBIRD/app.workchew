@@ -45,6 +45,11 @@ class MainMapForm extends Component {
       markers: []
     };
 
+
+  }
+
+  componentDidMount() {
+
     this.getGeo()
 
     var time = setInterval(() => {
@@ -54,16 +59,12 @@ class MainMapForm extends Component {
         this.onGeoAndMap()
 
         console.log('DONE', window['google'], refs.map)
-        clearInterval(time);
+      //clearInterval(time);
       }
 
     }, 1000)
 
-
-
   }
-
-
 
   onBoundsChanged() {
 
@@ -116,6 +117,8 @@ class MainMapForm extends Component {
 
     var google = window['google']
     const bounds = new google.maps.LatLngBounds();
+
+    console.log("fsdafsdafsadfsadfsdaf", bounds, this.state)
 
     if (bounds && this.state.geo) {
 
