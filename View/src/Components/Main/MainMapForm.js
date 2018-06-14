@@ -59,7 +59,7 @@ class MainMapForm extends Component {
         this.onGeoAndMap()
 
         console.log('DONE', window['google'], refs.map)
-      //clearInterval(time);
+        clearInterval(time);
       }
 
     }, 1000)

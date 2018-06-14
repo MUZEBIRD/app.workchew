@@ -239,7 +239,7 @@ class PublicBusinessView extends Component {
               <Topbar title={ business.name } />
               <div className="row h-25">
                 <div className="col-md-12">
-                  <img class="h-100" src={ business.bannerSrc } />
+                  <img className="h-100" src={ business.bannerSrc } />
                 </div>
               </div>
               <div className="row">
