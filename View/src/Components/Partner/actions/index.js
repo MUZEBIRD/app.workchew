@@ -1,19 +1,47 @@
-import { CALL_API } from '../middleware/'
-
-
 export const GET_PARTNER = 'GET_PARTNER'
-export const GET_PARTNER_SUCCESS = 'GET_PARTNER_SUCCESS'
-export const GET_PARTNER_FAILURE = 'GET_PARTNER_FAILURE'
-
-const partnersPath = "/partners"
-
-const getPartnersActionCreator = (config) => ({
-
-  type: GET_PARTNER,
-  config
-})
 
 export const getPartner = (config) => (dispatch, getState) => {
 
-  return dispatch(getPartnersActionCreator(config))
+  return dispatch({
+
+    type: GET_PARTNER,
+    config
+  })
+
+}
+
+export const GET_PARTNERS = 'GET_PARTNERS'
+
+export const getPartners = (config) => (dispatch, getState) => {
+
+  return dispatch({
+
+    type: GET_PARTNERS,
+    config
+  })
+
+}
+
+export const POST_PARTNER = 'POST_PARTNER'
+
+export const postPartner = (config) => (dispatch, getState) => {
+
+  return dispatch({
+
+    type: POST_PARTNER,
+    config
+  })
+
+}
+
+export const PUT_PARTNER = 'PUT_PARTNER'
+
+export const putPartner = (config) => (dispatch, getState) => {
+
+  return dispatch({
+
+    type: PUT_PARTNER,
+    config
+  })
+
 }
