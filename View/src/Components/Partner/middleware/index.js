@@ -21,11 +21,8 @@ const callApi = (endpoint, config = {}) => {
         return Promise.reject(json)
       }
 
-      return Object.assign({
-        type: "GET_PARTNER_SUCCESS"
-      }, {
-        data: json
-      })
+      return Object.assign({}, json)
+
     }))
 }
 
@@ -48,16 +45,38 @@ export default store => next => action => {
 
   switch (action.type) {
 
-
     case "GET_PARTNER": {
 
-      return callApi(partnersApiPath, action.config).then(next)
+      return callApi(partnersApiPath, action.config)
+        .then(data => ({
+          type: "GET_PARTNER_SUCCESS",
+          data
+        }))
 
     }
     case "GET_PARTNERS": {
 
-      return callApi(partnersApiPath, action.config).then(next)
+      return callApi(partnersApiPath, action.config)
+        .then(data => ({
+          type: "GET_PARTNERS_SUCCESS",
+          data
+        }))
+    }
+    case "POST_PARTNER": {
 
+      return callApi(partnersApiPath, action.config)
+        .then(data => ({
+          type: "POST_PARTNER_SUCCESS",
+          data
+        }))
+    }
+    case "PUT_PARTNER": {
+
+      return callApi(partnersApiPath, action.config)
+        .then(data => ({
+          type: "PUT_PARTNER_SUCCESS",
+          data
+        }))
     }
     default:
       return next(action)
