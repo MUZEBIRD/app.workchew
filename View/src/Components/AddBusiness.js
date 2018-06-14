@@ -22,6 +22,10 @@ import BusinessDiscountWidget from './Business/BusinessDiscountWidget.js'
 import DiscountListWidget from './Business/DiscountListWidget.js'
 
 import { ListInputWidget } from './shared/';
+import ParnterInfoArea from './Partner/PartnerInfoArea'
+
+
+
 
 const addBusinessSubject = new Subject();
 
@@ -32,6 +36,7 @@ class AddBusiness extends Component {
     super(props);
 
     this.state = {
+      partner: {},
       business: {
 
         discounts: [
@@ -84,6 +89,7 @@ class AddBusiness extends Component {
   }
 
   render() {
+    var partner = this.state.partner || this.props.partner
 
     console.log(addBusinessSubject, 'addBusinessStream')
 
@@ -127,19 +133,43 @@ class AddBusiness extends Component {
                 </div>
               </div>
             </div>
-            <br />
-            <div className="row">
-              <div className='col-sm-6'>
-                <BusinessSeatWidget />
+            <br/>
+            <div className='row'>
+              <div className='col-md-6'>
+                # of Allotted Seats:
               </div>
-              <div className='col-sm-3'>
-                <BusinessTagsWidget />
+              <div className='col-md-6'>
+                <input className="form-control input-lg" />
               </div>
-              <div className='col-sm-3'>
-                <BusinessDiscountWidget/>
-              </div>
-              <br/>
             </div>
+            <br/>
+            <div className='row'>
+              <div className='col-md-6'>
+                Additional Specials:
+              </div>
+              <div className='col-md-6'>
+                <ParnterInfoArea onChange={ (event) => this.updateCurrentPartnerState(event.target.value, 'specials') } value={ partner.specials } />
+              </div>
+            </div>
+            <br />
+            <div className='row'>
+              <div className='col-md-6'>
+                Events
+              </div>
+              <div className='col-md-6'>
+                <ParnterInfoArea onChange={ (event) => this.updateCurrentPartnerState(event.target.value, 'events') } value={ partner.events } />
+              </div>
+            </div>
+            <br/>
+            <div className='row'>
+              <div className='col-md-6'>
+                Discounts
+              </div>
+              <div className='col-md-6'>
+                <ParnterInfoArea onChange={ (event) => this.updateCurrentPartnerState(event.target.value, 'discounts') } value={ partner.discounts } />
+              </div>
+            </div>
+            <br/>
           </div>
         </div>
       </div>
