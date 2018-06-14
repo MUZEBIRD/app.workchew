@@ -129,7 +129,7 @@ class BusinessForm extends Component {
 
       //var msg = this.buildUpdateMsg(business)
 
-     // BusinessService.subject.next(msg)
+      // BusinessService.subject.next(msg)
 
     })
   }
@@ -420,6 +420,16 @@ class BusinessForm extends Component {
           <div className='col-sm-10'>
             <textarea className="form-control business-text-feild" name="description" />
           </div>
+        </div>
+        <br/>
+        <div className="row">
+          <div className='col-sm-2'>
+            <span># number of sheets</span>
+          </div>
+          <div className='col-sm-10'>
+            <input className="form-control business-text-feild" name="seats" />
+          </div>
+          <br/>
         </div>
         <br/>
         <div className="row">
