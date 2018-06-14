@@ -1,4 +1,8 @@
 import React, { Component } from 'react';
+
+import { connect } from 'react-redux'
+
+
 import userService from '../Services/userService.js'
 import BusinessService from '../Services/businessService.js';
 
@@ -25,6 +29,10 @@ import { ListInputWidget } from './shared/';
 import ParnterInfoArea from './Partner/PartnerInfoArea'
 
 
+import { getQueryParams, getPathVariables } from '../Utils'
+import * as partnerActions from './Partner/actions'
+
+var {getPartner} = partnerActions
 
 
 const addBusinessSubject = new Subject();
@@ -180,4 +188,13 @@ class AdminPartnerPage extends Component {
 
 }
 
-export default AdminPartnerPage;
+const mapStateToProps = (state, ownProps) => ({
+  partner: state.partners.current
+})
+
+const AdminPartnerPageComponent = connect(mapStateToProps, {
+  getPartner
+})(AdminPartnerPage)
+
+
+export default AdminPartnerPageComponent;
