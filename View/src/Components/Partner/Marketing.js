@@ -15,6 +15,9 @@ import { getQueryParams, getPathVariables } from '../../Utils'
 
 var {getPartner} = partnerActions
 
+
+const ParnterInfoArea = (props) => (<textarea value={ props.value } onChange={ props.onChange } rows="7" className="form-control input-lg" />)
+
 class PartnerMarketingPage extends Component {
 
   constructor(props) {
@@ -80,12 +83,7 @@ class PartnerMarketingPage extends Component {
                 WorkChew Hours:
               </div>
               <div className='col-md-6'>
-                <textarea value={ partner.hours } onChange={ (event) => {
-                                                             
-                                                             
-                                                               this.updateCurrentPartnerState(event.target.value, 'hours')
-                                                             
-                                                             } } rows="7" className="form-control input-lg" />
+                <ParnterInfoArea onChange={ (event) => this.updateCurrentPartnerState(event.target.value, 'hours') } value={ partner.hours } />
               </div>
             </div>
             <br/>
@@ -103,10 +101,28 @@ class PartnerMarketingPage extends Component {
                 Additional Specials:
               </div>
               <div className='col-md-6'>
-                <textarea className="form-control input-lg" />
+                <ParnterInfoArea onChange={ (event) => this.updateCurrentPartnerState(event.target.value, 'specials') } value={ partner.specials } />
               </div>
             </div>
             <br />
+            <div className='row'>
+              <div className='col-md-6'>
+                Events
+              </div>
+              <div className='col-md-6'>
+                <ParnterInfoArea onChange={ (event) => this.updateCurrentPartnerState(event.target.value, 'events') } value={ partner.events } />
+              </div>
+            </div>
+            <br/>
+            <div className='row'>
+              <div className='col-md-6'>
+                Discounts
+              </div>
+              <div className='col-md-6'>
+                <ParnterInfoArea onChange={ (event) => this.updateCurrentPartnerState(event.target.value, 'discounts') } value={ partner.discounts } />
+              </div>
+            </div>
+            <br/>
             <div className='d-flex justify-content-center'>
               <button onClick={ (event) => this.updatePartner() } className="btn btn-primary" type="button" aria-expanded="false">
                 update
