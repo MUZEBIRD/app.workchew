@@ -12,7 +12,7 @@ export const partners = (state = {
 
       console.log("GET_PARTNER_SUCCESS", state, action)
 
-      var [current] = action.data
+      var current = action.data
 
       return {
         ...state,

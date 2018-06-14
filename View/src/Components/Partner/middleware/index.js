@@ -1,5 +1,4 @@
 const API_ROOT = window.location.port == 3000 ? "http://localhost:8080" : ""
-export const CALL_API = 'Call API'
 
 const callApi = (endpoint, config = {}) => {
 
@@ -48,16 +47,16 @@ export default store => next => action => {
     case "GET_PARTNER": {
 
       return callApi(partnersApiPath, action.config)
-        .then(data => ({
+        .then(data => next({
           type: "GET_PARTNER_SUCCESS",
-          data
+          data: data[0]
         }))
 
     }
     case "GET_PARTNERS": {
 
       return callApi(partnersApiPath, action.config)
-        .then(data => ({
+        .then(data => next({
           type: "GET_PARTNERS_SUCCESS",
           data
         }))
@@ -65,7 +64,7 @@ export default store => next => action => {
     case "POST_PARTNER": {
 
       return callApi(partnersApiPath, action.config)
-        .then(data => ({
+        .then(data => next({
           type: "POST_PARTNER_SUCCESS",
           data
         }))
@@ -73,7 +72,7 @@ export default store => next => action => {
     case "PUT_PARTNER": {
 
       return callApi(partnersApiPath, action.config)
-        .then(data => ({
+        .then(data => next({
           type: "PUT_PARTNER_SUCCESS",
           data
         }))
