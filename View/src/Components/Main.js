@@ -82,7 +82,7 @@ class Main extends Component {
 
     console.log('on select Business', business)
 
-    urlService.goTo(`${urlService.partnerPage}?id=${business._id}`)
+    urlService.goTo(`${urlService.businessPage}?id=${business._id}`)
 
   }
 
