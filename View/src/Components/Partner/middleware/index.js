@@ -63,7 +63,16 @@ export default store => next => action => {
     }
     case "POST_PARTNER": {
 
-      return callApi(partnersApiPath, action.config)
+      return callApi(partnersApiPath, {
+
+        method: "POST",
+
+        headers: {
+          "Content-type": "application/json"
+        },
+        ...action.config
+
+      })
         .then(data => next({
           type: "POST_PARTNER_SUCCESS",
           data
@@ -71,7 +80,14 @@ export default store => next => action => {
     }
     case "PUT_PARTNER": {
 
-      return callApi(partnersApiPath, action.config)
+      return callApi(partnersApiPath, {
+        method: "POST",
+
+        headers: {
+          "Content-type": "application/json"
+        },
+        ...action.config
+      })
         .then(data => next({
           type: "PUT_PARTNER_SUCCESS",
           data
