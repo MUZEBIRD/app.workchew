@@ -237,13 +237,19 @@ class PublicBusinessView extends Component {
           { business &&
             <div className="scrollView">
               <Topbar title={ business.name } />
+              <div className="row h-25">
+                <div className="col-md-12">
+                  <img class="h-100" src={ business.bannerSrc } />
+                </div>
+              </div>
               <div className="row">
-                <div className="col-md-6">
+                <div className="col-md-1">
+                </div>
+                <div className="col-md-5  text-left">
                   <h2>{ business.name }</h2>
                   <br/>
-                  <span>4.93 15 ratings</span>
-                  <br/>
                   <span>{ business.address }</span>
+                  <br/>
                   <br/>
                   <span>Total: 25 | Availiable: 10</span>
                 </div>
@@ -256,16 +262,31 @@ class PublicBusinessView extends Component {
               <br/>
               <div className="row">
                 <div className="col-md-6">
-                  <h3>Hours</h3>
+                  <h3>Hours:</h3>
+                  <p>
+                    { business.hours }
+                  </p>
                 </div>
                 <div className="col-md-6">
-                  <h3>Discounts</h3>
+                  <h3>Discounts:</h3>
+                  <p>
+                    { business.discounts }
+                  </p>
                 </div>
               </div>
               <br/>
               <div className="row">
-                <div className="col-md-12">
+                <div className="col-md-6">
                   <h3>Events:</h3>
+                  <p>
+                    { business.events }
+                  </p>
+                </div>
+                <div className="col-md-6">
+                  <h3>Specials:</h3>
+                  <p>
+                    { business.specials }
+                  </p>
                 </div>
               </div>
             </div> }

@@ -41,14 +41,11 @@ class PartnerMarketingPage extends Component {
     }
   }
 
-
   updateCurrentPartnerState(update, key) {
-
 
     console.log('updateCurrentPartnerState', update, key)
 
     var partner = this.state.partner || this.props.partner
-
 
     partner.hours = update;
     this.setState({
@@ -58,7 +55,6 @@ class PartnerMarketingPage extends Component {
   }
 
   updatePartner() {
-
 
     console.log('updatePartner', this.state.partner)
 
