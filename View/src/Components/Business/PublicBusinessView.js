@@ -237,19 +237,21 @@ class PublicBusinessView extends Component {
           { business &&
             <div className="scrollView">
               <Topbar title={ business.name } />
-              <div className="row h-25">
-                <div className="col-md-12">
-                  <img className="h-100" src={ business.bannerSrc } />
-                </div>
-              </div>
+              { business.bannerImgSrc
+                && business.bannerImgSrc != ""
+                && <div className="row h-25">
+                     <div className="col-md-12">
+                       <img className="h-100" src={ business.bannerImgSrc } />
+                     </div>
+                   </div> }
+              <br/>
+              <br/>
               <div className="row">
                 <div className="col-md-1">
                 </div>
                 <div className="col-md-5  text-left">
                   <h2>{ business.name }</h2>
-                  <br/>
                   <span>{ business.address }</span>
-                  <br/>
                   <br/>
                   <span>Total: 25 | Availiable: 10</span>
                 </div>
@@ -260,6 +262,7 @@ class PublicBusinessView extends Component {
                 </div>
               </div>
               <br/>
+              <hr/>
               <div className="row">
                 <div className="col-md-6">
                   <h3>Hours:</h3>
