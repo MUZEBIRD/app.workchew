@@ -11,6 +11,8 @@ import SearchBusinesses from './Components/SearchBusinesses.js'
 
 import AddBusiness from './Components/AddBusiness.js'
 
+import AdminPartnerPage from './Components/AdminPartnerPage.js'
+
 import PublicBusinessView from './Components/Business/PublicBusinessView.js'
 
 import Users from './Components/Users.js'
@@ -63,6 +65,7 @@ class App extends Component {
             <Route path="/search-businesses" component={ SearchBusinesses } />
             <Route path="/add-business" component={ AddBusiness } />
             <Route path="/view-business" component={ AddBusiness } />
+            <Route path="/admin-partner-page" component={ AddBusiness } />
             <Route path="/users" component={ Users } />
             <Route path="/add-user" component={ AddUser } />
             <Route path="/view-user" component={ AddUser } />
