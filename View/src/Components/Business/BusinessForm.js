@@ -340,7 +340,6 @@ class BusinessForm extends Component {
     var formdata = new FormData();
     formdata.append("image", file);
 
-
     BusinessService
 
       .updateBanner(formdata)
@@ -351,17 +350,9 @@ class BusinessForm extends Component {
 
         alert('banner updated !')
 
-      })
+        this.clearPreviewImage()
 
-      // $.ajax({
-      //    url: "/asdfs/zlock",
-      //    type: "POST",
-      //    data: formdata,
-      //    processData: false, // important
-      //    contentType: false  // important
-      // }).complete(function(response){
-      //   console.log(response.status);
-      // });
+      })
 
   }
 

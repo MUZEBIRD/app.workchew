@@ -9,18 +9,39 @@ const business = require('../Services/businessService.js')
 router.post('/', (req, res) => {
 
   console.log('req.body @ busines post route', req.body)
+  console.log('req.headers @ busines post route', req.headers)
 
-  business
 
-    .post(getBusinessFromBody(req.body))
+  if (req.headers["Content-type"] == "application/x-www-form-urlencoded") {
 
-    .subscribe((postBusinessResponse) => {
+    business
 
-      res.send({
-        postBusinessResponse
+      .updateBanner(req)
+
+      .subscribe((postBusinessResponse) => {
+
+        res.send({
+          postBusinessResponse
+        })
+
       })
 
-    })
+  } else {
+    business
+
+      .post(getBusinessFromBody(req.body))
+
+      .subscribe((postBusinessResponse) => {
+
+        res.send({
+          postBusinessResponse
+        })
+
+      })
+
+  }
+
+
 
 }); //POST 
 

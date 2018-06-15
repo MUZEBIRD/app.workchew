@@ -1,6 +1,6 @@
 const db = require('./dbService');
 const Rx = require('rxjs');
-
+const parseReqForm = require('../rxFormidable')
 const _ = require('lodash');
 
 const businessCollectionName = 'businesss'
@@ -10,6 +10,24 @@ var post = function(business) {
   return db
 
     .post(businessCollectionName, business)
+
+}
+
+var updateBanner = function(req) {
+
+  return parseReqForm(req)
+
+    .switchMap((formData) => {
+
+      return db
+
+        .postImage({
+          file,
+          metadata: {
+            pic: "123"
+          }
+        })
+    })
 
 }
 
@@ -261,7 +279,8 @@ var businessService = {
 
   update,
 
-  put
+  put,
+  updateBanner
 }
 
 module.exports = businessService

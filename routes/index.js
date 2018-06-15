@@ -14,6 +14,10 @@ const Business = require('./Business')
 
 const payPal = require('./payPalRoute')
 
+
+const pic = require('./Pic')
+
+
 fs = require('fs')
 
 router.use('/Partners', Business)
@@ -29,6 +33,9 @@ router.use('/SignUp', SignUp)
 router.use('/Seats', Seats)
 
 router.use('/pay-pal', payPal)
+
+
+router.use('/pic', pic)
 
 // GET home page
 router.get('/', (req, res) => {
