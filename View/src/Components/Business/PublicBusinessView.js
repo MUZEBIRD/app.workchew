@@ -237,11 +237,11 @@ class PublicBusinessView extends Component {
           { business &&
             <div className="scrollView">
               <Topbar title={ business.name } />
-              { business.bannerImgSrc
-                && business.bannerImgSrc != ""
+              { business.bannerImgId
+                && business.bannerImgId != ""
                 && <div className="row h-25">
                      <div className="col-md-12">
-                       <img className="h-100" src={ business.bannerImgSrc } />
+                       <img className="h-100 w-100" src={ `${urlService.pic}/${business.bannerImgId}` } />
                      </div>
                    </div> }
               <br/>

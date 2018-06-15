@@ -20,6 +20,7 @@ export default {
   signUp: `${base}/SignUp`,
   user: `${base}/User`,
   payPal: `${base}/pay-pal`,
+  pic: `${base}/pic`,
 
 
   business: `${base}/business`,

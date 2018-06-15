@@ -12,17 +12,15 @@ router.post('/', (req, res) => {
   console.log('req.headers @ busines post route', req.headers)
 
 
-  if (req.headers["Content-type"] == "application/x-www-form-urlencoded") {
+  if (req.body) {
 
     business
 
       .updateBanner(req)
 
-      .subscribe((postBusinessResponse) => {
+      .subscribe((updateBannerResponse) => {
 
-        res.send({
-          postBusinessResponse
-        })
+        res.send(updateBannerResponse)
 
       })
 

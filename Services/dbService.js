@@ -170,6 +170,13 @@ var storeImage = function({file, metadata} , db) {
 
 var postImage = function({file, metadata}) {
 
+
+  console.log("postImage   postImage", {
+    file,
+    metadata
+  })
+
+
   return getMognoClient()
 
     .switchMap((db) => {

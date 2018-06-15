@@ -13,6 +13,29 @@ var post = function(business) {
 
 }
 
+var updatePartner = function(partnerUpdateData) {
+
+  var query = {
+    _id: partnerUpdateData._id
+  }
+
+  return db.get(businessCollectionName, query)
+
+    .switchMap((getResponse) => {
+
+      var partnerUpdate = _.extend(getResponse[0], partnerUpdateData)
+
+      return db
+
+        .update(businessCollectionName, partnerUpdate, {
+          _id: partnerUpdateData._id
+        })
+
+    })
+
+}
+
+
 var updateBanner = function(req) {
 
   return parseReqForm(req)
@@ -22,14 +45,43 @@ var updateBanner = function(req) {
       return db
 
         .postImage({
-          file,
+          file: formData.fileList[0],
           metadata: {
-            pic: "123"
+
           }
-        })
+        }).map(imageData => {
+        return {
+          ...imageData,
+          partnerId: formData.fields.partnerId
+        }
+
+      })
+    })
+
+
+
+    .switchMap(imageData => {
+      console.log("imageDataimageDataimageDataimageDataimageData", imageData)
+
+      return updatePartner(
+        {
+          _id: imageData.partnerId,
+          bannerImgId: imageData.id
+
+        }
+      )
+
+
+
+
+
+
     })
 
 }
+
+
+
 
 var put = function(business) {
 

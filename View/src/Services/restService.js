@@ -26,17 +26,43 @@ var restService = {
   },
   post: (url, body, headers?) => {
 
+
+    if (headers && headers["content-type"]) {
+
+
+    } else {
+
+      body = JSON.stringify(body)
+    }
+
     return Rx.Observable.fromPromise(fetch(url, {
 
       method: "POST",
 
       headers: {
-        "Content-type": "application/json",
+        "content-type": "application/json",
         ...headers
       },
 
-      body: !headers["Content-type"] ? body : JSON.stringify(body)
+      body: body
 
+    })
+
+      .then((res) => res.json()))
+
+  },
+
+
+  postImage: (url, body) => {
+
+
+
+    return Rx.Observable.fromPromise(fetch(url, {
+
+      method: "POST",
+
+
+      body
     })
 
       .then((res) => res.json()))
@@ -49,7 +75,7 @@ var restService = {
       method: "PUT",
 
       headers: {
-        "Content-type": "application/json"
+        "content-type": "application/json"
       },
 
       body: JSON.stringify(body)

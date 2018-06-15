@@ -202,12 +202,12 @@ class BusinessForm extends Component {
 
   mapListDataToBusiness(business) {
 
-    this.list.forEach(list => {
+    // this.list.forEach(list => {
 
-      business[list.keyName] = BusinessService.getlistDataByKeyName(list.keyName, business[list.keyName] || [], list.props)
+    //   business[list.keyName] = BusinessService.getlistDataByKeyName(list.keyName, business[list.keyName] || [], list.props)
 
 
-    })
+    // })
 
     return business
 
@@ -329,7 +329,7 @@ class BusinessForm extends Component {
 
   updateBannerImage = (dataURL) => {
 
-    var blobBin = atob(dataURL.split(',')[1]);
+    var blobBin = atob(this.state.bannerPreviewData.split(',')[1]);
     var array = [];
     for (var i = 0; i < blobBin.length; i++) {
       array.push(blobBin.charCodeAt(i));
@@ -339,6 +339,7 @@ class BusinessForm extends Component {
     });
     var formdata = new FormData();
     formdata.append("image", file);
+    formdata.append("partnerId", this.state.business._id);
 
     BusinessService
 
@@ -349,6 +350,8 @@ class BusinessForm extends Component {
         console.log('updateBanner ', postBusinessStream)
 
         alert('banner updated !')
+        window.location.reload(true);
+
 
         this.clearPreviewImage()
 
@@ -427,9 +430,10 @@ class BusinessForm extends Component {
         </div>
         <br/>
         { this.state.business
+          && this.state.business.bannerImgId
           && <div className="row" style={ { height: 200 } }>
                <div className='col-sm-12 h-100'>
-                 <img className='w-100 h-100' src={ this.state.business.bannerImgSrc } />
+                 <img className='w-100 h-100' src={ `${urlService.pic}/${this.state.business.bannerImgId}` } />
                </div>
              </div> }
         <br/>

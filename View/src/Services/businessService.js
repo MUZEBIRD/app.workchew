@@ -72,9 +72,7 @@ var businessService = {
   },
   updateBanner: (bannerUpdateForm) => {
 
-    return restService.post(urlService.business, bannerUpdateForm, {
-      "Content-type": "application/x-www-form-urlencoded"
-    })
+    return restService.postImage(urlService.business, bannerUpdateForm)
 
   },
   post: (businessInfo) => {
