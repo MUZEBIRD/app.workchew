@@ -35,7 +35,7 @@ var restService = {
         ...headers
       },
 
-      body: JSON.stringify(body)
+      body: !headers["Content-type"] ? body : JSON.stringify(body)
 
     })
 

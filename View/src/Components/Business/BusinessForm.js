@@ -5,6 +5,7 @@ import { Route, Link } from 'react-router-dom'
 
 import urlService from '../../Services/urlService.js'
 import restService from '../../Services/restService.js'
+import ImageUploader from 'react-images-upload';
 
 import _ from 'lodash'
 
@@ -149,7 +150,7 @@ class BusinessForm extends Component {
 
   save() {
     console.log('AT SAVE')
-    console.log('this.state.business   ', this.state.business)
+    console.log('this.state.business', this.state.business)
     var inputs = document.getElementsByClassName('business-text-feild')
 
     var fields = [...inputs]
@@ -326,6 +327,95 @@ class BusinessForm extends Component {
 
   }
 
+  updateBannerImage = (dataURL) => {
+
+    var blobBin = atob(dataURL.split(',')[1]);
+    var array = [];
+    for (var i = 0; i < blobBin.length; i++) {
+      array.push(blobBin.charCodeAt(i));
+    }
+    var file = new Blob([new Uint8Array(array)], {
+      type: 'image/png'
+    });
+    var formdata = new FormData();
+    formdata.append("image", file);
+
+
+    BusinessService
+
+      .updateBanner(formdata)
+
+      .subscribe((postBusinessStream) => {
+
+        console.log('updateBanner ', postBusinessStream)
+
+        alert('banner updated !')
+
+      })
+
+      // $.ajax({
+      //    url: "/asdfs/zlock",
+      //    type: "POST",
+      //    data: formdata,
+      //    processData: false, // important
+      //    contentType: false  // important
+      // }).complete(function(response){
+      //   console.log(response.status);
+      // });
+
+  }
+
+  clearPreviewImage = (imageData) => {
+
+    this.setState({
+      bannerPreviewData: null
+    })
+
+  }
+  setBannerPreview = (imageData) => {
+
+    this.setState({
+      bannerPreviewData: imageData
+    })
+
+  }
+
+  onDrop = (pictures) => {
+    console.log("on drop ", pictures)
+
+    var self = this;
+
+    var canvas,
+      context,
+      canvas = document.createElement("canvas");
+    context = canvas.getContext('2d');
+
+    var reader = new FileReader();
+
+
+    reader.addEventListener("loadend", function(arg) {
+      var src_image = new Image();
+      src_image.onload = function() {
+        canvas.height = src_image.height;
+        canvas.width = src_image.width;
+        context.drawImage(src_image, 0, 0);
+        var imageData = canvas.toDataURL("image/png");
+
+        self.setBannerPreview(imageData)
+
+        // uploadCanvas(imageData);
+
+      }
+      src_image.src = this.result;
+    });
+
+
+
+    reader.readAsDataURL(pictures[0]);
+
+  }
+
+
   render() {
 
     return (
@@ -341,27 +431,50 @@ class BusinessForm extends Component {
               Save
             </button>
           </div>
-          <div className='col-sm-10 featured-flex'>
-            <h2>Featured ?</h2>
-            <div className="dropdown">
-              <button className="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                { this.state.business.featured ? 'True' : 'False' }
-              </button>
-              <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a onClick={ (event) => {
-                             
-                               this.setFeatured(true)
-                             
-                             } } className="dropdown-item">True</a>
-                <a onClick={ (event) => {
-                             
-                               this.setFeatured(false)
-                             
-                             } } className="dropdown-item">False</a>
-              </div>
-            </div>
+          <div className='col-sm-10'>
           </div>
         </div>
+        <br/>
+        { this.state.business
+          && <div className="row" style={ { height: 200 } }>
+               <div className='col-sm-12 h-100'>
+                 <img className='w-100 h-100' src={ this.state.business.bannerImgSrc } />
+               </div>
+             </div> }
+        <br/>
+        <ImageUploader withIcon={ true } buttonText='Upload Banner' onChange={ this.onDrop } imgExtension={ ['.jpg', '.gif', '.png', '.gif'] } maxFileSize={ 5242880 }
+        />
+        <br/>
+        { this.state.bannerPreviewData
+          &&
+          
+          
+          <div>
+            <div className="row">
+              <div className='col-sm-12'>
+                <button onClick={ (event) => {
+                                  
+                                    this.clearPreviewImage()
+                                  
+                                  } } className='btn btn-warning'>
+                  Clear
+                </button>
+                <button onClick={ (event) => {
+                                  
+                                    this.updateBannerImage()
+                                  
+                                  } } className='btn btn-warning'>
+                  update
+                </button>
+              </div>
+            </div>
+            <br/>
+            <div className="row" style={ { height: 200 } }>
+              <div className='col-sm-12 h-100'>
+                <img className='w-100 h-100' src={ this.state.bannerPreviewData } />
+              </div>
+            </div>
+          </div> }
         <br />
         <br/>
         <div className="row">

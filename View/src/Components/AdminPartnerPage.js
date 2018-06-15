@@ -44,6 +44,7 @@ class AdminPartnerPage extends Component {
     super(props);
 
     this.state = {
+      pictures: [],
       partner: {},
       business: {
 
@@ -100,7 +101,7 @@ class AdminPartnerPage extends Component {
 
     var partner = this.state.partner || this.props.partner
 
-    console.log(addBusinessSubject, 'addBusinessStream')
+    console.log(addBusinessSubject, 'addBusinessStream   this.state', this.state)
 
     var props = {
 
@@ -139,6 +140,7 @@ class AdminPartnerPage extends Component {
                       <input id="business-geoPoint-longitude" className="form-control" />
                     </div>
                   </div>
+                  <br/>
                 </div>
               </div>
             </div>

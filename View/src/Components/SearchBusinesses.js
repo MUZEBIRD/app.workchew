@@ -58,7 +58,7 @@ class SearchBusinesses extends Component {
 
     console.log('on select Business', business)
 
-    urlService.goTo(`${urlService.viewBusinessPage}?id=${business._id}`)
+    urlService.goTo(`${urlService.adminPartnerPage}?id=${business._id}`)
 
   }
 

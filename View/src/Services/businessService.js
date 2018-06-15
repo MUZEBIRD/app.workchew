@@ -70,6 +70,13 @@ var businessService = {
     return restService.put(checkInUrl, checkInInfo)
 
   },
+  updateBanner: (bannerUpdateForm) => {
+
+    return restService.post(urlService.business, bannerUpdateForm, {
+      "Content-type": "application/x-www-form-urlencoded"
+    })
+
+  },
   post: (businessInfo) => {
 
     return restService.post(urlService.business, businessInfo)
