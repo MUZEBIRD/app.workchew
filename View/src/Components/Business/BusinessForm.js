@@ -14,7 +14,6 @@ import { Subject } from 'rxjs'
 var updateSubject = new Subject()
 class BusinessForm extends Component {
 
-
   constructor(props) {
 
     super(props);
@@ -58,8 +57,6 @@ class BusinessForm extends Component {
         this.setStateBusiness(business)
 
       })
-
-
 
   }
 
@@ -145,6 +142,7 @@ class BusinessForm extends Component {
       .forEach((inputField) => {
 
         inputField.value = item[inputField.name] || ""
+
       })
   }
 
@@ -205,7 +203,6 @@ class BusinessForm extends Component {
     // this.list.forEach(list => {
 
     //   business[list.keyName] = BusinessService.getlistDataByKeyName(list.keyName, business[list.keyName] || [], list.props)
-
 
     // })
 
@@ -328,35 +325,37 @@ class BusinessForm extends Component {
   }
 
   updateBannerImage = (dataURL) => {
+    if (this.state.business && this.state.business._id) {
+      var blobBin = atob(this.state.bannerPreviewData.split(',')[1]);
+      var array = [];
+      for (var i = 0; i < blobBin.length; i++) {
+        array.push(blobBin.charCodeAt(i));
+      }
+      var file = new Blob([new Uint8Array(array)], {
+        type: 'image/png'
+      });
+      var formdata = new FormData();
+      formdata.append("image", file);
+      formdata.append("partnerId", this.state.business._id);
 
-    var blobBin = atob(this.state.bannerPreviewData.split(',')[1]);
-    var array = [];
-    for (var i = 0; i < blobBin.length; i++) {
-      array.push(blobBin.charCodeAt(i));
+
+
+      BusinessService
+
+        .updateBanner(formdata)
+
+        .subscribe((postBusinessStream) => {
+
+          console.log('updateBanner ', postBusinessStream)
+
+          alert('banner updated !')
+          window.location.reload(true);
+
+
+          this.clearPreviewImage()
+
+        })
     }
-    var file = new Blob([new Uint8Array(array)], {
-      type: 'image/png'
-    });
-    var formdata = new FormData();
-    formdata.append("image", file);
-    formdata.append("partnerId", this.state.business._id);
-
-    BusinessService
-
-      .updateBanner(formdata)
-
-      .subscribe((postBusinessStream) => {
-
-        console.log('updateBanner ', postBusinessStream)
-
-        alert('banner updated !')
-        window.location.reload(true);
-
-
-        this.clearPreviewImage()
-
-      })
-
   }
 
   clearPreviewImage = (imageData) => {
@@ -366,12 +365,14 @@ class BusinessForm extends Component {
     })
 
   }
+
   setBannerPreview = (imageData) => {
+    if (this.state.business && this.state.business._id) {
 
-    this.setState({
-      bannerPreviewData: imageData
-    })
-
+      this.setState({
+        bannerPreviewData: imageData
+      })
+    }
   }
 
   onDrop = (pictures) => {
@@ -385,7 +386,6 @@ class BusinessForm extends Component {
     context = canvas.getContext('2d');
 
     var reader = new FileReader();
-
 
     reader.addEventListener("loadend", function(arg) {
       var src_image = new Image();
@@ -403,12 +403,9 @@ class BusinessForm extends Component {
       src_image.src = this.result;
     });
 
-
-
     reader.readAsDataURL(pictures[0]);
 
   }
-
 
   render() {
 
@@ -442,8 +439,6 @@ class BusinessForm extends Component {
         <br/>
         { this.state.bannerPreviewData
           &&
-          
-          
           <div>
             <div className="row">
               <div className='col-sm-12'>
