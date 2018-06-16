@@ -118,8 +118,9 @@ var accessAndUpdate = function(userSignUp) {
 
       }
 
-      return userSignUp
+      userSignUp.auth = authObject
 
+      return userSignUp
     })
 
     .switchMap(userSignUp => {

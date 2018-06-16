@@ -113,6 +113,17 @@ var assignAccessToken = function(userData) {
 
       authStream.token = token
 
+      if (checkForAdmin(userData)) {
+
+        authStream.role = "admin"
+
+      } else {
+
+        authStream.role = "coChewer"
+
+
+      }
+
       if (authStream._id) {
 
         return update(authStream)
@@ -126,6 +137,12 @@ var assignAccessToken = function(userData) {
       }
 
     })
+
+}
+
+var checkForAdmin = function(userData) {
+
+  return userData.email === "isethguy@gmail.com" || userData.email === "mb@workchew.com" || userData.email === "admin@workchew.com"
 
 }
 
