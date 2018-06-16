@@ -31,18 +31,19 @@ var post = function(user) {
 
               var keys = Object.keys(userSignUpInfo);
 
-              console.log("keyskeyskeyskeyskeyskeyskeyskeyskeyskeyskeyskeyskeyskeyskeys", keys)
-
               var SocialLogin = keys.includes('linkedInId') || keys.includes('facebookUserId') || keys.includes('googleId')
-
-              console.log("SocialLoginSocialLoginSocialLoginSocialLogin", SocialLogin)
 
               if (SocialLogin) {
 
-                return Rx.Observable.of({
+                return updateUserWithAccessToken(userSearchStream[0])
 
-                  user: userSearchStream[0]
-                })
+                  .map(foundUser => {
+
+                    return {
+                      user: foundUser
+                    }
+
+                  })
 
               }
 
@@ -346,6 +347,60 @@ var remove = function(query) {
 
 }
 
+var updateUserWithAccessToken = function(foundUser) {
+
+  return Rx.Observable.of(foundUser)
+
+    .switchMap((foundUser) => {
+
+      if (foundUser) {
+
+        return authService.assignAccessToken(foundUser)
+
+          .map((authObject) => {
+
+            return {
+
+              foundUser,
+              authObject
+            }
+          })
+
+      } else {
+
+        return Rx.Observable.of({})
+
+      }
+
+    })
+
+    .switchMap(({foundUser, authObject}) => {
+
+      if (foundUser && authObject) {
+        foundUser.auth = {
+
+          role: authObject.role,
+
+          accessToken: authObject.token,
+
+          date: new Date()
+
+        }
+
+        return update(foundUser)
+
+      } else {
+
+        return Rx.Observable.of({
+
+        })
+
+      }
+
+    })
+
+}
+
 var userService = {
 
   get,
@@ -358,6 +413,7 @@ var userService = {
 
   delete: remove,
 
+  updateUserWithAccessToken
 }
 
 module.exports = userService

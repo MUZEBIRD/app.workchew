@@ -12,61 +12,6 @@ const uuidv4 = require('uuid/v4');
 
 const bcryptStream = require('../Services/bcryptStreams')
 
-var updateUserWithAccessToken = (foundUser) => {
-
-  return Rx.Observable.of(foundUser)
-
-    .switchMap((foundUser) => {
-
-      if (foundUser) {
-
-        return authService.assignAccessToken(foundUser)
-
-          .map((authObject) => {
-
-            return {
-
-              foundUser,
-              authObject
-            }
-          })
-
-      } else {
-
-        return Rx.Observable.of({})
-
-      }
-
-    })
-
-    .switchMap(({foundUser, authObject}) => {
-
-      if (foundUser && authObject) {
-        foundUser.auth = {
-
-          role: authObject.role,
-
-          accessToken: authObject.token,
-
-          date: new Date()
-
-        }
-
-        return user
-
-          .update(foundUser)
-
-      } else {
-
-        return Rx.Observable.of({
-
-        })
-
-      }
-
-    })
-
-}
 
 router.post('/', ({body}, res) => {
 
@@ -108,7 +53,7 @@ router.post('/', ({body}, res) => {
 
     .switchMap(foundUser => {
 
-      return updateUserWithAccessToken(foundUser)
+      return user.updateUserWithAccessToken(foundUser)
 
     })
 
