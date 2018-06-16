@@ -5,6 +5,43 @@ const express = require('express');
 const router = express.Router();
 
 const business = require('../Services/businessService.js')
+var Url = require('url');
+
+router.use((req, res, next) => {
+
+  var teller = {
+    body: req.body,
+    query: req.query,
+    time: new Date().toUTCString(),
+    headers: req.headers,
+    method: req.method,
+    params: req.params,
+    route: req.route,
+    files: req.files,
+    cookies: req.cookies,
+    signedCookies: req.signedCookies,
+    url: req.url,
+  // socketKeys: Object.keys(req.socket)
+  }
+
+  var body = req.body;
+  var query = req.query;
+  var time = new Date().toUTCString();
+  var headers = req.headers;
+  var method = req.method;
+  var params = req.params;
+  var route = req.route;
+  var files = req.files;
+  var cookies = req.cookies;
+  var signedCookies = req.signedCookies;
+  var url = req.url;
+
+  var accessToken = headers['x-api-access-token']
+  var pathname = Url.parse(url).pathname;
+
+  next()
+
+})
 
 router.post('/', (req, res) => {
 
@@ -58,47 +95,6 @@ router.put('/', (req, res) => {
       })
 
     })
-
-}) //PUT
-
-router.put('/:bid/:action/:uid', (req, res, next) => {
-
-  console.log('req.body @ busines check in route', req.params);
-
-  if (req.params.action == 'checkin') {
-
-    business
-
-      .checkin(getBusinessFromBody(req.body))
-
-      .subscribe((putBusinessResponse) => {
-
-        res.send({
-          putBusinessResponse
-        })
-
-      })
-
-  } else if (req.params.action == "checkout") {
-
-    business
-
-      .checkout(getBusinessFromBody(req.body))
-
-      .subscribe((putBusinessResponse) => {
-
-        res.send({
-          putBusinessResponse
-        })
-
-      })
-
-  } else {
-
-    next();
-
-  }
-
 
 }) //PUT
 
