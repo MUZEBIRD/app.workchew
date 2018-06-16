@@ -67,43 +67,7 @@ class Login extends Component {
 
           })
 
-    else loginService
 
-        .post({
-
-          email: 'seth',
-
-          password: ''
-
-        })
-
-        .subscribe((LoginResponse) => {
-
-          if (LoginResponse.msg) {
-
-            this.showAlert(LoginResponse.msg)
-
-          }
-          if (LoginResponse.user && LoginResponse.user._id) {
-
-            userService.store(LoginResponse.user)
-
-            urlService.goTo(urlService.main)
-
-          }
-
-        },
-          (err) => {
-
-            if (err) {
-
-              this.showAlert({
-                text: "log in error",
-                class: "danger"
-              })
-            }
-
-          })
 
   }
 
@@ -121,6 +85,8 @@ class Login extends Component {
 
         var {userResponse} = signUpCoChewerResponse;
 
+        console.log("signUpCoChewerResponse", signUpCoChewerResponse)
+
         if (userResponse._id) {
 
           var {memberShipInfo} = userResponse;
@@ -135,15 +101,18 @@ class Login extends Component {
           }, () => {
 
             // window.location.hash = "m3mberships"
-            window.location.hash = `/`
 
+            userService.store(userResponse)
+
+            urlService.goTo(urlService.main)
           })
 
         /*userResponse._id*/
         } else if (userResponse.user && userResponse.user._id) { /*userResponse.user*/
 
-          window.location.hash = `/`
+          userService.store(userResponse.user)
 
+          urlService.goTo(urlService.main)
         } else {
 
           this.setState({

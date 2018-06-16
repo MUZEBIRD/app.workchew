@@ -118,7 +118,12 @@ class UserSignUpSocial extends Component {
           })
 
         /*userResponse._id*/
-        } else { /*!userResponse._id*/
+        } else if (userResponse.user && userResponse.user._id) { /*userResponse.user*/
+
+          userService.store(userResponse.user)
+
+          urlService.goTo(urlService.main)
+        } else {
 
           this.setState({
             showLoader: false,
