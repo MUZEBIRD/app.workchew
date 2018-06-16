@@ -338,8 +338,6 @@ class BusinessForm extends Component {
       formdata.append("image", file);
       formdata.append("partnerId", this.state.business._id);
 
-
-
       BusinessService
 
         .updateBanner(formdata)
@@ -350,7 +348,6 @@ class BusinessForm extends Component {
 
           alert('banner updated !')
           window.location.reload(true);
-
 
           this.clearPreviewImage()
 
