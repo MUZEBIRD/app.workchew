@@ -12,43 +12,9 @@ const uuidv4 = require('uuid/v4');
 
 const bcryptStream = require('../Services/bcryptStreams')
 
-router.post('/', ({body}, res) => {
+var updateUserWithAccessToken = (foundUser) => {
 
-  res.set('Content-Type', 'text/html');
-
-  user
-
-    .get(loginQueryFromCredentials(body))
-
-    .switchMap((findUserStream) => {
-
-      if (findUserStream && findUserStream.length) {
-
-        var foundUser = findUserStream[0];
-
-        return bcryptStream.compare(body.password, foundUser.password)
-
-          .map((testResponse) => {
-
-            if (testResponse) {
-
-              return foundUser
-
-            } else {
-
-              return false
-
-            }
-
-          })
-
-      } else {
-
-        return Rx.Observable.of(false)
-
-      }
-
-    })
+  return Rx.Observable.of(foundUser)
 
     .switchMap((foundUser) => {
 
@@ -97,6 +63,52 @@ router.post('/', ({body}, res) => {
         })
 
       }
+
+    })
+
+}
+
+router.post('/', ({body}, res) => {
+
+  res.set('Content-Type', 'text/html');
+
+  user
+
+    .get(loginQueryFromCredentials(body))
+
+    .switchMap((findUserStream) => {
+
+      if (findUserStream && findUserStream.length) {
+
+        var foundUser = findUserStream[0];
+
+        return bcryptStream.compare(body.password, foundUser.password)
+
+          .map((testResponse) => {
+
+            if (testResponse) {
+
+              return foundUser
+
+            } else {
+
+              return false
+
+            }
+
+          })
+
+      } else {
+
+        return Rx.Observable.of(false)
+
+      }
+
+    })
+
+    .switchMap(foundUser => {
+
+      return updateUserWithAccessToken(foundUser)
 
     })
 

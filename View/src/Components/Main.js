@@ -144,18 +144,18 @@ class Main extends Component {
           <div>
             <ul className="nav nav-tabs" id="myTab" role="tablist">
               <li className="nav-item">
-                <a className="nav-link active" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">List View</a>
+                <a className="nav-link active" id="map-tab" data-toggle="tab" href="#map" role="tab" aria-controls="map" aria-selected="true">Map View</a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" id="map-tab" data-toggle="tab" href="#map" role="tab" aria-controls="map" aria-selected="true">Map View</a>
+                <a className="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">List View</a>
               </li>
             </ul>
             <div className="tab-content" id="myTabContent">
-              <div className="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                { this.state.businesses && <BusinessList {...this.state} selectItem={ this.selectBusiness } /> }
-              </div>
-              <div className="tab-pane fade" id="map" role="tabpanel" aria-labelledby="map-tab">
+              <div className="tab-pane fade show active" id="map" role="tabpanel" aria-labelledby="map-tab">
                 <MainMapForm />
+              </div>
+              <div className="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                { this.state.businesses && <BusinessList {...this.state} selectItem={ this.selectBusiness } /> }
               </div>
             </div>
           </div>
