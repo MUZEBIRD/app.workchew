@@ -400,7 +400,7 @@ class BusinessForm extends Component {
       src_image.src = this.result;
     });
 
-    reader.readAsDataURL(pictures[0]);
+    reader.readAsDataURL(pictures[pictures.length - 1]);
 
   }
 

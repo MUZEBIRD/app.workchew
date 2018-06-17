@@ -47,7 +47,7 @@ router.post('/', (req, res) => {
   console.log('req.body @ busines post route', req.body)
   console.log('req.headers @ busines post route', req.headers)
 
-  if (req.body) {
+  if (req.body && req.body._id) {
 
     business
 
