@@ -4,10 +4,12 @@ const express = require('express');
 
 const router = express.Router();
 
+const authService = require('../Services/authService')
+
 const business = require('../Services/businessService.js')
 var Url = require('url');
 
-router.use((req, res, next) => {
+var businessPartnerAuth = function(req, res, next) {
 
   var teller = {
     body: req.body,
@@ -39,9 +41,19 @@ router.use((req, res, next) => {
   var accessToken = headers['x-api-access-token']
   var pathname = Url.parse(url).pathname;
 
-  next()
+  if (method.toLowerCase() === "post" || method.toLowerCase() === "put" || method.toLowerCase() === "delete") {
 
-})
+    onUpdateMehtod(req, res, next)
+
+  } else {
+
+    next()
+
+  }
+
+}
+
+router.use(businessPartnerAuth)
 
 router.post('/', (req, res) => {
 
@@ -131,6 +143,50 @@ var getBusinessFromBody = function(business) {
   return business
 
 }
+
+var onUpdateMehtod = function(req, res, next) {
+
+  if (req.headers['x-api-access-token'] && req.headers['x-api-access-token'].length) {
+
+    checkAccessToken(req, res, next)
+
+  } else {
+
+    res.status(401).send({
+      error: 401,
+      msg: "no access token"
+    })
+
+  }
+
+}
+
+var checkAccessToken = function(req, res, next) {
+
+  var token = res.headers['x-api-access-token'];
+
+  authService.getRole(token)
+
+    .subscribe(authObject => {
+
+      if (authObject.role === "admin") {
+
+        next()
+
+      } else {
+
+        res.status(401).send({
+          error: 401
+        })
+
+      }
+
+    })
+
+}
+
+
+
 
 // var getBusinessFromBody = function({_id, name, phone, email, seats, tags, discounts, address, wifi, featured, weekday_text, geoPoint, description}) {
 
