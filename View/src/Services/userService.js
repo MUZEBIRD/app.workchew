@@ -6,7 +6,6 @@ const Rx = require('rxjs');
 var userStorageKey = 'workchew.user'
 var userSignUpStorageKey = 'workchew.userSignUp'
 
-
 var userService = {
 
   userStorageKey,
@@ -72,7 +71,7 @@ var userService = {
   put: (userInfo) => {
 
     return restService.put(urlService.user, userInfo)
-    
+
   },
 
   logOut: () => {

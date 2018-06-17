@@ -55,8 +55,6 @@ var userRealmCheck = function(query, userRole) {
   return false;
 }
 
-
-
 var businessRealmCheck = function({pathAuth, requestedObject}) {
 
   var {allowedObjects} = pathAuth;

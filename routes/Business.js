@@ -26,7 +26,9 @@ var businessPartnerAuth = function(req, res, next) {
   var accessToken = headers['x-api-access-token']
   var pathname = Url.parse(url).pathname;
 
-  if (method.toLowerCase() === "post" || method.toLowerCase() === "put" || method.toLowerCase() === "delete") {
+  if (method.toLowerCase() === "post"
+    || method.toLowerCase() === "put"
+    || method.toLowerCase() === "delete") {
 
     onUpdateMehtod(req, res, next)
 
@@ -45,7 +47,6 @@ router.post('/', (req, res) => {
   console.log('req.body @ busines post route', req.body)
   console.log('req.headers @ busines post route', req.headers)
 
-
   if (req.body) {
 
     business
@@ -59,6 +60,7 @@ router.post('/', (req, res) => {
       })
 
   } else {
+
     business
 
       .post(getBusinessFromBody(req.body))
@@ -72,8 +74,6 @@ router.post('/', (req, res) => {
       })
 
   }
-
-
 
 }); //POST 
 
@@ -169,9 +169,6 @@ var checkAccessToken = function(req, res, next) {
     })
 
 }
-
-
-
 
 // var getBusinessFromBody = function({_id, name, phone, email, seats, tags, discounts, address, wifi, featured, weekday_text, geoPoint, description}) {
 

@@ -35,7 +35,6 @@ var updatePartner = function(partnerUpdateData) {
 
 }
 
-
 var updateBanner = function(req) {
 
   return parseReqForm(req)
@@ -58,10 +57,7 @@ var updateBanner = function(req) {
       })
     })
 
-
-
     .switchMap(imageData => {
-      console.log("imageDataimageDataimageDataimageDataimageData", imageData)
 
       return updatePartner(
         {
@@ -71,17 +67,9 @@ var updateBanner = function(req) {
         }
       )
 
-
-
-
-
-
     })
 
 }
-
-
-
 
 var put = function(business) {
 
@@ -92,7 +80,6 @@ var put = function(business) {
     })
 
 }
-
 
 var checkout = function(checkoutInfo) {
 

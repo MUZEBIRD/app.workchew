@@ -2,7 +2,6 @@ const Rx = require('rxjs');
 
 var restStorageKey = 'workChew.rest'
 
-
 var restService = {
 
   restStorageKey,
@@ -107,11 +106,9 @@ var getAccessToken = function() {
 
     var user = JSON.parse(localUserString);
 
-    console.log("  var localUserString = localStorage.getItem('workchew.user')", user)
+    if (user.auth && (user.auth.accessToken || user.auth.token)) {
 
-    if (user.auth && user.auth.accessToken) {
-
-      return user.auth.accessToken
+      return user.auth.accessToken || user.auth.token
 
     } else {
 
@@ -121,6 +118,7 @@ var getAccessToken = function() {
 
   } else {
 
+    return null
 
   }
 

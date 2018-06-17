@@ -101,11 +101,12 @@ class UserSignUpSocial extends Component {
 
           userService.storeSignUpInfo(userResponse)
 
+          userService.store(userResponse)
+
+
           var {memberShipInfo} = userResponse;
 
           var {paymentAuth} = memberShipInfo;
-
-          var {token} = paymentAuth;
 
           this.setState({
             signUpData: userResponse,
@@ -117,7 +118,6 @@ class UserSignUpSocial extends Component {
 
           })
 
-        /*userResponse._id*/
         } else if (userResponse.user && userResponse.user._id) { /*userResponse.user*/
 
           userService.store(userResponse.user)

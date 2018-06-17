@@ -128,7 +128,7 @@ var assignAccessToken = function(userData) {
 
       } else {
 
-        authStream.userId = userData._id
+        authStream.userId = `${userData._id.valueOf()}`
 
         return post(authStream)
 
