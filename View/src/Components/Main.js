@@ -127,7 +127,7 @@ class Main extends Component {
     return (
 
       <div className="wholeView flex-col">
-        <div className="showView">
+        <div className="showView d-flex flex-column">
           <div className='row flex-row-center-vert' style={ { backgroundColor: 'white', position: 'relative', zIndex: '5', height: '10%' } }>
             <div className='col-sm-4'>
               <div className="dropdown">
@@ -166,7 +166,7 @@ class Main extends Component {
               <br/>
               <br/>
             </div> }
-          <div>
+          <div className="flex-1 scroll-y">
             <ul className="nav nav-tabs" id="myTab" role="tablist">
               <li className="nav-item">
                 <a className="nav-link active" id="map-tab" data-toggle="tab" href="#map" role="tab" aria-controls="map" aria-selected="true">Map View</a>
@@ -184,6 +184,8 @@ class Main extends Component {
               </div>
             </div>
           </div>
+          <br/>
+          <br/>
         </div>
       </div>
 
