@@ -280,6 +280,10 @@ var update = function(userUpdateData) {
     _id: userUpdateData._id
   }
 
+  userUpdateData.email = null;
+
+  delete userUpdateData.email;
+
   return db.get(userCollectionName, query)
 
     .switchMap((getResponse) => {

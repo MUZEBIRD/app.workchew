@@ -188,6 +188,8 @@ var onlyIcanUpdateMe = function(req, res, next, authObject) {
 
 var userFromBody = function(user) {
 
+
+
   return user
 
 }
