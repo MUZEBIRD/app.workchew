@@ -51,18 +51,6 @@ router.post('/', (req, res) => {
 
     business
 
-      .updateBanner(req)
-
-      .subscribe((updateBannerResponse) => {
-
-        res.send(updateBannerResponse)
-
-      })
-
-  } else {
-
-    business
-
       .post(getBusinessFromBody(req.body))
 
       .subscribe((postBusinessResponse) => {
@@ -70,6 +58,17 @@ router.post('/', (req, res) => {
         res.send({
           postBusinessResponse
         })
+
+      })
+  } else {
+
+    business
+
+      .updateBanner(req)
+
+      .subscribe((updateBannerResponse) => {
+
+        res.send(updateBannerResponse)
 
       })
 
