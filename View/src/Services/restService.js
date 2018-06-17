@@ -2,6 +2,7 @@ const Rx = require('rxjs');
 
 var restStorageKey = 'workChew.rest'
 
+
 var restService = {
 
   restStorageKey,
@@ -12,6 +13,9 @@ var restService = {
 
       method: "GET",
 
+      headers: {
+        "x-api-access-token": getAccessToken()
+      },
     }).then((res) => res.json()))
 
   },
@@ -19,6 +23,11 @@ var restService = {
 
     return Rx.Observable.fromPromise(fetch(url, {
 
+      headers: {
+        "content-type": "application/json",
+
+        "x-api-access-token": getAccessToken()
+      },
       method: "DELETE",
 
     }).then((res) => res.json()))
@@ -41,7 +50,8 @@ var restService = {
 
       headers: {
         "content-type": "application/json",
-        ...headers
+        ...headers,
+        "x-api-access-token": getAccessToken()
       },
 
       body: body
@@ -52,16 +62,16 @@ var restService = {
 
   },
 
-
   postImage: (url, body) => {
-
-
 
     return Rx.Observable.fromPromise(fetch(url, {
 
       method: "POST",
 
+      headers: {
 
+        "x-api-access-token": getAccessToken()
+      },
       body
     })
 
@@ -75,7 +85,9 @@ var restService = {
       method: "PUT",
 
       headers: {
-        "content-type": "application/json"
+        "content-type": "application/json",
+        "x-api-access-token": getAccessToken()
+
       },
 
       body: JSON.stringify(body)
@@ -85,6 +97,33 @@ var restService = {
       .then((res) => res.json()))
 
   }
+}
+
+var getAccessToken = function() {
+
+  var localUserString = localStorage.getItem('workchew.user')
+
+  if (localUserString && localUserString.length > 0) {
+
+    var user = JSON.parse(localUserString);
+
+    console.log("  var localUserString = localStorage.getItem('workchew.user')", user)
+
+    if (user.auth && user.auth.accessToken) {
+
+      return user.auth.accessToken
+
+    } else {
+
+      return null
+
+    }
+
+  } else {
+
+
+  }
+
 }
 
 export default restService

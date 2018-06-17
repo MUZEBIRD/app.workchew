@@ -11,21 +11,6 @@ var Url = require('url');
 
 var businessPartnerAuth = function(req, res, next) {
 
-  var teller = {
-    body: req.body,
-    query: req.query,
-    time: new Date().toUTCString(),
-    headers: req.headers,
-    method: req.method,
-    params: req.params,
-    route: req.route,
-    files: req.files,
-    cookies: req.cookies,
-    signedCookies: req.signedCookies,
-    url: req.url,
-  // socketKeys: Object.keys(req.socket)
-  }
-
   var body = req.body;
   var query = req.query;
   var time = new Date().toUTCString();
@@ -163,7 +148,7 @@ var onUpdateMehtod = function(req, res, next) {
 
 var checkAccessToken = function(req, res, next) {
 
-  var token = res.headers['x-api-access-token'];
+  var token = req.headers['x-api-access-token'];
 
   authService.getRole(token)
 

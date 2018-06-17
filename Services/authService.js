@@ -31,11 +31,10 @@ var update = function(auth, witch) {
     _id: auth._id
   }
 
-
   if (witch) {
 
-
     query = witch
+
   }
 
   return db.get(authCollectionName, query)
@@ -121,7 +120,6 @@ var assignAccessToken = function(userData) {
 
         authStream.role = "coChewer"
 
-
       }
 
       if (authStream._id) {
@@ -142,7 +140,9 @@ var assignAccessToken = function(userData) {
 
 var checkForAdmin = function(userData) {
 
-  return userData.email === "isethguy@gmail.com" || userData.email === "mb@workchew.com" || userData.email === "admin@workchew.com"
+  return userData.email === "isethguy@gmail.com"
+    || userData.email === "mb@workchew.com"
+    || userData.email === "admin@workchew.com"
 
 }
 
@@ -177,12 +177,12 @@ var getRole = function(accessToken) {
 }
 
 var authService = {
+
   getRole,
 
   delete: remove,
 
   assignAccessToken,
-
 
   get,
 
