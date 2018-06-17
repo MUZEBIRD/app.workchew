@@ -12,7 +12,7 @@ export default {
   businessSignUp: `/business-signup`,
   viewBusinessPage: `/view-business`,
 
-  adminPartnerPage: 'admin-partner-page',
+  adminPartnerPage: '/admin-partner-page',
 
   partnerPage: `/partner-page`,
   businessPage: `/business-page`,

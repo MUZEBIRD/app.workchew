@@ -25,8 +25,6 @@ var Topbar = (props) => (<div className='row flex-row-center-vert' style={ { bac
                                                                           userService.logOut()
                                                                         
                                                                         } } href="#">Logout</a>
-                                 <a className="dropdown-item" href="#">Login</a>
-                                 <a className="dropdown-item" href="#">Settings</a>
                                </div>
                              </div>
                            </div>

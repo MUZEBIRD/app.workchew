@@ -140,9 +140,11 @@ class Main extends Component {
                   <i className="material-icons md-36">settings</i>
                 </button>
                 <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <a className="dropdown-item" href="#">Logout</a>
-                  <a className="dropdown-item" href="#">Login</a>
-                  <a className="dropdown-item" href="#">Settings</a>
+                  <a className="dropdown-item" href="#" onClick={ (event) => {
+                                                                  
+                                                                    userService.logOut()
+                                                                  
+                                                                  } }>Logout</a>
                 </div>
               </div>
             </div>
