@@ -38,6 +38,7 @@ const BusinessList = (props) => props.businesses.map(business => {
 })
 
 class Main extends Component {
+
   tableRows =[
     {
       title: "Name",
@@ -52,11 +53,10 @@ class Main extends Component {
       key: "wifi"
     },
   ]
+
   constructor(props) {
 
     super(props);
-
-
 
     this.state = {
       userIsAdmin: false
@@ -92,8 +92,6 @@ class Main extends Component {
 
   componentDidMount() {
 
-
-
     userService.get({
       params: {
         _id: 1
@@ -111,9 +109,6 @@ class Main extends Component {
           })
         }
       })
-
-
-
 
     this.getBusinessStream({}).subscribe((businessStream) => {
 
@@ -140,11 +135,11 @@ class Main extends Component {
                   <i className="material-icons md-36">settings</i>
                 </button>
                 <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <a className="dropdown-item" href="#" onClick={ (event) => {
-                                                                  
-                                                                    userService.logOut()
-                                                                  
-                                                                  } }>Logout</a>
+                  <a onClick={ (event) => {
+                               
+                                 userService.logOut()
+                               
+                               } } className="dropdown-item" href="#">Logout</a>
                 </div>
               </div>
             </div>

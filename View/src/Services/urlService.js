@@ -11,9 +11,8 @@ export default {
   coChewerSignUp: `/co-chewer-signUp-social`,
   businessSignUp: `/business-signup`,
   viewBusinessPage: `/view-business`,
-
+  buildProfile: '/co-chewer-signUp-build',
   adminPartnerPage: '/admin-partner-page',
-
   partnerPage: `/partner-page`,
   businessPage: `/business-page`,
   login: `${base}/Login`,
@@ -21,8 +20,6 @@ export default {
   user: `${base}/User`,
   payPal: `${base}/pay-pal`,
   pic: `${base}/pic`,
-
-
   business: `${base}/business`,
   goTo: function(route) {
 

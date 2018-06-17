@@ -88,6 +88,8 @@ class Login extends Component {
         console.log("signUpCoChewerResponse", signUpCoChewerResponse)
 
         if (userResponse._id) {
+          userService.storeSignUpInfo(userResponse)
+
 
           var {memberShipInfo} = userResponse;
 
@@ -100,11 +102,9 @@ class Login extends Component {
             showLoader: false
           }, () => {
 
-            // window.location.hash = "m3mberships"
-
             userService.store(userResponse)
 
-            urlService.goTo(urlService.main)
+            urlService.goTo(`${urlService.buildProfile}?id=${userResponse._id}`)
           })
 
         /*userResponse._id*/

@@ -113,7 +113,6 @@ class UserSignUpSocial extends Component {
             showLoader: false
           }, () => {
 
-            // window.location.hash = "m3mberships"
             window.location.hash = `co-chewer-signUp-build?id=${userResponse._id}`
 
           })
