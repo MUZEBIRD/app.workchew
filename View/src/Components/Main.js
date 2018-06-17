@@ -56,7 +56,11 @@ class Main extends Component {
 
     super(props);
 
-    this.state = {};
+
+
+    this.state = {
+      userIsAdmin: false
+    };
 
     userService.checkLoginStatus()
 
@@ -86,7 +90,30 @@ class Main extends Component {
 
   }
 
-  componentWillMount() {
+  componentDidMount() {
+
+
+
+    userService.get({
+      params: {
+        _id: 1
+      }
+    })
+
+      .subscribe(currentUser => {
+        var auth = currentUser.auth
+
+        if (auth && auth.role == "admin") {
+
+          this.setState({
+            userIsAdmin: true
+
+          })
+        }
+      })
+
+
+
 
     this.getBusinessStream({}).subscribe((businessStream) => {
 
@@ -125,22 +152,23 @@ class Main extends Component {
           </div>
           <br/>
           <br/>
-          <div>
-            <button className="btn btn-info">
-              <Link to="/businesses">
-                Businesses
-              </Link>
-            </button>
-            <br/>
-            <br/>
-            <button className="btn btn-info">
-              <Link to="/users">
-                Users
-              </Link>
-            </button>
-            <br/>
-            <br/>
-          </div>
+          { this.state.userIsAdmin &&
+            <div>
+              <button className="btn btn-info">
+                <Link to="/businesses">
+                  Businesses
+                </Link>
+              </button>
+              <br/>
+              <br/>
+              <button className="btn btn-info">
+                <Link to="/users">
+                  Users
+                </Link>
+              </button>
+              <br/>
+              <br/>
+            </div> }
           <div>
             <ul className="nav nav-tabs" id="myTab" role="tablist">
               <li className="nav-item">

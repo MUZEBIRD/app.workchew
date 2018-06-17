@@ -98,6 +98,30 @@ var userService = {
     )
 
   },
+
+  pizza: (stuff) => {
+
+    console.log("pizza chees stuff", stuff)
+
+    alert("chees")
+
+
+    var localUserString = localStorage.getItem(userStorageKey)
+
+    if (localUserString && localUserString.length > 0) {
+      console.log("JSON.parse(localUserString)  JSON.parse(localUserString)", JSON.parse(localUserString))
+
+      return Rx.Observable.of(JSON.parse(localUserString))
+
+    } else {
+
+      return Rx.Observable.of({})
+
+    }
+
+
+
+  },
   store: (user) => {
 
     localStorage

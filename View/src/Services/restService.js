@@ -34,9 +34,7 @@ var restService = {
   },
   post: (url, body, headers?) => {
 
-
     if (headers && headers["content-type"]) {
-
 
     } else {
 

@@ -228,17 +228,17 @@ class UserSignUpSocial extends Component {
   render() {
 
     const actions = [
-      <FlatButton label="Done" primary={ true } keyboardFocused={ true } onClick={ (event) => {
-                                                                             
-                                                                               localStorage.clear();
-                                                                             
-                                                                               this.handleClose()
-                                                                             
-                                                                               if (this.state.signUpComplete) {
-                                                                                 window.location.reload(true);
-                                                                               }
-                                                                             
-                                                                             } } />
+      <FlatButton onClick={ (event) => {
+                      
+                        localStorage.clear();
+                      
+                        this.handleClose()
+                      
+                        if (this.state.signUpComplete) {
+                          window.location.reload(true);
+                        }
+                      
+                      } } label="Done" primary={ true } keyboardFocused={ true } />
     ];
 
     return (
