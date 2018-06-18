@@ -13,6 +13,9 @@ import BusinessService from '../Services/businessService.js';
 
 import { v4 } from 'uuid'
 
+import { Topbar } from './TopBar.js'
+
+
 const BusinessList = (props) => props.businesses.map(business => {
 
   return (
@@ -124,29 +127,16 @@ class Main extends Component {
 
   render() {
 
+    var props = {
+
+      title: "Main",
+    }
+
     return (
 
       <div className="wholeView flex-col">
         <div className="showView d-flex flex-column">
-          <div className='row flex-row-center-vert' style={ { backgroundColor: 'white', position: 'relative', zIndex: '5', height: '10%' } }>
-            <div className='col-sm-4'>
-              <div className="dropdown">
-                <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i className="material-icons md-36">settings</i>
-                </button>
-                <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <a onClick={ (event) => {
-                               
-                                 userService.logOut()
-                               
-                               } } className="dropdown-item" href="#">Logout</a>
-                </div>
-              </div>
-            </div>
-            <div className='col-sm-4'>
-              <h2>Main</h2>
-            </div>
-          </div>
+          <Topbar { ...props } />
           <br/>
           <br/>
           { this.state.userIsAdmin &&
