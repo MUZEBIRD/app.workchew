@@ -115,6 +115,24 @@ class BuildYourProfile extends Component {
 
   }
 
+  viewProfile = () => {
+
+    userService.get({
+      params: {
+        _id: 1
+      }
+    })
+
+      .subscribe((currentUser) => {
+
+        var url = `${urlService.userProfile}?id=${currentUser._id}`;
+
+        urlService.goTo(url)
+
+      })
+
+  }
+
   render() {
 
     const actions = [
@@ -146,6 +164,12 @@ class BuildYourProfile extends Component {
                 <p className='text-left'>
                   WorkChew is about building connections between real people.
                 </p>
+                <button onClick={ (event) => {
+                                    this.viewProfile()
+                                  
+                                  } } className="btn btn-info">
+                  View your profile
+                </button>
               </div>
             </div>
             <div className='d-flex align-items-center' style={ { backgroundColor: 'white', position: 'relative', zIndex: '5' } }>
