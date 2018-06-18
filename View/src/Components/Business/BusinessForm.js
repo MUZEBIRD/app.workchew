@@ -424,6 +424,7 @@ class BusinessForm extends Component {
         </div>
         <br/>
         { this.state.business
+          
           && this.state.business.bannerImgId
           && <div className="row" style={ { height: 200 } }>
                <div className='col-sm-12 h-100'>
@@ -431,8 +432,9 @@ class BusinessForm extends Component {
                </div>
              </div> }
         <br/>
-        <ImageUploader withIcon={ true } buttonText='Upload Banner' onChange={ this.onDrop } imgExtension={ ['.jpg', '.gif', '.png', '.gif'] } maxFileSize={ 5242880 }
-        />
+        { this.state.business._id
+          && <ImageUploader withIcon={ true } buttonText='Upload Banner' onChange={ this.onDrop } imgExtension={ ['.jpg', '.gif', '.png', '.gif'] } maxFileSize={ 5242880 }
+             /> }
         <br/>
         { this.state.bannerPreviewData
           &&
