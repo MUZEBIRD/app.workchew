@@ -67,8 +67,6 @@ class Login extends Component {
 
           })
 
-
-
   }
 
   socialSignUp(userSignUpInfo) {
@@ -89,7 +87,6 @@ class Login extends Component {
 
         if (userResponse._id) {
           userService.storeSignUpInfo(userResponse)
-
 
           var {memberShipInfo} = userResponse;
 
@@ -200,7 +197,6 @@ class Login extends Component {
         }
 
         this.socialSignUp(userSignUpInfo)
-
 
       });
 

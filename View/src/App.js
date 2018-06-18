@@ -29,10 +29,8 @@ import AddUser from './Components/AddUser.js'
 
 import { BusinessUserSignUp, UserSignUp, Memberships, M3mberships, UserSignUpSocial, BuildYourProfile, UserInterest, UserType } from './Components/SignUp'
 
-
 import UserProfile from './Components/Public/UserPofile'
 import UserCard from './Components/Public/UserCard'
-
 
 import Main from './Components/Main.js'
 
@@ -44,13 +42,11 @@ import { store } from './Store'
 
 import { Provider, connect } from 'react-redux'
 
-
 const history = createHistory()
 
 class App extends Component {
 
   render() {
-
 
     return (
       <Provider store={ store }>

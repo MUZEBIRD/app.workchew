@@ -41,7 +41,7 @@ class BuildYourProfile extends Component {
 
   }
 
-  updateUser() {
+  updateUser(toPayment) {
 
     var fields = [...document.getElementsByClassName('sign-up-build-form-feild')];
 
@@ -69,7 +69,9 @@ class BuildYourProfile extends Component {
 
         userService.storeSignUpInfo(userResponse)
 
-        window.location.hash = `M3mberships?id=${userResponse._id}`
+        if (toPayment) {
+          window.location.hash = `M3mberships?id=${userResponse._id}`
+        }
 
       })
 
@@ -184,14 +186,20 @@ class BuildYourProfile extends Component {
             </div>
             <br/>
             <div className='row'>
-              <div className='col-sm-12'>
+              <div className='col-sm-12 d-flex justify-content-around'>
                 <button onClick={ (event) => {
-                                    var signUpData = userService.getSignUpData()
                                   
-                                    this.updateUser();
+                                    this.updateUser(false);
                                   
                                   } } className="btn btn-info">
-                  NEXT
+                  Save
+                </button>
+                <button onClick={ (event) => {
+                                  
+                                    this.updateUser(true);
+                                  
+                                  } } className="btn btn-info">
+                  Next To Payment Page
                 </button>
               </div>
             </div>
