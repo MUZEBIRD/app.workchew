@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { Route, Link } from 'react-router-dom'
 
+import { connect } from 'react-redux'
+
+
 import userService from '../../Services/userService.js'
 import urlService from '../../Services/urlService.js'
 import restService from '../../Services/restService.js'
@@ -15,6 +18,9 @@ import RaisedButton from 'material-ui/RaisedButton';
 import { Subject } from 'rxjs'
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import * as userActions from './actions'
+
+var {getUser} = userActions
 
 class UserProfile extends Component {
 
@@ -31,9 +37,21 @@ class UserProfile extends Component {
 
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+
+    if (this.state.queryParams && this.state.queryParams.id) {
+
+      this.props.getUser({
+        query: {
+          _id: this.state.queryParams.id
+        }
+      })
+    }
+  }
 
   render() {
+
+    var user = this.props.user
 
     return (
 
@@ -46,7 +64,7 @@ class UserProfile extends Component {
                 <button className="btn btn-secondary">
                   pro
                 </button>
-                <img style={ { width: 150 } } src={ "/static/images/blank-user.png" } />
+                <img style={ { width: 150 } } src={ user.facebookImgUrl || user.linkedInPictureUrl || user.profileImgLink } />
                 <button className="btn btn-secondary">
                   add
                 </button>
@@ -55,12 +73,14 @@ class UserProfile extends Component {
             <div className='row'>
               <div className='col-sm-12'>
                 <p>
-                  G.T. Turgut
-                  <br/> Washington, DC
+                  { user.firstName }
+                  { ' ' }
+                  { user.lastName }
+                  <br/>
+                  { user.location }
                 </p>
                 <p>
-                  Assistant Professor in the Decision, Operations, and Information Technologies Department at the Robert H. Smith School of Business, University of Maryland, College
-                  Park.
+                  { user.summary }
                 </p>
               </div>
             </div>
@@ -77,4 +97,13 @@ class UserProfile extends Component {
 
 }
 
-export default UserProfile;
+
+const mapStateToProps = (state, ownProps) => ({
+  user: state.users.current
+})
+
+const UserProfileComponent = connect(mapStateToProps, {
+  getUser
+})(UserProfile)
+
+export default UserProfileComponent;

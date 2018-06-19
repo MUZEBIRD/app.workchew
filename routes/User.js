@@ -166,9 +166,12 @@ var onlyIcanUpdateMe = function(req, res, next, authObject) {
 
   var userUpdate = req.body;
 
-  var userUpdateId = userUpdate._id
+  var userUpdateId = userUpdate._id || req.query._id
 
   var authedUserId = authObject.userId;
+
+
+
 
   if (userUpdateId
     && authedUserId
@@ -179,7 +182,8 @@ var onlyIcanUpdateMe = function(req, res, next, authObject) {
   } else {
 
     res.status(401).send({
-      error: 401
+      error: 401,
+      msg: "not valid user"
     })
 
   }

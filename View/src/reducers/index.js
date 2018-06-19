@@ -3,12 +3,11 @@ import { combineReducers } from 'redux'
 
 //import { business } from '../Components/Business/reducers'
 import { partners } from '../Components/Partner/reducers'
-
-
-
+import { users } from '../Components/Public/reducers'
 
 const appReducer = combineReducers({
   partners,
+  users
 //business,
 // routing: routerReducer
 })
