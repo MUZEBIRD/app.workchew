@@ -45,4 +45,12 @@ router.get('/', (req, res) => {
   res.send(fs.readFileSync('./View/build/index.html'));
 });
 
+
+router.get('/.well-known/acme-challenge/1WZzEdUoADgIQpLVzNFoscb-WDicZqJAGCtpVlgjzHs', (req, res) => {
+
+  res.set('Content-Type', 'text/html');
+
+  res.send('1WZzEdUoADgIQpLVzNFoscb-WDicZqJAGCtpVlgjzHs.MZ6I80nW0Grt-Pp4hrEoIYVw6K5_iohvHbW4GyHTm70');
+});
+
 module.exports = router;
