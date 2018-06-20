@@ -36,7 +36,8 @@ class BuildYourProfile extends Component {
 
     this.state = {
 
-      queryParams
+      queryParams,
+      user: {}
     }
 
   }
@@ -80,6 +81,11 @@ class BuildYourProfile extends Component {
   componentDidMount() {
 
     var signUpData = userService.getSignUpData()
+
+
+    this.setState({
+      user: signUpData
+    })
 
     console.log('signUpData', signUpData)
 
@@ -135,6 +141,8 @@ class BuildYourProfile extends Component {
 
   render() {
 
+    var user = this.state.user
+
     const actions = [
       <FlatButton label="Done" primary={ true } keyboardFocused={ true } onClick={ (event) => {
                                                                              
@@ -186,8 +194,15 @@ class BuildYourProfile extends Component {
                   </div>
                 </div>
               </div>
+              <input onChange={ (event) => {
+                                
+                                  console.log("duwop", event.target.files)
+                                
+                                } } style={ { "visibility": "hidden", heigh: 0, width: 0, opacity: 1 } } type="file" name="imageUpload" id="imageUpload" />
               <div className="h-100 m-3 d-flex align-items-center">
-                <img style={ { width: 150 } } src={ "/static/images/chew-pofile-img.png" } />
+                <label for="imageUpload">
+                  <img style={ { width: 150 } } src={ user.facebookImgUrl || user.linkedInPictureUrl || user.profileImgLink || "/static/images/chew-pofile-img.png" } />
+                </label>
               </div>
               <div className='flex-1'>
                 <div className='row'>

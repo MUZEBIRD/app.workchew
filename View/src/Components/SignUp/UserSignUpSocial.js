@@ -261,8 +261,8 @@ class UserSignUpSocial extends Component {
                 <FacebookLogin autoLoad={ false } appId="1755466141213974" fields="email,picture,first_name,last_name" callback={ this.responseFacebook } />
                 <br/>
                 <br/>
-                <GoogleLogin clientId="198825134082-5l64c1opmt10ts62nm7ka7dssev9iok9.apps.googleusercontent.com" buttonText="Login with Google" onSuccess={ this.responseGoogle } onFailure={ this.responseGoogle }
-                />
+                <GoogleLogin clientId="198825134082-5l64c1opmt10ts62nm7ka7dssev9iok9.apps.googleusercontent.com" buttonText="Sign Up with Google" onSuccess={ this.responseGoogle }
+                  onFailure={ this.responseGoogle } />
                 <br/>
                 <br/>
                 <button onClick={ (event) => {
