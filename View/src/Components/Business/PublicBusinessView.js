@@ -241,7 +241,7 @@ class PublicBusinessView extends Component {
                 && business.bannerImgId != ""
                 && <div className="row h-25">
                      <div className="col-md-12">
-                       <img className="h-100 w-100" src={ `${urlService.pic}/${business.bannerImgId}` } />
+                       <img className="h-100 w-50" src={ `${urlService.pic}/${business.bannerImgId}` } />
                      </div>
                    </div> }
               <br/>
@@ -253,7 +253,7 @@ class PublicBusinessView extends Component {
                   <h2>{ business.name }</h2>
                   <span>{ business.address }</span>
                   <br/>
-                  <span>Total: 25 | Availiable: 10</span>
+                  <span>Total: { business.seats } | Availiable:{ business.openSeats }</span>
                 </div>
                 <div className="col-md-6">
                   <button className="btn btn-primary" type="button">

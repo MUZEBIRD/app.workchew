@@ -29,7 +29,6 @@ const callApi = (endpoint, config = {}) => {
     }))
 }
 
-
 var getAccessToken = function() {
 
   var localUserString = localStorage.getItem('workchew.user')
