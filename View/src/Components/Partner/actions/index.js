@@ -37,7 +37,7 @@ export const postPartner = (config) => (dispatch, getState) => {
 export const PUT_PARTNER = 'PUT_PARTNER'
 
 export const putPartner = (config) => (dispatch, getState) => {
-
+console.log("configconfigconfigconfigconfigconfigconfigconfigconfigconfigconfigconfigconfigconfig", config)
   return dispatch({
 
     type: PUT_PARTNER,

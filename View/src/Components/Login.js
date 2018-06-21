@@ -51,7 +51,7 @@ class Login extends Component {
 
             if (LoginResponse.user.bid) {
 
-              urlService.goTo(`${urlService.partnerPage}?=${LoginResponse.user.bid}`)
+              urlService.goTo(`${urlService.partnerPage}?id=${LoginResponse.user.bid}`)
 
             } else {
 
@@ -117,6 +117,7 @@ class Login extends Component {
           userService.store(userResponse.user)
 
           urlService.goTo(urlService.main)
+
         } else {
 
           this.setState({

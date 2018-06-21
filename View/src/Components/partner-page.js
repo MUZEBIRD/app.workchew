@@ -1,23 +1,47 @@
 import React, { Component } from 'react';
 import userService from '../Services/userService.js'
 
+import { connect } from 'react-redux'
+
+
 import { Route, Link } from 'react-router-dom'
 
 import urlService from '../Services/urlService.js'
 
 import BusinessService from '../Services/businessService.js';
 
+import * as partnerActions from './Partner/actions'
+
+import { getQueryParams, getPathVariables } from '../Utils'
+
+
+var {getPartner, putPartner} = partnerActions
+
 class PartnerPage extends Component {
 
   constructor(props) {
+    var queryParams = getQueryParams()
 
     super(props);
 
-    this.state = {};
+    this.state = {
+      partner: {},
+      queryParams
+    };
 
   }
 
-  componentWillMount() {}
+  componentDidMount() {
+
+    if (this.state.queryParams && this.state.queryParams.id) {
+
+      this.props.getPartner({
+        query: {
+          _id: this.state.queryParams.id
+        }
+      })
+    }
+  }
 
   render() {
 
@@ -31,17 +55,17 @@ class PartnerPage extends Component {
               <h2>Partner Page</h2>
             </div>
           </div>
-          <div className='row flex-1'>
-            <div className='border d-flex flex-column justify-content-center col-md-4'>
-              <h2>Menu</h2>
-            </div>
-            <div onClick={ (event) => window.location.hash = "partner-marketing-page" } className='border d-flex flex-column justify-content-center col-md-4'>
-              <h2>Marketing</h2>
-            </div>
-            <div onClick={ (event) => window.location.hash = "partner-settings-page" } className='border d-flex flex-column justify-content-center col-md-4'>
-              <h2>Settings</h2>
-            </div>
-          </div>
+          { this.props.partner && <div className='row flex-1'>
+                                    <div className='border d-flex flex-column justify-content-center col-md-4'>
+                                      <h2>Menu</h2>
+                                    </div>
+                                    <div onClick={ (event) => window.location.hash = "partner-marketing-page?id=" + this.props.partner._id } className='border d-flex flex-column justify-content-center col-md-4'>
+                                      <h2>Marketing</h2>
+                                    </div>
+                                    <div onClick={ (event) => window.location.hash = "partner-settings-page?id=" + this.props.partner._id } className='border d-flex flex-column justify-content-center col-md-4'>
+                                      <h2>Settings</h2>
+                                    </div>
+                                  </div> }
         </div>
       </div>
 
@@ -49,5 +73,17 @@ class PartnerPage extends Component {
   }
 
 }
-//<FlexTable items={ this.state.businesses } selectItem={ this.selectBusiness } getTableEntry={ this.getTableEntry } tableRows={ this.tableRows } />
-export default PartnerPage;
+
+
+const mapStateToProps = (state, ownProps) => ({
+  partner: state.partners.current
+})
+
+const PartnerPageComponent = connect(mapStateToProps, {
+  getPartner,
+  putPartner
+})(PartnerPage)
+
+
+
+export default PartnerPageComponent ;

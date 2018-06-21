@@ -6,16 +6,16 @@ var parseReqForm = function(req) {
   console.log('hit parseReqForm')
 
   return Rx.Observable.create(function(observer) {
-  console.log('hit  create serv')
+    console.log('hit  create serv')
 
     var form = new formidable.IncomingForm();
     form.uploadDir = __dirname;
     form.keepExtensions = true;
     form.parse(req, function(err, fields, files) {
-  console.log('hit  form.parse')
+      console.log('hit  form.parse', fields, files, err)
 
       if (err) {
-  console.log('hit  form.err',err)
+        console.log('hit  form.err', err)
 
         observer.error(err)
 

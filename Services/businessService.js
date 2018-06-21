@@ -35,28 +35,24 @@ var updatePartner = function(partnerUpdateData) {
 
 }
 
-var updateBanner = function(req) {
+var updateBanner = function(formData) {
 
-  return parseReqForm(req)
+  return db
 
-    .switchMap((formData) => {
+    .postImage({
+      file: formData.fileList[0],
+      metadata: {
 
-      return db
-
-        .postImage({
-          file: formData.fileList[0],
-          metadata: {
-
-          }
-        })
-        .map(imageData => {
-          return {
-            ...imageData,
-            partnerId: formData.fields.partnerId
-          }
-
-        })
+      }
     })
+    .map(imageData => {
+      return {
+        ...imageData,
+        partnerId: formData.fields.partnerId
+      }
+
+    })
+
 
     .switchMap(imageData => {
 

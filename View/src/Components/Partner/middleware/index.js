@@ -2,7 +2,7 @@ const API_ROOT = window.location.port == 3000 ? "http://localhost:8080" : ""
 
 const callApi = (endpoint, config = {}) => {
 
-  const fullUrl = addQueryParams(`${API_ROOT}${endpoint}`, config.query)
+  const fullUrl = addQueryParams(`${API_ROOT}${endpoint}`, config.query || {})
 
   var responseType = "json"
 
@@ -79,10 +79,12 @@ export default store => next => action => {
     case "PUT_PARTNER": {
 
       return callApi(partnersApiPath, {
-        method: "POST",
+        method: "PUT",
 
         headers: {
-          "Content-type": "application/json"
+          "Content-type": "application/json",
+          "x-api-access-token": getAccessToken()
+
         },
         ...action.config,
         body: JSON.stringify(action.config.body)
@@ -94,6 +96,34 @@ export default store => next => action => {
     }
     default:
       return next(action)
+  }
+
+}
+
+
+
+var getAccessToken = function() {
+
+  var localUserString = localStorage.getItem('workchew.user')
+
+  if (localUserString && localUserString.length > 0) {
+
+    var user = JSON.parse(localUserString);
+
+    if (user.auth && (user.auth.accessToken || user.auth.token)) {
+
+      return user.auth.accessToken || user.auth.token
+
+    } else {
+
+      return null
+
+    }
+
+  } else {
+
+    return null
+
   }
 
 }

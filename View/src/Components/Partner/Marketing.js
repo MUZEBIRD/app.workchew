@@ -13,6 +13,7 @@ import ImageUploader from 'react-images-upload';
 
 
 import ParnterInfoArea from './PartnerInfoArea'
+import ParnterInfoInput from './PartnerInfoInput'
 
 import { getQueryParams, getPathVariables } from '../../Utils'
 import * as partnerActions from './actions'
@@ -27,6 +28,7 @@ class PartnerMarketingPage extends Component {
     super(props);
 
     this.state = {
+
       queryParams,
       bannerPreviewData: null
 
@@ -48,11 +50,13 @@ class PartnerMarketingPage extends Component {
 
   updateCurrentPartnerState(update, key) {
 
-    console.log('updateCurrentPartnerState', update, key)
+    var partner = {
+      ...this.props.partner,
+      ...this.state.partner
+    }
 
-    var partner = this.state.partner || this.props.partner
+    partner[key] = update;
 
-    partner.hours = update;
     this.setState({
       partner
     })
@@ -61,10 +65,17 @@ class PartnerMarketingPage extends Component {
 
   updatePartner() {
 
-    console.log('updatePartner', this.state.partner)
+    var partner = {
+      ...this.props.partner,
+      ...this.state.partner
+    }
 
+    this.props.putPartner({
+
+      body: partner
+
+    })
   }
-
 
   updateBannerImage = (dataURL) => {
     if (this.props.partner && this.props.partner._id) {
@@ -79,6 +90,7 @@ class PartnerMarketingPage extends Component {
       var formdata = new FormData();
       formdata.append("image", file);
       formdata.append("partnerId", this.props.partner._id);
+      console.log('this.props.partner._idthis.props.partner._idthis.props.partner._id ', this.props.partner._id)
 
       BusinessService
 
@@ -174,7 +186,7 @@ class PartnerMarketingPage extends Component {
               <div className='col-md-6'>
                 { partner
                   
-                  && partner.bannerImgId
+                  && (partner.bannerImgId || this.state.bannerPreviewData)
                   && <div className="row">
                        <div className='col-sm-12'>
                          <img className='w-100' style={ { height: 200 } } src={ this.state.bannerPreviewData || `${urlService.pic}/${partner.bannerImgId}` } />
@@ -215,7 +227,7 @@ class PartnerMarketingPage extends Component {
                 # of Allotted Seats:
               </div>
               <div className='col-md-6'>
-                <input className="form-control input-lg" />
+                <ParnterInfoInput onChange={ (event) => this.updateCurrentPartnerState(event.target.value, 'seats') } value={ partner.seats } />
               </div>
             </div>
             <br/>
@@ -252,6 +264,8 @@ class PartnerMarketingPage extends Component {
                 update
               </button>
             </div>
+            <br/>
+            <br />
           </div>
         </div>
       </div>

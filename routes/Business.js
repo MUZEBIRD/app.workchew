@@ -9,6 +9,9 @@ const authService = require('../Services/authService')
 const business = require('../Services/businessService.js')
 var Url = require('url');
 
+const userService = require('../Services/userService.js')
+
+
 const parseReqForm = require('../rxFormidable')
 
 
@@ -66,16 +69,86 @@ router.post('/', (req, res) => {
 
   } else {
 
-    business
+    parseReqForm(req)
 
-      .updateBanner(req)
+      .switchMap(formData => {
 
-      .subscribe((updateBannerResponse) => {
+        var token = req.headers['x-api-access-token'];
 
-        res.send(updateBannerResponse)
+        return authService.getRole(token)
+
+
+          .map(authObject => {
+
+            return {
+              authObject,
+              formData
+            }
+          })
 
       })
 
+      .switchMap(({authObject, formData}) => {
+
+        if (authObject.role == "admin") {
+
+          return business
+
+            .updateBanner(formData)
+
+
+        } else {
+
+          return userService.get({
+            _id: authObject.userId
+          })
+
+            .switchMap(users => {
+
+              console.log("INPSEC,INPSECINPSECINPSECINPSECINPSECINPSECINPSECINPSECINPSECINPSEC")
+              console.log(users, formData)
+
+              if (users && users.length && users[0].bid == formData.fields.partnerId) {
+
+
+                return business
+
+                  .updateBanner(formData)
+
+              } else {
+
+                return Rx.Observable.of(1)
+
+              }
+
+
+            })
+
+
+        }
+
+
+      })
+
+
+      .subscribe((updateBannerResponse) => {
+
+        if (updateBannerResponse == 1) {
+
+
+          res.status(401).send({
+            error: 401,
+            msg: " wrong user"
+          })
+
+        } else {
+
+          res.send(updateBannerResponse)
+
+        }
+
+
+      })
   }
 
 }); //POST 
@@ -174,6 +247,8 @@ var checkAccessToken = function(req, res, next) {
 
 var checkUserPermissions = function(req, res, next) {
 
+  var token = req.headers['x-api-access-token'];
+
   authService.getRole(token)
 
     .switchMap(authObject => {
@@ -186,32 +261,17 @@ var checkUserPermissions = function(req, res, next) {
 
     .subscribe(users => {
 
-      if (req.body && req.body._id && users.length > 0 && users[0].bid == req.body._id) {
+      if (req.body
+        && req.body._id
+        && users.length > 0
+        && (users[0].bid == req.body._id)) {
 
         next()
 
       } else {
 
-        parseReqForm
 
-          .switchMap((formData) => {
-
-            formData.fields.partnerId
-
-            if (formData.fields && formData.fields.partnerId && formData.fields.partnerId == users[0].bid) {
-
-              next()
-
-            } else {
-
-              res.status(401).send({
-                error: 401,
-                msg: "not authorized for this business"
-              })
-
-            }
-
-          })
+        next()
 
       }
 
