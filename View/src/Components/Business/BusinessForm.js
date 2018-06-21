@@ -332,7 +332,7 @@ class BusinessForm extends Component {
 
       <div className='col-sm-6'>
         <div className="row">
-          <div className='col-sm-2'>
+          <div className='col-sm-6 '>
             <button onClick={ (event) => {
                               
                                 this.save()
@@ -340,8 +340,18 @@ class BusinessForm extends Component {
                               } } className='btn btn-primary'>
               Save
             </button>
-          </div>
-          <div className='col-sm-10'>
+            { '  ' }
+            { this.state.business
+              && this.state.business._id
+              &&
+              <button onClick={ (event) => {
+                                
+                                  var createPartnerUserUrl = `${urlService.createPartnerUser}?id=${this.state.business._id}`
+                                  urlService.goTo(createPartnerUserUrl)
+                                
+                                } } className='btn btn-primary'>
+                Create User Account
+              </button> }
           </div>
         </div>
         <br/>

@@ -9,7 +9,7 @@ const authService = require('./authService')
 
 const bcryptStream = require('./bcryptStreams')
 
-var post = function(user) {
+var post = function(user, req) {
 
   var {userSignUpInfo, businessSignUpInfo} = user
 
@@ -54,6 +54,12 @@ var post = function(user) {
 
             } else {
 
+
+              userSignUpData.bid = null
+
+              delete userSignUpData.bid
+
+
               return db
 
                 .post(userCollectionName, userSignUpData)
@@ -72,7 +78,47 @@ var post = function(user) {
 
   } //userSignUpInfo
 
-  if (businessSignUpInfo) {
+  if (businessSignUpInfo && req.headers && req.headers['x-api-access-token']) {
+
+    return checkAccess(req.headers['x-api-access-token'])
+
+      .switchMap((authObject) => {
+
+        if (authObject.role == 'admin') {
+
+          return bcryptStream.hashUserPassword(businessSignUpInfo.password)
+
+            .map((hashedPassword) => {
+
+              return {
+                email: businessSignUpInfo.email,
+                password: hashedPassword,
+                bid: businessSignUpInfo.bid,
+
+                created: new Date().getTime()
+              }
+
+            })
+
+            .switchMap((user) => {
+
+              return db.post(userCollectionName, {
+                ...user,
+              })
+
+            })
+
+        } else {
+
+          return Rx.Observable.of({
+            error: 401
+          })
+
+        }
+
+      })
+
+  } else if (businessSignUpInfo) {
 
     return emailService
 
@@ -101,7 +147,26 @@ var post = function(user) {
       })
 
   }
+
+
+
+
+
+
+
 }
+
+
+
+var checkAccess = function(token) {
+
+  return authService.getRole(token)
+
+
+
+
+}
+
 
 var accessAndUpdate = function(userSignUp) {
 
@@ -283,6 +348,11 @@ var update = function(userUpdateData) {
   userUpdateData.email = null;
 
   delete userUpdateData.email;
+
+
+  userUpdateData.bid = null
+
+  delete userUpdateData.bid
 
   return db.get(userCollectionName, query)
 

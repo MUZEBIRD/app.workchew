@@ -48,13 +48,14 @@ var updateBanner = function(req) {
           metadata: {
 
           }
-        }).map(imageData => {
-        return {
-          ...imageData,
-          partnerId: formData.fields.partnerId
-        }
+        })
+        .map(imageData => {
+          return {
+            ...imageData,
+            partnerId: formData.fields.partnerId
+          }
 
-      })
+        })
     })
 
     .switchMap(imageData => {

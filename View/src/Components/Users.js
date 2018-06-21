@@ -40,13 +40,6 @@ class Users extends Component {
           <br/>
           <div>
             <button className="btn btn-info">
-              <Link to="/add-user">
-                Add
-              </Link>
-            </button>
-            <br/>
-            <br/>
-            <button className="btn btn-info">
               <Link to="/search-users">
                 Search / Edit / Delete
               </Link>

@@ -4,6 +4,7 @@ import { Route, Link } from 'react-router-dom'
 import userService from '../../Services/userService.js'
 import urlService from '../../Services/urlService.js'
 import restService from '../../Services/restService.js'
+import { getQueryParams, getPathVariables } from '../../Utils'
 
 class BusinessUserSignUp extends Component {
 
@@ -11,11 +12,43 @@ class BusinessUserSignUp extends Component {
 
     super(props);
 
+    this.state = {};
+
   }
 
-  signUp() {
+  componentDidMount() {
 
-    var fields = [...document.getElementsByClassName('sign-up-form-feild')];
+
+    var params = getQueryParams() || {};
+
+    if (params.id) {
+
+      this.setState({
+        bid: params.id
+      })
+
+    }
+
+    userService
+
+      .get({
+        params: {
+          _id: 1
+        }
+      })
+
+      .subscribe((user) => {
+
+        this.setState({
+          currentUser: user
+        })
+
+      })
+  }
+
+  signUp = () => {
+
+    var fields = [...document.getElementsByClassName('partner-sign-up-form-feild')];
 
     var businessSignUpInfo = fields.reduce((info, inputField) => {
 
@@ -23,7 +56,9 @@ class BusinessUserSignUp extends Component {
 
       return info;
 
-    }, {})
+    }, {
+      bid: this.state.bid
+    })
 
     userService
 
@@ -42,37 +77,31 @@ class BusinessUserSignUp extends Component {
 
     return (
 
-      <div className="wholeView flex-col">
-        <div className="showView container">
-          <div className='row flex-row-center-vert' style={ { backgroundColor: 'white', position: 'relative', zIndex: '5', height: '10%' } }>
+      <div className="wholeView">
+        <div className="showView  container">
+          <br/>
+          <br/>
+          <div className='row' style={ { backgroundColor: 'white', position: 'relative', zIndex: '5', height: '10%' } }>
             <div className='col-sm-4'>
             </div>
             <div className='col-sm-4'>
-              <h2>Business Sign Up</h2>
+              <h2><span><u><b>Create Account</b></u></span></h2>
             </div>
             <div className='col-sm-4'>
             </div>
           </div>
           <div className='row'>
-            <div className='col-sm-6'>
-              <input name="name" placeholder="Name of Business" className="form-control sign-up-form-feild" />
-            </div>
-          </div>
-          <br/>
-          <div className='row'>
-            <div className='col-sm-6'>
-              <input name="email" placeholder="Contact Email" className="form-control sign-up-form-feild" />
-            </div>
-          </div>
-          <br/>
-          <div className='row'>
-            <div className='col-sm-6'>
-              <textarea name="message" placeholder="Message (Optional)" className="form-control sign-up-form-feild" />
-            </div>
-          </div>
-          <br/>
-          <div className='row'>
-            <div className='col-sm-1'>
+            <div className='col-sm-12 d-flex flex-column align-items-center'>
+              <input name="name" placeholder="Name of Business" className="form-control w-50 partner-sign-up-form-feild" />
+              <br/>
+              <input name="email" placeholder="Contact Email" className="form-control w-50 partner-sign-up-form-feild" />
+              <br/>
+              { this.state.currentUser
+                && this.state.currentUser.auth
+                && (this.state.currentUser.auth.role == 'admin')
+                ? <input name="password" placeholder="Password" className="form-control w-50 partner-sign-up-form-feild" />
+                : <textarea name="message" placeholder="Message (Optional)" className="form-control w-50 partner-sign-up-form-feild" /> }
+              <br/>
               <button onClick={ this.signUp } className="btn btn-success">
                 Sign up
               </button>

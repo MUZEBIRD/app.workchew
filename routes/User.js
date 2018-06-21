@@ -55,15 +55,18 @@ var UserAuth = function(req, res, next) {
 
 router.use(UserAuth)
 
-router.post('/', ({body}, res) => {
+router.post('/', (req, res) => {
 
   res.set('Content-Type', 'text/html');
 
   user
 
-    .post(userFromBody(body))
+    .post(userFromBody(req.body), req)
 
     .subscribe((userPostResponse) => {
+
+
+      delete userPostResponse.password
 
       var responseBody = {
         userResponse: userPostResponse

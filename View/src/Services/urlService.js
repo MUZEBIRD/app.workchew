@@ -13,6 +13,7 @@ export default {
   viewBusinessPage: `/view-business`,
   buildProfile: '/co-chewer-signUp-build',
   adminPartnerPage: '/admin-partner-page',
+  createPartnerUser: 'business-signup',
   partnerPage: `/partner-page`,
   businessPage: `/business-page`,
   editUserProfile: '/co-chewer-signUp-build',

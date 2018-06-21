@@ -60,6 +60,7 @@ router.post('/', (req, res) => {
         })
 
       })
+
   } else {
 
     business
@@ -159,13 +160,42 @@ var checkAccessToken = function(req, res, next) {
 
       } else {
 
-        res.status(401).send({
-          error: 401
-        })
+        checkUserPermissions(req, res, next)
 
       }
 
     })
+
+}
+
+
+var checkUserPermissions = function(req, res, next) {
+
+  authService.getRole(token)
+
+    .switchMap(authObject => {
+
+
+      return userService.get({
+        _id: authObject.userId
+      })
+
+
+    })
+
+
+    .subscribe(users => {
+
+
+
+      //may have to parse req
+
+
+
+
+    })
+
+
 
 }
 
