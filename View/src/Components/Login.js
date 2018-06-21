@@ -49,7 +49,15 @@ class Login extends Component {
 
             userService.store(LoginResponse.user)
 
-            urlService.goTo(urlService.main)
+            if (LoginResponse.user.bid) {
+
+              urlService.goTo(`${urlService.partnerPage}?=${LoginResponse.user.bid}`)
+
+            } else {
+
+              urlService.goTo(urlService.main)
+
+            }
 
           }
 
@@ -63,7 +71,6 @@ class Login extends Component {
                 class: "danger"
               })
             }
-
 
           })
 
@@ -236,7 +243,7 @@ class Login extends Component {
         <br/>
         <br/>
         <div>
-          <img className="logo" src={ "/static/images/logo.png"} />
+          <img className="logo" src={ "/static/images/logo.png" } />
         </div>
         <div className="row">
           <div className="col-sm-4"></div>
@@ -296,9 +303,9 @@ class Login extends Component {
             </div>
             <br/>
             <div className='d-flex justify-content-center'>
-              <button className="btn btn-info" onClick={ () => {
-                                                           this.login()
-                                                         } }>
+              <button onClick={ () => {
+                                  this.login()
+                                } } className="btn btn-info">
                 Login
               </button>
             </div>
@@ -312,9 +319,9 @@ class Login extends Component {
           <div className="col-sm-4"></div>
           <div className="col-sm-4 flex-row-space-around">
             <span>Sign Up as a Co-Chewer</span>
-            <button className="btn btn-success" onClick={ () => {
-                                                            this.goToCoChewerSignUp()
-                                                          } }>
+            <button onClick={ () => {
+                                this.goToCoChewerSignUp()
+                              } } className="btn btn-success">
               click here
             </button>
           </div>
@@ -324,9 +331,9 @@ class Login extends Component {
           <div className="col-sm-4"></div>
           <div className="col-sm-4 flex-row-space-around">
             <span>Sign Up as Business Owner</span>
-            <button className="btn btn-success" onClick={ () => {
-                                                            this.goToBusinessSignUp()
-                                                          } }>
+            <button onClick={ () => {
+                                this.goToBusinessSignUp()
+                              } } className="btn btn-success">
               click here
             </button>
           </div>
