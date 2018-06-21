@@ -9,6 +9,9 @@ const authService = require('../Services/authService')
 const business = require('../Services/businessService.js')
 var Url = require('url');
 
+const parseReqForm = require('../rxFormidable')
+
+
 var businessPartnerAuth = function(req, res, next) {
 
   var body = req.body;
@@ -175,27 +178,44 @@ var checkUserPermissions = function(req, res, next) {
 
     .switchMap(authObject => {
 
-
       return userService.get({
         _id: authObject.userId
       })
 
-
     })
-
 
     .subscribe(users => {
 
+      if (req.body && req.body._id && users.length > 0 && users[0].bid == req.body._id) {
 
+        next()
 
-      //may have to parse req
+      } else {
 
+        parseReqForm
 
+          .switchMap((formData) => {
 
+            formData.fields.partnerId
+
+            if (formData.fields && formData.fields.partnerId && formData.fields.partnerId == users[0].bid) {
+
+              next()
+
+            } else {
+
+              res.status(401).send({
+                error: 401,
+                msg: "not authorized for this business"
+              })
+
+            }
+
+          })
+
+      }
 
     })
-
-
 
 }
 
