@@ -25,12 +25,21 @@ class PartnerSettingsPage extends Component {
 
       <div className="wholeView flex-col">
         <div className="showView d-flex flex-column">
-          <br />
-          <div className='row h-25'>
-            <div className='col-md-12'>
-              <h2>Partner Settings Page</h2>
+          <div className='row'>
+            <div className='col-md-3'>
+              <br/>
+              <img style={ { width: 100 } } src={ "/static/images/logo.png" } />
             </div>
           </div>
+          <div className='row'>
+            <div className='col-md-12'>
+              <h2>Partner Settings</h2>
+              <br/>
+              <span><u><b>Account</b></u></span>
+            </div>
+          </div>
+          <br/>
+          <br/>
           <div className='flex-1 scroll-y'>
             <div className='row'>
               <div className='col-md-3'>
@@ -56,6 +65,14 @@ class PartnerSettingsPage extends Component {
               </div>
               <div className='col-md-6'>
                 <input className="form-control input-lg" />
+              </div>
+            </div>
+            <br/>
+            <div className='row'>
+              <div className='col-md-3'>
+                <button className="btn btn-primary" type="button" aria-expanded="false">
+                  Change Password
+                </button>
               </div>
             </div>
             <br />

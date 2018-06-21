@@ -526,7 +526,7 @@ class BusinessForm extends Component {
         <br/>
         <div className="row">
           <div className='col-sm-2'>
-            <span># number of sheets</span>
+            <span># number of seats</span>
           </div>
           <div className='col-sm-10'>
             <input className="form-control business-text-feild" name="seats" />

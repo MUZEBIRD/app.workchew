@@ -236,15 +236,15 @@ class Login extends Component {
         <br/>
         <br/>
         <div>
-          <img className="logo" src={ "/static/images/logo.png" } />
+          <img className="logo" src={ "/static/images/logo.png"} />
         </div>
         <div className="row">
           <div className="col-sm-4"></div>
           <div className="col-sm-4">
             <div className={ "alert alert-" + this.state.alertLevel } style={ { visibility: this.state.alertVisibilty } } role="alert">
-              <button type="button" className="close" onClick={ () => {
-                                                                  this.closeAlert()
-                                                                } } aria-label="Close">
+              <button onClick={ () => {
+                                  this.closeAlert()
+                                } } type="button" className="close" aria-label="Close">
                 <span aria-hidden="true">×</span>
               </button>
               <strong>Oh snap!</strong>
