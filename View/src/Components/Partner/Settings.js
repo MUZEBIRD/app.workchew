@@ -70,14 +70,14 @@ class PartnerSettingsPage extends Component {
             <br/>
             <div className='row'>
               <div className='col-md-3'>
-                <button className="btn btn-primary" type="button" aria-expanded="false">
+                <button className="btn btn-primary" type="button">
                   Change Password
                 </button>
               </div>
             </div>
             <br />
             <div className='d-flex justify-content-center'>
-              <button className="btn btn-primary" type="button" aria-expanded="false">
+              <button className="btn btn-primary" type="button">
                 update
               </button>
             </div>
