@@ -45,4 +45,12 @@ router.get('/', (req, res) => {
   res.send(fs.readFileSync('./View/build/index.html'));
 });
 
+
+router.post('/orderslogin', (req, res) => {
+
+  res.set('Content-Type', 'text');
+
+  res.send(req.body);
+});
+
 module.exports = router;
