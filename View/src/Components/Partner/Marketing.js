@@ -161,7 +161,6 @@ class PartnerMarketingPage extends Component {
   }
 
   render() {
-    console.log("on this.state.bannerPreviewData  ", this.state.bannerPreviewData)
 
     var partner = this.state.partner || this.props.partner
 

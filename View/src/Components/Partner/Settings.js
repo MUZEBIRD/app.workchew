@@ -1,26 +1,78 @@
 import React, { Component } from 'react';
 import userService from '../../Services/userService.js'
+import { connect } from 'react-redux'
 
 import { Route, Link } from 'react-router-dom'
 
 import urlService from '../../Services/urlService.js'
 
 import BusinessService from '../../Services/businessService.js';
+import { getQueryParams, getPathVariables } from '../../Utils'
+import * as partnerActions from './actions'
 
+
+import ParnterInfoArea from './PartnerInfoArea'
+import ParnterInfoInput from './PartnerInfoInput'
+
+var {getPartner, putPartner} = partnerActions
 class PartnerSettingsPage extends Component {
 
   constructor(props) {
+    var queryParams = getQueryParams()
 
     super(props);
 
-    this.state = {};
+    this.state = {
+
+      queryParams,
+      bannerPreviewData: null
+
+    };
 
   }
+  updatePartner = () => {
 
-  componentWillMount() {}
+    var partner = {
+      ...this.props.partner,
+      ...this.state.partner
+    }
 
+    this.props.putPartner({
+
+      body: partner
+
+    })
+
+
+  }
+  updateCurrentPartnerState(update, key) {
+
+    var partner = {
+      ...this.props.partner,
+      ...this.state.partner
+    }
+
+    partner[key] = update;
+
+    this.setState({
+      partner
+    })
+
+  }
+  componentDidMount() {
+
+    if (this.state.queryParams && this.state.queryParams.id) {
+
+      this.props.getPartner({
+        query: {
+          _id: this.state.queryParams.id
+        }
+      })
+    }
+  }
   render() {
 
+    var partner = this.state.partner || this.props.partner
     return (
 
       <div className="wholeView flex-col">
@@ -46,7 +98,7 @@ class PartnerSettingsPage extends Component {
                 Contact Name
               </div>
               <div className='col-md-6'>
-                <input className="form-control input-lg" />
+                <ParnterInfoInput onChange={ (event) => this.updateCurrentPartnerState(event.target.value, 'contactName') } value={ partner.contactName } />
               </div>
             </div>
             <br/>
@@ -55,7 +107,7 @@ class PartnerSettingsPage extends Component {
                 Partner Business Name
               </div>
               <div className='col-md-6'>
-                <input className="form-control input-lg" />
+                <ParnterInfoInput onChange={ (event) => this.updateCurrentPartnerState(event.target.value, 'name') } value={ partner.name } />
               </div>
             </div>
             <br/>
@@ -64,7 +116,7 @@ class PartnerSettingsPage extends Component {
                 Contact Email
               </div>
               <div className='col-md-6'>
-                <input className="form-control input-lg" />
+                <ParnterInfoInput onChange={ (event) => this.updateCurrentPartnerState(event.target.value, 'email') } value={ partner.email } />
               </div>
             </div>
             <br/>
@@ -77,7 +129,11 @@ class PartnerSettingsPage extends Component {
             </div>
             <br />
             <div className='d-flex justify-content-center'>
-              <button className="btn btn-primary" type="button">
+              <button onClick={ (event) => {
+                                
+                                
+                                  this.updatePartner()
+                                } } className="btn btn-primary" type="button">
                 update
               </button>
             </div>
@@ -89,4 +145,15 @@ class PartnerSettingsPage extends Component {
   }
 
 }
-export default PartnerSettingsPage;
+
+
+const mapStateToProps = (state, ownProps) => ({
+  partner: state.partners.current
+})
+
+const PartnerSettingsPageComponent = connect(mapStateToProps, {
+  getPartner,
+  putPartner
+})(PartnerSettingsPage)
+
+export default PartnerSettingsPageComponent ;
