@@ -14,6 +14,9 @@ const Business = require('./Business')
 
 const payPal = require('./payPalRoute')
 
+const authService = require('../Services/authService')
+const businessService = require('../Services/businessService')
+const userService = require('../Services/userService')
 
 const pic = require('./Pic')
 
@@ -45,12 +48,110 @@ router.get('/', (req, res) => {
   res.send(fs.readFileSync('./View/build/index.html'));
 });
 
-
 router.post('/orderslogin', (req, res) => {
 
   res.set('Content-Type', 'application/json');
 
-  res.send(req.body);
+  authService.getRole(req.body.token)
+
+    .subscribe(authObject => {
+
+      if (authObject.role == "admin") {
+
+        adminOrdersLogin(req, res)
+
+      } else {
+
+        chewCheck(req, res, authObject, req.body.bid)
+
+      }
+
+
+    })
+
 });
+
+
+var adminOrdersLogin = function(req, res) {
+
+  businessService.get({})
+
+    .subscribe(business => {
+
+      res.send({
+        user: {
+          token: req.body.token,
+          role: 'admin'
+        },
+        business
+      })
+    })
+}
+
+
+var chewCheck = function(req, res, authObject, bid) {
+
+  userService.get({
+    _id: authObject.userId
+  })
+
+    .subscribe(users => {
+
+      if (users
+        && users.length
+        && users[0].bid
+        && users[0].bid.length
+        && (users[0].bid == bid)) {
+
+        partnerOrdersLogin(req, res, bid)
+
+      } else if (users
+        && users.length
+      ) {
+
+        coChewerLogin(req, res, bid)
+
+      }
+
+    })
+}
+
+var coChewerLogin = function(req, res, bid) {
+
+  businessService.get({
+    _id: bid
+  })
+
+    .subscribe(business => {
+
+      res.send({
+        user: {
+          token: req.body.token,
+          role: 'coChewer'
+        },
+        business
+      })
+    })
+}
+
+
+var partnerOrdersLogin = function(req, res, bid) {
+
+  businessService.get({
+    _id: bid
+  })
+    .subscribe(business => {
+
+      res.send({
+        user: {
+          token: req.body.token,
+          role: 'partner'
+        },
+        business
+      })
+    })
+}
+
+
 
 module.exports = router;
