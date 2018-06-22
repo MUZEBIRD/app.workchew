@@ -204,7 +204,7 @@ class PartnerMarketingPage extends Component {
                                                this.updateBannerImage()
                                              
                                              } } className='btn btn-warning'>
-                             update
+                             Save Banner Update
                            </button>
                          </div>
                        </div>
