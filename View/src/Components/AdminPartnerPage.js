@@ -97,6 +97,9 @@ class AdminPartnerPage extends Component {
 
   }
 
+
+
+
   render() {
 
     var partner = this.state.partner || this.props.partner

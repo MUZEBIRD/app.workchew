@@ -227,6 +227,26 @@ class PublicBusinessView extends Component {
     return item[row.key]
   }
 
+  gotToPartnerMenu = () => {
+
+    userService.get({
+      params: {
+        _id: 1
+      }
+    })
+      .subscribe((user) => {
+
+        var token = user.auth.token || user.auth.accessToken
+        if (token) {
+
+          window.location.href = "http://orders.workchew.com/#/?bid=" + this.state.business._id + "&token=" + token
+
+        }
+
+      })
+
+
+  }
   render() {
 
     var {business} = this.state
@@ -256,7 +276,9 @@ class PublicBusinessView extends Component {
                   <span>Total: { business.seats } | Availiable:{ business.openSeats }</span>
                 </div>
                 <div className="col-md-6">
-                  <button className="btn btn-primary" type="button">
+                  <button onClick={ (event) => {
+                                      this.gotToPartnerMenu()
+                                    } } className="btn btn-primary" type="button">
                     Menu
                   </button>
                 </div>
