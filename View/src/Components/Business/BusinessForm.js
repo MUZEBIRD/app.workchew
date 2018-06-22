@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import BusinessService from '../../Services/businessService.js';
+import userService from '../../Services/userService.js'
 
 import { Route, Link } from 'react-router-dom'
 
@@ -275,6 +276,30 @@ class BusinessForm extends Component {
       })
   }
 
+
+  gotToPartnerMenu = () => {
+
+    userService.get({
+      params: {
+        _id: 1
+      }
+    })
+
+
+      .subscribe((user) => {
+
+        var token = user.auth.token || user.auth.accessToken
+        if (token) {
+
+          window.location.href = "http://orders.workchew.com/#/?bid=" + this.state.business._id + "&token=" + token
+
+
+        }
+
+      })
+
+
+  }
   getQueryParams() {
 
     var url = window.location.href;
@@ -332,7 +357,7 @@ class BusinessForm extends Component {
 
       <div className='col-sm-6'>
         <div className="row">
-          <div className='col-sm-6 '>
+          <div className='col-sm-12 '>
             <button onClick={ (event) => {
                               
                                 this.save()
@@ -351,6 +376,18 @@ class BusinessForm extends Component {
                                 
                                 } } className='btn btn-primary'>
                 Create User Account
+              </button> }
+            { '  ' }
+            { this.state.business
+              && this.state.business._id
+              &&
+              <button onClick={ (event) => {
+                                
+                                  this.gotToPartnerMenu()
+                                
+                                
+                                } } className='btn btn-primary'>
+                Menu
               </button> }
           </div>
         </div>
