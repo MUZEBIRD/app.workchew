@@ -48,7 +48,7 @@ router.get('/', (req, res) => {
 
 router.post('/orderslogin', (req, res) => {
 
-  res.set('Content-Type', 'text');
+  res.set('Content-Type', 'application/json');
 
   res.send(req.body);
 });
