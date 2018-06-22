@@ -385,7 +385,6 @@ class BusinessForm extends Component {
                                 
                                   this.gotToPartnerMenu()
                                 
-                                
                                 } } className='btn btn-primary'>
                 Menu
               </button> }

@@ -43,6 +43,31 @@ class PartnerPage extends Component {
     }
   }
 
+
+  gotToPartnerMenu = () => {
+
+    userService.get({
+      params: {
+        _id: 1
+      }
+    })
+
+
+      .subscribe((user) => {
+
+        var token = user.auth.token || user.auth.accessToken
+        if (token) {
+
+          window.location.href = "http://orders.workchew.com/#/?bid=" + this.props.partner._id + "&token=" + token
+
+
+        }
+
+      })
+
+
+  }
+
   render() {
 
     return (
@@ -55,17 +80,18 @@ class PartnerPage extends Component {
               <h2>Partner Page</h2>
             </div>
           </div>
-          { this.props.partner && <div className='row flex-1'>
-                                    <div className='border d-flex flex-column justify-content-center col-md-4'>
-                                      <h2>Menu</h2>
-                                    </div>
-                                    <div onClick={ (event) => window.location.hash = "partner-marketing-page?id=" + this.props.partner._id } className='border d-flex flex-column justify-content-center col-md-4'>
-                                      <h2>Marketing</h2>
-                                    </div>
-                                    <div onClick={ (event) => window.location.hash = "partner-settings-page?id=" + this.props.partner._id } className='border d-flex flex-column justify-content-center col-md-4'>
-                                      <h2>Settings</h2>
-                                    </div>
-                                  </div> }
+          { this.props.partner
+            && <div className='row flex-1'>
+                 <div onClick={ (event) => this.gotToPartnerMenu() } className='border d-flex flex-column justify-content-center col-md-4'>
+                   <h2>Menu</h2>
+                 </div>
+                 <div onClick={ (event) => window.location.hash = "partner-marketing-page?id=" + this.props.partner._id } className='border d-flex flex-column justify-content-center col-md-4'>
+                   <h2>Marketing</h2>
+                 </div>
+                 <div onClick={ (event) => window.location.hash = "partner-settings-page?id=" + this.props.partner._id } className='border d-flex flex-column justify-content-center col-md-4'>
+                   <h2>Settings</h2>
+                 </div>
+               </div> }
         </div>
       </div>
 
