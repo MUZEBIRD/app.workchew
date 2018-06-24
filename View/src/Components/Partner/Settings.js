@@ -85,16 +85,16 @@ class PartnerSettingsPage extends Component {
           </div>
           <div className='row'>
             <div className='col-md-12'>
-              <h2>Partner Settings</h2>
+              <h2 style={ { fontWeight: 'bold' } } className="Brandon_bld">Partner Settings</h2>
               <br/>
-              <span><u><b>Account</b></u></span>
+              <span className="Brandon_bld"><u><b>Account</b></u></span>
             </div>
           </div>
           <br/>
           <br/>
           <div className='flex-1 scroll-y'>
             <div className='row'>
-              <div className='col-md-3'>
+              <div className='col-md-3 Brandon_bld'>
                 Contact Name
               </div>
               <div className='col-md-6'>
@@ -103,7 +103,7 @@ class PartnerSettingsPage extends Component {
             </div>
             <br/>
             <div className='row'>
-              <div className='col-md-3'>
+              <div className='col-md-3 Brandon_bld'>
                 Partner Business Name
               </div>
               <div className='col-md-6'>
@@ -112,7 +112,7 @@ class PartnerSettingsPage extends Component {
             </div>
             <br/>
             <div className='row'>
-              <div className='col-md-3'>
+              <div className='col-md-3 Brandon_bld'>
                 Contact Email
               </div>
               <div className='col-md-6'>
@@ -122,7 +122,7 @@ class PartnerSettingsPage extends Component {
             <br/>
             <div className='row'>
               <div className='col-md-3'>
-                <button className="btn btn-primary" type="button">
+                <button className="btn btn-primary Brandon_bld" type="button">
                   Change Password
                 </button>
               </div>
@@ -133,7 +133,7 @@ class PartnerSettingsPage extends Component {
                                 
                                 
                                   this.updatePartner()
-                                } } className="btn btn-primary" type="button">
+                                } } className="btn btn-primary Brandon_bld" type="button">
                 update
               </button>
             </div>
