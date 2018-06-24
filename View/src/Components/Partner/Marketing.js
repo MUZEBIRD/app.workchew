@@ -171,7 +171,7 @@ class PartnerMarketingPage extends Component {
           <br />
           <div className='row'>
             <div className='col-md-12'>
-              <h2>Partner Marketing</h2>
+              <h2 style={ { fontWeight: 'bold' } } className="Brandon_bld">Partner Marketing</h2>
             </div>
           </div>
           <br />
@@ -196,14 +196,14 @@ class PartnerMarketingPage extends Component {
                                              
                                                this.clearPreviewImage()
                                              
-                                             } } className='btn btn-warning'>
+                                             } } className='btn btn-primary'>
                              Clear
                            </button>
                            <button onClick={ (event) => {
                                              
                                                this.updateBannerImage()
                                              
-                                             } } className='btn btn-warning'>
+                                             } } className='btn btn-primary'>
                              Save Banner Update
                            </button>
                          </div>
@@ -213,7 +213,7 @@ class PartnerMarketingPage extends Component {
             </div>
             <br/>
             <div className='row'>
-              <div className='col-md-6'>
+              <div className='col-md-6 Brandon_bld'>
                 WorkChew Hours:
               </div>
               <div className='col-md-6'>
@@ -221,7 +221,7 @@ class PartnerMarketingPage extends Component {
               </div>
             </div>
             <br/>
-            <div className='row'>
+            <div className='row Brandon_bld'>
               <div className='col-md-6'>
                 # of Allotted Seats:
               </div>
@@ -230,7 +230,7 @@ class PartnerMarketingPage extends Component {
               </div>
             </div>
             <br/>
-            <div className='row'>
+            <div className='row Brandon_bld'>
               <div className='col-md-6'>
                 Additional Specials:
               </div>
@@ -239,7 +239,7 @@ class PartnerMarketingPage extends Component {
               </div>
             </div>
             <br />
-            <div className='row'>
+            <div className='row Brandon_bld'>
               <div className='col-md-6'>
                 Events
               </div>
@@ -248,7 +248,7 @@ class PartnerMarketingPage extends Component {
               </div>
             </div>
             <br/>
-            <div className='row'>
+            <div className='row Brandon_bld'>
               <div className='col-md-6'>
                 Discounts
               </div>
@@ -259,8 +259,8 @@ class PartnerMarketingPage extends Component {
             <br/>
             <br />
             <div className='d-flex justify-content-center'>
-              <button onClick={ (event) => this.updatePartner() } className="btn btn-primary" type="button" aria-expanded="false">
-                update
+              <button onClick={ (event) => this.updatePartner() } className="btn btn-primary Brandon_bld" type="button" aria-expanded="false">
+                SAVE
               </button>
             </div>
             <br/>
