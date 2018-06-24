@@ -251,7 +251,7 @@ class UserSignUpSocial extends Component {
             <br/>
             <div className='row' style={ { backgroundColor: 'white', position: 'relative', zIndex: '5' } }>
               <div className='col-sm-12'>
-                <h1 className='text-left'>Welcome, <br/> sign-up to get started.</h1>
+                <h1 style={ { fontWeight: 'bold', color: 'grey' } } className='text-left Brandon_bld'>Welcome, <br/> sign-up to get started.</h1>
               </div>
             </div>
             <div className='d-flex' style={ { backgroundColor: 'white', position: 'relative', zIndex: '5' } }>
@@ -276,8 +276,10 @@ class UserSignUpSocial extends Component {
                                   } } className={ "linkedin-button" }>
                 </button>
               </div>
-              <p>
-                or
+              <p style={ { fontSize: 28, color: 'grey' } } className="h-100 brandong">
+                <br/>
+                <br/>
+                <br/> or
               </p>
               <div className='flex-1'>
                 <br/>
@@ -301,7 +303,7 @@ class UserSignUpSocial extends Component {
                                     
                                       this.defaultUserRespone()
                                     
-                                    } } className="btn btn-success">
+                                    } } className="btn btn-secondary brandong w-50">
                     Sign up
                   </button>
                 </div>
