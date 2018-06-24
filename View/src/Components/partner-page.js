@@ -80,7 +80,7 @@ class PartnerPage extends Component {
               && partner.bannerImgId
               &&
               
-              <div style={ { opacity: .7, position: 'absolute', zIndex: 1 } } className='h-100 w-100 z-10 d-flex align-items-center w-100 justify-content-center'>
+              <div style={ { opacity: .4, position: 'absolute', zIndex: 1 } } className='h-100 w-100 z-10 d-flex align-items-center w-100 justify-content-center'>
                 <img className='h-100 w-50 z-1' src={ this.state.bannerPreviewData || `${urlService.pic}/${partner.bannerImgId}` } />
               </div> }
             <div style={ { zIndex: 10 } } className='h-100 z-10 d-flex align-items-center w-100 justify-content-center'>
