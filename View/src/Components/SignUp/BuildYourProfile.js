@@ -168,8 +168,8 @@ class BuildYourProfile extends Component {
             <br/>
             <div className='row' style={ { backgroundColor: 'white', position: 'relative', zIndex: '5' } }>
               <div className='col-sm-12'>
-                <h1 className='text-left'>Build your profile.</h1>
-                <p className='text-left'>
+                <h1 style={ { fontWeight: 'bold', color: 'grey' } } className='text-left Brandon_bld'>Build your profile.</h1>
+                <p style={ { color: 'grey' } } className='text-left Brandon_bld'>
                   WorkChew is about building connections between real people.
                 </p>
                 <button onClick={ (event) => {
@@ -180,6 +180,7 @@ class BuildYourProfile extends Component {
                 </button>
               </div>
             </div>
+            <br/>
             <div className='d-flex align-items-center' style={ { backgroundColor: 'white', position: 'relative', zIndex: '5' } }>
               <div className='flex-1'>
                 <div className='row'>
