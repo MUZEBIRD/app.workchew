@@ -24,12 +24,12 @@ const BusinessList = (props) => props.businesses.map(business => {
       <br/>
       <div className="w-100 d-flex justify-content-between">
         <div className="text-left">
-          <span><b>{ business.name }</b></span>
+          <span style={ { fontSize: 22, fontWeight: 'bold' } } className="Brandon_bld"><b>{ business.name }</b></span>
           <br/>
-          <span>{ business.address }</span>
+          <span className="Brandon_bld">{ business.address }</span>
         </div>
         <div>
-          <button onClick={ (event) => props.selectItem(business) } className="btn btn-primary" type="button" aria-expanded="false">
+          <button onClick={ (event) => props.selectItem(business) } className="btn btn-primary Brandon_bld" type="button" aria-expanded="false">
             Partner Page
           </button>
         </div>
