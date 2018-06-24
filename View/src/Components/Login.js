@@ -319,7 +319,7 @@ class Login extends Component {
         <div className="row">
           <div className="col-sm-4"></div>
           <div className="col-sm-4 flex-row-space-around">
-            <span>Sign Up as a Co-Chewer</span>
+            <span className="brandong">Sign Up as a Co-Chewer</span>
             <button onClick={ () => {
                                 this.goToCoChewerSignUp()
                               } } className="btn btn-success">
