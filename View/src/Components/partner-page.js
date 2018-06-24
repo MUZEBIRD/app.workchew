@@ -69,27 +69,46 @@ class PartnerPage extends Component {
   }
 
   render() {
-
+    var partner = this.props.partner || {}
     return (
 
       <div className="wholeView flex-col">
         <div className="showView d-flex flex-column">
           <br />
-          <div className='row h-25'>
-            <div className='col-md-12'>
-              <h2>Partner Page</h2>
+          <div style={ { position: 'relative' } } className='row h-25'>
+            { partner
+              && partner.bannerImgId
+              &&
+              
+              <div style={ { opacity: .7, position: 'absolute', zIndex: 1 } } className='h-100 w-100 z-10 d-flex align-items-center w-100 justify-content-center'>
+                <img className='h-100 w-50 z-1' src={ this.state.bannerPreviewData || `${urlService.pic}/${partner.bannerImgId}` } />
+              </div> }
+            <div style={ { zIndex: 10 } } className='h-100 z-10 d-flex align-items-center w-100 justify-content-center'>
+              <h2 style={ { fontWeight: 'bold' } } className="Brandon_bld">WorkChew Partner</h2>
             </div>
           </div>
           { this.props.partner
             && <div className='row flex-1'>
-                 <div onClick={ (event) => this.gotToPartnerMenu() } className='border d-flex flex-column justify-content-center col-md-4'>
-                   <h2>Menu</h2>
+                 <div onClick={ (event) => this.gotToPartnerMenu() } className='d-flex flex-column justify-content-center align-items-center col-md-4'>
+                   <img style={ { width: 100, height: 100 } } src={ `/static/images/partner-menu-icon.png` } />
+                   <h2 style={ { fontWeight: 'bold' } } className="Brandon_bld">Menu</h2>
+                   <p className="Brandon_bld">
+                     Create and edit menu items and prices
+                   </p>
                  </div>
-                 <div onClick={ (event) => window.location.hash = "partner-marketing-page?id=" + this.props.partner._id } className='border d-flex flex-column justify-content-center col-md-4'>
-                   <h2>Marketing</h2>
+                 <div onClick={ (event) => window.location.hash = "partner-marketing-page?id=" + this.props.partner._id } className='d-flex flex-column justify-content-center align-items-center col-md-4'>
+                   <img style={ { width: 100, height: 100 } } src={ `/static/images/partner-marketing-icon.png` } />
+                   <h2 style={ { fontWeight: 'bold' } } className="Brandon_bld">Marketing</h2>
+                   <p className="Brandon_bld">
+                     Manage days, hours, seats allotted, discounts, specials and events
+                   </p>
                  </div>
-                 <div onClick={ (event) => window.location.hash = "partner-settings-page?id=" + this.props.partner._id } className='border d-flex flex-column justify-content-center col-md-4'>
-                   <h2>Settings</h2>
+                 <div onClick={ (event) => window.location.hash = "partner-settings-page?id=" + this.props.partner._id } className='d-flex flex-column justify-content-center align-items-center col-md-4'>
+                   <img style={ { width: 100, height: 100 } } src={ `/static/images/partner-settings-icon.png` } />
+                   <h2 style={ { fontWeight: 'bold' } } className="Brandon_bld">Settings</h2>
+                   <p className="Brandon_bld">
+                     Edit account info (user name, password, etc.)
+                   </p>
                  </div>
                </div> }
         </div>
