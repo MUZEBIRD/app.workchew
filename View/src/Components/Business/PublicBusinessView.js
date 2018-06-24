@@ -256,7 +256,7 @@ class PublicBusinessView extends Component {
         <div className="showView">
           { business &&
             <div className="scrollView">
-              <Topbar title={ business.name } />
+              <Topbar title={ '' } />
               { business.bannerImgId
                 && business.bannerImgId != ""
                 && <div className="row h-25">
@@ -270,15 +270,15 @@ class PublicBusinessView extends Component {
                 <div className="col-md-1">
                 </div>
                 <div className="col-md-5  text-left">
-                  <h2>{ business.name }</h2>
+                  <h2 style={ { fontWeight: 'bold' } } className="Brandon_bld">{ business.name }</h2>
                   <span>{ business.address }</span>
                   <br/>
-                  <span>Total: { business.seats } | Availiable:{ business.openSeats }</span>
+                  <span className="Brandon_bld">>Total: { business.seats } | Availiable:{ business.openSeats }</span>
                 </div>
                 <div className="col-md-6">
                   <button onClick={ (event) => {
                                       this.gotToPartnerMenu()
-                                    } } className="btn btn-primary" type="button">
+                                    } } className="btn btn-primary Brandon_bld" type="button">
                     Menu
                   </button>
                 </div>
@@ -287,14 +287,14 @@ class PublicBusinessView extends Component {
               <hr/>
               <div className="row">
                 <div className="col-md-6">
-                  <h3>Hours:</h3>
-                  <p>
+                  <h3 className="Brandon_bld">Hours:</h3>
+                  <p className="Brandon_bld">
                     { business.hours }
                   </p>
                 </div>
                 <div className="col-md-6">
-                  <h3>Discounts:</h3>
-                  <p>
+                  <h3 className="Brandon_bld">Discounts:</h3>
+                  <p className="Brandon_bld">
                     { business.discounts }
                   </p>
                 </div>
@@ -302,14 +302,14 @@ class PublicBusinessView extends Component {
               <br/>
               <div className="row">
                 <div className="col-md-6">
-                  <h3>Events:</h3>
-                  <p>
+                  <h3 className="Brandon_bld">Events:</h3>
+                  <p className="Brandon_bld">
                     { business.events }
                   </p>
                 </div>
                 <div className="col-md-6">
-                  <h3>Specials:</h3>
-                  <p>
+                  <h3 className="Brandon_bld">Specials:</h3>
+                  <p className="Brandon_bld">
                     { business.specials }
                   </p>
                 </div>
