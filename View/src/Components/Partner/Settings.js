@@ -119,14 +119,6 @@ class PartnerSettingsPage extends Component {
                 <ParnterInfoInput onChange={ (event) => this.updateCurrentPartnerState(event.target.value, 'email') } value={ partner.email } />
               </div>
             </div>
-            <br/>
-            <div className='row'>
-              <div className='col-md-3'>
-                <button className="btn btn-primary Brandon_bld" type="button">
-                  Change Password
-                </button>
-              </div>
-            </div>
             <br />
             <div className='d-flex justify-content-center'>
               <button onClick={ (event) => {
