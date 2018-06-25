@@ -69,8 +69,17 @@ class BusinessUserSignUp extends Component {
           businessSignUpResponse
         })
 
-        window.location.hash = "login"
         alert("thanks for signing up check your email for next steps")
+
+        if (this.state.bid) {
+
+          window.location.hash = "admin-partner-page?id=" + this.state.bid
+
+        } else {
+
+          window.location.hash = "login"
+
+        }
       }
 
     )
