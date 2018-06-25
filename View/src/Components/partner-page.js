@@ -78,7 +78,7 @@ class PartnerPage extends Component {
           <br />
           <Topbar title={ '' } />
           <br />
-          <div style={ { position: 'relative' } } className='row h-25'>
+          <div style={ { position: 'relative', zIndex: 1 } } className='row h-25'>
             { partner
               && partner.bannerImgId
               &&

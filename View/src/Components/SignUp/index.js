@@ -1,4 +1,5 @@
 import BusinessUserSignUp from './BusinessSignUp';
+import ChangePassword from './changePassword';
 
 import UserSignUp from './UserSignUp';
 import UserSignUpSocial from './UserSignUpSocial';
@@ -13,4 +14,4 @@ import Memberships from './Memberships';
 
 import M3mberships from './M3mberships';
 
-export { BusinessUserSignUp, Memberships, M3mberships, UserSignUp, UserSignUpSocial, BuildYourProfile, UserInterest, UserType }
+export { BusinessUserSignUp, ChangePassword, Memberships, M3mberships, UserSignUp, UserSignUpSocial, BuildYourProfile, UserInterest, UserType }

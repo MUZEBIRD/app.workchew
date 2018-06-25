@@ -20,6 +20,7 @@ export default {
   userProfile: '/user-profile',
   login: `${base}/Login`,
   signUp: `${base}/SignUp`,
+  changePassword: '/changePassword',
   user: `${base}/User`,
   payPal: `${base}/pay-pal`,
   pic: `${base}/pic`,

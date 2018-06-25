@@ -27,7 +27,7 @@ import SearchUsers from './Components/SearchUsers.js'
 
 import AddUser from './Components/AddUser.js'
 
-import { BusinessUserSignUp, UserSignUp, Memberships, M3mberships, UserSignUpSocial, BuildYourProfile, UserInterest, UserType } from './Components/SignUp'
+import { BusinessUserSignUp, ChangePassword, UserSignUp, Memberships, M3mberships, UserSignUpSocial, BuildYourProfile, UserInterest, UserType } from './Components/SignUp'
 
 import UserProfile from './Components/Public/UserPofile'
 import UserCard from './Components/Public/UserCard'
@@ -67,6 +67,7 @@ class App extends Component {
             <Route path="/view-user" component={ AddUser } />
             <Route path="/search-users" component={ SearchUsers } />
             <Route path="/business-page" component={ PublicBusinessView } />
+            <Route path="/changePassword" component={ ChangePassword } />
             <Route path="/business-signup" component={ BusinessUserSignUp } />
             <Route path="/co-chewer-signUp-social" component={ UserSignUpSocial } />
             <Route path="/co-chewer-profile" component={ UserSignUpSocial } />
