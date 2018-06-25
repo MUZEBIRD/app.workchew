@@ -261,7 +261,7 @@ class PublicBusinessView extends Component {
                 && business.bannerImgId != ""
                 && <div className="row h-25">
                      <div className="col-md-12">
-                       <img className="h-100 w-50" src={ `${urlService.pic}/${business.bannerImgId}` } />
+                       <img style={ { opacity: .2 } } className="h-200 w-100" src={ `${urlService.pic}/${business.bannerImgId}` } />
                      </div>
                    </div> }
               <br/>
