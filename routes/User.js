@@ -7,6 +7,7 @@ const router = express.Router();
 const user = require('../Services/userService.js')
 
 const authService = require('../Services/authService')
+const bcryptStream = require('../Services/bcryptStreams')
 
 var Url = require('url');
 
@@ -82,19 +83,55 @@ router.put('/', ({body}, res) => {
 
   res.set('Content-Type', 'text/html');
 
-  user
 
-    .update(userFromBody(body))
+  if (body && body.newPassword && body.oldPassword) {
 
-    .subscribe((userPutResponse) => {
+    bcryptStream.hashUserPassword(body.newPassword)
 
-      var responseBody = {
-        userResponse: userPutResponse
-      }
+      .subscribe((hashedPassword) => {
 
-      res.send(responseBody)
+        var passwordUpdate = {
+          _id: body._id,
+          password: hashedPassword,
 
-    })
+          updated: new Date().getTime()
+        }
+
+        user
+
+          .update(userFromBody(passwordUpdate))
+
+          .subscribe((userPutResponse) => {
+
+            var responseBody = {
+              userResponse: userPutResponse
+            }
+
+            res.send(responseBody)
+
+          })
+
+      })
+
+  } else {
+
+    user
+
+      .update(userFromBody(body))
+
+      .subscribe((userPutResponse) => {
+
+        var responseBody = {
+          userResponse: userPutResponse
+        }
+
+        res.send(responseBody)
+
+      })
+
+  }
+
+
 
 }); //PUT 
 
@@ -166,14 +203,11 @@ var checkAccessToken = function(req, res, next) {
 } //checkAccessToken
 
 var onlyIcanUpdateMe = function(req, res, next, authObject) {
-
   var userUpdate = req.body;
 
   var userUpdateId = userUpdate._id || req.query._id
 
   var authedUserId = authObject.userId;
-
-
 
 
   if (userUpdateId

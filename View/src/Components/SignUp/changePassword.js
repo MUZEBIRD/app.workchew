@@ -58,12 +58,12 @@ class ChangePassword extends Component {
       return info;
 
     }, {
-      bid: this.state.bid
+      _id: this.state.currentUser._id
     })
 
     userService
 
-      .changePassword(businessSignUpInfo)
+      .put(businessSignUpInfo)
       .subscribe((businessSignUpResponse) => {
         console.log({
           businessSignUpResponse

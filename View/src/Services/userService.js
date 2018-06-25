@@ -73,7 +73,6 @@ var userService = {
     return restService.put(urlService.user, userInfo)
 
   },
-
   logOut: () => {
 
     localStorage.clear();

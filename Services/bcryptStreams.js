@@ -3,7 +3,6 @@ const Rx = require('rxjs');
 const saltRounds = 10;
 
 var hashUserPassword = function(myPlaintextPassword) {
-
   return Rx.Observable.create((observer) => {
 
     bcrypt.hash(myPlaintextPassword, saltRounds, function(err, hash) {
