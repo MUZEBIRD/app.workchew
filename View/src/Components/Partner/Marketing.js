@@ -15,6 +15,9 @@ import ImageUploader from 'react-images-upload';
 import ParnterInfoArea from './PartnerInfoArea'
 import ParnterInfoInput from './PartnerInfoInput'
 
+import { Topbar } from '../TopBar.js'
+
+
 import { getQueryParams, getPathVariables } from '../../Utils'
 import * as partnerActions from './actions'
 
@@ -169,11 +172,7 @@ class PartnerMarketingPage extends Component {
       <div className="wholeView flex-col">
         <div className="showView d-flex flex-column">
           <br />
-          <div className='row'>
-            <div className='col-md-12'>
-              <h2 style={ { fontWeight: 'bold' } } className="Brandon_bld">Partner Marketing</h2>
-            </div>
-          </div>
+          <Topbar title={ 'Partner Marketing' } />
           <br />
           <div className='flex-1 scroll-y container text-left'>
             <div className='row'>

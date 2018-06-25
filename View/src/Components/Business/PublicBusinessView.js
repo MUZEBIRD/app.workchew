@@ -273,7 +273,7 @@ class PublicBusinessView extends Component {
                   <h2 style={ { fontWeight: 'bold' } } className="Brandon_bld">{ business.name }</h2>
                   <span>{ business.address }</span>
                   <br/>
-                  <span className="Brandon_bld">>Total: { business.seats } | Availiable:{ business.openSeats }</span>
+                  <span className="Brandon_bld">Total: { business.seats || '0' } | Availiable:{ business.openSeats || business.seats || '0' }</span>
                 </div>
                 <div className="col-md-6">
                   <button onClick={ (event) => {

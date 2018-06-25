@@ -9,6 +9,7 @@ import { Route, Link } from 'react-router-dom'
 import urlService from '../Services/urlService.js'
 
 import BusinessService from '../Services/businessService.js';
+import { Topbar } from './TopBar.js'
 
 import * as partnerActions from './Partner/actions'
 
@@ -75,11 +76,12 @@ class PartnerPage extends Component {
       <div className="wholeView flex-col">
         <div className="showView d-flex flex-column">
           <br />
+          <Topbar title={ '' } />
+          <br />
           <div style={ { position: 'relative' } } className='row h-25'>
             { partner
               && partner.bannerImgId
               &&
-              
               <div style={ { opacity: .4, position: 'absolute', zIndex: 1 } } className='h-100 w-100 z-10 d-flex align-items-center w-100 justify-content-center'>
                 <img className='h-100 w-50 z-1' src={ this.state.bannerPreviewData || `${urlService.pic}/${partner.bannerImgId}` } />
               </div> }

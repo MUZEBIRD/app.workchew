@@ -21,6 +21,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import './signUp.css';
 
+import { Topbar } from '../TopBar.js'
 
 export const signUpDialogSubject = new Subject();
 
@@ -165,6 +166,7 @@ class BuildYourProfile extends Component {
           </Dialog>
           { this.state.showLoader && <WorkLoader/> }
           <div className="showView w-100 scroll-y container">
+            <Topbar title={ '' } />
             <br/>
             <div className='row' style={ { backgroundColor: 'white', position: 'relative', zIndex: '5' } }>
               <div className='col-sm-12'>
@@ -219,6 +221,7 @@ class BuildYourProfile extends Component {
                 </div>
               </div>
             </div>
+            <br/>
             <div className='row'>
               <div className='col-sm-12'>
                 <textarea placeholder="Introduce yourself so we know a little about you…" name="summary" className="form-control sign-up-build-form-feild" />

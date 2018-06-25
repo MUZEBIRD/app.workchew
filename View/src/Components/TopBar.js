@@ -34,7 +34,7 @@ var Topbar = (props) => {
               </button>
             </div>
             <div className='col-sm-4'>
-              <h2>{ props.title }</h2>
+              <h2 className="Brandon_bld">{ props.title }</h2>
             </div>
             <div className='col-sm-4'>
               <div className="dropdown">

@@ -5,6 +5,7 @@ import userService from '../../Services/userService.js'
 import urlService from '../../Services/urlService.js'
 import restService from '../../Services/restService.js'
 import { getQueryParams, getPathVariables } from '../../Utils'
+import { Topbar } from '../TopBar.js'
 
 class BusinessUserSignUp extends Component {
 
@@ -81,15 +82,8 @@ class BusinessUserSignUp extends Component {
         <div className="showView  container">
           <br/>
           <br/>
-          <div className='row' style={ { backgroundColor: 'white', position: 'relative', zIndex: '5', height: '10%' } }>
-            <div className='col-sm-4'>
-            </div>
-            <div className='col-sm-4'>
-              <h2><span><u><b>Create Account</b></u></span></h2>
-            </div>
-            <div className='col-sm-4'>
-            </div>
-          </div>
+          <Topbar title={ 'Create Account' } />
+          <br/>
           <div className='row'>
             <div className='col-sm-12 d-flex flex-column align-items-center'>
               <input name="name" placeholder="Name of Business" className="form-control w-50 partner-sign-up-form-feild" />

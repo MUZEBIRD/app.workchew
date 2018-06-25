@@ -10,6 +10,7 @@ import BusinessService from '../../Services/businessService.js';
 import { getQueryParams, getPathVariables } from '../../Utils'
 import * as partnerActions from './actions'
 
+import { Topbar } from '../TopBar.js'
 
 import ParnterInfoArea from './PartnerInfoArea'
 import ParnterInfoInput from './PartnerInfoInput'
@@ -83,10 +84,9 @@ class PartnerSettingsPage extends Component {
               <img style={ { width: 100 } } src={ "/static/images/logo.png" } />
             </div>
           </div>
+          <Topbar title={ 'Partner Settings' } />
           <div className='row'>
             <div className='col-md-12'>
-              <h2 style={ { fontWeight: 'bold' } } className="Brandon_bld">Partner Settings</h2>
-              <br/>
               <span className="Brandon_bld"><u><b>Account</b></u></span>
             </div>
           </div>
