@@ -68,6 +68,8 @@ class BusinessUserSignUp extends Component {
         console.log({
           businessSignUpResponse
         })
+
+        window.location.hash = "login"
         alert("thanks for signing up check your email for next steps")
       }
 

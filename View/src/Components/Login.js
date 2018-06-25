@@ -331,7 +331,7 @@ class Login extends Component {
         <div className="row">
           <div className="col-sm-4"></div>
           <div className="col-sm-4 flex-row-space-around">
-            <span>Sign Up as Business Owner</span>
+            <span className="brandong">Sign Up as Business Owner</span>
             <button onClick={ () => {
                                 this.goToBusinessSignUp()
                               } } className="btn btn-success">
