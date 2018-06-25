@@ -289,13 +289,13 @@ class PublicBusinessView extends Component {
                 <div className="col-md-6">
                   <h3 className="Brandon_bld">Hours:</h3>
                   <p className="Brandon_bld">
-                    { business.hours }
+                    <pre>{ business.hours }</pre>
                   </p>
                 </div>
                 <div className="col-md-6">
                   <h3 className="Brandon_bld">Discounts:</h3>
                   <p className="Brandon_bld">
-                    { business.discounts }
+                    <pre>{ business.discounts }</pre>
                   </p>
                 </div>
               </div>
@@ -304,13 +304,13 @@ class PublicBusinessView extends Component {
                 <div className="col-md-6">
                   <h3 className="Brandon_bld">Events:</h3>
                   <p className="Brandon_bld">
-                    { business.events }
+                    <pre>{ business.events }</pre>
                   </p>
                 </div>
                 <div className="col-md-6">
                   <h3 className="Brandon_bld">Specials:</h3>
                   <p className="Brandon_bld">
-                    { business.specials }
+                    <pre>{ business.specials }</pre>
                   </p>
                 </div>
               </div>
