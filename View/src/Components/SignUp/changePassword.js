@@ -13,12 +13,13 @@ class ChangePassword extends Component {
 
     super(props);
 
-    this.state = {};
+    this.state = {
+      inputType: 'password'
+    };
 
   }
 
   componentDidMount() {
-
 
     var params = getQueryParams() || {};
 
@@ -74,7 +75,7 @@ class ChangePassword extends Component {
       }
 
     )
-  }
+  } //changePassword
 
   render() {
 
@@ -88,9 +89,9 @@ class ChangePassword extends Component {
           <br/>
           <div className='row'>
             <div className='col-sm-12 d-flex flex-column align-items-center'>
-              <input name="oldPassword" placeholder="Old Password" className="form-control w-50 partner-changePassword-form-feild" />
+              <input name="oldPassword" type={ this.state.inputType } placeholder="Old Password" className="form-control w-50 partner-changePassword-form-feild" />
               <br/>
-              <input name="newPassword" placeholder="New Password" className="form-control w-50 partner-changePassword-form-feild" />
+              <input name="newPassword" type={ this.state.inputType } placeholder="New Password" className="form-control w-50 partner-changePassword-form-feild" />
               <br/>
               <button onClick={ this.changePassword } className="btn btn-success">
                 Change Password

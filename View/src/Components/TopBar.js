@@ -22,6 +22,11 @@ var goToEditProfilePage = function() {
     })
 }
 
+var goToLocations = function() {
+
+  window.location.hash = "locations"
+
+}
 
 var goToChangePassword = function() {
 
@@ -76,6 +81,10 @@ var Topbar = (props) => {
                                
                                  goToChangePassword()
                                } } className="dropdown-item">Change Password</a>
+                  <a onClick={ (event) => {
+                               
+                                 goToLocations()
+                               } } className="dropdown-item">Go To Locations</a>
                 </div>
               </div>
             </div>

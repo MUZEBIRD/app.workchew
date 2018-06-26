@@ -53,6 +53,7 @@ class App extends Component {
         <HashRouter history={ history } basename='/'>
           <div className="App">
             <Route exact path="/" component={ Main } />
+            <Route exact path="/locations" component={ Main } />
             <Route exact path="/Login" component={ Login } />
             <Route exact path="/partner-marketing-page" component={ PartnerMarketingPage } />
             <Route exact path="/partner-settings-page" component={ PartnerSettingsPage } />

@@ -113,15 +113,16 @@ class Main extends Component {
         }
       })
 
-    this.getBusinessStream({}).subscribe((businessStream) => {
+    this.getBusinessStream({})
 
-      console.log('businessStream', businessStream)
-      this.setState({
+      .subscribe((businessStream) => {
 
-        businesses: businessStream
+        console.log('businessStream', businessStream)
+        this.setState({
+          businesses: businessStream
+        })
 
       })
-    })
 
   }
 
@@ -129,7 +130,8 @@ class Main extends Component {
 
     var props = {
 
-      title: "Main",
+      title: "Locations",
+
     }
 
     return (
