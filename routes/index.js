@@ -48,6 +48,21 @@ router.get('/', (req, res) => {
   res.send(fs.readFileSync('./View/build/index.html'));
 });
 
+
+
+
+
+router.get('/.well-known/acme-challenge/iTbGriE_3A-t_SPvN8Y60lS1aYoCmhW3_bzQFUooCI0', (req, res) => {
+
+  res.set('Content-Type', 'text/html');
+
+  res.send('iTbGriE_3A-t_SPvN8Y60lS1aYoCmhW3_bzQFUooCI0.MZ6I80nW0Grt-Pp4hrEoIYVw6K5_iohvHbW4GyHTm70');
+});
+
+
+
+
+
 router.post('/orderslogin', (req, res) => {
 
   res.set('Content-Type', 'application/json');
