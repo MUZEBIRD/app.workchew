@@ -86,7 +86,6 @@ class BuildYourProfile extends Component {
 
     var signUpData = userService.getSignUpData()
 
-
     this.setState({
       user: signUpData
     })
