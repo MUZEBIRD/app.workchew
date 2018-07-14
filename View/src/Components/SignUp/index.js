@@ -14,4 +14,6 @@ import Memberships from './Memberships';
 
 import M3mberships from './M3mberships';
 
-export { BusinessUserSignUp, ChangePassword, Memberships, M3mberships, UserSignUp, UserSignUpSocial, BuildYourProfile, UserInterest, UserType }
+import MembershipPaths from './MembershipPaths';
+
+export { BusinessUserSignUp, ChangePassword, Memberships, M3mberships, MembershipPaths, UserSignUp, UserSignUpSocial, BuildYourProfile, UserInterest, UserType }

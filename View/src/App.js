@@ -27,7 +27,7 @@ import SearchUsers from './Components/SearchUsers.js'
 
 import AddUser from './Components/AddUser.js'
 
-import { BusinessUserSignUp, ChangePassword, UserSignUp, Memberships, M3mberships, UserSignUpSocial, BuildYourProfile, UserInterest, UserType } from './Components/SignUp'
+import { BusinessUserSignUp, ChangePassword, UserSignUp, Memberships, M3mberships, UserSignUpSocial, BuildYourProfile, MembershipPaths, UserInterest, UserType } from './Components/SignUp'
 
 import UserProfile from './Components/Public/UserPofile'
 import UserCard from './Components/Public/UserCard'
@@ -80,6 +80,7 @@ class App extends Component {
             <Route path="/user-card" component={ UserCard } />
             <Route path="/user-type" component={ UserType } />
             <Route path="/user-interest" component={ UserInterest } />
+            <Route path="/membership-paths" component={ MembershipPaths } />
             <Route path="/edit-user" />
           </div>
         </HashRouter>
