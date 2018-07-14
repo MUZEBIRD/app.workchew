@@ -23,6 +23,8 @@ import './signUp.css';
 
 import { Topbar } from '../TopBar.js'
 
+import TextField from 'material-ui/TextField';
+
 export const signUpDialogSubject = new Subject();
 
 class BuildYourProfile extends Component {
@@ -49,7 +51,7 @@ class BuildYourProfile extends Component {
 
     var userProfileUpdate = fields.reduce((info, inputField) => {
 
-      info[inputField.name] = inputField.value
+      info[inputField.childNodes[0].name] = inputField.childNodes[0].value
 
       return info;
 
@@ -89,20 +91,6 @@ class BuildYourProfile extends Component {
     })
 
     console.log('signUpData', signUpData)
-
-    var {email, firstName, lastName, location} = signUpData;
-
-    var fields = [...document.getElementsByClassName('sign-up-build-form-feild')];
-
-    fields.forEach((inputField) => {
-
-      if (signUpData[inputField.name]) {
-
-        inputField.value = signUpData[inputField.name];
-
-      }
-
-    }, {})
 
     loaderStream.subscribe((showLoader) => {
 
@@ -158,75 +146,78 @@ class BuildYourProfile extends Component {
                                                                              } } />
     ];
 
-    return (
 
+    return (
       <MuiThemeProvider>
-        <div className="wholeView w-100 d-flex flex-column">
+        <div className="wholeView w-100 d-flex flex-column" style={ { backgroundColor: 'orange', color: 'white' } }>
           <Dialog title={ this.state.dialogMsg } actions={ actions } modal={ false } open={ this.state.showDialog } onRequestClose={ this.handleClose }>
           </Dialog>
           { this.state.showLoader && <WorkLoader/> }
           <div className="showView w-100 scroll-y container">
-            <Topbar title={ '' } />
+            <Topbar title={ 'Create Profile' } />
             <br/>
-            <div className='row' style={ { backgroundColor: 'white', position: 'relative', zIndex: '5' } }>
+            <div className='row' style={ { position: 'relative' } }>
               <div className='col-sm-12'>
-                <h1 style={ { fontWeight: 'bold', color: 'grey' } } className='text-left Brandon_bld'>Build your profile.</h1>
-                <p style={ { color: 'grey' } } className='text-left Brandon_bld'>
-                  WorkChew is about building connections between real people.
-                </p>
                 <button onClick={ (event) => {
                                     this.viewProfile()
-                                  
                                   } } className="btn btn-info">
                   View your profile
                 </button>
               </div>
             </div>
             <br/>
-            <div className='d-flex align-items-center' style={ { backgroundColor: 'white', position: 'relative', zIndex: '5' } }>
-              <div className='flex-1'>
-                <div className='row'>
-                  <div className='col-sm-12'>
-                    <input placeholder="First Name" name="firstName" className="form-control sign-up-build-form-feild" />
-                  </div>
-                </div>
-                <br/>
-                <div className='row'>
-                  <div className='col-sm-12'>
-                    <input placeholder="Last Name" name="lastName" className="form-control sign-up-build-form-feild" />
-                  </div>
-                </div>
-              </div>
-              <input onChange={ (event) => {
-                                
-                                  console.log("duwop", event.target.files)
-                                
-                                } } style={ { "visibility": "hidden", heigh: 0, width: 0, opacity: 1 } } type="file" name="imageUpload" id="imageUpload" />
-              <div className="h-100 m-3 d-flex align-items-center">
-                <label for="imageUpload">
-                  <img style={ { width: 150 } } src={ user.facebookImgUrl || user.linkedInPictureUrl || user.profileImgLink || "/static/images/chew-pofile-img.png" } />
-                </label>
-              </div>
-              <div className='flex-1'>
-                <div className='row'>
-                  <div className='col-sm-12'>
-                    <input placeholder="Location" name="location" className="form-control sign-up-build-form-feild" />
-                  </div>
-                </div>
-                <br/>
-                <div className='row'>
-                  <div className='col-sm-12'>
-                    <input placeholder="Email" name="email" className="form-control sign-up-build-form-feild" />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <br/>
-            <div className='row'>
-              <div className='col-sm-12'>
-                <textarea placeholder="Introduce yourself so we know a little about you…" name="summary" className="form-control sign-up-build-form-feild" />
-              </div>
-            </div>
+            { user
+              && user.email
+              && <div style={ { backgroundColor: 'white', position: 'relative' } }>
+                   <div className='d-flex align-items-center'>
+                     <div className='flex-1'>
+                       <div className='row'>
+                         <div className='col-sm-12'>
+                           <TextField floatingLabelText="firstName" defaultValue={ user.firstName } placeholder="First Name" name="firstName" className="w-100 sign-up-build-form-feild" />
+                         </div>
+                       </div>
+                       <br/>
+                       <div className='row'>
+                         <div className='col-sm-12'>
+                           <TextField floatingLabelText="location" defaultValue={ user.location } placeholder="Location" name="location" className="w-100 sign-up-build-form-feild" />
+                         </div>
+                       </div>
+                     </div>
+                     <input onChange={ (event) => {
+                                       
+                                         console.log("duwop", event.target.files)
+                                       
+                                       } } style={ { "visibility": "hidden", heigh: 0, width: 0, opacity: 1 } } type="file" name="imageUpload" id="imageUpload" />
+                     <div className="h-100 m-3 d-flex flex-column align-items-center">
+                       <p className="Brandon_bld" style={ { color: 'black' } }>
+                         PHOTO
+                       </p>
+                       <label htmlFor="imageUpload">
+                         <img style={ { width: 150 } } src={ user.facebookImgUrl || user.linkedInPictureUrl || user.profileImgLink || "/static/images/chew-pofile-img.png" } />
+                       </label>
+                     </div>
+                     <div className='flex-1'>
+                       <div className='row'>
+                         <div className='col-sm-12'>
+                           <TextField floatingLabelText="lastName" defaultValue={ user.lastName } placeholder="Last Name" name="lastName" className="w-100 sign-up-build-form-feild" />
+                         </div>
+                       </div>
+                       <br/>
+                       <div className='row'>
+                         <div className='col-sm-12'>
+                           <TextField floatingLabelText="email" defaultValue={ user.email } placeholder="Email" name="email" className="w-100 sign-up-build-form-feild" />
+                         </div>
+                       </div>
+                     </div>
+                   </div>
+                   <br/>
+                   <div className='row'>
+                     <div className='col-sm-12'>
+                       <TextField floatingLabelText="summary" defaultValue={ user.summary } placeholder="Introduce yourself so we know a little about you…" name="summary" className="w-100 sign-up-build-form-feild"
+                       />
+                     </div>
+                   </div>
+                 </div> }
             <br/>
             <div className='row'>
               <div className='col-sm-12 d-flex justify-content-around'>

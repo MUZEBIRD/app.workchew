@@ -96,7 +96,6 @@ router.post('/', (req, res) => {
 
             .updateBanner(formData)
 
-
         } else {
 
           return userService.get({
@@ -105,11 +104,7 @@ router.post('/', (req, res) => {
 
             .switchMap(users => {
 
-              console.log("INPSEC,INPSECINPSECINPSECINPSECINPSECINPSECINPSECINPSECINPSECINPSEC")
-              console.log(users, formData)
-
               if (users && users.length && users[0].bid == formData.fields.partnerId) {
-
 
                 return business
 
@@ -121,20 +116,15 @@ router.post('/', (req, res) => {
 
               }
 
-
             })
-
 
         }
 
-
       })
-
 
       .subscribe((updateBannerResponse) => {
 
         if (updateBannerResponse == 1) {
-
 
           res.status(401).send({
             error: 401,
@@ -146,7 +136,6 @@ router.post('/', (req, res) => {
           res.send(updateBannerResponse)
 
         }
-
 
       })
   }

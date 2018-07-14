@@ -50,10 +50,9 @@ var goToChangePassword = function() {
 
 var Topbar = (props) => {
 
-  return (<div className='row flex-row-center-vert' style={ { backgroundColor: 'white', position: 'relative', zIndex: '5', height: '10%' } }>
+  return (<div className='row flex-row-center-vert' style={ { position: 'relative', zIndex: '5', height: '10%' } }>
             <div className='col-sm-4'>
               <button onClick={ (event) => {
-                                
                                   window.history.back();
                                 } } className='btn btn-secondary'>
                 back
@@ -69,20 +68,15 @@ var Topbar = (props) => {
                 </button>
                 <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
                   <a className="dropdown-item" onClick={ (event) => {
-                                                         
                                                            userService.logOut()
-                                                         
                                                          } }>Logout</a>
                   <a onClick={ (event) => {
-                               
                                  goToEditProfilePage()
                                } } className="dropdown-item">Update Profile</a>
                   <a onClick={ (event) => {
-                               
                                  goToChangePassword()
                                } } className="dropdown-item">Change Password</a>
                   <a onClick={ (event) => {
-                               
                                  goToLocations()
                                } } className="dropdown-item">Go To Locations</a>
                 </div>
