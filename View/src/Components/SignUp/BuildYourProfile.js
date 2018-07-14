@@ -24,7 +24,8 @@ import './signUp.css';
 import { Topbar } from '../TopBar.js'
 
 import TextField from 'material-ui/TextField';
-
+import SelectField from 'material-ui/SelectField';
+import MenuItem from 'material-ui/MenuItem';
 export const signUpDialogSubject = new Subject();
 
 class BuildYourProfile extends Component {
@@ -168,18 +169,13 @@ class BuildYourProfile extends Component {
             <br/>
             { user
               && user.email
-              && <div style={ { backgroundColor: 'white', position: 'relative' } }>
+              && <div className="p-3" style={ { backgroundColor: 'white', position: 'relative' } }>
                    <div className='d-flex align-items-center'>
                      <div className='flex-1'>
                        <div className='row'>
                          <div className='col-sm-12'>
-                           <TextField floatingLabelText="firstName" defaultValue={ user.firstName } placeholder="First Name" name="firstName" className="w-100 sign-up-build-form-feild" />
-                         </div>
-                       </div>
-                       <br/>
-                       <div className='row'>
-                         <div className='col-sm-12'>
-                           <TextField floatingLabelText="location" defaultValue={ user.location } placeholder="Location" name="location" className="w-100 sign-up-build-form-feild" />
+                           <TextField floatingLabelText="First Name" defaultValue={ user.firstName } placeholder="First Name" name="firstName" className="w-100 sign-up-build-form-feild"
+                           />
                          </div>
                        </div>
                      </div>
@@ -199,21 +195,66 @@ class BuildYourProfile extends Component {
                      <div className='flex-1'>
                        <div className='row'>
                          <div className='col-sm-12'>
-                           <TextField floatingLabelText="lastName" defaultValue={ user.lastName } placeholder="Last Name" name="lastName" className="w-100 sign-up-build-form-feild" />
-                         </div>
-                       </div>
-                       <br/>
-                       <div className='row'>
-                         <div className='col-sm-12'>
-                           <TextField floatingLabelText="email" defaultValue={ user.email } placeholder="Email" name="email" className="w-100 sign-up-build-form-feild" />
+                           <TextField floatingLabelText="Last Name" defaultValue={ user.lastName } placeholder="Last Name" name="lastName" className="w-100 sign-up-build-form-feild" />
                          </div>
                        </div>
                      </div>
                    </div>
                    <br/>
                    <div className='row'>
+                     <div className='col-sm-6'>
+                       <TextField floatingLabelText="Location" defaultValue={ user.location } placeholder="location" name="location" className="w-100 sign-up-build-form-feild" />
+                     </div>
+                     <div className='col-sm-6'>
+                       <TextField floatingLabelText="Zip" defaultValue={ user.Zip } placeholder="Zip" name="zip" className="w-100 sign-up-build-form-feild" />
+                     </div>
+                   </div>
+                   <br/>
+                   <div className='row'>
                      <div className='col-sm-12'>
-                       <TextField floatingLabelText="summary" defaultValue={ user.summary } placeholder="Introduce yourself so we know a little about you…" name="summary" className="w-100 sign-up-build-form-feild"
+                       <TextField floatingLabelText="Email" defaultValue={ user.email } placeholder="Email" name="email" className="w-100 sign-up-build-form-feild" />
+                     </div>
+                   </div>
+                   <br/>
+                   <div className='row'>
+                     <div className='col-sm-6'>
+                       <SelectField className="w-100" floatingLabelText="OCCUPATION" value={ this.state.occupationValue } onChange={ () => {
+                                                                                                                                     } }>
+                         <MenuItem value={ 1 } primaryText="Never" />
+                         <MenuItem value={ 2 } primaryText="Every Night" />
+                         <MenuItem value={ 3 } primaryText="Weeknights" />
+                         <MenuItem value={ 4 } primaryText="Weekends" />
+                         <MenuItem value={ 5 } primaryText="Weekly" />
+                       </SelectField>
+                     </div>
+                     <div className='col-sm-6'>
+                       <SelectField className="w-100" floatingLabelText="INDUSTRY" value={ this.state.industryValue } onChange={ () => {
+                                                                                                                                 } }>
+                         <MenuItem value={ 1 } primaryText="Never" />
+                         <MenuItem value={ 2 } primaryText="Every Night" />
+                         <MenuItem value={ 3 } primaryText="Weeknights" />
+                         <MenuItem value={ 4 } primaryText="Weekends" />
+                         <MenuItem value={ 5 } primaryText="Weekly" />
+                       </SelectField>
+                     </div>
+                   </div>
+                   <br/>
+                   <div className='row'>
+                     <div className='col-sm-12'>
+                       <SelectField className="w-100 text-center d-flex align-items-start" floatingLabelText="WHAT ARE YOU HOPING TO GET OUT OF THIS?" value={ 0 } onChange={ () => {
+                                                                                                                                                                              } }>
+                         <MenuItem value={ 0 } primaryText="Never" />
+                         <MenuItem value={ 2 } primaryText="Every Night" />
+                         <MenuItem value={ 3 } primaryText="Weeknights" />
+                         <MenuItem value={ 4 } primaryText="Weekends" />
+                         <MenuItem value={ 5 } primaryText="Weekly" />
+                       </SelectField>
+                     </div>
+                   </div>
+                   <br/>
+                   <div className='row'>
+                     <div className='col-sm-12'>
+                       <TextField floatingLabelText="Summary" defaultValue={ user.summary } placeholder="Introduce yourself so we know a little about you…" name="summary" className="w-100 sign-up-build-form-feild"
                        />
                      </div>
                    </div>
