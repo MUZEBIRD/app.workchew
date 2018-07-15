@@ -49,7 +49,7 @@ class BuildYourProfile extends Component {
 
   }
 
-  updateUser(toPayment) {
+  updateUser = (toPayment) => {
 
     var fields = [...document.getElementsByClassName('sign-up-build-form-feild')];
 
@@ -63,7 +63,14 @@ class BuildYourProfile extends Component {
       _id: this.state.queryParams.id
     })
 
-    console.log(userProfileUpdate);
+    var finalUpdate = {
+      ...userProfileUpdate,
+      hopingsValue: this.state.hopingsValue,
+      occupationValue: this.state.occupationValue,
+      industryValue: this.state.industryValue
+    }
+
+    console.log(finalUpdate);
 
     userService
 
@@ -90,7 +97,10 @@ class BuildYourProfile extends Component {
     var signUpData = userService.getSignUpData()
 
     this.setState({
-      user: signUpData
+      user: signUpData,
+      hopingsValue: signUpData.hopingsValue,
+      occupationValue: signUpData.occupationValue,
+      industryValue: signUpData.industryValue
     })
 
     console.log('signUpData', signUpData)
@@ -128,6 +138,16 @@ class BuildYourProfile extends Component {
         urlService.goTo(url)
 
       })
+
+  }
+
+  onSelectionChange = (event, key, selection) => {
+
+    console.log('onkey selection', event.target, key, selection)
+
+    this.setState({
+      [key]: selection
+    })
 
   }
 
@@ -220,23 +240,20 @@ class BuildYourProfile extends Component {
                    <br/>
                    <div className='row'>
                      <div className='col-sm-6'>
-                       <SelectField className="w-100" floatingLabelText="OCCUPATION" value={ this.state.occupationValue } onChange={ () => {
-                                                                                                                                     } }>
+                       <SelectField onChange={ (event, index, value) => {
+                                                 this.onSelectionChange(event, 'occupationValue', value)
+                                               } } className="w-100 d-flex align-items-start o-hidden b-under" floatingLabelText="OCCUPATION" value={ this.state.occupationValue }>
                          { occupations.map((occupation, i) => {
-                           
-                           
                              return ( <MenuItem key={ v4() } value={ i } primaryText={ occupation.name } /> )
-                           
                            }) }
                        </SelectField>
                      </div>
                      <div className='col-sm-6'>
-                       <SelectField className="w-100" floatingLabelText="INDUSTRY" value={ this.state.industryValue } onChange={ () => {
-                                                                                                                                 } }>
+                       <SelectField onChange={ (event, index, value) => {
+                                                 this.onSelectionChange(event, 'industryValue', value)
+                                               } } className="w-100 d-flex align-items-start o-hidden b-under" floatingLabelText="INDUSTRY" value={ this.state.industryValue }>
                          { industries.map((industry, i) => {
-                           
                              return ( <MenuItem key={ v4() } value={ i } primaryText={ industry.name } /> )
-                           
                            }) }
                        </SelectField>
                      </div>
@@ -244,12 +261,12 @@ class BuildYourProfile extends Component {
                    <br/>
                    <div className='row'>
                      <div className='col-sm-12'>
-                       <SelectField className="w-100 text-center d-flex align-items-start" floatingLabelText="WHAT ARE YOU HOPING TO GET OUT OF THIS?" value={ this.state.hopingsValue } onChange={ () => {
-                                                                                                                                                                                                    } }>
+                       <SelectField onChange={ (event, index, value) => {
+                                                 this.onSelectionChange(event, 'hopingsValue', value)
+                                               } } className="w-100 text-center d-flex align-items-start o-hidden b-under" floatingLabelText="WHAT ARE YOU HOPING TO GET OUT OF THIS?"
+                         value={ this.state.hopingsValue }>
                          { hopings.map((hoping, i) => {
-                           
                              return ( <MenuItem key={ v4() } value={ i } primaryText={ hoping.name } /> )
-                           
                            }) }
                        </SelectField>
                      </div>
