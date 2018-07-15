@@ -1,4 +1,4 @@
-var idustries = [
+var industries = [
   {
     name: "Accounting/Finance/Banking"
   },

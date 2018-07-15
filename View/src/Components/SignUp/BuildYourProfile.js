@@ -17,11 +17,14 @@ import WorkLoader, { loaderStream } from '../shared/workLoader';
 
 import { Subject } from 'rxjs'
 
+import { industries, hopings, occupations } from './dropDownSelections'
+
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import './signUp.css';
 
 import { Topbar } from '../TopBar.js'
+import { v4 } from 'uuid'
 
 import TextField from 'material-ui/TextField';
 import SelectField from 'material-ui/SelectField';
@@ -219,34 +222,35 @@ class BuildYourProfile extends Component {
                      <div className='col-sm-6'>
                        <SelectField className="w-100" floatingLabelText="OCCUPATION" value={ this.state.occupationValue } onChange={ () => {
                                                                                                                                      } }>
-                         <MenuItem value={ 1 } primaryText="Never" />
-                         <MenuItem value={ 2 } primaryText="Every Night" />
-                         <MenuItem value={ 3 } primaryText="Weeknights" />
-                         <MenuItem value={ 4 } primaryText="Weekends" />
-                         <MenuItem value={ 5 } primaryText="Weekly" />
+                         { occupations.map((occupation, i) => {
+                           
+                           
+                             return ( <MenuItem key={ v4() } value={ i } primaryText={ occupation.name } /> )
+                           
+                           }) }
                        </SelectField>
                      </div>
                      <div className='col-sm-6'>
                        <SelectField className="w-100" floatingLabelText="INDUSTRY" value={ this.state.industryValue } onChange={ () => {
                                                                                                                                  } }>
-                         <MenuItem value={ 1 } primaryText="Never" />
-                         <MenuItem value={ 2 } primaryText="Every Night" />
-                         <MenuItem value={ 3 } primaryText="Weeknights" />
-                         <MenuItem value={ 4 } primaryText="Weekends" />
-                         <MenuItem value={ 5 } primaryText="Weekly" />
+                         { industries.map((industry, i) => {
+                           
+                             return ( <MenuItem key={ v4() } value={ i } primaryText={ industry.name } /> )
+                           
+                           }) }
                        </SelectField>
                      </div>
                    </div>
                    <br/>
                    <div className='row'>
                      <div className='col-sm-12'>
-                       <SelectField className="w-100 text-center d-flex align-items-start" floatingLabelText="WHAT ARE YOU HOPING TO GET OUT OF THIS?" value={ 0 } onChange={ () => {
-                                                                                                                                                                              } }>
-                         <MenuItem value={ 0 } primaryText="Never" />
-                         <MenuItem value={ 2 } primaryText="Every Night" />
-                         <MenuItem value={ 3 } primaryText="Weeknights" />
-                         <MenuItem value={ 4 } primaryText="Weekends" />
-                         <MenuItem value={ 5 } primaryText="Weekly" />
+                       <SelectField className="w-100 text-center d-flex align-items-start" floatingLabelText="WHAT ARE YOU HOPING TO GET OUT OF THIS?" value={ this.state.hopingsValue } onChange={ () => {
+                                                                                                                                                                                                    } }>
+                         { hopings.map((hoping, i) => {
+                           
+                             return ( <MenuItem key={ v4() } value={ i } primaryText={ hoping.name } /> )
+                           
+                           }) }
                        </SelectField>
                      </div>
                    </div>
