@@ -55,7 +55,7 @@ class BuildYourProfile extends Component {
 
     var userProfileUpdate = fields.reduce((info, inputField) => {
 
-      info[inputField.childNodes[0].name] = inputField.childNodes[0].value
+      info[inputField.childNodes[1].name] = inputField.childNodes[1].value
 
       return info;
 
@@ -74,7 +74,7 @@ class BuildYourProfile extends Component {
 
     userService
 
-      .put(userProfileUpdate)
+      .put(finalUpdate)
 
       .subscribe((updateUserResponse) => {
 
