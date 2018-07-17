@@ -149,6 +149,24 @@ class BuildYourProfile extends Component {
 
   }
 
+  updateProfilePic = () => {
+    if (this.state.user && this.state.user._id) {
+
+      var blobBin = atob(this.state.previewProfilePic.split(',')[1]);
+      var array = [];
+      for (var i = 0; i < blobBin.length; i++) {
+        array.push(blobBin.charCodeAt(i));
+      }
+      var file = new Blob([new Uint8Array(array)], {
+        type: 'image/png'
+      });
+      var formdata = new FormData();
+      formdata.append("image", file);
+      formdata.append("partnerId", this.state.user._id);
+      console.log('this.state.business._idthis.state.business._idthis.state.business._id ', this.state.user._id)
+    }
+
+  }
 
   clearPreviewImage = (imageData) => {
 
@@ -279,7 +297,7 @@ class BuildYourProfile extends Component {
                              { '    ' }
                              <button onClick={ (event) => {
                                                
-                                                 this.updateBannerImage()
+                                                 this.updateProfilePic()
                                                
                                                } } className='btn btn-warning'>
                                Update

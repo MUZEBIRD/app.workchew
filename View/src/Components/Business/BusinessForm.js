@@ -350,7 +350,7 @@ class BusinessForm extends Component {
   }
 
 
-  updateBannerImage = (dataURL) => {
+  updateBannerImage = () => {
     if (this.state.business && this.state.business._id) {
       var blobBin = atob(this.state.bannerPreviewData.split(',')[1]);
       var array = [];
