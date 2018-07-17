@@ -49,8 +49,7 @@ var goToChangePassword = function() {
 }
 
 var Topbar = (props) => {
-
-  return (<div className='row m-3' style={ { position: 'relative', zIndex: '5' } }>
+  return (<div className='row m-3' style={ { zIndex: '5' } }>
             <div className='col-sm-4'>
               <button onClick={ (event) => {
                                   window.history.back();
@@ -84,8 +83,6 @@ var Topbar = (props) => {
             </div>
           </div>
   )
-
-
 }
 
 export { Topbar };

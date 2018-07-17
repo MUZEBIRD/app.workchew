@@ -141,6 +141,56 @@ class BuildYourProfile extends Component {
 
   }
 
+  setBannerPreview = (imageData) => {
+
+    this.setState({
+      previewProfilePic: imageData
+    })
+
+  }
+
+
+  clearPreviewImage = (imageData) => {
+
+    this.setState({
+      previewProfilePic: null
+    })
+
+  }
+
+  upDateProfilePreview = (files) => {
+
+    console.log("on drop ", files)
+
+    var self = this;
+
+    var canvas,
+      context,
+      canvas = document.createElement("canvas");
+    context = canvas.getContext('2d');
+
+    var reader = new FileReader();
+
+    reader.addEventListener("loadend", function(arg) {
+      var src_image = new Image();
+      src_image.onload = function() {
+        canvas.height = src_image.height;
+        canvas.width = src_image.width;
+        context.drawImage(src_image, 0, 0);
+        var imageData = canvas.toDataURL("image/png");
+
+        self.setBannerPreview(imageData)
+
+        // uploadCanvas(imageData);
+
+      }
+      src_image.src = this.result;
+    });
+
+    reader.readAsDataURL(files[files.length - 1]);
+
+  }
+
   onSelectionChange = (event, key, selection) => {
 
     console.log('onkey selection', event.target, key, selection)
@@ -206,14 +256,36 @@ class BuildYourProfile extends Component {
                                          
                                            console.log("duwop", event.target.files)
                                          
+                                           this.upDateProfilePreview(event.target.files)
+                                         
                                          } } style={ { "visibility": "hidden", heigh: 0, width: 0, opacity: 1 } } type="file" name="imageUpload" id="imageUpload" />
                        <div className="h-100 m-3 d-flex flex-column align-items-center">
                          <p className="Brandon_bld" style={ { color: 'black' } }>
                            PHOTO
                          </p>
                          <label htmlFor="imageUpload">
-                           <img style={ { width: 150 } } src={ user.facebookImgUrl || user.linkedInPictureUrl || user.profileImgLink || "/static/images/chew-pofile-img.png" } />
+                           <img style={ { width: 150 } } src={ this.state.previewProfilePic || user.facebookImgUrl || user.linkedInPictureUrl || user.profileImgLink || "/static/images/chew-pofile-img.png" } />
                          </label>
+                         <br/>
+                         <div className="row">
+                           <div className='col-sm-12'>
+                             <button onClick={ (event) => {
+                                               
+                                                 this.clearPreviewImage()
+                                               
+                                               } } className='btn btn-warning'>
+                               Clear
+                             </button>
+                             { '    ' }
+                             <button onClick={ (event) => {
+                                               
+                                                 this.updateBannerImage()
+                                               
+                                               } } className='btn btn-warning'>
+                               Update
+                             </button>
+                           </div>
+                         </div>
                        </div>
                        <div className='flex-1'>
                          <div className='row'>
