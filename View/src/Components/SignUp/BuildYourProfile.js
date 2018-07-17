@@ -176,127 +176,130 @@ class BuildYourProfile extends Component {
           <Dialog title={ this.state.dialogMsg } actions={ actions } modal={ false } open={ this.state.showDialog } onRequestClose={ this.handleClose }>
           </Dialog>
           { this.state.showLoader && <WorkLoader/> }
-          <div className="showView w-100 scroll-y container">
-            <Topbar title={ 'Create Profile' } />
-            <br/>
-            <div className='row' style={ { position: 'relative' } }>
-              <div className='col-sm-12'>
-                <button onClick={ (event) => {
-                                    this.viewProfile()
-                                  } } className="btn btn-info">
-                  View your profile
-                </button>
+          <div className="showView w-100 container">
+            <div className="scroll-y h-100">
+              <Topbar title={ 'Create Profile' } />
+              <br/>
+              <div className='row' style={ { position: 'relative' } }>
+                <div className='col-sm-12'>
+                  <button onClick={ (event) => {
+                                      this.viewProfile()
+                                    } } className="btn btn-info">
+                    View your profile
+                  </button>
+                </div>
               </div>
-            </div>
-            <br/>
-            { user
-              && user.email
-              && <div className="p-3" style={ { backgroundColor: 'white', position: 'relative' } }>
-                   <div className='d-flex align-items-center'>
-                     <div className='flex-1'>
-                       <div className='row'>
-                         <div className='col-sm-12'>
-                           <TextField floatingLabelText="First Name" defaultValue={ user.firstName } placeholder="First Name" name="firstName" className="w-100 sign-up-build-form-feild"
-                           />
+              <br/>
+              { user
+                && user.email
+                && <div className="p-3" style={ { backgroundColor: 'white', position: 'relative' } }>
+                     <div className='d-flex align-items-center'>
+                       <div className='flex-1'>
+                         <div className='row'>
+                           <div className='col-sm-12'>
+                             <TextField floatingLabelText="First Name" defaultValue={ user.firstName } placeholder="First Name" name="firstName" className="w-100 sign-up-build-form-feild"
+                             />
+                           </div>
+                         </div>
+                       </div>
+                       <input onChange={ (event) => {
+                                         
+                                           console.log("duwop", event.target.files)
+                                         
+                                         } } style={ { "visibility": "hidden", heigh: 0, width: 0, opacity: 1 } } type="file" name="imageUpload" id="imageUpload" />
+                       <div className="h-100 m-3 d-flex flex-column align-items-center">
+                         <p className="Brandon_bld" style={ { color: 'black' } }>
+                           PHOTO
+                         </p>
+                         <label htmlFor="imageUpload">
+                           <img style={ { width: 150 } } src={ user.facebookImgUrl || user.linkedInPictureUrl || user.profileImgLink || "/static/images/chew-pofile-img.png" } />
+                         </label>
+                       </div>
+                       <div className='flex-1'>
+                         <div className='row'>
+                           <div className='col-sm-12'>
+                             <TextField floatingLabelText="Last Name" defaultValue={ user.lastName } placeholder="Last Name" name="lastName" className="w-100 sign-up-build-form-feild" />
+                           </div>
                          </div>
                        </div>
                      </div>
-                     <input onChange={ (event) => {
-                                       
-                                         console.log("duwop", event.target.files)
-                                       
-                                       } } style={ { "visibility": "hidden", heigh: 0, width: 0, opacity: 1 } } type="file" name="imageUpload" id="imageUpload" />
-                     <div className="h-100 m-3 d-flex flex-column align-items-center">
-                       <p className="Brandon_bld" style={ { color: 'black' } }>
-                         PHOTO
-                       </p>
-                       <label htmlFor="imageUpload">
-                         <img style={ { width: 150 } } src={ user.facebookImgUrl || user.linkedInPictureUrl || user.profileImgLink || "/static/images/chew-pofile-img.png" } />
-                       </label>
-                     </div>
-                     <div className='flex-1'>
-                       <div className='row'>
-                         <div className='col-sm-12'>
-                           <TextField floatingLabelText="Last Name" defaultValue={ user.lastName } placeholder="Last Name" name="lastName" className="w-100 sign-up-build-form-feild" />
-                         </div>
+                     <br/>
+                     <div className='row'>
+                       <div className='col-sm-6'>
+                         <TextField floatingLabelText="Location" defaultValue={ user.location } placeholder="location" name="location" className="w-100 sign-up-build-form-feild" />
+                       </div>
+                       <div className='col-sm-6'>
+                         <TextField floatingLabelText="Zip" defaultValue={ user.Zip } placeholder="Zip" name="zip" className="w-100 sign-up-build-form-feild" />
                        </div>
                      </div>
-                   </div>
-                   <br/>
-                   <div className='row'>
-                     <div className='col-sm-6'>
-                       <TextField floatingLabelText="Location" defaultValue={ user.location } placeholder="location" name="location" className="w-100 sign-up-build-form-feild" />
+                     <br/>
+                     <div className='row'>
+                       <div className='col-sm-12'>
+                         <TextField floatingLabelText="Email" defaultValue={ user.email } placeholder="Email" name="email" className="w-100 sign-up-build-form-feild" />
+                       </div>
                      </div>
-                     <div className='col-sm-6'>
-                       <TextField floatingLabelText="Zip" defaultValue={ user.Zip } placeholder="Zip" name="zip" className="w-100 sign-up-build-form-feild" />
+                     <br/>
+                     <div className='row'>
+                       <div className='col-sm-6'>
+                         <SelectField onChange={ (event, index, value) => {
+                                                   this.onSelectionChange(event, 'occupationValue', value)
+                                                 } } className="w-100 d-flex align-items-start o-hidden b-under" floatingLabelText="OCCUPATION" value={ this.state.occupationValue }>
+                           { occupations.map((occupation, i) => {
+                               return ( <MenuItem key={ v4() } value={ i } primaryText={ occupation.name } /> )
+                             }) }
+                         </SelectField>
+                       </div>
+                       <div className='col-sm-6'>
+                         <SelectField onChange={ (event, index, value) => {
+                                                   this.onSelectionChange(event, 'industryValue', value)
+                                                 } } className="w-100 d-flex align-items-start o-hidden b-under" floatingLabelText="INDUSTRY" value={ this.state.industryValue }>
+                           { industries.map((industry, i) => {
+                               return ( <MenuItem key={ v4() } value={ i } primaryText={ industry.name } /> )
+                             }) }
+                         </SelectField>
+                       </div>
                      </div>
-                   </div>
-                   <br/>
-                   <div className='row'>
-                     <div className='col-sm-12'>
-                       <TextField floatingLabelText="Email" defaultValue={ user.email } placeholder="Email" name="email" className="w-100 sign-up-build-form-feild" />
+                     <br/>
+                     <div className='row'>
+                       <div className='col-sm-12'>
+                         <SelectField onChange={ (event, index, value) => {
+                                                   this.onSelectionChange(event, 'hopingsValue', value)
+                                                 } } className="w-100 text-center d-flex align-items-start o-hidden b-under" floatingLabelText="WHAT ARE YOU HOPING TO GET OUT OF THIS?"
+                           value={ this.state.hopingsValue }>
+                           { hopings.map((hoping, i) => {
+                               return ( <MenuItem key={ v4() } value={ i } primaryText={ hoping.name } /> )
+                             }) }
+                         </SelectField>
+                       </div>
                      </div>
-                   </div>
-                   <br/>
-                   <div className='row'>
-                     <div className='col-sm-6'>
-                       <SelectField onChange={ (event, index, value) => {
-                                                 this.onSelectionChange(event, 'occupationValue', value)
-                                               } } className="w-100 d-flex align-items-start o-hidden b-under" floatingLabelText="OCCUPATION" value={ this.state.occupationValue }>
-                         { occupations.map((occupation, i) => {
-                             return ( <MenuItem key={ v4() } value={ i } primaryText={ occupation.name } /> )
-                           }) }
-                       </SelectField>
+                     <br/>
+                     <div className='row'>
+                       <div className='col-sm-12'>
+                         <TextField floatingLabelText="Summary" defaultValue={ user.summary } placeholder="Introduce yourself so we know a little about you…" name="summary" className="w-100 sign-up-build-form-feild"
+                         />
+                       </div>
                      </div>
-                     <div className='col-sm-6'>
-                       <SelectField onChange={ (event, index, value) => {
-                                                 this.onSelectionChange(event, 'industryValue', value)
-                                               } } className="w-100 d-flex align-items-start o-hidden b-under" floatingLabelText="INDUSTRY" value={ this.state.industryValue }>
-                         { industries.map((industry, i) => {
-                             return ( <MenuItem key={ v4() } value={ i } primaryText={ industry.name } /> )
-                           }) }
-                       </SelectField>
-                     </div>
-                   </div>
-                   <br/>
-                   <div className='row'>
-                     <div className='col-sm-12'>
-                       <SelectField onChange={ (event, index, value) => {
-                                                 this.onSelectionChange(event, 'hopingsValue', value)
-                                               } } className="w-100 text-center d-flex align-items-start o-hidden b-under" floatingLabelText="WHAT ARE YOU HOPING TO GET OUT OF THIS?"
-                         value={ this.state.hopingsValue }>
-                         { hopings.map((hoping, i) => {
-                             return ( <MenuItem key={ v4() } value={ i } primaryText={ hoping.name } /> )
-                           }) }
-                       </SelectField>
-                     </div>
-                   </div>
-                   <br/>
-                   <div className='row'>
-                     <div className='col-sm-12'>
-                       <TextField floatingLabelText="Summary" defaultValue={ user.summary } placeholder="Introduce yourself so we know a little about you…" name="summary" className="w-100 sign-up-build-form-feild"
-                       />
-                     </div>
-                   </div>
-                 </div> }
-            <br/>
-            <div className='row'>
-              <div className='col-sm-12 d-flex justify-content-around'>
-                <button onClick={ (event) => {
-                                  
-                                    this.updateUser(false);
-                                  
-                                  } } className="btn btn-info">
-                  Save
-                </button>
-                <button onClick={ (event) => {
-                                  
-                                    this.updateUser(true);
-                                  
-                                  } } className="btn btn-info">
-                  Next To Payment Page
-                </button>
+                   </div> }
+              <br/>
+              <div className='row'>
+                <div className='col-sm-12 d-flex justify-content-around'>
+                  <button onClick={ (event) => {
+                                    
+                                      this.updateUser(false);
+                                    
+                                    } } className="btn btn-info">
+                    Save
+                  </button>
+                  <button onClick={ (event) => {
+                                    
+                                      this.updateUser(true);
+                                    
+                                    } } className="btn btn-info">
+                    Next To Payment Page
+                  </button>
+                </div>
               </div>
+              <br/>
             </div>
           </div>
         </div>
