@@ -53,6 +53,11 @@ var userService = {
     return restService.get(getUserUrl)
 
   },
+  updateProfilePic: (updateProfilePicForm) => {
+
+    return restService.putImage(urlService.user, updateProfilePicForm)
+
+  },
   updateProfile: () => {
 
 

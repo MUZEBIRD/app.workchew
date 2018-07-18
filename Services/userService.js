@@ -145,28 +145,14 @@ var post = function(user, req) {
         return data
 
       })
-
   }
-
-
-
-
-
-
-
 }
-
-
 
 var checkAccess = function(token) {
 
   return authService.getRole(token)
 
-
-
-
 }
-
 
 var accessAndUpdate = function(userSignUp) {
 
@@ -315,6 +301,37 @@ var sendEmail = function() {
   //     })
 
   // })
+
+}
+
+var updateProfilePic = function(formData) {
+
+  return db
+
+    .postImage({
+      file: formData.fileList[0],
+      metadata: {
+
+      }
+    })
+    .map(imageData => {
+      return {
+        ...imageData,
+        userId: formData.fields.userId
+      }
+
+    })
+
+    .switchMap(imageData => {
+
+      return update(
+        {
+          _id: imageData.userId,
+          profileImgLink: imageData.id
+        }
+      )
+
+    })
 
 }
 
@@ -487,6 +504,8 @@ var userService = {
   update,
 
   delete: remove,
+
+  updateProfilePic,
 
   updateUserWithAccessToken
 }

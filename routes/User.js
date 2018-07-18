@@ -8,6 +8,7 @@ const user = require('../Services/userService.js')
 
 const authService = require('../Services/authService')
 const bcryptStream = require('../Services/bcryptStreams')
+const parseReqForm = require('../rxFormidable')
 
 var Url = require('url');
 
@@ -79,12 +80,13 @@ router.post('/', (req, res) => {
 
 }); //POST 
 
-router.put('/', ({body}, res) => {
+router.put('/', (req, res) => {
+
+  var {body} = req;
 
   res.set('Content-Type', 'text/html');
 
-
-  if (body && body.newPassword && body.oldPassword) {
+  if (body && body._id && body.newPassword && body.oldPassword) {
 
     bcryptStream.hashUserPassword(body.newPassword)
 
@@ -113,6 +115,78 @@ router.put('/', ({body}, res) => {
 
       })
 
+  } else if (!body || !body._id) {
+
+    parseReqForm(req)
+
+      .switchMap(formData => {
+
+        var token = req.headers['x-api-access-token'];
+
+        return authService.getRole(token)
+
+          .map(authObject => {
+
+            return {
+              authObject,
+              formData
+            }
+          })
+
+      })
+
+      .switchMap(({authObject, formData}) => {
+
+        if (authObject.role == "admin") {
+
+          return user
+
+            .updateProfilePic(formData)
+
+
+        } else {
+
+          return userService.get({
+            _id: authObject.userId
+          })
+
+            .switchMap(users => {
+
+              if (users && users.length && users[0]) {
+
+                return user
+
+                  .updateProfilePic(formData)
+
+              } else {
+
+                return Rx.Observable.of(1)
+
+              }
+
+            })
+
+        }
+
+      })
+
+      .subscribe((updateProfilePicResponse) => {
+
+        if (updateProfilePicResponse == 1) {
+
+          res.status(401).send({
+            error: 401,
+            msg: " wrong user"
+          })
+
+        } else {
+
+          res.send(updateProfilePicResponse)
+
+        }
+
+      })
+
   } else {
 
     user
@@ -130,8 +204,6 @@ router.put('/', ({body}, res) => {
       })
 
   }
-
-
 
 }); //PUT 
 

@@ -77,7 +77,6 @@ router.post('/', (req, res) => {
 
         return authService.getRole(token)
 
-
           .map(authObject => {
 
             return {

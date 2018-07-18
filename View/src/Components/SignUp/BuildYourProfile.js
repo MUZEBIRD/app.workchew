@@ -151,7 +151,6 @@ class BuildYourProfile extends Component {
 
   updateProfilePic = () => {
     if (this.state.user && this.state.user._id) {
-
       var blobBin = atob(this.state.previewProfilePic.split(',')[1]);
       var array = [];
       for (var i = 0; i < blobBin.length; i++) {
@@ -162,10 +161,23 @@ class BuildYourProfile extends Component {
       });
       var formdata = new FormData();
       formdata.append("image", file);
-      formdata.append("partnerId", this.state.user._id);
+      formdata.append("userId", this.state.user._id);
       console.log('this.state.business._idthis.state.business._idthis.state.business._id ', this.state.user._id)
-    }
 
+      userService.updateProfilePic(formdata)
+
+        .subscribe((updateProfilePicStream) => {
+
+          console.log('updateProfilePicStream ', updateProfilePicStream)
+
+          alert('profile pic updated !')
+          window.location.reload(true);
+
+          this.clearPreviewImage()
+
+        })
+
+    }
   }
 
   clearPreviewImage = (imageData) => {
@@ -222,6 +234,17 @@ class BuildYourProfile extends Component {
   render() {
 
     var user = this.state.user
+
+    var profileImgLink = null;
+
+    console.log("   big user ", user)
+
+    if (user.profileImgLink) {
+
+      profileImgLink = `${urlService.pic}/${user.profileImgLink}`;
+
+    }
+
 
     const actions = [
       <FlatButton label="Done" primary={ true } keyboardFocused={ true } onClick={ (event) => {
@@ -282,7 +305,8 @@ class BuildYourProfile extends Component {
                            PHOTO
                          </p>
                          <label htmlFor="imageUpload">
-                           <img style={ { width: 150 } } src={ this.state.previewProfilePic || user.facebookImgUrl || user.linkedInPictureUrl || user.profileImgLink || "/static/images/chew-pofile-img.png" } />
+                           { !profileImgLink && <img style={ { width: 150 } } src={ this.state.previewProfilePic || user.facebookImgUrl /*|| user.linkedInPictureUrl*/ || "/static/images/chew-pofile-img.png" } /> }
+                           { profileImgLink && <img style={ { width: 150 } } src={ profileImgLink } /> }
                          </label>
                          <br/>
                          <div className="row">

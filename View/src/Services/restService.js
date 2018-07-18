@@ -58,7 +58,22 @@ var restService = {
       .then((res) => res.json()))
 
   },
+  putImage: (url, body) => {
 
+    return Rx.Observable.fromPromise(fetch(url, {
+
+      method: "PUT",
+
+      headers: {
+
+        "x-api-access-token": getAccessToken()
+      },
+      body
+    })
+
+      .then((res) => res.json()))
+
+  },
   postImage: (url, body) => {
 
     return Rx.Observable.fromPromise(fetch(url, {

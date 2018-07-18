@@ -349,7 +349,6 @@ class BusinessForm extends Component {
 
   }
 
-
   updateBannerImage = () => {
     if (this.state.business && this.state.business._id) {
       var blobBin = atob(this.state.bannerPreviewData.split(',')[1]);
@@ -381,7 +380,6 @@ class BusinessForm extends Component {
         })
     }
   }
-
 
   clearPreviewImage = (imageData) => {
 
