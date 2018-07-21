@@ -169,6 +169,7 @@ class BuildYourProfile extends Component {
         .subscribe((updateProfilePicStream) => {
 
           console.log('updateProfilePicStream ', updateProfilePicStream)
+          userService.storeSignUpInfo(updateProfilePicStream)
 
           alert('profile pic updated !')
           window.location.reload(true);
@@ -176,7 +177,6 @@ class BuildYourProfile extends Component {
           this.clearPreviewImage()
 
         })
-
     }
   }
 
@@ -237,14 +237,11 @@ class BuildYourProfile extends Component {
 
     var profileImgLink = null;
 
-    console.log("   big user ", user)
-
     if (user.profileImgLink) {
 
       profileImgLink = `${urlService.pic}/${user.profileImgLink}`;
 
     }
-
 
     const actions = [
       <FlatButton label="Done" primary={ true } keyboardFocused={ true } onClick={ (event) => {
@@ -305,8 +302,9 @@ class BuildYourProfile extends Component {
                            PHOTO
                          </p>
                          <label htmlFor="imageUpload">
-                           { !profileImgLink && <img style={ { width: 150 } } src={ this.state.previewProfilePic || user.facebookImgUrl /*|| user.linkedInPictureUrl*/ || "/static/images/chew-pofile-img.png" } /> }
-                           { profileImgLink && <img style={ { width: 150 } } src={ profileImgLink } /> }
+                           { !profileImgLink && !this.state.previewProfilePic && <img style={ { width: 150 } } src={ "/static/images/chew-pofile-img.png" } /> }
+                           { this.state.previewProfilePic && <img style={ { width: 150 } } src={ this.state.previewProfilePic } /> }
+                           { profileImgLink && !this.state.previewProfilePic && <img style={ { width: 150 } } src={ profileImgLink } /> }
                          </label>
                          <br/>
                          <div className="row">

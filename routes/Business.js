@@ -11,9 +11,7 @@ var Url = require('url');
 
 const userService = require('../Services/userService.js')
 
-
 const parseReqForm = require('../rxFormidable')
-
 
 var businessPartnerAuth = function(req, res, next) {
 
