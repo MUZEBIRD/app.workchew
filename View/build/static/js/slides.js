@@ -197,14 +197,6 @@ $(document).ready(function() {
   //updateHash();
 
   //Listen history changes
-  $(window).on('popstate', function(e) {
-    setTimeout(function() {
-      //updateHash();
-    }, 100);
-    e.preventDefault();
-  });
-
-  var isHash = window.location.href.split("#")[1];
 
   //Preload images
   if (window.preload) {
@@ -361,7 +353,7 @@ $(document).ready(function() {
       } else {
         if ((window.location.toString().indexOf('#') > 0) && (location.protocol !== "file:") && (location.href.split('#')[0])) {
           if (history.pushState) {
-            window.history.pushState("", "", location.href.split('#')[0]);
+            // window.history.pushState("", "", location.href.split('#')[0]);
           } else {
             //window.location.hash = "";
           }
@@ -469,7 +461,7 @@ $(document).ready(function() {
   $('.toFirstSlide').on('click', function() {
     window.changeSlide(1);
     if (history.pushState) {
-      window.history.pushState("", "", location.href.split('#')[0]);
+      //window.history.pushState("", "", location.href.split('#')[0]);
     } else {
       //window.location.hash = "";
     }
@@ -480,7 +472,7 @@ $(document).ready(function() {
   $('.toLastSlide').on('click', function() {
     window.changeSlide(window.stages);
     if (history.pushState) {
-      window.history.pushState("", "", location.href.split('#')[0]);
+      //window.history.pushState("", "", location.href.split('#')[0]);
     } else {
       //window.location.hash = "";
     }
