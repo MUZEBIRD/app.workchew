@@ -526,7 +526,10 @@ $(document).ready(function() {
   var eventCount = 0,
     eventCountStart;
 
-  $('html,body').on('DOMMouseScroll mousewheel scroll touchmove', function(event) {
+
+
+  window.happ = (event) => {
+
     var currentSection = $('.slide.selected .content'),
       scrollsize = Math.ceil(Math.abs(event.deltaY) * event.deltaFactor),
       browserScrollRate = (window.isFirefox) ? 2 : 1,
@@ -680,6 +683,14 @@ $(document).ready(function() {
         }
       }
     }
+
+
+  }
+
+  $('html,body').on('DOMMouseScroll mousewheel scroll touchmove', function(event) {
+
+
+    window.happ(event)
   //end on mousewheel event
   });
 
