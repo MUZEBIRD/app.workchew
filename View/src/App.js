@@ -50,7 +50,7 @@ class App extends Component {
 
     return (
       <Provider store={ store }>
-        <HashRouter history={ history } basename='/'>
+        <HashRouter>
           <div className="App">
             <Route exact path="/" component={ Main } />
             <Route exact path="/locations" component={ Main } />
