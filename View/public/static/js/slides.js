@@ -530,6 +530,26 @@ $(document).ready(function() {
 
   window.happ = (event) => {
 
+
+    if (!event) {
+
+
+      event = {
+        deltaY: 10,
+        preventDefault: () => {
+
+        },
+        deltaFactor:10,
+        originalEvent: {
+
+          wheelDelta: 10
+        }
+
+      }
+
+
+    }
+
     var currentSection = $('.slide.selected .content'),
       scrollsize = Math.ceil(Math.abs(event.deltaY) * event.deltaFactor),
       browserScrollRate = (window.isFirefox) ? 2 : 1,
