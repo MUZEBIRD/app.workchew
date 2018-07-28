@@ -15,8 +15,9 @@ export const checkMembership = (user) => (dispatch, getState) => {
   return dispatch({
 
     type: "FETCH_DATA",
+    requestName: "FETCH_DATA",
     config: {
-      url: "user/check-membership?_id=" + user._id,
+      url: "/user/check-membership?_id=" + user._id,
       method: "GET"
     }
   })
