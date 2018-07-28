@@ -20,14 +20,20 @@ paypal.configure(payPalSandBoxConfig);
 
 var getPayment = function(paymentId) {
 
+  console.log("paymentIdpaymentIdpaymentId", paymentId)
+
   return Rx.Observable.create(function(observer) {
 
     paypal.payment.get(paymentId, function(error, payment) {
       if (error) {
         observer.error(error)
+        observer.complete()
+
         throw error;
       } else {
         observer.next(payment)
+        observer.complete()
+
       }
     }); //paypal.payment.get(
 

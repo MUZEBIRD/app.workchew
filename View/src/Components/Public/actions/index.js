@@ -10,6 +10,19 @@ export const getUser = (config) => (dispatch, getState) => {
 
 }
 
+export const checkMembership = (user) => (dispatch, getState) => {
+
+  return dispatch({
+
+    type: "FETCH_DATA",
+    config: {
+      url: "user/check-membership?_id=" + user._id,
+      method: "GET"
+    }
+  })
+
+}
+
 export const GET_USERS = 'GET_USERS'
 
 export const getUsers = (config) => (dispatch, getState) => {

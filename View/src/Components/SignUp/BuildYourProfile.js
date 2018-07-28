@@ -235,7 +235,7 @@ class BuildYourProfile extends Component {
 
     var user = this.state.user
 
-    var profileImgLink = null;
+    var profileImgLink = user.googleImgUrl || user.facebookImgUrl || user.linkedInPictureUrl
 
     if (user.profileImgLink) {
 

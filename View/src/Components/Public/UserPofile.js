@@ -20,7 +20,7 @@ import { Subject } from 'rxjs'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import * as userActions from './actions'
 
-var {getUser} = userActions
+var {getUser, checkMembership} = userActions
 
 class UserProfile extends Component {
 
@@ -46,12 +46,25 @@ class UserProfile extends Component {
           _id: this.state.queryParams.id
         }
       })
+
+      this.props.checkMembership({
+        _id: this.state.queryParams.id
+      })
+
     }
   }
 
   render() {
 
-    var user = this.props.user
+    var user = this.props.user;
+
+    var profileImgLink = user.googleImgUrl || user.facebookImgUrl || user.linkedInPictureUrl
+
+    if (user.profileImgLink) {
+
+      profileImgLink = `${urlService.pic}/${user.profileImgLink}`;
+
+    }
 
     return (
 
@@ -64,7 +77,7 @@ class UserProfile extends Component {
                 <button className="btn btn-secondary Brandon_bld">
                   pro
                 </button>
-                <img style={ { width: 150 } } src={ user.facebookImgUrl || user.linkedInPictureUrl || user.profileImgLink } />
+                <img style={ { width: 150 } } src={ profileImgLink } />
                 <button className="btn btn-secondary Brandon_bld">
                   add
                 </button>
@@ -103,7 +116,8 @@ const mapStateToProps = (state, ownProps) => ({
 })
 
 const UserProfileComponent = connect(mapStateToProps, {
-  getUser
+  getUser,
+  checkMembership
 })(UserProfile)
 
 export default UserProfileComponent;

@@ -10,6 +10,9 @@ const authService = require('../Services/authService')
 const bcryptStream = require('../Services/bcryptStreams')
 const parseReqForm = require('../rxFormidable')
 
+const payPalWCNodeCLient = require('../Services/wc-paypal.js')
+
+
 var Url = require('url');
 
 var UserAuth = function(req, res, next) {
@@ -220,6 +223,53 @@ router.get('/', (req, res) => {
     })
 
 })
+
+
+router.get('/check-membership', (req, res) => {
+
+  var {_id} = req.query
+
+  return user
+
+    .get({
+      _id
+    })
+
+    .switchMap((users) => {
+
+      console.log("found users", users)
+
+      var {lastPaymentId} = users[0].memberShipInfo.paymentAuth
+      console.log("lastPaymentId lastPaymentId", lastPaymentId)
+
+      return payPalWCNodeCLient
+
+        .getPayment(lastPaymentId)
+
+    })
+
+    .subscribe((payPalResponse) => {
+
+      var {transactions, create_time} = payPalResponse;
+
+      var transaction = transactions[0];
+
+      var {item_list} = transaction;
+
+      var {items} = item_list;
+
+      var item = items[0];
+
+      var {name, description, currency} = item;
+
+      res.send({
+        item,
+        create_time
+      })
+
+    })
+
+}) //check membership
 
 router.delete('/', (req, res) => {
 

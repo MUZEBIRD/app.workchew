@@ -71,15 +71,15 @@ class UserSignUpSocial extends Component {
 
     var userSignUpInfo = fields.reduce((info, inputField) => {
 
-      info[inputField.name] = inputField.value
+      info[inputField.name] = inputField.value;
 
       return info;
 
-    }, {})
+    }, {});
 
     console.log(userSignUpInfo);
 
-    this.signUp(userSignUpInfo)
+    this.signUp(userSignUpInfo);
 
   }
 
@@ -122,6 +122,7 @@ class UserSignUpSocial extends Component {
           userService.store(userResponse.user)
 
           urlService.goTo(urlService.main)
+
         } else {
 
           this.setState({
