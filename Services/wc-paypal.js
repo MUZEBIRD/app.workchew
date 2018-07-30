@@ -75,14 +75,12 @@ var getAccessToken = function() {
 
 }
 
-
 var createProAgreement = function(data) {
 
   return Rx.Observable.create(function(observer) {
 
     var d = new Date((new Date()).getTime() + 5 * 60000)
     var start_date = d.toISOString();
-
 
     request.post({
       url: basePayPalUrl + '/v1/payments/billing-agreements',
@@ -221,7 +219,7 @@ var executeAgreementRequest = (data) => {
       url: basePayPalUrl + '/v1/payments/billing-agreements/' + data.agreementToken + '/agreement-execute',
       headers: {
         "Content-Type": "application/json",
-        "Authorization": "Beaer " + beaer
+        "Authorization": "Basic " + Buffer.from(client_id + ":" + client_secret).toString('base64')
       }
     }, function(err, httpResponse, body) {
 
@@ -234,26 +232,29 @@ var executeAgreementRequest = (data) => {
 
 }
 
-
-
 var executeAgreement = function(data) {
 
-  return Rx.Observable.create(function(observer) {
+  return executeAgreementRequest(data)
 
-    request.post({
-      url: basePayPalUrl + '/v1/payments/billing-agreements/' + data.agreementToken + '/agreement-execute',
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": "Basic " + Buffer.from(client_id + ":" + client_secret).toString('base64')
-      }
-    }, function(err, httpResponse, body) {
+    .switchMap((executedAgreementInfo) => {
 
-      observer.next(JSON.parse(body))
-      observer.complete()
+      return userService.update({
+        _id: data._id,
+        executedAgreementInfo: {
+          id: executedAgreementInfo.id
+        }
+      })
+
+        .map((updatedUser) => {
+
+          return {
+            executedAgreementInfo: executedAgreementInfo,
+            updatedUser: updatedUser
+          }
+
+        })
 
     })
-
-  })
 
 }
 

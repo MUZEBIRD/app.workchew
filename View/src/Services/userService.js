@@ -135,12 +135,13 @@ var userService = {
       })
 
   },
-  executeMembership: ({token}) => {
+  executeMembership: ({token, _id}) => {
 
     return restService
 
       .post(urlService.memberships + "/execute-membership-agreement", {
-        token
+        token,
+        _id
       })
 
   },
