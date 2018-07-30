@@ -79,7 +79,7 @@ var createProAgreement = function(data) {
 
   return Rx.Observable.create(function(observer) {
 
-    var d = new Date();
+    var d = new Date((new Date()).getTime() + 5 * 60000)
     var start_date = d.toISOString();
 
 
@@ -118,23 +118,18 @@ var createProAgreement = function(data) {
 
 }
 
-
 var createStaterAgreement = function(data) {
 
   return Rx.Observable.create(function(observer) {
 
-    var d = new Date();
+    var d = new Date((new Date()).getTime() + 5 * 60000)
     var start_date = d.toISOString();
-
 
     request.post({
       url: basePayPalUrl + '/v1/payments/billing-agreements',
-
       headers: {
-
         "Content-Type": "application/json",
         "Authorization": "Basic " + Buffer.from(client_id + ":" + client_secret).toString('base64')
-
       },
       body: JSON.stringify({
         "name": "Starter Membership",
@@ -168,14 +163,10 @@ var executeAgreement = function(data) {
 
     request.post({
       url: basePayPalUrl + '/v1/payments/billing-agreements/' + data.agreementToken + '/agreement-execute',
-
       headers: {
-
         "Content-Type": "application/json",
         "Authorization": "Basic " + Buffer.from(client_id + ":" + client_secret).toString('base64')
-
       }
-
     }, function(err, httpResponse, body) {
 
       observer.next(JSON.parse(body))
@@ -213,7 +204,8 @@ var getAgreementDetails = function(data) {
 }
 
 module.exports = {
-  getPayment
+  getPayment,
+  executeAgreement
 }
 // var paymentId = "PAY-1AB70526TK0449927LK37UJQ";
 

@@ -14,6 +14,7 @@ export default {
   buildProfile: '/co-chewer-signUp-build',
   adminPartnerPage: '/admin-partner-page',
   createPartnerUser: 'business-signup',
+  memberships: `${base}/memberships`,
   partnerPage: `/partner-page`,
   businessPage: `/business-page`,
   editUserProfile: '/co-chewer-signUp-build',

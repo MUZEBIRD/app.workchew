@@ -13,6 +13,7 @@ const Seats = require('./seatsRoute')
 const Business = require('./Business')
 
 const payPal = require('./payPalRoute')
+const payPalWCNodeCLient = require('../Services/wc-paypal.js')
 
 const authService = require('../Services/authService')
 const businessService = require('../Services/businessService')
@@ -47,6 +48,48 @@ router.get('/', (req, res) => {
 
   res.send(fs.readFileSync('./View/build/index.html'));
 });
+
+
+
+router.post('/memberships/create-membership-agreement', (req, res) => {
+
+  res.set('Content-Type', 'application/json');
+
+  authService.getRole(req.body.token)
+
+    .subscribe(authObject => {
+
+      if (authObject.role == "admin") {
+
+        adminOrdersLogin(req, res)
+
+      } else {
+
+        chewCheck(req, res, authObject, req.body.bid)
+
+      }
+
+
+    })
+
+});
+
+
+router.post('/memberships/execute-membership-agreement', (req, res) => {
+
+
+  payPalWCNodeCLient.executeAgreement({
+    token: req.body.token
+  })
+
+    .subscribe((payPalResponse) => {
+
+      res.send(payPalResponse)
+
+    })
+
+});
+
 
 router.post('/orderslogin', (req, res) => {
 

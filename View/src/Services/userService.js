@@ -12,7 +12,7 @@ var userService = {
 
   get: ({params}) => {
 
-    var {_id} = params
+    var {_id} = params;
 
     if (_id === 1) {
 
@@ -122,6 +122,24 @@ var userService = {
 
       .post({
         businessSignUpInfo
+      })
+
+  },
+  createMembershipAgreement: ({_id}) => {
+
+    return restService
+
+      .post(urlService.memberships + "/create-membesship-agreement", {
+        _id
+      })
+
+  },
+  executeMembership: ({token}) => {
+
+    return restService
+
+      .post(urlService.memberships + "/execute-membership-agreement", {
+        token
       })
 
   },

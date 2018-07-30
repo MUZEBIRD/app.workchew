@@ -30,7 +30,7 @@ class M3mberships extends Component {
     super(props);
 
 
-var queryParams = getQueryParams()
+    var queryParams = getQueryParams()
 
     this.state = {
       showDialog: false,
@@ -40,6 +40,25 @@ var queryParams = getQueryParams()
   }
 
   componentDidMount() {
+
+    if (this.state && this.state.queryParams && this.state.queryParams.token) {
+
+      var token = this.state.queryParams.token;
+
+      userService
+        .executeMembership({
+          token
+        })
+
+        .subscribe((executeResponse) => {
+
+          console.log({
+            executeResponse
+          })
+
+        })
+
+    }
 
     loaderStream.subscribe((showLoader) => {
 
