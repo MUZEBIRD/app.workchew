@@ -20,8 +20,8 @@ var client_secret = 'EIkza4HNFtXuq9LBIulUqlzmyHxuUbtm7fR5zo5FnobdLCVQgu7l6Zp6hrI
 
 const payPalSandBoxConfig = {
   'mode': 'sandbox', //sandbox or live
-  'client_id': 'ARlX_FQiPMWYBBxHdmAuPnIh4lF0YChw3Ju8R6oPiFfPS7NW74VcNadMQmDuXUmOwlKO215-DIZ4rtVp',
-  'client_secret': 'EIkza4HNFtXuq9LBIulUqlzmyHxuUbtm7fR5zo5FnobdLCVQgu7l6Zp6hrI0xbn4eG9oqRuXv7O2dgnD'
+  'client_id': client_id,
+  'client_secret': client_secret
 }
 
 paypal.configure(payPalSandBoxConfig);
@@ -142,7 +142,7 @@ var excuteAgreement = function(data) {
 
 }
 
-var getAgreementDetials = function(data) {
+var getAgreementDetails = function(data) {
 
   return Rx.Observable.create(function(observer) {
 
@@ -166,19 +166,6 @@ var getAgreementDetials = function(data) {
   })
 
 }
-
-
-getAgreementDetials({
-  agreementID: "I-YS2554FTVFYU"
-})
-
-  .subscribe((done) => {
-
-    var {id, agreement_details} = JSON.parse(done)
-
-    console.log(agreement_details)
-
-  })
 
 module.exports = {
   getPayment
