@@ -125,6 +125,16 @@ var userService = {
       })
 
   },
+  createProMembership: ({_id, userEmail}) => {
+
+    return restService
+
+      .post(urlService.memberships + "/create-pro-membership", {
+        _id,
+        userEmail
+      })
+
+  },
   createStaterMembership: ({_id, userEmail}) => {
 
     return restService

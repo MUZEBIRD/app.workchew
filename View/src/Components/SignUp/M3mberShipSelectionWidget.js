@@ -28,6 +28,7 @@ const pricingOptions3 = [
   {
     id: "STARTER",
     title: "STARTER",
+    option: "createStaterMembership",
     price: 49.99,
     paymentRecurrence: "BILLED MONTHLY",
     mainFeature: "Access to one WorkChew location",
@@ -46,6 +47,7 @@ const pricingOptions3 = [
   {
     id: "Pro",
     title: "PRO",
+    option: "createProMembership",
     price: 99.99,
     paymentRecurrence: "BILLED MONTHLY",
     features: [
@@ -84,7 +86,7 @@ var selectedMemberShip = function(memberShipInfo) {
 
     .switchMap(({_id, email}) => {
 
-      return userService.createStaterMembership({
+      return userService[memberShipInfo.option]({
         _id,
         userEmail: email
       })

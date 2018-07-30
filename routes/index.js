@@ -66,6 +66,28 @@ router.post('/memberships/create-stater-membership', (req, res) => {
 
 });
 
+
+router.post('/memberships/create-pro-membership', (req, res) => {
+
+  res.set('Content-Type', 'application/json');
+
+  payPalWCNodeCLient.createProAgreement({
+    userEmail: req.body.userEmail,
+    _id: req.body._id,
+  })
+
+    .subscribe((payPalResponse) => {
+
+      res.send(payPalResponse)
+
+    })
+
+});
+
+
+
+
+
 router.post('/memberships/execute-membership-agreement', (req, res) => {
 
   payPalWCNodeCLient.executeAgreement({

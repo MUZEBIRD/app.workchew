@@ -75,7 +75,39 @@ var getAccessToken = function() {
 
 }
 
+
 var createProAgreement = function(data) {
+
+  return createProAgreementRequest(data)
+
+    .switchMap((initAgreementInfo) => {
+
+      var token = getTokenFromAgreementInfo(initAgreementInfo)
+      var {links} = initAgreementInfo;
+
+
+      var [approval, execute] = links;
+
+      return userService.update({
+        _id: data._id,
+        initAgreementToken: token
+      })
+
+        .map((updatedUser) => {
+
+          return {
+            initAgreementInfo: initAgreementInfo,
+            updatedUser: updatedUser,
+            approvalUrl: approval
+          }
+
+        })
+
+    })
+
+}
+
+var createProAgreementRequest = function(data) {
 
   return Rx.Observable.create(function(observer) {
 
@@ -283,9 +315,21 @@ var getAgreementDetails = function(data) {
 
 }
 
+getAgreementDetails({
+  agreementID: "I-72N4CDM42R34"
+})
+
+  .subscribe((res) => {
+    console.log(res)
+
+
+
+  })
+
 module.exports = {
   getPayment,
   executeAgreement,
+  createProAgreement,
   createStaterAgreement
 }
 // var paymentId = "PAY-1AB70526TK0449927LK37UJQ";
