@@ -95,6 +95,10 @@ var selectedMemberShip = function(memberShipInfo) {
 
       console.log('starterResponse', starterResponse)
 
+      var {approvalUrl} = starterResponse;
+
+      window.location.href = approvalUrl.href
+
     })
 
 

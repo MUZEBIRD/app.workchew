@@ -56,6 +56,20 @@ class M3mberships extends Component {
             executeResponse
           })
 
+          var {id} = executeResponse;
+          if (id) {
+            var signUpMessage = " Sign up success ! , check your email for next steps"
+
+
+
+            signUpDialogSubject.next({
+              dialogMsg: signUpMessage,
+              showDialog: true,
+              signUpComplete: true
+            })
+
+          }
+
         })
 
     }

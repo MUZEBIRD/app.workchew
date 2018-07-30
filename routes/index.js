@@ -69,7 +69,7 @@ router.post('/memberships/create-stater-membership', (req, res) => {
 router.post('/memberships/execute-membership-agreement', (req, res) => {
 
   payPalWCNodeCLient.executeAgreement({
-    token: req.body.token
+    agreementToken: req.body.token
   })
 
     .subscribe((payPalResponse) => {
