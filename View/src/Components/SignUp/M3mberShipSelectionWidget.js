@@ -75,6 +75,29 @@ const pricingOptions3 = [
 var selectedMemberShip = function(memberShipInfo) {
 
   console.log('memberShipInfo', memberShipInfo)
+
+  userService.get({
+    params: {
+      _id: 1
+    }
+  })
+
+    .switchMap(({_id, email}) => {
+
+      return userService.createStaterMembership({
+        _id,
+        userEmail: email
+      })
+
+    })
+
+    .subscribe((starterResponse) => {
+
+      console.log('starterResponse', starterResponse)
+
+    })
+
+
 }
 
 const M3mberShipSelectionWidget = (props) => {

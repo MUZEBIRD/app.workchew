@@ -194,7 +194,7 @@ var createStaterAgreement = function(data) {
 
       var [approval, execute] = links;
 
-      return userService.put({
+      return userService.update({
         _id: data._id,
         initAgreementToken: token
       })
@@ -284,7 +284,8 @@ var getAgreementDetails = function(data) {
 
 module.exports = {
   getPayment,
-  executeAgreement
+  executeAgreement,
+  createStaterAgreement
 }
 // var paymentId = "PAY-1AB70526TK0449927LK37UJQ";
 
