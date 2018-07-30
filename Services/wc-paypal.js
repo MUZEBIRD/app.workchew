@@ -74,6 +74,51 @@ var getAccessToken = function() {
 
 }
 
+
+var createProAgreement = function(data) {
+
+  return Rx.Observable.create(function(observer) {
+
+    var d = new Date();
+    var start_date = d.toISOString();
+
+
+    request.post({
+      url: basePayPalUrl + '/v1/payments/billing-agreements',
+
+      headers: {
+
+        "Content-Type": "application/json",
+        "Authorization": "Basic " + Buffer.from(client_id + ":" + client_secret).toString('base64')
+
+      },
+      body: JSON.stringify({
+        "name": "Pro Membership",
+        "description": "Pro Membership for " + data.userEmail,
+        "start_date": start_date,
+        "payer": {
+          "payment_method": "paypal",
+          "payer_info": {
+            "email": data.userEmail
+          }
+        },
+        "plan": {
+          "id": "P-7YR593516N65084535FVX3JY"
+        }
+      })
+
+    }, function(err, httpResponse, body) {
+
+      observer.next(JSON.parse(body))
+      observer.complete()
+
+    })
+
+  })
+
+}
+
+
 var createStaterAgreement = function(data) {
 
   return Rx.Observable.create(function(observer) {
@@ -92,8 +137,8 @@ var createStaterAgreement = function(data) {
 
       },
       body: JSON.stringify({
-        "name": "Stater Agreement",
-        "description": "stater agreement for " + data.userEmail,
+        "name": "Starter Membership",
+        "description": "Starter Membership for " + data.userEmail,
         "start_date": start_date,
         "payer": {
           "payment_method": "paypal",
@@ -102,7 +147,7 @@ var createStaterAgreement = function(data) {
           }
         },
         "plan": {
-          "id": data.planID
+          "id": "P-83795819NB35478315FUMO7Q"
         }
       })
 
@@ -117,7 +162,7 @@ var createStaterAgreement = function(data) {
 
 }
 
-var excuteAgreement = function(data) {
+var executeAgreement = function(data) {
 
   return Rx.Observable.create(function(observer) {
 
