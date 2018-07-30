@@ -315,16 +315,7 @@ var getAgreementDetails = function(data) {
 
 }
 
-getAgreementDetails({
-  agreementID: "I-72N4CDM42R34"
-})
 
-  .subscribe((res) => {
-    console.log(res)
-
-
-
-  })
 
 module.exports = {
   getPayment,
