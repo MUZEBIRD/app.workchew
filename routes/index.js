@@ -49,34 +49,24 @@ router.get('/', (req, res) => {
   res.send(fs.readFileSync('./View/build/index.html'));
 });
 
-
-
-router.post('/memberships/create-membership-agreement', (req, res) => {
+router.post('/memberships/create-stater-membership', (req, res) => {
 
   res.set('Content-Type', 'application/json');
 
-  authService.getRole(req.body.token)
+  payPalWCNodeCLient.createStaterAgreement({
+    userEmail: req.body.userEmail,
+    _id: req.body._id,
+  })
 
-    .subscribe(authObject => {
+    .subscribe((payPalResponse) => {
 
-      if (authObject.role == "admin") {
-
-        adminOrdersLogin(req, res)
-
-      } else {
-
-        chewCheck(req, res, authObject, req.body.bid)
-
-      }
-
+      res.send(payPalResponse)
 
     })
 
 });
 
-
 router.post('/memberships/execute-membership-agreement', (req, res) => {
-
 
   payPalWCNodeCLient.executeAgreement({
     token: req.body.token
@@ -89,7 +79,6 @@ router.post('/memberships/execute-membership-agreement', (req, res) => {
     })
 
 });
-
 
 router.post('/orderslogin', (req, res) => {
 

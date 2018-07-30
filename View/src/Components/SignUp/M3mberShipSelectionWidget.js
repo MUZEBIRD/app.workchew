@@ -71,6 +71,12 @@ const pricingOptions3 = [
 
 ]
 
+
+var selectedMemberShip = function(memberShipInfo) {
+
+  console.log('memberShipInfo', memberShipInfo)
+}
+
 const M3mberShipSelectionWidget = (props) => {
 
   return (
@@ -145,9 +151,14 @@ const M3mberShipSelectionWidget = (props) => {
         <div className='row w-100 d-flex flex-wrap justify-content-around'>
           { pricingOptions3.map(
               (pricing, i) => (
-                <div key={ i } style={ { width: 300 } } className='d-flex flex-column'>
-                  <div id={ `${pricing.id}-button` }>
-                  </div>
+                <div key={ i } style={ { width: 300 } } className='d-flex justify-content-center'>
+                  { (i == 0) && <div id={ `${pricing.id}-button` }>
+                                </div> }
+                  { (i != 0) && <img onClick={ (event) => {
+                                   
+                                     selectedMemberShip(pricing)
+                                   
+                                   } } style={ { height: 75, width: 250 } } src={ "static/images/fay-pal.png" } /> }
                 </div>)
             ) }
         </div>

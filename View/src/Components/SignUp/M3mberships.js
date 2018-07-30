@@ -70,7 +70,7 @@ class M3mberships extends Component {
 
     window.paypalCheckoutReady = () => {
 
-      pricingOptions3.forEach((pricing) => {
+      pricingOptions3.filter((op, i) => i == 0).forEach((pricing) => {
 
         placeButton({
 

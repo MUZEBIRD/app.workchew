@@ -125,12 +125,13 @@ var userService = {
       })
 
   },
-  createMembershipAgreement: ({_id}) => {
+  createStaterMembership: ({_id, userEmail}) => {
 
     return restService
 
-      .post(urlService.memberships + "/create-membesship-agreement", {
-        _id
+      .post(urlService.memberships + "/create-stater-membership", {
+        _id,
+        userEmail
       })
 
   },

@@ -5,6 +5,7 @@ twochains
 mb-buyer@workchew.com
 runner08
 */
+const userService = require('../Services/userService')
 
 var basePayPalUrl = "https://api.sandbox.paypal.com";
 
@@ -118,7 +119,7 @@ var createProAgreement = function(data) {
 
 }
 
-var createStaterAgreement = function(data) {
+var starterAgreementRequest = function(data, beaer) {
 
   return Rx.Observable.create(function(observer) {
 
@@ -156,6 +157,84 @@ var createStaterAgreement = function(data) {
   })
 
 }
+
+var getTokenFromAgreementInfo = (initAgreementInfo) => {
+
+  var {links} = initAgreementInfo;
+
+  var [approval, execute] = links;
+
+  var {href, rel} = approval;
+
+  var split1 = href.substring(href.indexOf('?') + 1).split("&")
+
+  var params = split1.reduce((params, data) => {
+
+    var [key, value] = data.split("=")
+
+    params[key] = value;
+
+    return params
+
+  }, {})
+
+  return params.token;
+
+}
+
+var createStaterAgreement = function(data) {
+
+  return starterAgreementRequest(data)
+
+    .switchMap((initAgreementInfo) => {
+
+      var token = getTokenFromAgreementInfo(initAgreementInfo)
+      var {links} = initAgreementInfo;
+
+
+      var [approval, execute] = links;
+
+      return userService.put({
+        _id: data._id,
+        initAgreementToken: token
+      })
+
+        .map((updatedUser) => {
+
+          return {
+            initAgreementInfo: initAgreementInfo,
+            updatedUser: updatedUser,
+            approvalUrl: approval
+          }
+
+        })
+
+    })
+
+}
+
+var executeAgreementRequest = (data) => {
+
+  return Rx.Observable.create(function(observer) {
+
+    request.post({
+      url: basePayPalUrl + '/v1/payments/billing-agreements/' + data.agreementToken + '/agreement-execute',
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Beaer " + beaer
+      }
+    }, function(err, httpResponse, body) {
+
+      observer.next(JSON.parse(body))
+      observer.complete()
+
+    })
+
+  })
+
+}
+
+
 
 var executeAgreement = function(data) {
 
