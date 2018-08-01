@@ -102,9 +102,6 @@ var selectedMemberShip = function(memberShipInfo) {
 
       window.location.href = approvalUrl.href
 
-      loaderStream.next(false)
-
-
     })
 
 
