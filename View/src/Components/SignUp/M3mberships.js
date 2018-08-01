@@ -125,13 +125,17 @@ class M3mberships extends Component {
 
     const actions = [
       <FlatButton label="Done" primary={ true } keyboardFocused={ true } onClick={ (event) => {
+                                                                               var signUpData = userService.getSignUpData()
                                                                              
                                                                                localStorage.clear();
                                                                              
                                                                                this.handleClose()
                                                                              
-                                                                               if (this.state.signUpComplete) {
-                                                                                 window.location.hash = "login"
+                                                                               if (this.state.signUpComplete && signUpData) {
+                                                                             
+                                                                                 var token = signUpData.memberShipInfo.paymentAuth.token
+                                                                             
+                                                                                 window.location.href = "http://workchew.com/locations.html?token=" + signUpData
                                                                                }
                                                                              
                                                                              } } />
