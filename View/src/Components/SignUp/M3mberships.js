@@ -46,6 +46,10 @@ class M3mberships extends Component {
       var token = this.state.queryParams.token;
       var signUpData = userService.getSignUpData()
       console.log("signUpDatasignUpData", signUpData)
+
+      this.setState({
+        showLoader: true
+      })
       userService
         .executeMembership({
           token,
@@ -61,7 +65,9 @@ class M3mberships extends Component {
           var {executedAgreementInfo} = executeResponse;
 
           var {id} = executedAgreementInfo;
-
+          this.setState({
+            showLoader: true
+          })
           if (id) {
             var signUpMessage = " Sign up success ! , check your email for next steps"
 

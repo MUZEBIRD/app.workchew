@@ -8,6 +8,7 @@ import restService from '../../Services/restService.js'
 import { placeButton } from '../../Utils/wc-pal-pal-client.js'
 
 import { getQueryParams, getPathVariables } from '../../Utils/'
+import WorkLoader, { loaderStream } from '../shared/workLoader';
 
 const pricingOptions3 = [
 
@@ -77,7 +78,7 @@ const pricingOptions3 = [
 var selectedMemberShip = function(memberShipInfo) {
 
   console.log('memberShipInfo', memberShipInfo)
-
+  loaderStream.next(true)
   userService.get({
     params: {
       _id: 1
@@ -94,6 +95,7 @@ var selectedMemberShip = function(memberShipInfo) {
     })
 
     .subscribe((starterResponse) => {
+      loaderStream.next(false)
 
       console.log('starterResponse', starterResponse)
 
