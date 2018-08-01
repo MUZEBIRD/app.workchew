@@ -135,7 +135,7 @@ class M3mberships extends Component {
                                                                              
                                                                                  var token = signUpData.memberShipInfo.paymentAuth.token
                                                                              
-                                                                                 window.location.href = "http://workchew.com/locations.html?token=" + signUpData
+                                                                                 window.location.href = "http://workchew.com/locations.html?token=" + token
                                                                                }
                                                                              
                                                                              } } />
