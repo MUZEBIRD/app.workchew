@@ -95,13 +95,15 @@ var selectedMemberShip = function(memberShipInfo) {
     })
 
     .subscribe((starterResponse) => {
-      loaderStream.next(false)
 
       console.log('starterResponse', starterResponse)
 
       var {approvalUrl} = starterResponse;
 
       window.location.href = approvalUrl.href
+
+      loaderStream.next(false)
+
 
     })
 
