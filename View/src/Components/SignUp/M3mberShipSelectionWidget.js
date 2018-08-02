@@ -19,11 +19,17 @@ const pricingOptions3 = [
     paymentRecurrence: "ONE TIME CHARGER",
     features: [
       {
-        text: "Access to one WorkChew location"
+        text: "Access to one WorkChew location of your choosing"
       },
       {
-        text: " Access to networking and social events occurring on that day"
-      }
+        text: "Access to high speed wi-fi and portable chargers for the day"
+      },
+      {
+        text: "Access to special discounts on menu items for the day"
+      },
+      {
+        text: "Access to one event happening that day"
+      },
     ]
   },
   {
@@ -38,11 +44,17 @@ const pricingOptions3 = [
         text: "Access to all WorkChew location"
       },
       {
-        text: "$10 food credit"
+        text: "Access to high speed wi-fi and portable chargers"
       },
       {
-        text: "Access to all networking & social events"
-      }
+        text: "Access to one event happening that day"
+      },
+      {
+        text: "Access to special discounts on menu items"
+      },
+      {
+        text: "Access to all WorkChew professional and social events"
+      },
     ]
   },
   {
@@ -56,19 +68,21 @@ const pricingOptions3 = [
       {
         text: "Access to all WorkChew location"
       },
-
       {
-        text: "$40 food credit."
+        text: "Access to high speed wi-fi and portable chargers"
       },
       {
-        text: "Priority access to all networking & social events"
+        text: "Access to all WorkChew Events"
       },
       {
-        text: "Priority access to private dining & meeting spaces"
+        text: "Ability to create custom events promoted on WorkChew platform"
       },
       {
-        text: "Ability to create custom events"
-      }
+        text: "Access to WorkChew Pro only events"
+      },
+      {
+        text: "Priority access to WorkChew Pro+ which includes 9am-5pm locations"
+      },
     ]
   }
 
@@ -111,87 +125,85 @@ const M3mberShipSelectionWidget = (props) => {
 
   return (
 
-    <div className='row'>
-      <div className='col-sm-12'>
-        <div className='row w-100 d-flex flex-wrap justify-content-around'>
-          { pricingOptions3.map(
-              (pricing, i) => (
-                <div key={ i } style={ { width: 300 } } className='d-flex flex-column'>
-                  <p>
-                    { pricing.title }
-                  </p>
-                  <h2>${ pricing.price }</h2>
-                  <p>
-                    { pricing.paymentRecurrence }
-                  </p>
-                </div>)
-            ) }
-        </div>
-        <div className="d-flex flex-column align-items-center w-100" style={ { border: '1px solid black' } }>
-          <br/>
-          <h3>A M E N I T I E S</h3>
-          <br/>
-          <div id="priceLet-container" className="d-flex w-100 ae-3 done">
+    <div>
+      <div className='row w-100 d-flex flex-wrap justify-content-around'>
+        { pricingOptions3.map(
+            (pricing, i) => (
+              <div key={ i } style={ { width: 300 } } className='d-flex brandong flex-column'>
+                <p className="Brandon_bld">
+                  { pricing.title }
+                </p>
+                <h2 className="brandong">${ pricing.price }</h2>
+                <p>
+                  { pricing.paymentRecurrence }
+                </p>
+              </div>)
+          ) }
+      </div>
+      <div className="d-flex flex-column brandong align-items-center w-100" style={ { border: '1px solid black' } }>
+        <br/>
+        <h3>A M E N I T I E S</h3>
+        <br/>
+        <div id="priceLet-container" className="d-flex w-100 ae-3 done">
+          <div className="flex-1 flex-column align-items-center">
+            <img width="80" height="50" src={ "/static/images/Wifi.png" } />
+            <br/>
+            <strong>Fast <br/> WiFi</strong>
+            <br/>
+            <br/>
+          </div>
+          <div className="flex-1 d-flex justify-content-between">
             <div className="flex-1 flex-column align-items-center">
-              <img width="80" height="50" src={ "/static/images/Wifi.png" } />
+              <img width="80" height="50" src={ "/static/images/Weekly_Social_Events.png" } />
               <br/>
-              <strong>Fast <br/> WiFi</strong>
+              <strong>Weekly Networking + <br/> Social Events</strong>
               <br/>
               <br/>
             </div>
-            <div className="flex-1 d-flex justify-content-between">
-              <div className="flex-1 flex-column align-items-center">
-                <img width="80" height="50" src={ "/static/images/Weekly_Social_Events.png" } />
-                <br/>
-                <strong>Weekly Networking + <br/> Social Events</strong>
-                <br/>
-                <br/>
-              </div>
-              <div className="flex-1 flex-column align-items-center">
-                <img width="80" height="50" src={ "/static/images/Portbale_Charger.png" } />
-                <br/>
-                <strong>Portable <br/> Chargers</strong>
-                <br/>
-                <br/>
-              </div>
-            </div>
             <div className="flex-1 flex-column align-items-center">
-              <img width="80" height="50" src={ "/static/images/Food_Drink_Discounts.png" } />
+              <img width="80" height="50" src={ "/static/images/Portbale_Charger.png" } />
               <br/>
-              <strong>Food & Drink <br/> Discounts</strong>
+              <strong>Portable <br/> Chargers</strong>
               <br/>
               <br/>
             </div>
           </div>
+          <div className="flex-1 flex-column align-items-center">
+            <img width="80" height="50" src={ "/static/images/Food_Drink_Discounts.png" } />
+            <br/>
+            <strong>Food & Drink <br/> Discounts</strong>
+            <br/>
+            <br/>
+          </div>
         </div>
-        <br/>
-        <div className='row w-100 d-flex flex-wrap justify-content-around'>
-          { pricingOptions3.map(
-              (pricing, i) => (
-                <div key={ i } style={ { width: 300 } } className='d-flex flex-column'>
-                  { pricing.features.map(
-                      (feature, j) => (<p key={ j }>
-                                         <img className="chewCheck" style={ { height: 20 } } src={ "static/images/chewCheck.png" } />
-                                         { feature.text }
-                                       </p>)
-                    ) }
-                </div>)
-            ) }
-        </div>
-        <div className='row w-100 d-flex flex-wrap justify-content-around'>
-          { pricingOptions3.map(
-              (pricing, i) => (
-                <div key={ i } style={ { width: 300 } } className='d-flex justify-content-center'>
-                  { (i == 0) && <div id={ `${pricing.id}-button` }>
-                                </div> }
-                  { (i != 0) && <img onClick={ (event) => {
-                                   
-                                     selectedMemberShip(pricing)
-                                   
-                                   } } style={ { height: 75, width: 250 } } src={ "static/images/fay-pal.png" } /> }
-                </div>)
-            ) }
-        </div>
+      </div>
+      <br/>
+      <div className='row w-100 d-flex flex-wrap justify-content-around'>
+        { pricingOptions3.map(
+            (pricing, i) => (
+              <div key={ i } style={ { width: 300 } } className='d-flex flex-column'>
+                { pricing.features.map(
+                    (feature, j) => (<p className="brandong" key={ j }>
+                                       <img className="chewCheck" style={ { height: 20 } } src={ "static/images/chewCheck.png" } />
+                                       { feature.text }
+                                     </p>)
+                  ) }
+              </div>)
+          ) }
+      </div>
+      <div className='row w-100 d-flex flex-wrap justify-content-around'>
+        { pricingOptions3.map(
+            (pricing, i) => (
+              <div key={ i } style={ { width: 300 } } className='d-flex justify-content-center'>
+                { (i == 0) && <div id={ `${pricing.id}-button` }>
+                              </div> }
+                { (i != 0) && <img onClick={ (event) => {
+                                 
+                                   selectedMemberShip(pricing)
+                                 
+                                 } } style={ { height: 75, width: 250 } } src={ "static/images/fay-pal.png" } /> }
+              </div>)
+          ) }
       </div>
     </div>
 

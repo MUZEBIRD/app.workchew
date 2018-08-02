@@ -338,16 +338,16 @@ class BuildYourProfile extends Component {
                      <br/>
                      <div className='row'>
                        <div className='col-sm-6'>
-                         <TextField floatingLabelText="Location" defaultValue={ user.location } placeholder="location" name="location" className="w-100 sign-up-build-form-feild" />
+                         <TextField floatingLabelText="City" defaultValue={ user.location } name="location" className="w-100 sign-up-build-form-feild" />
                        </div>
                        <div className='col-sm-6'>
-                         <TextField floatingLabelText="Zip" defaultValue={ user.Zip } placeholder="Zip" name="zip" className="w-100 sign-up-build-form-feild" />
+                         <TextField floatingLabelText="Zip" defaultValue={ user.Zip } name="zip" className="w-100 sign-up-build-form-feild" />
                        </div>
                      </div>
                      <br/>
                      <div className='row'>
                        <div className='col-sm-12'>
-                         <TextField floatingLabelText="Email" defaultValue={ user.email } placeholder="Email" name="email" className="w-100 sign-up-build-form-feild" />
+                         <TextField floatingLabelText="Email" defaultValue={ user.email } name="email" className="w-100 sign-up-build-form-feild" />
                        </div>
                      </div>
                      <br/>

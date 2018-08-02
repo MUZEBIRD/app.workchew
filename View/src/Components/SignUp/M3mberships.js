@@ -150,11 +150,11 @@ class M3mberships extends Component {
     return (
 
       <MuiThemeProvider>
-        <div className="wholeView w-100 d-flex flex-column align-items-center">
+        <div className="wholeView w-100 d-flex flex-column align-items-center ">
           <Dialog title={ this.state.dialogMsg } actions={ actions } modal={ false } open={ this.state.showDialog } onRequestClose={ this.handleClose }>
           </Dialog>
           { this.state.showLoader && <WorkLoader/> }
-          <div className="showView w-100 scroll-y">
+          <div className="flex-1 w-100 h-100 scroll-y">
             <br/>
             <div className='row flex-row-center-vert' style={ { backgroundColor: 'white', position: 'relative', zIndex: '5' } }>
               <div className='col-sm-4'>

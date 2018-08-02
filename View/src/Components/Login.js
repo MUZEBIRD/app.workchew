@@ -326,7 +326,7 @@ class Login extends Component {
         <div className="row">
           <div className="col-sm-4"></div>
           <div className="col-sm-4 flex-row-space-around">
-            <span className="brandong">Sign Up as a Co-Chewer</span>
+            <span className="brandong">Member Sign Up</span>
             <button onClick={ () => {
                                 this.goToCoChewerSignUp()
                               } } className="btn btn-success">
@@ -336,15 +336,6 @@ class Login extends Component {
         </div>
         <br/>
         <div className="row">
-          <div className="col-sm-4"></div>
-          <div className="col-sm-4 flex-row-space-around">
-            <span className="brandong">Sign Up as Business Owner</span>
-            <button onClick={ () => {
-                                this.goToBusinessSignUp()
-                              } } className="btn btn-success">
-              click here
-            </button>
-          </div>
         </div>
       </div>
 
