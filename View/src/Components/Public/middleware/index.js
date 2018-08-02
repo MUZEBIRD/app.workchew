@@ -81,8 +81,6 @@ export default store => next => action => {
 
       var {user} = data;
 
-
-
       var {_id} = user;
 
       userService.storeSignUpInfo(user)
@@ -93,10 +91,21 @@ export default store => next => action => {
     case "GET_USER": {
 
       return callApi(usersApiPath, action.config)
-        .then(data => next({
-          type: "GET_USER_SUCCESS",
-          data: data[0]
-        }))
+
+
+        .then(data => {
+
+
+          userService.storeSignUpInfo(data[0])
+
+          return next({
+
+            type: "GET_USER_SUCCESS",
+            data: data[0]
+          })
+
+
+        })
 
     }
     case "GET_USERS": {
