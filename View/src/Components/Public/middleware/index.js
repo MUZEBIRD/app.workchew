@@ -1,3 +1,5 @@
+import userService from '../../../Services/userService.js'
+
 const API_ROOT = window.location.port == 3000 ? "http://localhost:8080" : ""
 
 const callApi = (endpoint, config = {}) => {
@@ -79,7 +81,11 @@ export default store => next => action => {
 
       var {user} = data;
 
+
+
       var {_id} = user;
+
+      userService.storeSignUpInfo(user)
 
       window.location.hash = "user-profile?id=" + _id
 

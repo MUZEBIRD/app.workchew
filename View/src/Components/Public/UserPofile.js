@@ -54,6 +54,12 @@ class UserProfile extends Component {
     }
   }
 
+  updateProfile = () => {
+
+    window.location.hash = "/co-chewer-signUp-build?id=" + this.props.user._id
+
+  }
+
   render() {
 
     var user = this.props.user;
@@ -72,6 +78,11 @@ class UserProfile extends Component {
         <div className="wholeView w-100 d-flex flex-column align-items-center justify-content-center oback">
           <div className="w-50" style={ { backgroundColor: 'white' } }>
             <br/>
+            <button onClick={ (event) => {
+                                this.updateProfile()
+                              } } className="btn btn-info">
+              Update your profile
+            </button>
             <div className='d-flex align-items-center justify-content-center' style={ { backgroundColor: 'white', position: 'relative', zIndex: '5' } }>
               <div className="h-100 w-100 m-3 d-flex align-items-center justify-content-around">
                 <img style={ { width: 150 } } src={ profileImgLink } />
