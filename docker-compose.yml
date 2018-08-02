@@ -19,11 +19,11 @@ services:
       - nodeapp-network
 
   mongo-express:
+    env_file:
+      - mongo-express.env
     depends_on:
       - "mongodb"
-    build:
-      context: .
-      dockerfile: mongo-express.dockerfile  
+    image: mongo-express
     ports:
       - "8081:8081"
     networks:
