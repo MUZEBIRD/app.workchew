@@ -85,7 +85,93 @@ router.post('/memberships/create-pro-membership', (req, res) => {
 });
 
 
+router.get('/check-membership', (req, res) => {
 
+  var {_id} = req.query
+
+  return user
+
+    .get({
+      _id
+    })
+
+    .switchMap((users) => {
+
+      console.log("found users", users)
+
+
+      var {executedAgreementInfo} = users[0]
+      var {lastPaymentId} = users[0].memberShipInfo.paymentAuth
+      console.log("lastPaymentId lastPaymentId", lastPaymentId)
+
+
+      if (!lastPaymentId && !executedAgreementInfo && !executedAgreementInfo.id) {
+
+
+        return Rx.Observable.of({})
+      }
+
+
+      if (!lastPaymentId && executedAgreementInfo && executedAgreementInfo.id) {
+
+
+        return payPalWCNodeCLient
+
+          .getAgreementDetails({
+            agreementID: executedAgreementInfo.id
+          })
+
+      }
+
+      return payPalWCNodeCLient
+
+        .getPayment(lastPaymentId)
+
+    })
+
+    .subscribe((payPalResponse) => {
+
+      console.log("pay pal respoonse", payPalResponse)
+
+      var {transactions, create_time, state, agreement_details} = payPalResponse;
+
+
+      if (payPalResponse && transactions && create_time) {
+
+        var transaction = transactions[0];
+
+        var {item_list} = transaction;
+
+        var {items} = item_list;
+
+        var item = items[0];
+
+        var {name, description, currency} = item;
+
+        res.send({
+          item,
+          create_time
+        })
+
+      } else if (agreement_details && state) {
+
+        res.send({
+          state,
+          agreement_details
+        })
+
+      } else {
+
+        res.status(401).send({
+          error: 401,
+          msg: " wrong user"
+        })
+
+      }
+
+    })
+
+}) //check membership
 
 
 router.post('/memberships/execute-membership-agreement', (req, res) => {
