@@ -105,7 +105,7 @@ router.get('/check-membership', (req, res) => {
       console.log("lastPaymentId lastPaymentId", lastPaymentId)
 
 
-      if (!lastPaymentId && !executedAgreementInfo && !executedAgreementInfo.id) {
+      if (!lastPaymentId && !executedAgreementInfo) {
 
 
         return Rx.Observable.of({})
