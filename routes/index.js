@@ -89,7 +89,7 @@ router.get('/check-membership', (req, res) => {
 
   var {_id} = req.query
 
-  return User
+  return userService
 
     .get({
       _id
