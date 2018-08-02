@@ -31,6 +31,7 @@ import { BusinessUserSignUp, ChangePassword, UserSignUp, Memberships, M3mbership
 
 import UserProfile from './Components/Public/UserPofile'
 import UserCard from './Components/Public/UserCard'
+import UserProfileSingIn from './Components/Public/UserProfileSignIn.js'
 
 import Main from './Components/Main.js'
 
@@ -77,6 +78,7 @@ class App extends Component {
             <Route path="/m3mberships" component={ M3mberships } />
             <Route path="/memberships" component={ Memberships } />
             <Route path="/user-profile" component={ UserProfile } />
+            <Route path="/user-profile-signin" component={ UserProfileSingIn } />
             <Route path="/user-card" component={ UserCard } />
             <Route path="/user-type" component={ UserType } />
             <Route path="/user-interest" component={ UserInterest } />
