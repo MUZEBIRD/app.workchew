@@ -165,9 +165,9 @@ router.get('/check-membership', (req, res) => {
 
       } else {
 
-        res.status(401).send({
-          error: 401,
-          msg: " wrong user"
+        res.send({
+          msg: "no valid payments",
+
         })
 
       }
