@@ -211,20 +211,36 @@ router.post('/orderslogin', (req, res) => {
 
       }
 
-
     })
 
 });
 
-
 var adminOrdersLogin = function(req, res, authObject) {
 
-  businessService.get({})
+  userService.get({
+    _id: authObject.userId
+  })
 
-    .subscribe(business => {
+    .switchMap((foundUsers) => {
+
+      return businessService.get({})
+
+        .map((business) => {
+
+          return {
+            business,
+            user: foundUsers[0]
+          }
+
+        })
+
+    })
+
+    .subscribe(({business, user}) => {
 
       res.send({
         user: {
+          ...user,
           token: req.body.token,
           role: 'admin',
           _id: authObject.userId
@@ -233,7 +249,6 @@ var adminOrdersLogin = function(req, res, authObject) {
       })
     })
 }
-
 
 var chewCheck = function(req, res, authObject, bid) {
 
@@ -249,20 +264,20 @@ var chewCheck = function(req, res, authObject, bid) {
         && users[0].bid.length
         && (users[0].bid == bid)) {
 
-        partnerOrdersLogin(req, res, bid, authObject)
+        partnerOrdersLogin(req, res, bid, authObject, users[0])
 
       } else if (users
         && users.length
       ) {
 
-        coChewerLogin(req, res, bid, authObject)
+        coChewerLogin(req, res, bid, authObject, users[0])
 
       }
 
     })
 }
 
-var coChewerLogin = function(req, res, bid, authObject) {
+var coChewerLogin = function(req, res, bid, authObject, user) {
 
   businessService.get({
     _id: bid
@@ -272,9 +287,11 @@ var coChewerLogin = function(req, res, bid, authObject) {
 
       res.send({
         user: {
+          ...user,
           token: req.body.token,
           role: 'coChewer',
-          _id: authObject.userId
+          _id: authObject.userId,
+
         },
         business
       })
@@ -282,7 +299,7 @@ var coChewerLogin = function(req, res, bid, authObject) {
 }
 
 
-var partnerOrdersLogin = function(req, res, bid, authObject) {
+var partnerOrdersLogin = function(req, res, bid, authObject, user) {
 
   businessService.get({
     _id: bid
@@ -291,6 +308,7 @@ var partnerOrdersLogin = function(req, res, bid, authObject) {
 
       res.send({
         user: {
+          ...user,
           token: req.body.token,
           role: 'partner',
           _id: authObject.userId
