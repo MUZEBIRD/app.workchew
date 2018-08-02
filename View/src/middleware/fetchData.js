@@ -7,7 +7,8 @@ const callApi = (config = {}) => {
   var responseType = "json"
 
   config.headers = {
-    "x-api-access-token": getAccessToken()
+    "x-api-access-token": getAccessToken(),
+    ...config.headers
   }
 
   if (config && config.responseType) {
@@ -69,6 +70,8 @@ var addQueryParams = (url, config) => {
 }
 
 export default store => next => action => {
+
+  console.log("BIG ACTION ", action.type, action.type === "checkMembershipToken_SUCCESS")
 
   switch (action.type) {
 

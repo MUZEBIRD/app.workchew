@@ -321,7 +321,8 @@ module.exports = {
   getPayment,
   executeAgreement,
   createProAgreement,
-  createStaterAgreement
+  createStaterAgreement,
+  getAgreementDetails
 }
 // var paymentId = "PAY-1AB70526TK0449927LK37UJQ";
 

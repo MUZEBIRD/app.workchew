@@ -239,8 +239,29 @@ router.get('/check-membership', (req, res) => {
 
       console.log("found users", users)
 
+
+      var {executedAgreementInfo} = users[0]
       var {lastPaymentId} = users[0].memberShipInfo.paymentAuth
       console.log("lastPaymentId lastPaymentId", lastPaymentId)
+
+
+      if (!lastPaymentId && !executedAgreementInfo && !executedAgreementInfo.id) {
+
+
+        return Rx.Observable.of({})
+      }
+
+
+      if (!lastPaymentId && executedAgreementInfo && executedAgreementInfo.id) {
+
+
+        return payPalWCNodeCLient
+
+          .getAgreementDetails({
+            agreementID: executedAgreementInfo.id
+          })
+
+      }
 
       return payPalWCNodeCLient
 
@@ -250,22 +271,45 @@ router.get('/check-membership', (req, res) => {
 
     .subscribe((payPalResponse) => {
 
-      var {transactions, create_time} = payPalResponse;
+      console.log("pay pal respoonse", payPalResponse)
 
-      var transaction = transactions[0];
+      var {transactions, create_time, state, agreement_details} = payPalResponse;
 
-      var {item_list} = transaction;
 
-      var {items} = item_list;
+      if (payPalResponse && transactions && create_time) {
 
-      var item = items[0];
+        var transaction = transactions[0];
 
-      var {name, description, currency} = item;
+        var {item_list} = transaction;
 
-      res.send({
-        item,
-        create_time
-      })
+        var {items} = item_list;
+
+        var item = items[0];
+
+        var {name, description, currency} = item;
+
+        res.send({
+          item,
+          create_time
+        })
+
+      } else if (agreement_details && state) {
+
+        res.send({
+          state,
+          agreement_details
+        })
+
+      } else {
+
+        res.status(401).send({
+          error: 401,
+          msg: " wrong user"
+        })
+
+      }
+
+
 
     })
 

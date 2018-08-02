@@ -10,12 +10,32 @@ export const getUser = (config) => (dispatch, getState) => {
 
 }
 
+export const checkMembershipToken = (token) => (dispatch, getState) => {
+
+  return dispatch({
+
+    type: "FETCH_DATA",
+    requestName: "checkMembershipToken",
+    config: {
+      url: "/orderslogin",
+      headers: {
+        "content-type": "application/json"
+      },
+      body: JSON.stringify({
+        token
+      }),
+      method: "POST"
+    }
+  })
+
+}
+
 export const checkMembership = (user) => (dispatch, getState) => {
 
   return dispatch({
 
     type: "FETCH_DATA",
-    requestName: "FETCH_DATA",
+    requestName: "check_membership",
     config: {
       url: "/user/check-membership?_id=" + user._id,
       method: "GET"

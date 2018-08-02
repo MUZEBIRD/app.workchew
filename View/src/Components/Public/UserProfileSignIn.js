@@ -16,7 +16,7 @@ import { Subject } from 'rxjs'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import * as userActions from './actions'
 
-var {} = userActions
+var {checkMembershipToken} = userActions
 
 class UserProfileSignIn extends Component {
 
@@ -39,6 +39,13 @@ class UserProfileSignIn extends Component {
 
       console.log("found token,", this.state.queryParams.token)
 
+      this.props.checkMembershipToken(
+        this.state.queryParams.token
+      )
+
+    } else {
+
+      window.location.hash = "/login"
     }
   }
 
@@ -71,7 +78,7 @@ const mapStateToProps = (state, ownProps) => ({
 })
 
 const UserProfileSignInComponent = connect(mapStateToProps, {
-
+  checkMembershipToken
 })(UserProfileSignIn)
 
 export default UserProfileSignInComponent;

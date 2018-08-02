@@ -114,7 +114,7 @@ router.post('/orderslogin', (req, res) => {
 
       if (authObject.role == "admin") {
 
-        adminOrdersLogin(req, res)
+        adminOrdersLogin(req, res, authObject)
 
       } else {
 
@@ -128,7 +128,7 @@ router.post('/orderslogin', (req, res) => {
 });
 
 
-var adminOrdersLogin = function(req, res) {
+var adminOrdersLogin = function(req, res, authObject) {
 
   businessService.get({})
 
@@ -137,7 +137,8 @@ var adminOrdersLogin = function(req, res) {
       res.send({
         user: {
           token: req.body.token,
-          role: 'admin'
+          role: 'admin',
+          _id: authObject.userId
         },
         business
       })
@@ -159,20 +160,20 @@ var chewCheck = function(req, res, authObject, bid) {
         && users[0].bid.length
         && (users[0].bid == bid)) {
 
-        partnerOrdersLogin(req, res, bid)
+        partnerOrdersLogin(req, res, bid, authObject)
 
       } else if (users
         && users.length
       ) {
 
-        coChewerLogin(req, res, bid)
+        coChewerLogin(req, res, bid, authObject)
 
       }
 
     })
 }
 
-var coChewerLogin = function(req, res, bid) {
+var coChewerLogin = function(req, res, bid, authObject) {
 
   businessService.get({
     _id: bid
@@ -183,7 +184,8 @@ var coChewerLogin = function(req, res, bid) {
       res.send({
         user: {
           token: req.body.token,
-          role: 'coChewer'
+          role: 'coChewer',
+          _id: authObject.userId
         },
         business
       })
@@ -191,7 +193,7 @@ var coChewerLogin = function(req, res, bid) {
 }
 
 
-var partnerOrdersLogin = function(req, res, bid) {
+var partnerOrdersLogin = function(req, res, bid, authObject) {
 
   businessService.get({
     _id: bid
@@ -201,7 +203,8 @@ var partnerOrdersLogin = function(req, res, bid) {
       res.send({
         user: {
           token: req.body.token,
-          role: 'partner'
+          role: 'partner',
+          _id: authObject.userId
         },
         business
       })

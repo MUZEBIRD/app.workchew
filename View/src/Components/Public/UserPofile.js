@@ -74,13 +74,7 @@ class UserProfile extends Component {
             <br/>
             <div className='d-flex align-items-center justify-content-center' style={ { backgroundColor: 'white', position: 'relative', zIndex: '5' } }>
               <div className="h-100 w-100 m-3 d-flex align-items-center justify-content-around">
-                <button className="btn btn-secondary Brandon_bld">
-                  pro
-                </button>
                 <img style={ { width: 150 } } src={ profileImgLink } />
-                <button className="btn btn-secondary Brandon_bld">
-                  add
-                </button>
               </div>
             </div>
             <div className='row'>
@@ -97,9 +91,6 @@ class UserProfile extends Component {
                 </p>
               </div>
             </div>
-            <button className="btn btn-secondary Brandon_bld">
-              Message
-            </button>
             <br/>
             <br/>
           </div>
