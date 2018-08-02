@@ -13,7 +13,7 @@ import MainMapMarker from './MainMarker.js'
 
 import _ from 'lodash'
 
-const MapsUrl = "https://maps.googleapis.com/maps/api/js?key=AIzaSyA_8r6OomKLA42Vzblb5jOjxeIlqpix5G0&v=3.exp&libraries=geometry,drawing,places"
+const MapsUrl = "https://maps.googleapis.com/maps/api/js?key=AIzaSyBiXIdQkeDx3E0Dy5xKjGPINHBx5T3Jl7o&v=3.exp&libraries=geometry,drawing,places"
 
 const BunchOMarkers = (props) => props.markers
 
