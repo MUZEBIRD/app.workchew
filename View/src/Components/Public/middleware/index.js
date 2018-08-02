@@ -80,11 +80,8 @@ export default store => next => action => {
       var {user} = data;
 
       var {_id} = user;
-      console.log("hash time")
-
 
       window.location.hash = "user-profile?id=" + _id
-
 
     }
     case "GET_USER": {

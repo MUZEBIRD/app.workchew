@@ -55,7 +55,11 @@ class Login extends Component {
 
             } else {
 
-              urlService.goTo(urlService.main)
+              var token = LoginResponse.user.auth.accessToken || LoginResponse.user.auth.token
+
+              window.location.href = "http://www.workchew.com/locations.html?token=" + token
+
+              //urlService.goTo(urlService.main)
 
             }
 
@@ -116,8 +120,11 @@ class Login extends Component {
 
           userService.store(userResponse.user)
 
-          urlService.goTo(urlService.main)
 
+
+          var token = userResponse.user.auth.accessToken || userResponse.user.auth.token
+
+          window.location.href = "http://www.workchew.com/locations.html?token=" + token
         } else {
 
           this.setState({

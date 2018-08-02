@@ -71,8 +71,6 @@ var addQueryParams = (url, config) => {
 
 export default store => next => action => {
 
-  console.log("BIG ACTION ", action.type, action.type === "checkMembershipToken_SUCCESS")
-
   switch (action.type) {
 
     case "FETCH_DATA": {
