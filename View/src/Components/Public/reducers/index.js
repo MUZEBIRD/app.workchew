@@ -28,7 +28,7 @@ export const users = (state = {
 
       var dateDiff = (new Date()).getTime() - cDate;
 
-      if (dateDiff < 86400000) {
+      if (dateDiff && dateDiff < 86400000) {
 
         agreementState = "Active"
 
