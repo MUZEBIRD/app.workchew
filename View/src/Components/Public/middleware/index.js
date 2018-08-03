@@ -75,6 +75,7 @@ const usersApiPath = `/user`
 export default store => next => action => {
 
   switch (action.type) {
+
     case "checkMembershipToken_SUCCESS": {
 
       var {data} = action;

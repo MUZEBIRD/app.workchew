@@ -63,6 +63,9 @@ class UserProfile extends Component {
   render() {
 
     var user = this.props.user;
+    var {agreement_details, agreementState} = this.props.users;
+
+    console.log("show time", this.props.users)
 
     var profileImgLink = user.googleImgUrl || user.facebookImgUrl || user.linkedInPictureUrl
 
@@ -100,6 +103,9 @@ class UserProfile extends Component {
                 <p>
                   { user.summary }
                 </p>
+                { agreementState && agreementState === 'Active' && <p style={ { color: "green" } } className="Brandon_bld">
+                                                                     Active
+                                                                   </p> }
               </div>
             </div>
             <br/>
@@ -114,7 +120,8 @@ class UserProfile extends Component {
 
 
 const mapStateToProps = (state, ownProps) => ({
-  user: state.users.current
+  user: state.users.current,
+  users: state.users
 })
 
 const UserProfileComponent = connect(mapStateToProps, {

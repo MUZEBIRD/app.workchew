@@ -25,8 +25,6 @@ import { ListInputWidget } from './shared/';
 import ParnterInfoArea from './Partner/PartnerInfoArea'
 
 
-
-
 const addBusinessSubject = new Subject();
 
 class AddBusiness extends Component {
