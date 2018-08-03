@@ -102,15 +102,39 @@ class Main extends Component {
     })
 
       .subscribe(currentUser => {
-        var auth = currentUser.auth
 
-        if (auth && auth.role == "admin") {
 
-          this.setState({
-            userIsAdmin: true
 
-          })
+        if (currentUser && currentUser._id) {
+
+          var auth = currentUser.auth
+
+          console.log("currentUsercurrentUsercurrentUsercurrentUser", currentUser)
+          window.location.href = "http://www.workchew.com?token=" + (auth.token || auth.accessToken)
+
+
+        } else {
+
+
+          window.location.hash = "login"
+
+
         }
+
+
+        // if (auth && auth.role == "admin") {
+
+        //   this.setState({
+        //     userIsAdmin: true
+
+        //   })
+
+
+        // }
+
+
+
+
       })
 
     this.getBusinessStream({})
