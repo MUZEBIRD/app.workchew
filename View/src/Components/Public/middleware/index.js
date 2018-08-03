@@ -78,6 +78,9 @@ export default store => next => action => {
 
     case "checkMembershipToken_SUCCESS": {
 
+
+
+
       var {data} = action;
 
       var {user} = data;
@@ -85,6 +88,8 @@ export default store => next => action => {
       var {_id} = user;
 
       userService.storeSignUpInfo(user)
+      userService.store(user)
+
 
       window.location.hash = "user-profile?id=" + _id
 
