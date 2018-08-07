@@ -1,4 +1,4 @@
-var isDev = window.location.href.indexOf(3000) > -1
+var isDev = window.location.port == 3000
 
 console.log('isDev', isDev)
 

@@ -87,8 +87,6 @@ class Main extends Component {
 
   selectBusiness(business) {
 
-    console.log('on select Business', business)
-
     urlService.goTo(`${urlService.businessPage}?id=${business._id}`)
 
   }
@@ -103,37 +101,22 @@ class Main extends Component {
 
       .subscribe(currentUser => {
 
-
-
         if (currentUser && currentUser._id) {
 
           var auth = currentUser.auth
 
-          console.log("currentUsercurrentUsercurrentUsercurrentUser", currentUser)
-          window.location.href = "http://www.workchew.com?token=" + (auth.token || auth.accessToken)
-
+          window.location.href = "https://www.workchew.com/locations.html?token=" + (auth.token || auth.accessToken)
 
         } else {
 
-
           window.location.hash = "login"
 
-
         }
-
-
         // if (auth && auth.role == "admin") {
-
         //   this.setState({
         //     userIsAdmin: true
-
         //   })
-
-
         // }
-
-
-
 
       })
 
@@ -141,7 +124,6 @@ class Main extends Component {
 
       .subscribe((businessStream) => {
 
-        console.log('businessStream', businessStream)
         this.setState({
           businesses: businessStream
         })
