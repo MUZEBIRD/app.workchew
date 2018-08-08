@@ -113,7 +113,7 @@ class UserSignUpSocial extends Component {
             showLoader: false
           }, () => {
 
-            window.location.hash = `co-chewer-signUp-build?id=${userResponse._id}`
+            window.location.hash = `membership-paths?id=${userResponse._id}`
 
           })
 
@@ -258,8 +258,8 @@ class UserSignUpSocial extends Component {
             <div className='d-flex' style={ { backgroundColor: 'white', position: 'relative', zIndex: '5' } }>
               <div className='flex-1'>
                 { /*  <br/>
-                                                <br/>
-                                              <FacebookLogin autoLoad={ false } appId="1755466141213974" fields="email,picture,first_name,last_name" callback={ this.responseFacebook } />*/ }
+                                                                                                                <br/>
+                                                                                                              <FacebookLogin autoLoad={ false } appId="1755466141213974" fields="email,picture,first_name,last_name" callback={ this.responseFacebook } />*/ }
                 <br/>
                 <br/>
                 <GoogleLogin clientId="198825134082-5l64c1opmt10ts62nm7ka7dssev9iok9.apps.googleusercontent.com" buttonText="Sign Up with Google" onSuccess={ this.responseGoogle }

@@ -111,7 +111,6 @@ class Main extends Component {
 
           }
 
-
         } else {
 
           window.location.hash = "login"

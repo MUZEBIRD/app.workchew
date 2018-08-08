@@ -8,10 +8,14 @@ import restService from '../../Services/restService.js'
 import { getQueryParams, getPathVariables } from '../../Utils'
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-
+import { Elements } from 'react-stripe-elements';
+import CheckoutForm from './checkoutForm'
 import './signUp.css';
 
 import { Topbar } from '../TopBar.js'
+
+
+
 
 class MembershipPaths extends Component {
 
@@ -30,7 +34,17 @@ class MembershipPaths extends Component {
 
   }
 
-  componentDidMount() {} //componentDidMount
+  goToPayment = () => {
+
+
+
+  }
+
+  goToMembershipSelection = () => {
+
+
+
+  }
 
   render() {
 
@@ -41,13 +55,17 @@ class MembershipPaths extends Component {
             <div className="w-100 d-flex justify-content-center">
               <div style={ { width: 300, backgroundColor: "white" } }>
                 <br/>
-                <span class="Brandon_bld"><strong>TRY WORKCHEW FOR</strong></span>
+                <span className="Brandon_bld"><strong>TRY WORKCHEW FOR</strong></span>
                 <br/>
-                <span class="Brandon_bld">ONE MONTH</span>
-                <p style={ { fontSize: '90%', } } class="brandong">
+                <span className="Brandon_bld">ONE MONTH</span>
+                <p style={ { fontSize: '90%', } } className="brandong">
                   Sign up now and start anytime
                 </p>
-                <button class="btn btn-info brandong">
+                <button onClick={ (event) => {
+                                  
+                                    this.goToPayment()
+                                  
+                                  } } className="btn btn-info brandong">
                   GET A FREE MONTH
                 </button>
                 <br/>
@@ -56,13 +74,17 @@ class MembershipPaths extends Component {
               <div style={ { width: 30 } }></div>
               <div style={ { width: 300, backgroundColor: "white" } }>
                 <br/>
-                <span class="Brandon_bld"><strong>BECOME A</strong></span>
+                <span className="Brandon_bld"><strong>BECOME A</strong></span>
                 <br/>
-                <span class="Brandon_bld">WORKCHEW MEMBER</span>
-                <p style={ { fontSize: '90%', } } class="brandong">
+                <span className="Brandon_bld">WORKCHEW MEMBER</span>
+                <p style={ { fontSize: '90%', } } className="brandong">
                   Membership starts at $49.99 a month
                 </p>
-                <button class="btn btn-info brandong">
+                <button onClick={ (event) => {
+                                  
+                                    this.goToMembershipSelection()
+                                  
+                                  } } className="btn btn-info brandong">
                   CHOOSE YOUR PLAN
                 </button>
                 <br/>
@@ -70,18 +92,10 @@ class MembershipPaths extends Component {
               </div>
             </div>
             <br/>
-            <div className="w-100 d-flex  justify-content-center">
-              <div className="day-pass-path-button" style={ { width: 300, backgroundColor: "transparent", color: 'white' } }>
-                <br/>
-                <span class="Brandon_bld"><strong>TRY OUR</strong></span>
-                <p class="Brandon_bld">
-                  DAY PASS
-                </p>
-                <p style={ { fontSize: '90%', } } class="brandong">
-                  After your one month trial has expired you can
-                  <br/> sign up for a Day Pass
-                </p>
-              </div>
+            <div className="w-100 h-50 d-flex justify-content-center">
+              <Elements>
+                <CheckoutForm />
+              </Elements>
             </div>
           </div>
         </div>
@@ -91,4 +105,4 @@ class MembershipPaths extends Component {
 
 }
 
-export default MembershipPaths;
+export default MembershipPaths

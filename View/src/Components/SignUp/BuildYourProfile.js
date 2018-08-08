@@ -415,7 +415,7 @@ class BuildYourProfile extends Component {
                                       this.updateUser(true);
                                     
                                     } } className="btn btn-info">
-                    Next To Payment Page
+                    Next
                   </button>
                 </div>
               </div>
