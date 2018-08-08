@@ -77,7 +77,7 @@ var Topbar = (props) => {
                                } } className="dropdown-item">Change Password</a>
                   <a onClick={ (event) => {
                                  goToLocations()
-                               } } className="dropdown-item">Go To Locations</a>
+                               } } className="dropdown-item">Membership Perks</a>
                 </div>
               </div>
             </div>

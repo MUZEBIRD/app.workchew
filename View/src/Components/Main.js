@@ -105,7 +105,12 @@ class Main extends Component {
 
           var auth = currentUser.auth
 
-          //  window.location.href = "https://www.workchew.com/locations.html?token=" + (auth.token || auth.accessToken)
+          if (window.location.port != 3000) {
+
+            window.location.href = "https://www.workchew.com/locations.html?token=" + (auth.token || auth.accessToken)
+
+          }
+
 
         } else {
 
