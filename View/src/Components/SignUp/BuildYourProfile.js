@@ -67,7 +67,8 @@ class BuildYourProfile extends Component {
       ...userProfileUpdate,
       hopingsValue: this.state.hopingsValue,
       occupationValue: this.state.occupationValue,
-      industryValue: this.state.industryValue
+      industryValue: this.state.industryValue,
+      likeToMeet: this.state.likeToMeet
     }
 
     console.log(finalUpdate);
@@ -100,7 +101,8 @@ class BuildYourProfile extends Component {
       user: signUpData,
       hopingsValue: signUpData.hopingsValue,
       occupationValue: signUpData.occupationValue,
-      industryValue: signUpData.industryValue
+      industryValue: signUpData.industryValue,
+      likeToMeet: signUpData.likeToMeet
     })
 
     console.log('signUpData', signUpData)
@@ -387,8 +389,14 @@ class BuildYourProfile extends Component {
                      <br/>
                      <div className='row'>
                        <div className='col-sm-12'>
-                         <TextField floatingLabelText="Summary" defaultValue={ user.summary } placeholder="Introduce yourself so we know a little about you…" name="summary" className="w-100 sign-up-build-form-feild"
-                         />
+                         <SelectField onChange={ (event, index, value) => {
+                                                   this.onSelectionChange(event, 'likeToMeet', value)
+                                                 } } className="w-100 text-center d-flex align-items-start o-hidden b-under" floatingLabelText="WHO WOULD YOU LIKE TO MEET"
+                           value={ this.state.likeToMeet }>
+                           { occupations.map((occupations, i) => {
+                               return ( <MenuItem key={ v4() } value={ i } primaryText={ occupations.name } /> )
+                             }) }
+                         </SelectField>
                        </div>
                      </div>
                    </div> }

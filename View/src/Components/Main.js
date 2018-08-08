@@ -105,7 +105,7 @@ class Main extends Component {
 
           var auth = currentUser.auth
 
-          window.location.href = "https://www.workchew.com/locations.html?token=" + (auth.token || auth.accessToken)
+          //  window.location.href = "https://www.workchew.com/locations.html?token=" + (auth.token || auth.accessToken)
 
         } else {
 

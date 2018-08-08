@@ -276,7 +276,6 @@ class BusinessForm extends Component {
       })
   }
 
-
   gotToPartnerMenu = () => {
 
     userService.get({
@@ -285,7 +284,6 @@ class BusinessForm extends Component {
       }
     })
 
-
       .subscribe((user) => {
 
         var token = user.auth.token || user.auth.accessToken
@@ -293,13 +291,12 @@ class BusinessForm extends Component {
 
           window.location.href = "http://orders.workchew.com/#/?bid=" + this.state.business._id + "&token=" + token
 
-
         }
 
       })
 
-
   }
+
   getQueryParams() {
 
     var url = window.location.href;
