@@ -14,9 +14,6 @@ import './signUp.css';
 
 import { Topbar } from '../TopBar.js'
 
-
-
-
 class MembershipPaths extends Component {
 
   constructor(props) {
@@ -36,13 +33,17 @@ class MembershipPaths extends Component {
 
   goToPayment = () => {
 
-
-
   }
 
   goToMembershipSelection = () => {
 
+    var {id} = this.state.queryParams;
 
+    if (id && id.length) {
+
+      window.location.hash = "M3mberships?id=" + id
+
+    }
 
   }
 
