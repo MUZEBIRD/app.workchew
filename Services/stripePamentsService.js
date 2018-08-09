@@ -1,6 +1,6 @@
 var fs = require('fs');
 
-var secrect = fs.readFileSync("../certs/secrets/StripePayments/test/secret", "utf8");
+var secrect = fs.readFileSync("./certs/secrets/StripePayments/test/secret", "utf8");
 
 var stripe = require("stripe")(secrect);
 

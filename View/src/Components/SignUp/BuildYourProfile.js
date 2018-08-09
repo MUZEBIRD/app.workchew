@@ -86,7 +86,7 @@ class BuildYourProfile extends Component {
         userService.storeSignUpInfo(userResponse)
 
         if (toPayment) {
-          window.location.hash = `M3mberships?id=${userResponse._id}`
+          window.location.hash = `membership-paths?id=${userResponse._id}`
         }
 
       })

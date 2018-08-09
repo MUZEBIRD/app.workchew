@@ -12,6 +12,7 @@ const parseReqForm = require('../rxFormidable')
 
 const payPalWCNodeCLient = require('../Services/wc-paypal.js')
 
+const stripeService = require('../Services/stripePamentsService.js')
 
 var Url = require('url');
 
@@ -59,6 +60,48 @@ var UserAuth = function(req, res, next) {
 }
 
 router.use(UserAuth)
+
+router.put('/create-membership', (req, res) => {
+
+  var {id, token} = body
+
+  var {body, headers} = req;
+
+  var accessToken = headers['x-api-access-token'];
+
+  authService.getRole(token)
+
+    .switchMap((authObject) => {
+
+      return userService.get({
+        _id: authObject.userId
+      })
+
+    })
+
+    .subscribe((foundUsers) => {
+
+      if (foundUsers && foundUsers[0]) {
+
+        var user = foundUsers[0];
+
+        stripeService.createCustomer({
+          email: user.email,
+          source: token
+        })
+
+      } else {
+
+        res.status(401).send({
+          error: 401,
+          msg: "not valid user"
+        })
+
+      }
+
+    })
+
+}); //POST 
 
 router.post('/', (req, res) => {
 
@@ -224,9 +267,6 @@ router.get('/', (req, res) => {
 
 })
 
-
-
-
 router.delete('/', (req, res) => {
 
   return user
@@ -281,33 +321,45 @@ var checkAccessToken = function(req, res, next) {
 } //checkAccessToken
 
 var onlyIcanUpdateMe = function(req, res, next, authObject) {
+
   var userUpdate = req.body;
 
-  var userUpdateId = userUpdate._id || req.query._id
+  userService.get({
+    _id: authObject.userId
+  })
 
-  var authedUserId = authObject.userId;
+    .subscribe((foundUsers) => {
 
+      if (foundUsers && foundUsers.length) {
 
-  if (userUpdateId
-    && authedUserId
-    && (authedUserId === userUpdateId)) {
+        req.workchewUser = foundUsers[0];
 
-    next()
+        var userUpdateId = userUpdate._id || req.query._id;
 
-  } else {
+        var authedUserId = authObject.userId;
 
-    res.status(401).send({
-      error: 401,
-      msg: "not valid user"
+        if (userUpdateId
+          && authedUserId
+          && (authedUserId === userUpdateId)) {
+
+          next()
+
+        }
+
+      } else {
+
+        res.status(401).send({
+          error: 401,
+          msg: "not valid user"
+        })
+
+      }
+
     })
-
-  }
 
 } //onlyIcanUpdateMe
 
 var userFromBody = function(user) {
-
-
 
   return user
 

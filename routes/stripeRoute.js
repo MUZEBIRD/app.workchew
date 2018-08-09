@@ -4,9 +4,12 @@ const express = require('express');
 
 const router = express.Router();
 
-router.post('/', (req, res) => {
+const stripeService = require('../Services/stripePamentsService.js')
 
-  res.send({
+router.post('/create-membership', (req, res) => {
+
+
+  var {body} = res.send({
 
   })
 
