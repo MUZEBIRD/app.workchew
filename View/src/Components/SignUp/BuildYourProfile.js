@@ -73,7 +73,7 @@ class BuildYourProfile extends Component {
 
     console.log(finalUpdate);
 
-    userService
+userService
 
       .put(finalUpdate)
 
