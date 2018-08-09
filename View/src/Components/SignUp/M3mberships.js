@@ -91,22 +91,6 @@ class M3mberships extends Component {
 
     })
 
-    window.paypalCheckoutReady = () => {
-
-      pricingOptions3.filter((op, i) => i == 0).forEach((pricing) => {
-
-        placeButton({
-
-          price: pricing.price,
-          elementKey: `${pricing.id}-button`,
-          membershipName: pricing.title
-
-        })
-
-      })
-
-    }
-
     signUpDialogSubject.subscribe(({dialogMsg, showDialog, signUpComplete}) => {
 
       this.setState({
@@ -170,6 +154,7 @@ class M3mberships extends Component {
             </div>
             <br/>
             <M3mberShipSelectionWidget/>
+            <br/>
             <br/>
           </div>
         </div>

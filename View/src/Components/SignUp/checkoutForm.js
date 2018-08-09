@@ -15,7 +15,7 @@ class CheckoutForm extends Component {
 
   submit = (ev) => {
 
-    var signUpData = userService.get({
+    userService.get({
       params: {
         _id: 1
       }
@@ -25,7 +25,7 @@ class CheckoutForm extends Component {
 
         if (localUser && localUser._id) {
 
-          return this.createToken(signUpData.email)
+          return this.createToken(localUser.email)
 
             .switchMap(({token}) => {
 

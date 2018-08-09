@@ -137,7 +137,7 @@ var userService = {
       })
 
   },
-  chargeForOneDaypass: (membershipPaymentData) => {
+  chargeForOneDayPass: (membershipPaymentData) => {
 
     return restService
 

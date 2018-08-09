@@ -13,7 +13,7 @@ import WorkLoader, { loaderStream } from '../shared/workLoader';
 const pricingOptions3 = [
 
   {
-    id: "ONE-DAY-PASS",
+    id: "ONE_DAY_PASS",
     title: "DAY PASS",
     price: 14.99,
     paymentRecurrence: "ONE TIME CHARGER",
@@ -58,7 +58,7 @@ const pricingOptions3 = [
     ]
   },
   {
-    id: "Pro",
+    id: "PRO",
     title: "PRO",
     option: "createProMembership",
     price: 99.99,
@@ -88,36 +88,46 @@ const pricingOptions3 = [
 
 ]
 
-
 var selectedMemberShip = function(memberShipInfo) {
 
-  console.log('memberShipInfo', memberShipInfo)
-  loaderStream.next(true)
+
+  console.log("hit", memberShipInfo)
+
   userService.get({
     params: {
       _id: 1
     }
   })
 
-    .switchMap(({_id, email}) => {
+    .subscribe((localUser) => {
+      console.log('memberShipInfo', memberShipInfo)
 
-      return userService[memberShipInfo.option]({
-        _id,
-        userEmail: email
-      })
+      if (localUser && localUser._id) {
 
-    })
+        switch (memberShipInfo.id) {
+          case "ONE_DAY_PASS": {
+            window.location.hash = `payment-page?id=${localUser._id}&chargeType=day`;
+            break;
+          }
+          case "STARTER": {
+            window.location.hash = `payment-page?id=${localUser._id}&chargeType=starter`;
+            break;
 
-    .subscribe((starterResponse) => {
 
-      console.log('starterResponse', starterResponse)
+          }
+          case "PRO": {
+            window.location.hash = `payment-page?id=${localUser._id}&chargeType=pro`;
+            break;
 
-      var {approvalUrl} = starterResponse;
+          }
+          default:
+            // code...
+            break;
+        }
 
-      window.location.href = approvalUrl.href
+      }
 
-    })
-
+    });
 
 }
 
@@ -194,14 +204,14 @@ const M3mberShipSelectionWidget = (props) => {
       <div className='row w-100 d-flex flex-wrap justify-content-around'>
         { pricingOptions3.map(
             (pricing, i) => (
-              <div key={ i } style={ { width: 300 } } className='d-flex justify-content-center'>
-                { (i == 0) && <div id={ `${pricing.id}-button` }>
-                              </div> }
-                { (i != 0) && <img onClick={ (event) => {
-                                 
-                                   selectedMemberShip(pricing)
-                                 
-                                 } } style={ { height: 75, width: 250 } } src={ "static/images/fay-pal.png" } /> }
+              <div key={ i } style={ { width: 300 } }>
+                <button onClick={ (event) => {
+                                  
+                                    selectedMemberShip(pricing)
+                                  
+                                  } } className="btn btn-info brandong">
+                  Sign Me Up !
+                </button>
               </div>)
           ) }
       </div>

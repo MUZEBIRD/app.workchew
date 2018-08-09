@@ -21,7 +21,7 @@ const ProDisplay = () => (<div>
                           </div>)
 
 const DayDisplay = () => (<div>
-                            <h1 className="Brandon_bld">One Day pass</h1>
+                            <h1 className="Brandon_bld">One Day Pass</h1>
                             <br/>
                             <h3 className="brandong">$14.99</h3>
                             <br/>
