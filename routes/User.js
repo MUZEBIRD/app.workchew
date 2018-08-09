@@ -63,7 +63,7 @@ router.use(UserAuth)
 
 router.put('/create-stripe-membership', (req, res) => {
 
-  var {id, token, type} = body
+  var {token, type} = body
 
   var {body, headers} = req;
 

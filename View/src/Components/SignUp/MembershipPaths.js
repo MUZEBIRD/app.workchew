@@ -35,7 +35,7 @@ class MembershipPaths extends Component {
 
     if (id && id.length) {
 
-      window.location.hash = "payment-page?id=" + id
+      window.location.hash = "payment-page?id=" + id + "&chargeType=starter"
 
     }
   }

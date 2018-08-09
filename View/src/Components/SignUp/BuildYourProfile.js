@@ -85,6 +85,8 @@ class BuildYourProfile extends Component {
 
         userService.storeSignUpInfo(userResponse)
 
+        userService.store(userResponse)
+
         if (toPayment) {
           window.location.hash = `membership-paths?id=${userResponse._id}`
         }
@@ -172,6 +174,8 @@ class BuildYourProfile extends Component {
 
           console.log('updateProfilePicStream ', updateProfilePicStream)
           userService.storeSignUpInfo(updateProfilePicStream)
+          userService.store(updateProfilePicStream)
+
 
           alert('profile pic updated !')
           window.location.reload(true);

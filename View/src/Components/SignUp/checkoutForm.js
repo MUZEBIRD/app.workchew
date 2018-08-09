@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import { CardElement, injectStripe } from 'react-stripe-elements';
 import userService from '../../Services/userService.js'
 import urlService from '../../Services/urlService.js'
+import { getQueryParams, getPathVariables } from '../../Utils'
 
+
+import { Observable } from 'rxjs'
 
 class CheckoutForm extends Component {
   constructor(props) {
@@ -10,16 +13,80 @@ class CheckoutForm extends Component {
     this.submit = this.submit.bind(this);
   }
 
-  async submit(ev) {
+  submit = (ev) => {
 
-    let {token} = await this.props.stripe.createToken({
-      name: "Name"
-    });
+    var signUpData = userService.get({
+      params: {
+        _id: 1
+      }
+    })
 
-    console.log(token)
+      .switchMap((localUser) => {
+
+        if (localUser && localUser._id) {
+
+          return this.createToken(signUpData.email)
+
+            .switchMap(({token}) => {
+
+              return this.processPayment(token)
+
+            })
+
+        } else {
+
+          return Observable.of(null)
+
+        }
+
+      })
+
+      .subscribe((processPaymentResponse) => {
+
+        console.log('processPaymentResponse', processPaymentResponse)
+
+        if (processPaymentResponse) {
+
+        } else {
 
 
+        }
 
+      })
+
+  }
+
+  createToken = (email) => Observable.fromPromise(this.props.stripe.createToken({
+    name: `${email}_token`
+  }))
+
+  processPayment = (token) => {
+
+    var {chargeType} = getQueryParams()
+
+    switch (chargeType) {
+      case "starter": {
+
+        return userService.createStripeStarterMembership({
+          token
+        })
+
+      }
+      case "pro": {
+        return userService.createStripeStarterMembership({
+          token
+        })
+      }
+      case "day": {
+        return userService.chargeForDayPass({
+          token
+        })
+
+      }
+      default:
+        // code...
+        break;
+    }
 
   }
 
