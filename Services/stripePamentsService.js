@@ -75,7 +75,6 @@ var createCustomer = ({email, source}) => {
 
 }
 
-
 var subscribeCustomer = ({customer, plan}) => {
 
   var today = new Date();
