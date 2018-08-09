@@ -27,7 +27,7 @@ import SearchUsers from './Components/SearchUsers.js'
 
 import AddUser from './Components/AddUser.js'
 
-import { BusinessUserSignUp, ChangePassword, UserSignUp, Memberships, M3mberships, UserSignUpSocial, BuildYourProfile, MembershipPaths, UserInterest, UserType } from './Components/SignUp'
+import { BusinessUserSignUp, PaymentPage, ChangePassword, UserSignUp, Memberships, M3mberships, UserSignUpSocial, BuildYourProfile, MembershipPaths, UserInterest, UserType } from './Components/SignUp'
 
 import UserProfile from './Components/Public/UserPofile'
 import UserCard from './Components/Public/UserCard'
@@ -57,6 +57,7 @@ class App extends Component {
             <div className="App">
               <Route exact path="/" component={ Main } />
               <Route exact path="/locations" component={ Main } />
+              <Route exact path="/payment-page" component={ PaymentPage } />
               <Route exact path="/Login" component={ Login } />
               <Route exact path="/partner-marketing-page" component={ PartnerMarketingPage } />
               <Route exact path="/partner-settings-page" component={ PartnerSettingsPage } />

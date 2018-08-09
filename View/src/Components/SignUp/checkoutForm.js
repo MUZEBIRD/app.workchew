@@ -8,26 +8,20 @@ class CheckoutForm extends Component {
   }
 
   async submit(ev) {
-    // User clicked submit
 
     let {token} = await this.props.stripe.createToken({
       name: "Name"
     });
 
-
-
-
   }
 
   render() {
     return (
-      <div className="checkout">
-        <p>
-          Would you like to complete the purchase?
-        </p>
+      <div style={ { minWidth: 300 } } className="checkout">
         <CardElement />
-        <button onClick={ this.submit }>
-          Send
+        <br />
+        <button className="btn btn-info brandong" onClick={ this.submit }>
+          Sign Me Up !
         </button>
       </div>
       );

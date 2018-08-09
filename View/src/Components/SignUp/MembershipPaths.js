@@ -8,8 +8,7 @@ import restService from '../../Services/restService.js'
 import { getQueryParams, getPathVariables } from '../../Utils'
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import { Elements } from 'react-stripe-elements';
-import CheckoutForm from './checkoutForm'
+
 import './signUp.css';
 
 import { Topbar } from '../TopBar.js'
@@ -32,7 +31,13 @@ class MembershipPaths extends Component {
   }
 
   goToPayment = () => {
+    var {id} = this.state.queryParams;
 
+    if (id && id.length) {
+
+      window.location.hash = "payment-page?id=" + id
+
+    }
   }
 
   goToMembershipSelection = () => {
@@ -94,9 +99,6 @@ class MembershipPaths extends Component {
             </div>
             <br/>
             <div className="w-100 h-50 d-flex justify-content-center">
-              <Elements>
-                <CheckoutForm />
-              </Elements>
             </div>
           </div>
         </div>
