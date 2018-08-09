@@ -134,7 +134,7 @@ var chargeCustomerForOneDayPass = ({source}) => {
   return Rx.Observable.fromPromise(
 
     stripe.charges.create({
-      amount: 1400,
+      amount: 1499,
       currency: "usd",
       description: "charge for one day pass",
       source: source

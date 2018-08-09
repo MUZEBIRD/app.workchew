@@ -61,6 +61,47 @@ var UserAuth = function(req, res, next) {
 
 router.use(UserAuth)
 
+router.put('/charge-for-day', (req, res) => {
+
+  var {token, type} = body
+
+  var {body, headers} = req;
+
+  if (req.user) {
+
+    var user = req.user
+
+    stripeService.createCustomer({
+      email: user.email,
+      source: token,
+      userId: user._id
+    })
+
+      .switchMap((stripeUserResponse) => {
+
+        return stripeService
+
+          .chargeCustomerForOneDayPass(token)
+
+      })
+
+      .subscribe((membershipResponse) => {
+
+        res.send(membershipResponse)
+
+      })
+
+  } else {
+
+    res.status(401).send({
+      error: 401,
+      msg: "not valid user"
+    })
+
+  }
+
+}); //create-stripe-membership PUT 
+
 router.put('/create-stripe-membership', (req, res) => {
 
   var {token, type} = body

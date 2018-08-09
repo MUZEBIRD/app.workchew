@@ -137,6 +137,16 @@ var userService = {
       })
 
   },
+  chargeForOneDaypass: (membershipPaymentData) => {
+
+    return restService
+
+      .put(urlService.stripeStarterMembership + "/charge-for-day", {
+        ...membershipPaymentData,
+        type: "DAY"
+      })
+
+  },
   signUpBusinessUser: (businessSignUpInfo) => {
 
     return userService
