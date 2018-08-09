@@ -116,6 +116,27 @@ var userService = {
     window.location.href = "/"
 
   },
+
+  createStripeStarterMembership: (membershipPaymentData) => {
+
+    return restService
+
+      .post(urlService.stripeStarterMembership + "/create-pro-membership", {
+        membershipPaymentData,
+        type: "STARTER"
+      })
+
+  },
+  createStripeProMembership: (membershipPaymentData) => {
+
+    return restService
+
+      .post(urlService.stripeStarterMembership + "/create-pro-membership", {
+        membershipPaymentData,
+        type: "PRO"
+      })
+
+  },
   signUpBusinessUser: (businessSignUpInfo) => {
 
     return userService

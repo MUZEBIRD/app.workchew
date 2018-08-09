@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import { CardElement, injectStripe } from 'react-stripe-elements';
+import userService from '../../Services/userService.js'
+import urlService from '../../Services/urlService.js'
+
 
 class CheckoutForm extends Component {
   constructor(props) {
@@ -13,12 +16,18 @@ class CheckoutForm extends Component {
       name: "Name"
     });
 
+    console.log(token)
+
+
+
+
   }
 
   render() {
     return (
       <div style={ { minWidth: 300 } } className="checkout">
         <CardElement />
+        <br />
         <br />
         <button className="btn btn-info brandong" onClick={ this.submit }>
           Sign Me Up !

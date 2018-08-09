@@ -3,10 +3,19 @@ var fs = require('fs');
 var secrect = fs.readFileSync("./certs/secrets/StripePayments/test/secret", "utf8");
 
 var stripe = require("stripe")(secrect);
+const userService = require('./userService.js');
+
+var Rx = require('rxjs')
 
 var trialLength = 2592000000;
 
 var memberShips = [
+
+  {
+    name: 'Workchew Starter Membership',
+    id: "prod_DNkKhY6x69OR4p",
+    planId: "plan_DNkd2WlLmkb055"
+  },
 
   {
     name: 'Workchew Starter Membership',
@@ -54,55 +63,118 @@ var createPlan = ({id, name, price}) => {
 
 }
 
+var createCustomer = ({email, source, userId}) => {
 
+  return Rx.Observable.create((observer) => {
 
-var createCustomer = ({email, source}) => {
+    stripe.customers.create({
+      email,
+      source
+    })
 
-  const customer = stripe.customers.create({
-    email,
-    source
-  });
+      .then((stripUserResponse) => {
 
-  customer.then((response) => {
+        console.log("stripUserResponse", stripUserResponse)
 
-    console.log(" customer response", response)
+        observer.next(stripUserResponse)
+        observer.complete(stripUserResponse)
 
-  }).catch((response) => {
+      })
 
-    console.log(" customer rerr", response)
+      .catch((stripeErrorResponse) => {
+
+        console.log("stripeErrorResponse", stripeResponse)
+
+        observer.error(stripeResponse)
+
+      })
 
   })
 
+    .switchMap((stripUserResponse) => {
+
+      var {id, account_balance, email} = stripUserResponse;
+
+      //userService.up
+
+      return Observable.of(stripUserResponse)
+
+    })
+
 }
 
-var subscribeCustomer = ({customer, plan}) => {
+var initUserMemberShip = (stripUserResponse, type) => {
+
+  if (type === "PRO") {
+
+    return subscribeUserToProMemberShip(stripUserResponse)
+
+  } else {
+
+    return subscribeUserToStarterMemberShip(stripUserResponse)
+
+  }
+
+}
+
+var subscribeUserToProMemberShip = (stripUserResponse) => {
+
+  return subscribeCustomer(stripUserResponse, memberShips[1])
+
+}
+
+var subscribeUserToStarterMemberShip = (stripUserResponse) => {
+
+  return subscribeCustomer(stripUserResponse, memberShips[0])
+
+}
+
+var chargeCustomerForOneDayPass = ({source}) => {
+
+  return Rx.Observable.fromPromise(
+
+    stripe.charges.create({
+      amount: 1400,
+      currency: "usd",
+      description: "charge for one day pass",
+      source: source
+    })
+      .then((response) => {
+
+        console.log(" chargeRequest response", response)
+
+        return response
+
+      })
+
+  )
+
+} //chargeCustomerForOneDayPass
+
+var subscribeCustomer = (customer, plan) => {
 
   var today = new Date();
 
   var nowTime = today.getTime()
 
-  const subscription = stripe.subscriptions.create({
-    customer: customer,
-    items: [plan],
-    trial_end: nowTime + trialLength
+  return Rx.Observable.fromPromise(
 
-  });
+    stripe.subscriptions.create({
+      customer: customer,
+      items: [plan],
+      trial_end: nowTime + trialLength
 
-  subscription.then((response) => {
+    })
 
-    console.log(" subscription response", response)
+      .then((response) => {
 
-  }).catch((response) => {
+        console.log(" subscription response", response)
+        return response
 
-    console.log(" subscription rerr", response)
+      })
 
-  })
-
-}
-
-
-
-
+  )
+} //subscribeCustomer
 
 
 

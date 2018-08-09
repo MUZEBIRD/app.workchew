@@ -61,47 +61,46 @@ var UserAuth = function(req, res, next) {
 
 router.use(UserAuth)
 
-router.put('/create-membership', (req, res) => {
+router.put('/create-stripe-membership', (req, res) => {
 
-  var {id, token} = body
+  var {id, token, type} = body
 
   var {body, headers} = req;
 
-  var accessToken = headers['x-api-access-token'];
+  if (req.user) {
 
-  authService.getRole(token)
+    var user = req.user
 
-    .switchMap((authObject) => {
+    stripeService.createCustomer({
+      email: user.email,
+      source: token,
+      userId: user._id
+    })
 
-      return userService.get({
-        _id: authObject.userId
+      .switchMap((stripeUserResponse) => {
+
+        return stripeService
+
+          .initUserMemberShip(stripeUserResponse, type)
+
       })
 
+      .subscribe((membershipResponse) => {
+
+        res.send(membershipResponse)
+
+      })
+
+  } else {
+
+    res.status(401).send({
+      error: 401,
+      msg: "not valid user"
     })
 
-    .subscribe((foundUsers) => {
+  }
 
-      if (foundUsers && foundUsers[0]) {
-
-        var user = foundUsers[0];
-
-        stripeService.createCustomer({
-          email: user.email,
-          source: token
-        })
-
-      } else {
-
-        res.status(401).send({
-          error: 401,
-          msg: "not valid user"
-        })
-
-      }
-
-    })
-
-}); //POST 
+}); //create-stripe-membership PUT 
 
 router.post('/', (req, res) => {
 
@@ -336,11 +335,11 @@ var onlyIcanUpdateMe = function(req, res, next, authObject) {
 
         var userUpdateId = userUpdate._id || req.query._id;
 
-        var authedUserId = authObject.userId;
+        var authedUserId = authObject.user
 
-        if (userUpdateId
-          && authedUserId
-          && (authedUserId === userUpdateId)) {
+        var authorized = userUpdateId && authedUserId && (authedUserId === userUpdateId)
+
+        if (authorized) {
 
           next()
 

@@ -12,8 +12,6 @@ const Seats = require('./seatsRoute')
 
 const Business = require('./Business')
 
-const stripe = require('./stripeRoute')
-
 const payPal = require('./payPalRoute')
 const payPalWCNodeCLient = require('../Services/wc-paypal.js')
 
@@ -42,8 +40,6 @@ router.use('/SignUp', SignUp)
 router.use('/Seats', Seats)
 
 router.use('/pay-pal', payPal)
-
-router.use('/stripe', stripe)
 
 router.use('/pic', pic)
 
