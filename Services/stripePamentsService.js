@@ -153,18 +153,6 @@ var chargeCustomerForOneDayPass = ({source}) => {
 
 var subscribeCustomer = (customer, plan) => {
 
-  var today = new Date();
-
-  var nowTime = today.getTime()
-
-  console.log('nowTime', nowTime)
-
-
-  var trial_end = nowTime + trialLength
-
-  console.log('nowTime trialLength', trial_end, new Date(trial_end))
-
-
   return Rx.Observable.fromPromise(
 
     stripe.subscriptions.create({
@@ -176,13 +164,6 @@ var subscribeCustomer = (customer, plan) => {
 
     })
 
-      .then((response) => {
-
-        console.log(" subscription response", response)
-        return response
-
-      })
-
   )
 } //subscribeCustomer
 
@@ -190,7 +171,8 @@ var subscribeCustomer = (customer, plan) => {
 
 module.exports = {
   createCustomer,
-  initUserMemberShip
+  initUserMemberShip,
+  chargeCustomerForOneDayPass
 }
 
 
