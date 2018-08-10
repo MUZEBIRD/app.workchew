@@ -67,9 +67,9 @@ router.put('/charge-for-day', (req, res) => {
 
   var {body, headers} = req;
 
-  if (req.user) {
+  if (req.workchewUser) {
 
-    var user = req.user
+    var user = req.workchewUser
 
     stripeService.createCustomer({
       email: user.email,
@@ -104,13 +104,14 @@ router.put('/charge-for-day', (req, res) => {
 
 router.put('/create-stripe-membership', (req, res) => {
 
-  var {token, type} = body
+  var {token, type} = req.body
 
   var {body, headers} = req;
 
-  if (req.user) {
 
-    var user = req.user
+  if (req.workchewUser) {
+
+    var user = req.workchewUser
 
     stripeService.createCustomer({
       email: user.email,
@@ -130,13 +131,20 @@ router.put('/create-stripe-membership', (req, res) => {
 
         res.send(membershipResponse)
 
-      })
+      }, (e) => {
+
+
+        console.log("sub err", e)
+
+      }
+
+    )
 
   } else {
 
     res.status(401).send({
       error: 401,
-      msg: "not valid user"
+      msg: "not valid authorized user"
     })
 
   }
@@ -364,7 +372,7 @@ var onlyIcanUpdateMe = function(req, res, next, authObject) {
 
   var userUpdate = req.body;
 
-  userService.get({
+  user.get({
     _id: authObject.userId
   })
 
@@ -376,7 +384,7 @@ var onlyIcanUpdateMe = function(req, res, next, authObject) {
 
         var userUpdateId = userUpdate._id || req.query._id;
 
-        var authedUserId = authObject.user
+        var authedUserId = authObject.userId
 
         var authorized = userUpdateId && authedUserId && (authedUserId === userUpdateId)
 

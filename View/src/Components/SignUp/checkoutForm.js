@@ -29,7 +29,7 @@ class CheckoutForm extends Component {
 
             .switchMap(({token}) => {
 
-              return this.processPayment(token)
+              return this.processPayment(token, localUser._id)
 
             })
 
@@ -60,7 +60,7 @@ class CheckoutForm extends Component {
     name: `${email}_token`
   }))
 
-  processPayment = (token) => {
+  processPayment = (token, _id) => {
 
     var {chargeType} = getQueryParams()
 
@@ -68,17 +68,20 @@ class CheckoutForm extends Component {
       case "starter": {
 
         return userService.createStripeStarterMembership({
+          _id,
           token
         })
 
       }
       case "pro": {
         return userService.createStripeStarterMembership({
+          _id,
           token
         })
       }
       case "day": {
         return userService.chargeForDayPass({
+          _id,
           token
         })
 

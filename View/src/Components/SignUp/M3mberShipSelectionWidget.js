@@ -112,13 +112,10 @@ var selectedMemberShip = function(memberShipInfo) {
           case "STARTER": {
             window.location.hash = `payment-page?id=${localUser._id}&chargeType=starter`;
             break;
-
-
           }
           case "PRO": {
             window.location.hash = `payment-page?id=${localUser._id}&chargeType=pro`;
             break;
-
           }
           default:
             // code...

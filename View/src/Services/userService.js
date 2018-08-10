@@ -121,7 +121,7 @@ var userService = {
 
     return restService
 
-      .put(urlService.stripeStarterMembership + "/create-stripe-membership", {
+      .put(urlService.user + "/create-stripe-membership", {
         ...membershipPaymentData,
         type: "STARTER"
       })
@@ -131,7 +131,7 @@ var userService = {
 
     return restService
 
-      .put(urlService.stripeStarterMembership + "/create-stripe-membership", {
+      .put(urlService.user + "/create-stripe-membership", {
         ...membershipPaymentData,
         type: "PRO"
       })
@@ -141,7 +141,7 @@ var userService = {
 
     return restService
 
-      .put(urlService.stripeStarterMembership + "/charge-for-day", {
+      .put(urlService.user + "/charge-for-day", {
         ...membershipPaymentData,
         type: "DAY"
       })

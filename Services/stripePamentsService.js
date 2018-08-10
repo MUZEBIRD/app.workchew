@@ -41,7 +41,7 @@ var makeServiceProduct = () => {
 }
 
 
-var createPlan = ({id, name, price}) => {
+const createPlan = ({id, name, price}) => {
 
   const plan = stripe.plans.create({
     product: id,
@@ -69,7 +69,7 @@ var createCustomer = ({email, source, userId}) => {
 
     stripe.customers.create({
       email,
-      source
+      source: source.id
     })
 
       .then((stripUserResponse) => {
@@ -83,9 +83,9 @@ var createCustomer = ({email, source, userId}) => {
 
       .catch((stripeErrorResponse) => {
 
-        console.log("stripeErrorResponse", stripeResponse)
+        console.log("stripeErrorResponse", stripeErrorResponse)
 
-        observer.error(stripeResponse)
+        observer.error(stripeErrorResponse)
 
       })
 
@@ -97,7 +97,7 @@ var createCustomer = ({email, source, userId}) => {
 
       //userService.up
 
-      return Observable.of(stripUserResponse)
+      return Rx.Observable.of(stripUserResponse)
 
     })
 
@@ -119,13 +119,13 @@ var initUserMemberShip = (stripUserResponse, type) => {
 
 var subscribeUserToProMemberShip = (stripUserResponse) => {
 
-  return subscribeCustomer(stripUserResponse, memberShips[1])
+  return subscribeCustomer(stripUserResponse, memberShips[1].planId)
 
 }
 
 var subscribeUserToStarterMemberShip = (stripUserResponse) => {
 
-  return subscribeCustomer(stripUserResponse, memberShips[0])
+  return subscribeCustomer(stripUserResponse, memberShips[0].planId)
 
 }
 
@@ -137,7 +137,7 @@ var chargeCustomerForOneDayPass = ({source}) => {
       amount: 1499,
       currency: "usd",
       description: "charge for one day pass",
-      source: source
+      source: source.id
     })
       .then((response) => {
 
@@ -157,12 +157,22 @@ var subscribeCustomer = (customer, plan) => {
 
   var nowTime = today.getTime()
 
+  console.log('nowTime', nowTime)
+
+
+  var trial_end = nowTime + trialLength
+
+  console.log('nowTime trialLength', trial_end, new Date(trial_end))
+
+
   return Rx.Observable.fromPromise(
 
     stripe.subscriptions.create({
-      customer: customer,
-      items: [plan],
-      trial_end: nowTime + trialLength
+      customer: customer.id,
+      items: [{
+        plan: plan
+      }],
+      trial_period_days: 30
 
     })
 
@@ -175,6 +185,13 @@ var subscribeCustomer = (customer, plan) => {
 
   )
 } //subscribeCustomer
+
+
+
+module.exports = {
+  createCustomer,
+  initUserMemberShip
+}
 
 
 
