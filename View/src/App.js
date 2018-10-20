@@ -42,7 +42,7 @@ import createHistory from 'history/createBrowserHistory'
 import { store } from './Store'
 
 import { Provider, connect } from 'react-redux'
-import { Elements, StripeProvider } from 'react-stripe-elements';
+import { StripeProvider } from 'react-stripe-elements';
 
 const history = createHistory()
 
