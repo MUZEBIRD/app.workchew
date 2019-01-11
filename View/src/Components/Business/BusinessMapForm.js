@@ -14,7 +14,7 @@ import { withGoogleMap, withScriptjs, GoogleMap, Marker } from "react-google-map
 
 import { MySearchBox } from '../MySearchBox.js'
 
-const MapsUrl = "https://maps.googleapis.com/maps/api/js?key=AIzaSyBiXIdQkeDx3E0Dy5xKjGPINHBx5T3Jl7o&v=3.exp&libraries=geometry,drawing,places"
+const MapsUrl = "https://maps.googleapis.com/maps/api/js?key=AIzaSyBI9O72qcsHB1fdvQHADtlPiyazGYy18WI&v=3.exp&libraries=geometry,drawing,places"
 
 const MyMapComponent = withScriptjs(withGoogleMap(function(props) {
 
